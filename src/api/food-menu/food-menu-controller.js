@@ -16,7 +16,21 @@ const getMenuItemById = async (req, res) => {
   if (item) {
     res.status(201).json(item);
   } else {
-    res.status(404).json({message: "Could not find item"});
+    res.status(404).json({message: 'Could not find item'});
+  }
+};
+
+const postMenuItem = async (req, res) => {
+  const menuItemData = {
+    ...req.body,
+  };
+
+  const result = await addMenuItem(menuItemData);
+
+  if (result?.menu_item_id) {
+    res.status(201).json({message: 'New menu item added', result});
+  } else {
+    res.status(400).json({message: 'Could not add menu item'});
   }
 };
 
@@ -49,4 +63,4 @@ const deleteCat = (req, res) => {
   res.sendStatus(200);
 };*/
 
-export {getMenuItems, getMenuItemById};
+export {getMenuItems, getMenuItemById, postMenuItem};
