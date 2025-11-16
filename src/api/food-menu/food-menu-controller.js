@@ -34,33 +34,52 @@ const postMenuItem = async (req, res) => {
   }
 };
 
-/*const getCatById = (req, res) => {
-  const cat = findCatById(req.params.id);
-  if (cat) {
-    res.json(cat);
+const putMenuItem = async (req, res) => {
+  const menuItem = await findMenuItemById(req.params.id);
+
+  if (!menuItem) {
+    return res.status(401).json({message: 'Menu item not found'});
+  }
+
+  // check if user is admin
+  /*if (res.locals.user?.role !== 'admin') {
+    return res.status(403).json({message: 'User cannot modify this menu item'});
+  }*/
+
+  // modify menu item
+  const result = await modifyMenuItem(req.body, menuItem.menu_item_id);
+  console.log(result);
+  if (result) {
+    res.status(201).json({message: 'Menu item updated', result});
   } else {
-    res.sendStatus(404);
+    res.status(404).json({message: 'No updates done'});
   }
 };
 
-const postCat = (req, res) => {
-  const result = addCat(req.body);
-  if (result.cat_id) {
-    res.status(201);
-    res.json({message: 'New cat added.', result});
+const deleteMenuItem = async (req, res) => {
+  const menuItem = await findMenuItemById(req.params.id);
+
+  if (!menuItem) {
+    return res.status(401).json({message: 'Menu item not found'});
+  }
+
+  // check if user is admin
+  /*if (res.locals.user?.role !== 'admin') {
+    return res.status(403).json({message: 'User cannot modify this menu item'});
+  }*/
+
+  const result = await removeMenuItem(req.params.id);
+  if (result) {
+    res.status(200).json({message: 'Menu item deleted', result});
   } else {
-    res.sendStatus(400);
+    res.status(404).json({message: 'Menu item not deleted'});
   }
 };
 
-const putCat = (req, res) => {
-  // not implemented in this example, this is homework
-  res.sendStatus(200);
+export {
+  getMenuItems,
+  getMenuItemById,
+  postMenuItem,
+  putMenuItem,
+  deleteMenuItem,
 };
-
-const deleteCat = (req, res) => {
-  // not implemented in this example, this is homework
-  res.sendStatus(200);
-};*/
-
-export {getMenuItems, getMenuItemById, postMenuItem};
