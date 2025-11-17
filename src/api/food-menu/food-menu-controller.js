@@ -25,6 +25,11 @@ const postMenuItem = async (req, res) => {
     ...req.body,
   };
 
+  // check if user is admin
+  /*if (res.locals.user?.role !== 'admin') {
+    return res.status(403).json({message: 'User cannot modify this menu item'});
+  }*/
+
   const result = await addMenuItem(menuItemData);
 
   if (result?.menu_item_id) {
