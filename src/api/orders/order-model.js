@@ -8,4 +8,15 @@ const listAllOrders = async () => {
   return rows;
 };
 
-export {listAllOrders};
+const findOrderById = async (id) => {
+  const [rows] = await promisePool.execute(
+    `SELECT * FROM orders WHERE order_id = ?`,
+    [id]
+  );
+  if (rows.length === 0) {
+    return false;
+  }
+  return rows[0];
+};
+
+export {listAllOrders, findOrderById};

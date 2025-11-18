@@ -1,7 +1,17 @@
-import {listAllOrders} from './order-model.js';
+import {findOrderById, listAllOrders} from './order-model.js';
 
 const getAllOrders = async (req, res) => {
   res.json(await listAllOrders());
 };
 
-export {getAllOrders};
+const getOrdersById = async (req, res) => {
+  const order = await findOrderById(req.params.id);
+
+  if (order) {
+    res.status(200).json(order);
+  } else {
+    res.status(404).json({message: 'Order not found'});
+  }
+};
+
+export {getAllOrders, getOrdersById};
