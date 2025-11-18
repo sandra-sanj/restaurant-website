@@ -9,3 +9,6 @@ GET http://localhost:3000/api/v1/orders
 ### Get order by ID
 GET http://localhost:3000/api/v1/orders/1
 
+
+### Get order details with items
+GET http://localhost:3000/api/v1/orders/1/details

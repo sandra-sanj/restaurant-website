@@ -19,4 +19,30 @@ const findOrderById = async (id) => {
   return rows[0];
 };
 
-export {listAllOrders, findOrderById};
+const findOrderWithItemsById = async (id) => {
+  // Get the order
+  const [orderRows] = await promisePool.execute(
+    `SELECT * FROM orders WHERE order_id = ?`,
+    [id]
+  );
+
+  if (orderRows.length === 0) {
+    return false;
+  }
+
+  const order = orderRows[0];
+
+  // Get order items
+  const [itemRows] = await promisePool.execute(
+    `SELECT * FROM order_items WHERE order_id = ?`,
+    [id]
+  );
+
+  // Combine order with its items
+  return {
+    ...order,
+    items: itemRows,
+  };
+};
+
+export {listAllOrders, findOrderById, findOrderWithItemsById};
