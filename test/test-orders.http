@@ -1,4 +1,4 @@
-### API HTTP request
+### API HTTP request tests for orders
 
 ### Orders
 
@@ -7,8 +7,64 @@ GET http://localhost:3000/api/v1/orders
 
 
 ### Get order by ID
-GET http://localhost:3000/api/v1/orders/1
+GET http://localhost:3000/api/v1/orders/14
 
 
 ### Get order details with items
-GET http://localhost:3000/api/v1/orders/1/details
+GET http://localhost:3000/api/v1/orders/14/details
+
+
+### Create new order (not registered customer)
+POST http://localhost:3000/api/v1/orders
+Content-Type: application/json
+
+{
+    "user_id": null,
+    "customer_name": "Test user",
+    "customer_email": "guest@test.com",
+    "customer_phone": "+358223344556",
+    "order_type": "delivery",
+    "delivery_address": "test 123, 001 Helsinki",
+    "items": [
+        {
+            "menu_item_id": 3,
+            "item_name": "Kanatacot x 3",
+            "quantity": 2,
+            "unit_price": 14.50,
+            "selected_spice_level": 3,
+            "special_requests": "Extra salsa"
+        }
+    ]
+}
+
+
+### Create new order (registered customer)
+POST http://localhost:3000/api/v1/orders
+Content-Type: application/json
+
+{
+    "user_id": 2,
+    "customer_name": "Liisa Virtanen",
+    "customer_email": "liisa@example.fi",
+    "customer_phone": "+358112233445",
+    "order_type": "delivery",
+    "delivery_address": "test 123, 001 Helsinki",
+    "items": [
+        {
+            "menu_item_id": 7,
+            "item_name": "Burrito",
+            "quantity": 1,
+            "unit_price": 16.90,
+            "selected_protein": "chicken",
+            "selected_spice_level": 2,
+            "special_requests": "No onions"
+        },
+        {
+            "menu_item_id": 11,
+            "item_name": "Jarritos Lime",
+            "quantity": 2,
+            "unit_price": 3.90
+        }
+    ]
+}
+

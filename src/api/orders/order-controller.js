@@ -2,6 +2,7 @@ import {
   listAllOrders,
   findOrderById,
   findOrderWithItemsById,
+  addOrder,
 } from './order-model.js';
 
 const getAllOrders = async (req, res) => {
@@ -28,4 +29,21 @@ const getOrderDetails = async (req, res) => {
   }
 };
 
-export {getAllOrders, getOrdersById, getOrderDetails};
+const postOrder = async (req, res) => {
+  const orderData = {
+    ...req.body,
+  };
+
+  const result = await addOrder(orderData);
+
+  if (result?.order_id) {
+    res.status(201).json({
+      message: 'New order created',
+      result,
+    });
+  } else {
+    res.status(400).json({message: 'Could not create order'});
+  }
+};
+
+export {getAllOrders, getOrdersById, getOrderDetails, postOrder};
