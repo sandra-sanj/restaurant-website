@@ -68,3 +68,15 @@ Content-Type: application/json
     ]
 }
 
+
+### Update order
+PUT http://localhost:3000/api/v1/orders/14
+Content-Type: application/json
+
+{
+    "customer_name": "Liisa Hoffren",
+    "customer_email": "liisa.hoffren@example.com",
+    "customer_phone": "+358992233445",
+    "order_type": "delivery",
+    "delivery_address": "Karamalmi 12, 0070 Espoo"
+}

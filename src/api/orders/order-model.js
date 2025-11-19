@@ -133,4 +133,26 @@ const addOrder = async (order) => {
   }
 };
 
-export {listAllOrders, findOrderById, findOrderWithItemsById, addOrder};
+const updateOrder = async (id, order) => {
+  const sql = promisePool.format(`UPDATE orders SET ? WHERE order_id = ?`, [
+    order,
+    id,
+  ]);
+
+  const [result] = await promisePool.execute(sql);
+  console.log('Update result', result);
+
+  if (result.affectedRows === 0) {
+    return false;
+  }
+
+  return await findOrderById(id);
+};
+
+export {
+  listAllOrders,
+  findOrderById,
+  findOrderWithItemsById,
+  addOrder,
+  updateOrder,
+};

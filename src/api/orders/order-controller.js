@@ -3,6 +3,7 @@ import {
   findOrderById,
   findOrderWithItemsById,
   addOrder,
+  updateOrder,
 } from './order-model.js';
 
 const getAllOrders = async (req, res) => {
@@ -46,4 +47,32 @@ const postOrder = async (req, res) => {
   }
 };
 
-export {getAllOrders, getOrdersById, getOrderDetails, postOrder};
+const putOrder = async (req, res) => {
+  const order = await findOrderById(req.params.id);
+
+  if (!order) {
+    res.status(404).json({message: 'Order not found'});
+    return;
+  }
+
+  /* TODO: check if user is admin (add authentication later)
+  if (res.locals.user?.role !== 'admin') {
+    return res
+      .status(403)
+      .json({message: 'Admin access required to update orders'});
+  }
+  */
+
+  const result = await updateOrder(req.params.id, req.body);
+
+  if (result) {
+    res.status(200).json({
+      message: 'Order updated',
+      result,
+    });
+  } else {
+    res.status(400).json({message: 'Could not update order'});
+  }
+};
+
+export {getAllOrders, getOrdersById, getOrderDetails, postOrder, putOrder};
