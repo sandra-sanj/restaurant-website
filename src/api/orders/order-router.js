@@ -4,6 +4,7 @@ import {
   getAllOrders,
   getOrderDetails,
   getOrdersById,
+  getUsersOrders,
   postOrder,
   putOrder,
 } from './order-controller.js';
@@ -15,5 +16,7 @@ orderRouter.route('/').get(getAllOrders).post(postOrder);
 orderRouter.route('/:id').get(getOrdersById).put(putOrder);
 
 orderRouter.route('/:id/details').get(getOrderDetails);
+
+orderRouter.route('/user/:userId').get(getUsersOrders);
 
 export default orderRouter;

@@ -4,6 +4,7 @@ import {
   findOrderWithItemsById,
   addOrder,
   updateOrder,
+  findOrdersByUserId,
 } from './order-model.js';
 
 const getAllOrders = async (req, res) => {
@@ -27,6 +28,21 @@ const getOrderDetails = async (req, res) => {
     res.status(200).json(order);
   } else {
     res.status(404).json({message: 'Order not found'});
+  }
+};
+
+const getUsersOrders = async (req, res) => {
+  try {
+    const orders = await findOrdersByUserId(req.params.userId);
+
+    if (orders.length > 0) {
+      res.status(200).json(orders);
+    } else {
+      res.status(404).json({message: 'No orders found for this user.'});
+    }
+  } catch (error) {
+    console.error('Error getting user orders: ', error);
+    res.status(500).json({message: 'Error fetching user orders'});
   }
 };
 
@@ -75,4 +91,11 @@ const putOrder = async (req, res) => {
   }
 };
 
-export {getAllOrders, getOrdersById, getOrderDetails, postOrder, putOrder};
+export {
+  getAllOrders,
+  getOrdersById,
+  getUsersOrders,
+  getOrderDetails,
+  postOrder,
+  putOrder,
+};

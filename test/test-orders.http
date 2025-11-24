@@ -14,6 +14,10 @@ GET http://localhost:3000/api/v1/orders/14
 GET http://localhost:3000/api/v1/orders/14/details
 
 
+### Get user's orders
+GET http://localhost:3000/api/v1/orders/user/2
+
+
 ### Create new order (not registered customer)
 POST http://localhost:3000/api/v1/orders
 Content-Type: application/json

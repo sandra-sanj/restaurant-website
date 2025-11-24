@@ -45,6 +45,14 @@ const findOrderWithItemsById = async (id) => {
   };
 };
 
+const findOrdersByUserId = async (userId) => {
+  const [rows] = await promisePool.execute(
+    `SELECT * FROM orders WHERE user_id = ? ORDER BY created_at DESC`,
+    [userId]
+  );
+  return rows;
+};
+
 const addOrder = async (order) => {
   const {
     user_id,
@@ -153,6 +161,7 @@ export {
   listAllOrders,
   findOrderById,
   findOrderWithItemsById,
+  findOrdersByUserId,
   addOrder,
   updateOrder,
 };
