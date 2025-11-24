@@ -23,9 +23,9 @@ POST http://localhost:3000/api/v1/orders
 Content-Type: application/json
 
 {
-    "user_id": null,
-    "customer_name": "Test user",
-    "customer_email": "guest@test.com",
+    "user_id": 3,
+    "customer_name": "minna Meikäläinen",
+    "customer_email": "minnaa@test.com",
     "customer_phone": "+358223344556",
     "order_type": "delivery",
     "delivery_address": "test 123, 001 Helsinki",

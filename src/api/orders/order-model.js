@@ -46,11 +46,25 @@ const findOrderWithItemsById = async (id) => {
 };
 
 const findOrdersByUserId = async (userId) => {
-  const [rows] = await promisePool.execute(
+  const [orders] = await promisePool.execute(
     `SELECT * FROM orders WHERE user_id = ? ORDER BY created_at DESC`,
     [userId]
   );
-  return rows;
+
+  // Get items for each order
+  const ordersWithItems = await Promise.all(
+    orders.map(async (order) => {
+      const [items] = await promisePool.execute(
+        `SELECT * FROM order_items WHERE order_id = ?`,
+        [order.order_id]
+      );
+      return {
+        ...order,
+        items: items,
+      };
+    })
+  );
+  return ordersWithItems;
 };
 
 const addOrder = async (order) => {
