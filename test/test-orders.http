@@ -87,4 +87,4 @@ Content-Type: application/json
 
 
 ### Delete order
-DELETE http://localhost:3000/api/v1/orders/13
+DELETE http://localhost:3000/api/v1/orders/11
