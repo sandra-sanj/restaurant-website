@@ -5,6 +5,7 @@ import {
   addOrder,
   updateOrder,
   findOrdersByUserId,
+  removeOrder,
 } from './order-model.js';
 
 const getAllOrders = async (req, res) => {
@@ -91,6 +92,38 @@ const putOrder = async (req, res) => {
   }
 };
 
+const deleteOrder = async (req, res) => {
+  try {
+    const order = await findOrderById(req.params.id);
+
+    if (!order) {
+      return res.status(404).json({message: 'Order not found'});
+    }
+
+    /* TODO: check if user is admin (add authentication later)
+      if (res.locals.user?.role !== 'admin') {
+        return res
+          .status(403)
+          .json({message: 'Admin access required to delete orders'});
+      }
+    */
+
+    const result = await removeOrder(req.params.id);
+
+    if (result) {
+      res.json({
+        message: 'Order deleted successfully',
+        result,
+      });
+    } else {
+      res.status(400).json({message: 'Order could not be deleted'});
+    }
+  } catch (error) {
+    console.error('Error deleting order: ', error);
+    res.status(500).json({message: 'Error deleting order'});
+  }
+};
+
 export {
   getAllOrders,
   getOrdersById,
@@ -98,4 +131,5 @@ export {
   getOrderDetails,
   postOrder,
   putOrder,
+  deleteOrder,
 };

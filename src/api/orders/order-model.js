@@ -157,6 +157,20 @@ const updateOrder = async (id, order) => {
   return await findOrderById(id);
 };
 
+const removeOrder = async (id) => {
+  const [result] = await promisePool.execute(
+    'DELETE FROM orders WHERE order_id = ?',
+    [id]
+  );
+  console.log('delete result', result);
+
+  if (result.affectedRows === 0) {
+    return false;
+  }
+
+  return {message: 'Order deleted successfully'};
+};
+
 export {
   listAllOrders,
   findOrderById,
@@ -164,4 +178,5 @@ export {
   findOrdersByUserId,
   addOrder,
   updateOrder,
+  removeOrder,
 };

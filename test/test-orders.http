@@ -14,8 +14,8 @@ GET http://localhost:3000/api/v1/orders/14
 GET http://localhost:3000/api/v1/orders/14/details
 
 
-### Get user's orders
-GET http://localhost:3000/api/v1/orders/user/2
+### Get user's orders by user ID
+GET http://localhost:3000/api/v1/orders/user/1
 
 
 ### Create new order (not registered customer)
@@ -84,3 +84,7 @@ Content-Type: application/json
     "order_type": "delivery",
     "delivery_address": "Karamalmi 12, 0070 Espoo"
 }
+
+
+### Delete order
+DELETE http://localhost:3000/api/v1/orders/13
