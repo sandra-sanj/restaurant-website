@@ -7,14 +7,20 @@ import {
 } from './food-menu-model.js';
 
 const getMenuItems = async (req, res) => {
-  res.json(await listAllMenuItems());
+  const menuItems = await listAllMenuItems();
+
+  if (menuItems) {
+    res.status(200).json(menuItems);
+  } else {
+    res.status(404).json({message: 'Could not get menu'});
+  }
 };
 
 const getMenuItemById = async (req, res) => {
   const item = await findMenuItemById(req.params.id);
 
   if (item) {
-    res.status(201).json(item);
+    res.status(200).json(item);
   } else {
     res.status(404).json({message: 'Could not find item'});
   }
