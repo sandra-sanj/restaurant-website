@@ -2,11 +2,11 @@
 // How to handle errors in controller?
 import promisePool from '../../utils/database.js';
 
-const listAllUsers = async () => {
+/*const listAllUsers = async () => {
   // TODO: remove this request or heavily limit it
   const result = await promisePool.query('SELECT * FROM users');
   return result[0];
-};
+};*/
 
 const findUserById = async (id) => {
   const [result] = await promisePool.execute(
@@ -62,24 +62,18 @@ const removeUser = async (id) => {
     const [result] = await connection.execute(sql);
 
     if (result.affectedRows === 0) {
-      return {
-        message: 'User not deleted',
-      };
+      return 'User not deleted';
     }
 
     // if no errors, commit the transaction (save changes)
     await connection.commit();
 
-    return {
-      message: 'User deleted',
-    };
+    return 'User deleted';
   } catch (error) {
     // if error, rollback transaction (undo changes)
     await connection.rollback();
     console.error('error', error.message);
-    return {
-      message: error.message,
-    };
+    return error.message;
   } finally {
     connection.release();
   }
@@ -98,7 +92,7 @@ const getUserByUsername = async (username) => {
 };
 
 export {
-  listAllUsers,
+  //listAllUsers,
   findUserById,
   addUser,
   modifyUser,
