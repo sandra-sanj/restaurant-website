@@ -1,5 +1,4 @@
 import {
-  listAllUsers,
   findUserById,
   addUser,
   modifyUser,
@@ -29,18 +28,18 @@ const verifyUserAccess = async (user, logged_in_user) => {
 
   // check user validity
   if (!user) {
-    return {ok: false, status: 401, message: 'User not found'};
+    return {ok: false, status: 404, message: 'User not found'};
   }
 
   // check if token (logged in user) can modify user
   if (!(await getModifyingPermissions(user, logged_in_user))) {
-    return {ok: false, status: 403, message: 'User cannot modify this user'};
+    return {ok: false, status: 401, message: 'User cannot modify this user'};
   }
 
   return {ok: true};
 };
 
-const getUser = async (req, res) => {
+/*const getUser = async (req, res) => {
   const users = await listAllUsers();
 
   if (users) {
@@ -48,7 +47,7 @@ const getUser = async (req, res) => {
   } else {
     res.status(404).json({message: 'Could not get users'});
   }
-};
+};*/
 
 const getUserById = async (req, res) => {
   const user = await findUserById(req.params.id);
@@ -64,7 +63,7 @@ const postUser = async (req, res, next) => {
   // check if username exists
   if (await getUserByUsername(req.body.username)) {
     return res
-      .status(201)
+      .status(409)
       .json({message: 'Cannot add user, username already exists'});
   }
 
@@ -81,7 +80,7 @@ const postUser = async (req, res, next) => {
   if (result) {
     res.status(201).json({message: 'New user added', result});
   } else {
-    res.status(400).json({message: 'Did not add user'});
+    res.status(404).json({message: 'Did not add user'});
   }
 };
 
@@ -123,10 +122,10 @@ const deleteUser = async (req, res) => {
 
   const result = await removeUser(user.user_id);
   if (result) {
-    res.status(200).json({message: result.message});
+    res.status(200).json({message: result});
   } else {
-    res.status(404).json({message: result.message});
+    res.status(404).json({message: result});
   }
 };
 
-export {getUser, getUserById, postUser, putUser, deleteUser};
+export {getUserById, postUser, putUser, deleteUser};
