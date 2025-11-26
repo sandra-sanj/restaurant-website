@@ -14,15 +14,15 @@
 
 ### User related requests
 
-| Endpoint    | Method | Description                    | Request Body (Example) | Response Body (Example) | Status Codes |
-| ----------- | ------ | ------------------------------ | ---------------------- | ----------------------- | ------------ |
-| /users      | GET    | Retrieve all users             | -                      | -                       |              |
-| /users/:id  | GET    | Retrieve user with ID          | -                      | -                       |              |
-| /users      | POST   | Create new user                | -                      | -                       |              |
-| /users/:id  | PUT    | Modify user with ID            | -                      | -                       |              |
-| /users/:id  | DELETE | Delete user with ID            | -                      | -                       |              |
-| /auth/login | POST   | Create login token             | -                      | -                       |              |
-| /auth/me    | GET    | Retrieve user from login token | -                      | -                       |              |
+| Endpoint    | Method | Description                    | Request Body (Example) | Response Body (Example) | Status Codes  |
+| ----------- | ------ | ------------------------------ | ---------------------- | ----------------------- | ------------- |
+| /users      | GET    | Retrieve all users             | -                      | -                       |               |
+| /users/:id  | GET    | Retrieve user with ID          | -                      | -                       |               |
+| /users      | POST   | Create new user                | -                      | -                       | 201, 404, 409 |
+| /users/:id  | PUT    | Modify user with ID            | -                      | -                       |               |
+| /users/:id  | DELETE | Delete user with ID            | -                      | -                       | 200, 404      |
+| /auth/login | POST   | Create login token             | -                      | -                       |               |
+| /auth/me    | GET    | Retrieve user from login token | -                      | -                       |               |
 
 ### Order related requests
 
