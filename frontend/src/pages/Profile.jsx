@@ -1,8 +1,19 @@
-function Profile() {
+//import {useUser} from '../contexts/UserContext';
+
+const Profile = () => {
+    const {user} = useUser();
+
     return (
-        <>
-          <h1>Profile</h1>
-        </>
-    )
-}
+        <div>
+            {user &&
+                <>
+                    <h1>Profile</h1>
+                    <p>Username: {user.username}</p>
+                    <p>Email: {user.email}</p>
+                </>
+            }
+        </div>
+    );
+};
+
 export default Profile;
