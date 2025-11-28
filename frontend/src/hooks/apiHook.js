@@ -1,5 +1,5 @@
 
-function useAuthentication(params) {
+function useAuthentication() {
     const postLogin = async (inputs) => {
         const fetchOptions = {
             method: 'POST',

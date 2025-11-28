@@ -7,10 +7,14 @@ const LoginForm = () => {
     password: '',
     };
 
+    //TODO: lisää doRegister joka kutsuu useAuth hookkia
+
     const doLogin = () => {
         console.log(inputs);
         postLogin(inputs); //fixaaa
     };
+
+    const {postLogin} = useAuthentication();
 
     const {inputs, handleInputChange, handleSubmit} = useForm(doLogin, initValues);
 
