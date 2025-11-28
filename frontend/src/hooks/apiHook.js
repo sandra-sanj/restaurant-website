@@ -8,7 +8,7 @@ function useAuthentication(params) {
             },
             body: JSON.stringify(inputs),
         };
-        const loginResult = await fetchData(); //tähä api
+        const loginResult = await fetchData('/users'); 
         return loginResult;
         };
     
