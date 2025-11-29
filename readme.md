@@ -1,5 +1,49 @@
 # Website for Restaurant
 
+## Install, initialize, develop and launch project
+
+### Install
+
+1. Clone repository by running `git clone https://github.com/sandra-sanj/restaurant-website.git` in terminal.
+2. Open cloned project folder in a code editor.
+3. Run `npm install` to install everything in **package.json**. Run this command whenever said file is updated.
+4. Copy the contents of **.env.sample** to new **.env** file in project root and modify all rows
+
+### Initialize
+
+#### Database
+
+TODO: instructions to database creation
+
+### Development
+
+Run `npm run dev` when developing project.
+
+#### Test
+
+Run `npm run test` to run all API tests. Run specific tests:
+
+- `npm run test:api-user` to run user related tests
+- `npm run test:api-menu` to run menu related tests (TODO)
+
+TODO: orders, other tests
+
+### Build
+
+#### Backend
+
+Build project with `npm run build`. Resulting build files are located in **dist** folder.
+
+#### Frontend
+
+TODO: instructions about frontend init, testing, building
+
+### Launch
+
+TODO: instructions about adding project to server
+
+something something about **dist** folder
+
 ## REST API Documentation
 
 ### Menu related requests (+ menu item allergen?)
