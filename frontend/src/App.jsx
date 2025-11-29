@@ -5,6 +5,7 @@ import Profile from "./pages/Profile";
 import Cart from "./pages/Cart";
 import {Routes, Route} from "react-router";
 import NavBar from './components/NavBar';
+import Admin from './pages/Admin';
 
 const App = () => {
   return (
@@ -16,7 +17,8 @@ const App = () => {
             <Route path='/' element={<Home />}/>
             <Route path='/menu' element={<Menu />}/>
             <Route path='/profile' element={<Profile />}/>
-            <Route path='/Cart' element={<Cart />}/>
+            <Route path='/admin' element={<Admin />}/>
+            <Route path='/cart' element={<Cart />}/>
           </Routes>
         </main>
       </div>
