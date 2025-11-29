@@ -1,7 +1,7 @@
-import MenuNav from '../components/MenuNav';
-import FoodCard from './../components/FoodCard';
-import FoodCardPortrait from '../components/FoodCardPortrait';
-import HighlightCard from '../components/HighlightCard';
+import MenuNav from '../components/menu/MenuNav';
+import FoodCard from '../components/menu/FoodCard';
+import FoodCardPortrait from '../components/menu/FoodCardPortrait';
+import HighlightCard from '../components/menu/HighlightCard';
 
 function Menu() {
   return (
