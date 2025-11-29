@@ -1,6 +1,6 @@
 import useForm from "../hooks/formHooks";
 
-const LoginForm = () => {
+const RegisterForm = () => {
 
     const initValues = {
     username: '',
@@ -17,10 +17,10 @@ const LoginForm = () => {
     console.log(inputs);
      return (
          <>
-             <h1>Login</h1>
+             <h1>Register</h1>
              <form onSubmit={ () => {handleSubmit} }>
                   <div>
-                      <label htmlFor="loginuser">Username</label>
+                      <label htmlFor="registerUser">Username</label>
                      <input
                          name="username"
                          type="text"
@@ -38,27 +38,27 @@ const LoginForm = () => {
                      />
                  </div>
                  <div>
-                      <label htmlFor="loginuser">Username</label>
+                      <label htmlFor="loginuser">Email</label>
                      <input
                          name="username"
                          type="text"
-                         id="registerUser"
+                         id="registerEmail"
                          onChange={ () => {handleInputChange} }
                      />
                  </div>
                  <div>
-                      <label htmlFor="loginuser">Username</label>
+                      <label htmlFor="registerAddress">Address</label>
                      <input
                          name="username"
                          type="text"
-                         id="registerUser"
+                         id="registerAddress"
                          onChange={ () => {handleInputChange} }
                      />
                  </div>
-                 <button type="submit">Login</button>
+                 <button type="submit">Register</button>
              </form>
          </>
      );
 };
 
-export default LoginForm;
+export default RegisterForm;
