@@ -1,12 +1,12 @@
 const MenuNav = () => {
   return (
     <>
-      <ul>
+      <ul className="flex flex-row gap-5">
         <li>
           <a href="">Kaikki</a>
         </li>
         <li>
-          <a href="">Snacks</a>
+          <a href="">Alkuruoat</a>
         </li>
         <li>
           <a href="">Pääruoat</a>
