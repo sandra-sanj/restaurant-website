@@ -1,8 +1,8 @@
-import { Link } from "react-router";
+import {Link} from "react-router";
 
 function NavBar() {
 
-    // TODO: transfer admin page (later) inside profile / registration
+    // TODO: transfer admin page (later) inside profile / registration AND history inside admin
 
     return <nav className="navbar">
         <div className="navbar-links">
@@ -10,6 +10,7 @@ function NavBar() {
             <Link to="/menu" className="nav-link">Menu </Link>
             <Link to="/profile" className="nav-link">Profile </Link>
             <Link to="/admin" className="nav-link">Admin </Link>
+            <Link to="/history" className="nav-link">History </Link>
             <Link to="/cart" className="nav-link">Cart </Link>
         </div>
     </nav>

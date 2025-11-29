@@ -1,15 +1,14 @@
-import TableRow from './../components/admin/tableRow';
-import EditMenu from './../components/admin/EditMenu';
+import HistoryRow from './../components/admin/HistoryRow';
 
-const Admin = () => {
+const AdminHistory = () => {
   return (
     <>
-      <h1>Admin</h1>
-
+      <h1>Tilaushistoria</h1>
       <div className="flex flex-row">
-        <h2>Avoimet tilaukset</h2>
-        <p>5</p>
+        <button>Tämän päivän tilaukset</button>
+        <button>Kaikki tilaukset</button>
       </div>
+
       <p>Tähän populoidaan dataa tietokannasta</p>
       <br />
       <table>
@@ -19,23 +18,23 @@ const Admin = () => {
             <th>Tuote</th>
             <th>Lisätiedot</th>
             <th>Määrä</th>
-            <th>Tehty</th>
+            <th>Tilauspäivä</th>
           </tr>
         </thead>
 
         <tbody>
-          <TableRow />
-          <TableRow />
-          <TableRow />
+          <HistoryRow />
+          <HistoryRow />
+          <HistoryRow />
         </tbody>
       </table>
 
       <br />
       <footer>
-        <EditMenu />
+        <p>Tilauksia yhteensä 99</p>
       </footer>
     </>
   );
 };
 
-export default Admin;
+export default AdminHistory;

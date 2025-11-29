@@ -6,6 +6,7 @@ import Cart from "./pages/Cart";
 import {Routes, Route} from "react-router";
 import NavBar from './components/NavBar';
 import Admin from './pages/Admin';
+import AdminHistory from './pages/AdminHistory';
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
             <Route path='/menu' element={<Menu />}/>
             <Route path='/profile' element={<Profile />}/>
             <Route path='/admin' element={<Admin />}/>
+            <Route path='/history' element={<AdminHistory />}/>
             <Route path='/cart' element={<Cart />}/>
           </Routes>
         </main>
