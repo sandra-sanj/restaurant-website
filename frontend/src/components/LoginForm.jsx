@@ -8,18 +8,16 @@ const LoginForm = () => {
     password: '',
     };
 
-    //TODO: lisää doRegister joka kutsuu useAuth hookkia
 
     const doLogin = () => {
         console.log(inputs);
-        postLogin(inputs); //fixaaa
+        postLogin(inputs);
     };
 
     const {postLogin} = useAuthentication();
 
     const {inputs, handleInputChange, handleSubmit} = useForm(doLogin, initValues);
 
-    console.log(inputs);
      return (
          <>
              <h1>Login</h1>
@@ -30,7 +28,7 @@ const LoginForm = () => {
                          name="username"
                          type="text"
                          id="loginuser"
-                         onChange={ () => {handleInputChange} }
+                         onChange={ (e) => {handleInputChange(e)} }
                          autoComplete="username"
                      />
                  </div>
@@ -40,7 +38,7 @@ const LoginForm = () => {
                          name="password"
                          type="password"
                          id="loginpassword"
-                         onChange={ () => {handleInputChange} }
+                         onChange={ (e) => {handleInputChange(e)} }
                          autoComplete="current-password"
                      />
                  </div>
