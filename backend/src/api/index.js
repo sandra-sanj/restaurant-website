@@ -4,6 +4,7 @@ import userRouter from './user/user-router.js';
 import authRouter from './auth/auth-router.js';
 
 import orderRouter from './orders/order-router.js';
+import allergenRouter from './food-menu/allergen-router.js';
 
 const router = express.Router();
 
@@ -13,5 +14,6 @@ router.use('/users', userRouter);
 router.use('/auth', authRouter);
 
 router.use('/orders', orderRouter);
+router.use('/allergens', allergenRouter);
 
 export default router;
