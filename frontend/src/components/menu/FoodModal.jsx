@@ -3,11 +3,17 @@ const FoodModal = ({onAddToCart, onClose}) => {
 
   return (
     <>
-      <div className="m-5 outline-2 outline-gray-400 rounded-md">
+      <div className="m-5 outline-2 outline-gray-400 rounded-md w-[500px]">
         <div>
           <span className="cursor-pointer" onClick={onClose}>
             &times;
           </span>
+          <img
+            src="../src/assets/img/muut/tostada-liha-ehka-vege.jpg"
+            alt="Tostada"
+            width={'auto'}
+            className="rounded-md"
+          />
         </div>
         <div>
           <h1>FoodModal</h1>
@@ -22,7 +28,13 @@ const FoodModal = ({onAddToCart, onClose}) => {
           <div>
             <label>
               Lisätiedot:
-              <textarea name="postContent" rows={4} cols={40} defaultValue="Tämä on tekstikenttä" className="bg-neutral-50"/>
+              <textarea
+                name="postContent"
+                rows={4}
+                cols={40}
+                defaultValue="Tämä on tekstikenttä"
+                className="bg-neutral-50"
+              />
             </label>
           </div>
         </div>
