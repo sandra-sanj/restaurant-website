@@ -37,4 +37,4 @@ function useUser() {
     }
 }
 
-export {useAuthentication};
+export default {useAuthentication, useUser};

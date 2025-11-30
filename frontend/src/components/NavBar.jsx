@@ -9,19 +9,13 @@ function NavBar() {
             <Link to="/" className="nav-link">Home </Link>
             <Link to="/menu" className="nav-link">Menu </Link>
             <Link to="/profile" className="nav-link">Profile </Link>
-<<<<<<< HEAD
             <Link to="/admin" className="nav-link">Admin </Link>
             <Link to="/history" className="nav-link">History </Link>
-=======
             <Link to="/login" className="nav-link">LogIn</Link>
->>>>>>> auth-front
             <Link to="/cart" className="nav-link">Cart </Link>
         </div>
     </nav>
 }
 
-<<<<<<< HEAD
 export default NavBar
-=======
-export default NavBar;
->>>>>>> auth-front
+
