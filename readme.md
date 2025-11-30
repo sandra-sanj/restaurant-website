@@ -82,4 +82,9 @@ something something about **dist** folder
 
 ### Other requests (allergens, categories, lunch specials)
 
-table
+### Categories related requests
+
+| Endpoint        | Method | Description           | Request Body (Example) | Response Body (Example) | Status Codes  |
+| --------------- | ------ | --------------------- | ---------------------- | ----------------------- | ------------- |
+| /categories     | GET    | Get all categories    | -                      | -                       | 200, 500      |
+| /categories/:id | GET    | Get categoriess by ID | -                      | -                       | 200, 404, 500 |
