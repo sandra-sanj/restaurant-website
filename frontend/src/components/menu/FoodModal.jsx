@@ -5,7 +5,9 @@ const FoodModal = ({onAddToCart, onClose}) => {
     <>
       <div className="m-5 outline-2 outline-gray-400 rounded-md">
         <div>
-          <span className="cursor-pointer" onClick={onClose}>&times;</span>
+          <span className="cursor-pointer" onClick={onClose}>
+            &times;
+          </span>
         </div>
         <div>
           <h1>FoodModal</h1>
@@ -17,7 +19,12 @@ const FoodModal = ({onAddToCart, onClose}) => {
             ruokakortin Lisää tilaukseen-nappia
           </p>
           <p>Tulisuus: X X X (jos ruoassa mahdollista säätää)</p>
-          <p>Lisätiedot: tähän tulee tekstikenttä</p>
+          <div>
+            <label>
+              Lisätiedot:
+              <textarea name="postContent" rows={4} cols={40} defaultValue="Tämä on tekstikenttä" className="bg-neutral-50"/>
+            </label>
+          </div>
         </div>
 
         <div className="flex flex-row">
