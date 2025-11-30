@@ -46,3 +46,17 @@ GET http://localhost:3000/api/v1/allergens/4
 GET http://localhost:3000/api/v1/allergens/menu-item/8
 
 
+
+
+### Lunch Specials
+
+### Get all lunch specials
+GET http://localhost:3000/api/v1/lunch
+
+### Get today's lunch special
+GET http://localhost:3000/api/v1/lunch/today
+
+
+### Get lunch for specific day
+GET http://localhost:3000/api/v1/lunch/tuesday
+
