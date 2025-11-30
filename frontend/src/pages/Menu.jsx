@@ -2,10 +2,11 @@ import MenuNav from '../components/menu/MenuNav';
 import FoodCard from '../components/menu/FoodCard';
 import FoodCardPortrait from '../components/menu/FoodCardPortrait';
 import HighlightCard from '../components/menu/HighlightCard';
-import FoodModal from './../components/menu/FoodModal';
 
 function Menu() {
   
+  // TODO: hae kaikki ruoat tietokannasta, näytä kaikki menussa
+  // TODO: näytä ruokalajit kategorian mukaan
 
   return (
     <>
@@ -17,7 +18,7 @@ function Menu() {
       
       <HighlightCard />
       <FoodCard />
-      <FoodCardPortrait />
+      {/*<FoodCardPortrait />*/}
     </>
   );
 }
