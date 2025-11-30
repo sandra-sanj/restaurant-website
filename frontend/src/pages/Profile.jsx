@@ -1,17 +1,18 @@
 import {useUser} from "../hooks/apiHook";
+import Modal from "../components/Modal";
 
 const Profile = () => {
-    const {user} = useUser;
+    //const {user} = useUser();
 
     return (
         <div>
-            {user &&
                 <>
-                    <h1>Profile</h1>
-                    <p>Username: {user.username}</p>
-                    <p>Email: {user.email}</p>
+                    <h1>Burrito member</h1> 
+                    <p>Username: nimi</p>
+                    <div className="profile-bar">
+                        <button></button>
+                    </div>
                 </>
-            }
         </div>
     );
 };
