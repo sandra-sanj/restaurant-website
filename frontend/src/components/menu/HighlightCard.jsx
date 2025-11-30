@@ -1,7 +1,17 @@
+import {useState} from 'react';
+import FoodModal from './FoodModal';
 
 const HighlightCard = () => {
+  const [foodModalOpen, setFoodModalOpen] = useState(false);
+
+  const handleButtonClick = () => {
+    setFoodModalOpen(false);
+  }
+
   return (
     <>
+      {foodModalOpen && <FoodModal onSubmit={handleButtonClick} onClose={handleButtonClick}/>}
+
       <div className="bg-white-50 w-[500px] h-[550px] rounded-md mb-5 outline-10 outline-red-800">
         <img
           src="../src/assets/img/muut/tostada-liha-ehka-vege.jpg"
@@ -20,7 +30,7 @@ const HighlightCard = () => {
           (voisi olla myös span?)
         </p>
         <p>13,90 €</p>
-        <button>+ Lisää tilaukseen</button>
+        <button onClick={() => setFoodModalOpen(true)}>+ Lisää tilaukseen</button>
       </div>
     </>
   );
