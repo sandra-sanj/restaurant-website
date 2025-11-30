@@ -1,9 +1,5 @@
-const FoodModal = ({onSubmit, onClose}) => {
+const FoodModal = ({onAddToCart, onClose}) => {
   //const FoodModal = ({props}) => {
-
-
-  //const {food} = props;
-  //console.log(food);
 
   return (
     <>
@@ -28,7 +24,7 @@ const FoodModal = ({onSubmit, onClose}) => {
           <button>-</button>
           <p>1</p> {/* Tähän tulee määrä jota voi muokata */}
           <button>+</button>
-          <button onClick={onSubmit}>Lisää ostoskoriin 14,50 €</button>
+          <button onClick={onAddToCart}>Lisää ostoskoriin 14,50 €</button>
         </div>
       </div>
     </>
