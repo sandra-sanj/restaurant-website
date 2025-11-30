@@ -1,7 +1,7 @@
-//import {useUser} from '../contexts/UserContext';
+import {useUser} from "../hooks/apiHook";
 
 const Profile = () => {
-    const {user} = useUser();
+    const {user} = useUser;
 
     return (
         <div>
