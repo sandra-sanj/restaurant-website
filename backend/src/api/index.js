@@ -5,6 +5,7 @@ import authRouter from './auth/auth-router.js';
 
 import orderRouter from './orders/order-router.js';
 import allergenRouter from './food-menu/allergen-router.js';
+import categoryRouter from './food-menu/category-router.js';
 
 const router = express.Router();
 
@@ -15,5 +16,6 @@ router.use('/auth', authRouter);
 
 router.use('/orders', orderRouter);
 router.use('/allergens', allergenRouter);
+router.use('/categories', categoryRouter);
 
 export default router;

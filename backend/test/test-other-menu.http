@@ -1,3 +1,26 @@
+### API HTTP request tests for categories, allergens endpoints
+
+### Categories
+
+### Get all categories
+GET http://localhost:3000/api/v1/categories
+
+### Get category by ID (Snacks)
+GET http://localhost:3000/api/v1/categories/1
+
+### Get category by ID (Mains)
+GET http://localhost:3000/api/v1/categories/2
+
+### Get category by ID (Desserts)
+GET http://localhost:3000/api/v1/categories/3
+
+
+### Get category by ID (Drinks)
+GET http://localhost:3000/api/v1/categories/4
+
+
+
+
 ### Allergens
 
 ### Get all allergens
