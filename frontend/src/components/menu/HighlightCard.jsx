@@ -22,7 +22,7 @@ const HighlightCard = () => {
       )}
       {infoCardOpen && <InfoCard onClose={handleButtonClick} />}
 
-      <div className="bg-white-50 w-[500px] h-[550px] rounded-md mb-5 outline-10 outline-red-800">
+      <div className="bg-white-50 w-[500px] rounded-md mb-5 outline-10 outline-red-800">
         <img
           src="../src/assets/img/muut/tostada-liha-ehka-vege.jpg"
           alt="Tostada"

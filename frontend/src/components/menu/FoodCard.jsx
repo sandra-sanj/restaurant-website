@@ -28,9 +28,10 @@ const FoodCard = () => {
           onClose={handleButtonClick}
         />
       )}
+
       {infoCardOpen && <InfoCard onClose={handleButtonClick} />}
 
-      <div className="bg-white-50 w-[500px] h-[550px] rounded-md mb-5 outline-2 outline-gray-400">
+      <div className="bg-white-50 w-[500px] rounded-md mb-5 outline-2 outline-gray-400">
         <img
           src="../src/assets/img/muut/tostada-liha-ehka-vege.jpg"
           alt="Tostada"
