@@ -14,7 +14,7 @@ function useAuthentication() {
     return {postLogin};
 };
 
-const useUser = () => {
+function useUser() {
     const getUserByToken = async (token) => {
         const options = {
             headers: {
@@ -22,8 +22,18 @@ const useUser = () => {
             },
         };
 
-        const tokenResult = fetchData();
+        const tokenResult = await fetchData();
         return tokenResult;
+    }
+
+    const postUser = async (inputs) => {
+        const postOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(inputs),
+        }
     }
 }
 
