@@ -26,7 +26,7 @@ const getLunchSpecialByDay = async (req, res) => {
     }
   } catch (error) {
     console.error('Error fetching lunch special by day: ', error);
-    res.status(404).json({message: 'Error fetching lunch special'});
+    res.status(500).json({message: 'Error fetching lunch special'});
   }
 };
 
@@ -56,7 +56,7 @@ const getTodaysLunchSpecial = async (req, res) => {
     }
   } catch (error) {
     console.error('Error fetching lunch special by day; ', error);
-    res.status(500).json({message: 'Error fetching lunch special'});
+    res.status(500).json({message: 'Error fetching todays lunch special'});
   }
 };
 
