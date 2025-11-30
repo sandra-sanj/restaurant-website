@@ -88,3 +88,11 @@ something something about **dist** folder
 | --------------- | ------ | --------------------- | ---------------------- | ----------------------- | ------------- |
 | /categories     | GET    | Get all categories    | -                      | -                       | 200, 500      |
 | /categories/:id | GET    | Get categoriess by ID | -                      | -                       | 200, 404, 500 |
+
+### Allergens related requests
+
+| Endpoint               | Method | Description                 | Request Body (Example) | Response Body (Example) | Status Codes  |
+| ---------------------- | ------ | --------------------------- | ---------------------- | ----------------------- | ------------- |
+| /allergens             | GET    | Get all allergens           | -                      | -                       | 200, 500      |
+| /allergens/:id         | GET    | Get allergens by ID         | -                      | -                       | 200, 404, 500 |
+| /allergens/:menuItemId | GET    | Get allergens for menu item | -                      | -                       | 200, 404, 500 |
