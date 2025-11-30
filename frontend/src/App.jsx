@@ -7,6 +7,7 @@ import {Routes, Route} from "react-router";
 import NavBar from './components/NavBar';
 import Admin from './pages/Admin';
 import AdminHistory from './pages/AdminHistory';
+import Login from './pages/Login';
 
 const App = () => {
   return (
@@ -21,6 +22,8 @@ const App = () => {
             <Route path='/admin' element={<Admin />}/>
             <Route path='/history' element={<AdminHistory />}/>
             <Route path='/cart' element={<Cart />}/>
+            <Route path='/login' element={<Login />}/>
+            <Route path='/Cart' element={<Cart />}/>
           </Routes>
         </main>
       </div>
