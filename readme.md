@@ -96,3 +96,11 @@ something something about **dist** folder
 | /allergens             | GET    | Get all allergens           | -                      | -                       | 200, 500      |
 | /allergens/:id         | GET    | Get allergens by ID         | -                      | -                       | 200, 404, 500 |
 | /allergens/:menuItemId | GET    | Get allergens for menu item | -                      | -                       | 200, 404, 500 |
+
+### Lunch-specials related requests
+
+| Endpoint     | Method | Description               | Request Body (Example) | Response Body (Example) | Status Codes  |
+| ------------ | ------ | ------------------------- | ---------------------- | ----------------------- | ------------- |
+| /lunch       | GET    | Get all lunch specials    | -                      | -                       | 200, 500      |
+| /lunch/today | GET    | Get today's lunch special | -                      | -                       | 200, 404, 500 |
+| /lunch/:day  | GET    | Get lunch special by day  | -                      | -                       | 200, 404, 500 |
