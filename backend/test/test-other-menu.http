@@ -1,0 +1,62 @@
+### API HTTP request tests for categories, allergens endpoints
+
+### Categories
+
+### Get all categories
+GET http://localhost:3000/api/v1/categories
+
+### Get category by ID (Snacks)
+GET http://localhost:3000/api/v1/categories/1
+
+### Get category by ID (Mains)
+GET http://localhost:3000/api/v1/categories/2
+
+### Get category by ID (Desserts)
+GET http://localhost:3000/api/v1/categories/3
+
+
+### Get category by ID (Drinks)
+GET http://localhost:3000/api/v1/categories/4
+
+
+
+
+### Allergens
+
+### Get all allergens
+GET http://localhost:3000/api/v1/allergens
+
+### Get allergen by ID (Lactose-free)
+GET http://localhost:3000/api/v1/allergens/1
+
+
+### Get allergen by ID (Gluten-free)
+GET http://localhost:3000/api/v1/allergens/2
+
+
+### Get allergen by ID (Dairy-free)
+GET http://localhost:3000/api/v1/allergens/3
+
+
+### Get allergen by ID (Vegan)
+GET http://localhost:3000/api/v1/allergens/4
+
+
+### Get allergens for menu item
+GET http://localhost:3000/api/v1/allergens/menu-item/8
+
+
+
+
+### Lunch Specials
+
+### Get all lunch specials
+GET http://localhost:3000/api/v1/lunch
+
+### Get today's lunch special
+GET http://localhost:3000/api/v1/lunch/today
+
+
+### Get lunch for specific day
+GET http://localhost:3000/api/v1/lunch/tuesday
+

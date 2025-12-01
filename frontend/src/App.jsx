@@ -21,9 +21,8 @@ const App = () => {
             <Route path='/profile' element={<Profile />}/>
             <Route path='/admin' element={<Admin />}/>
             <Route path='/history' element={<AdminHistory />}/>
-            <Route path='/cart' element={<Cart />}/>
             <Route path='/login' element={<Login />}/>
-            <Route path='/Cart' element={<Cart />}/>
+            <Route path='/cart' element={<Cart />}/>
           </Routes>
         </main>
       </div>

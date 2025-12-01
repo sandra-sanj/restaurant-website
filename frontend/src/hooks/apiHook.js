@@ -35,6 +35,8 @@ function useUser() {
             body: JSON.stringify(inputs),
         }
     }
+
+    return {getUserByToken, postUser};
 }
 
-export default {useAuthentication, useUser};
+export {useAuthentication, useUser};

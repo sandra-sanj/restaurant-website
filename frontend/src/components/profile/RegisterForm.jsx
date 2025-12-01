@@ -1,5 +1,5 @@
-import useForm from "../hooks/formHooks";
-import useUser from '../hooks/apiHook';
+import useForm from '../../hooks/formHooks';
+import { useUser } from '../../hooks/apiHook';
 
 const RegisterForm = () => {
 
@@ -11,7 +11,7 @@ const RegisterForm = () => {
     };
 
     const doRegister = () => {
-    //console.log(inputs);
+    console.log(inputs);
     postUser(inputs);
     };
 

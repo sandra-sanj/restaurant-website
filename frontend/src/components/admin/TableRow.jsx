@@ -1,4 +1,6 @@
 const TableRow = () => {
+  /*TODO: lisää viimeideen td:hen checkbox (tehty-kohta)*/
+  
   return (
     <>
       <tr>

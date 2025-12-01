@@ -4,6 +4,10 @@ import FoodCardPortrait from '../components/menu/FoodCardPortrait';
 import HighlightCard from '../components/menu/HighlightCard';
 
 function Menu() {
+  
+  // TODO: hae kaikki ruoat tietokannasta, näytä kaikki menussa
+  // TODO: näytä ruokalajit kategorian mukaan
+
   return (
     <>
       <h1>Menu</h1>
@@ -11,9 +15,10 @@ function Menu() {
       <br />
       <MenuNav />
       <br />
+      
       <HighlightCard />
       <FoodCard />
-      <FoodCardPortrait />
+      {/*<FoodCardPortrait />*/}
     </>
   );
 }

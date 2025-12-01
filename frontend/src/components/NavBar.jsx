@@ -11,11 +11,10 @@ function NavBar() {
             <Link to="/profile" className="nav-link">Profile </Link>
             <Link to="/admin" className="nav-link">Admin </Link>
             <Link to="/history" className="nav-link">History </Link>
-            <Link to="/login" className="nav-link">LogIn</Link>
+            <Link to="/login" className="nav-link">LogIn </Link>
             <Link to="/cart" className="nav-link">Cart </Link>
         </div>
     </nav>
 }
 
-export default NavBar
-
+export default NavBar;

@@ -30,6 +30,10 @@ body {
   min-height: 100vh;
 }
 
+input {
+  border: #646cff4f solid 2px;
+}
+
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
@@ -45,6 +49,7 @@ button {
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
+  margin: 1rem;
 }
 button:hover {
   border-color: #646cff;
@@ -53,6 +58,46 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
+
+.ad-div {
+  display: flex;
+
+}
+
+.container-home {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.container-home div {
+  width: 25%;
+}
+
+.container-home img {
+  height: 10rem;
+  width: 10rem;
+  object-fit: cover;
+}
+
+.edit-prof {
+  display: flex;
+  width: 100%;
+  font-size: 22px;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.edit-prof p:hover {
+  cursor: pointer;
+  color: red;
+}
+
+.edit-prof p {
+  float: right;
+}
+
 
 @media (prefers-color-scheme: light) {
   :root {

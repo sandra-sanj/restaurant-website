@@ -1,7 +1,25 @@
 import TableRow from './../components/admin/tableRow';
 import EditMenu from './../components/admin/EditMenu';
+import AddItem from '../components/admin/AddItem';
+import EditItem from './../components/admin/EditItem';
+import DeleteItem from '../components/admin/DeleteItem';
+import {useState} from 'react';
+import DeleteConfirmation from '../components/admin/DeleteConfirmation';
+
+// TODO: lisää admin-navigaatio: button: historia/avoimet tilaukset, p: Ylläpito ja p: käyttäjänimi
 
 const Admin = () => {
+  const [addItemOpen, setAddItemOpen] = useState(false);
+  const [editItemOpen, setEditItemOpen] = useState(false);
+  const [deleteItemOpen, setDeleteItemOpen] = useState(false);
+
+  const handleButtonCloseClick = () => {
+    console.log('handleButtonClick');
+    setAddItemOpen(false);
+    setEditItemOpen(false);
+    setDeleteItemOpen(false);
+  };
+
   return (
     <>
       <h1>Admin</h1>
@@ -34,6 +52,13 @@ const Admin = () => {
       <footer>
         <EditMenu />
       </footer>
+
+      <div></div>
+
+      <AddItem onClose={handleButtonCloseClick} />
+      <EditItem onClose={handleButtonCloseClick} />
+      <DeleteItem onClose={handleButtonCloseClick} />
+      <DeleteConfirmation onClose={handleButtonCloseClick} />
     </>
   );
 };
