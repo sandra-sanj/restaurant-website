@@ -62,9 +62,21 @@ const getMenuItemById = async (req, res, next) => {
 };
 
 const postMenuItem = async (req, res, next) => {
+  console.log(req.file);
+  // check if file exists
+  if (!req.file) {
+    const error = new Error('Invalid or missing file');
+    error.status = 400;
+    return next(error);
+  }
+
   const menuItemData = {
     ...req.body,
   };
+  //console.log(menuItemData);
+  menuItemData.image_url = req.file.filename;
+  menuItemData.image_thumb_url = req.file.thumbFilename;
+  //console.log(menuItemData);
 
   // check if user is admin
   /*if (res.locals.user?.role !== 'admin') {
@@ -99,6 +111,12 @@ const postMenuItem = async (req, res, next) => {
 };
 
 const putMenuItem = async (req, res, next) => {
+  if (!req.file) {
+    const error = new Error('Invalid or missing file');
+    error.status = 400;
+    return next(error);
+  }
+
   const menuItem = await findMenuItemById(req.params.id);
   if (!menuItem) {
     const error = new Error('Menu item not found');

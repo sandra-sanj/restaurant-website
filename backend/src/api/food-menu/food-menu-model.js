@@ -32,11 +32,12 @@ const addMenuItem = async (menuItem) => {
     available_proteins,
     default_protein,
     image_url,
+    image_thumb_url,
     is_available,
   } = menuItem;
 
-  const sql = `INSERT INTO menu_items (category_id, name, name_en, description, description_en, price, ingredients, spice_level, allows_spice_custom, available_proteins, default_protein, image_url, is_available)
-               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+  const sql = `INSERT INTO menu_items (category_id, name, name_en, description, description_en, price, ingredients, spice_level, allows_spice_custom, available_proteins, default_protein, image_url, image_thumb_url, is_available)
+               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
   const params = [
     category_id,
@@ -51,6 +52,7 @@ const addMenuItem = async (menuItem) => {
     available_proteins,
     default_protein,
     image_url,
+    image_thumb_url,
     is_available,
   ];
 
