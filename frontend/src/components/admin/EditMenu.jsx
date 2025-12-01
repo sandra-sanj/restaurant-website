@@ -1,10 +1,10 @@
-const EditMenu = () => {
+const EditMenu = ({addItemClick, editItemClick, deleteItemClick}) => {
   return (
     <>
       <h2>Muokkaa ruokalistaa</h2>
-      <button>Lisää tuote</button>
-      <button>Muokkaa tuotetta</button>
-      <button>Poista tuote</button>
+      <button onClick={addItemClick}>Lisää tuote</button>
+      <button onClick={editItemClick}>Muokkaa tuotetta</button>
+      <button onClick={deleteItemClick}>Poista tuote</button>
     </>
   );
 };

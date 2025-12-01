@@ -1,4 +1,6 @@
 const DeleteItem = ({onClose}) => {
+
+  // TODO: lisää x-nappeihin onClick -> avaa DeleteCOnfirmation-komponentin
   return (
     <>
       <div className="m-5 outline-2 outline-gray-400 rounded-md">
@@ -58,6 +60,8 @@ const DeleteItem = ({onClose}) => {
             </tbody>
           </table>
         </div>
+
+        
       </div>
     </>
   );

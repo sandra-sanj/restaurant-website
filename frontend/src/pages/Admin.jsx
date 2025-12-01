@@ -20,6 +20,18 @@ const Admin = () => {
     setDeleteItemOpen(false);
   };
 
+  const handleAddItemClick = () => {
+    setAddItemOpen(true);
+  };
+
+  const handleEditItemClick = () => {
+    setEditItemOpen(true);
+  };
+
+  const handleDeleteItemClick = () => {
+    setDeleteItemOpen(true);
+  };
+
   return (
     <>
       <h1>Admin</h1>
@@ -50,14 +62,17 @@ const Admin = () => {
 
       <br />
       <footer>
-        <EditMenu />
+        <EditMenu addItemClick={handleAddItemClick} editItemClick={handleEditItemClick} deleteItemClick={handleDeleteItemClick}/>
       </footer>
 
       <div></div>
 
-      <AddItem onClose={handleButtonCloseClick} />
-      <EditItem onClose={handleButtonCloseClick} />
-      <DeleteItem onClose={handleButtonCloseClick} />
+      {addItemOpen && <AddItem onClose={handleButtonCloseClick} />}
+
+      {editItemOpen && <EditItem onClose={handleButtonCloseClick} />}
+
+      {deleteItemOpen && <DeleteItem onClose={handleButtonCloseClick} />}
+
       <DeleteConfirmation onClose={handleButtonCloseClick} />
     </>
   );
