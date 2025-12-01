@@ -22,8 +22,8 @@ foodMenuRouter
     authenticateToken,
     //upload.single('file'), // file needs to be created first before validations
     body('category_id').trim().isInt(),
-    body('name').trim().isLength({max: 255}),
-    body('name_en').trim().isLength({max: 255}),
+    body('name').trim().notEmpty().isLength({max: 255}),
+    body('name_en').trim().notEmpty().isLength({max: 255}),
     body('description').trim().notEmpty().isLength({max: 255}),
     body('description_en').trim().notEmpty().isLength({max: 255}),
     body('price').isDecimal({force_decimal: true}),
@@ -44,8 +44,8 @@ foodMenuRouter
   .put(
     authenticateToken,
     body('category_id').trim().isInt(),
-    body('name').trim().isLength({max: 255}),
-    body('name_en').trim().isLength({max: 255}),
+    body('name').trim().notEmpty().isLength({max: 255}),
+    body('name_en').trim().notEmpty().isLength({max: 255}),
     body('description').trim().notEmpty().isLength({max: 255}),
     body('description_en').trim().notEmpty().isLength({max: 255}),
     body('price').isDecimal({force_decimal: true}),
