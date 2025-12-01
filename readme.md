@@ -37,6 +37,12 @@ Build project with `npm run build`. Resulting build files are located in **dist*
 #### Frontend
 
 TODO: instructions about frontend init, testing, building
+<br/>
+
+Initialization: run `npm install` in **restaurant-website/frontend** folder. 
+<br/>
+
+To open project in browser, run `npm run dev` in **restaurant-website/frontend**.
 
 ### Launch
 
