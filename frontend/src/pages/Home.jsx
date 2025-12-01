@@ -71,6 +71,15 @@ function Home() {
             </div>
           </div>
           <h3>YHTEYSTIEDOT</h3>
+          <div className="contacts" id="contacts">
+            <p>Aukiolo ajat: </p>
+            <p>ma-pe: 11-22</p>
+            <p>la: 12-22</p>
+            <p>su: suljettu</p>
+            <p>Osoite: jokuosoite 8 a</p>
+            <p>Sähköposti: ravintolannimi@gmail.com</p>
+            <p>Puhelinnumero: +358 7776669</p>
+          </div>
         </>
     )
 }
