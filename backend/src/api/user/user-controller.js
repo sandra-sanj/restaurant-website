@@ -25,6 +25,7 @@ const getModifyingPermissions = async (user, logged_in_user) => {
 
 const verifyUserAccess = async (user, logged_in_user) => {
   // TODO: combine error messages to one for better security ("User not found or no permission to modify user")
+  // TODO: better error messages as this method is used elsewhere too, such as menu, orders, etc.
 
   // check user validity
   if (!user) {
@@ -128,4 +129,4 @@ const deleteUser = async (req, res) => {
   }
 };
 
-export {getUserById, postUser, putUser, deleteUser};
+export {verifyUserAccess, getUserById, postUser, putUser, deleteUser};

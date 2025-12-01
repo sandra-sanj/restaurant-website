@@ -8,6 +8,7 @@ import NavBar from './components/NavBar';
 import Admin from './pages/Admin';
 import AdminHistory from './pages/AdminHistory';
 import Login from './pages/Login';
+import Footer from './components/Footer'
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
           </Routes>
         </main>
       </div>
+      <Footer />
     </>
   );
 };

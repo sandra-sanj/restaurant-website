@@ -46,6 +46,7 @@ CREATE TABLE menu_items (
     available_proteins VARCHAR(200),
     default_protein VARCHAR(50),
     image_url VARCHAR(500),
+    image_thumb_url VARCHAR(500),
     is_available BOOLEAN DEFAULT TRUE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (category_id) REFERENCES categories (category_id),

@@ -37,6 +37,12 @@ Build project with `npm run build`. Resulting build files are located in **dist*
 #### Frontend
 
 TODO: instructions about frontend init, testing, building
+<br/>
+
+Initialization: run `npm install` in **restaurant-website/frontend** folder. 
+<br/>
+
+To open project in browser, run `npm run dev` in **restaurant-website/frontend**.
 
 ### Launch
 
@@ -82,4 +88,25 @@ something something about **dist** folder
 
 ### Other requests (allergens, categories, lunch specials)
 
-table
+### Categories related requests
+
+| Endpoint        | Method | Description           | Request Body (Example) | Response Body (Example) | Status Codes  |
+| --------------- | ------ | --------------------- | ---------------------- | ----------------------- | ------------- |
+| /categories     | GET    | Get all categories    | -                      | -                       | 200, 500      |
+| /categories/:id | GET    | Get categoriess by ID | -                      | -                       | 200, 404, 500 |
+
+### Allergens related requests
+
+| Endpoint               | Method | Description                 | Request Body (Example) | Response Body (Example) | Status Codes  |
+| ---------------------- | ------ | --------------------------- | ---------------------- | ----------------------- | ------------- |
+| /allergens             | GET    | Get all allergens           | -                      | -                       | 200, 500      |
+| /allergens/:id         | GET    | Get allergens by ID         | -                      | -                       | 200, 404, 500 |
+| /allergens/:menuItemId | GET    | Get allergens for menu item | -                      | -                       | 200, 404, 500 |
+
+### Lunch-specials related requests
+
+| Endpoint     | Method | Description               | Request Body (Example) | Response Body (Example) | Status Codes  |
+| ------------ | ------ | ------------------------- | ---------------------- | ----------------------- | ------------- |
+| /lunch       | GET    | Get all lunch specials    | -                      | -                       | 200, 500      |
+| /lunch/today | GET    | Get today's lunch special | -                      | -                       | 200, 404, 500 |
+| /lunch/:day  | GET    | Get lunch special by day  | -                      | -                       | 200, 404, 500 |
