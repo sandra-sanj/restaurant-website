@@ -43,7 +43,7 @@ const LoginForm = () => {
                          autoComplete="current-password"
                      />
                  </div>
-                 <button type="submit">Login</button>
+                 <button type="submit">Kirjaudu</button>
              </form>
          </>
      );
