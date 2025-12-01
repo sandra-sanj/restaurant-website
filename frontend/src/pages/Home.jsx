@@ -1,11 +1,16 @@
 import { useNavigate } from "react-router";
-import { useState } from 'react';
-import handleButton from "./Login";
+import Login from "./Login";
 
 
-//TODO: varmista että navigaatio oikeaan osoitteeseen.
+//TODO: varmista että navigaatio oikeaan osoitteeseen
+// sitten ehkä oma funktio 
 function Home() {
   const navigate = useNavigate();
+
+  const handleLoginBtn = () => {
+    handleButton();
+    navigate('/login');
+  }
 
     return (
         <>
@@ -14,7 +19,7 @@ function Home() {
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum veritatis suscipit quos dolorum </p>
           </div>
           <div>
-            <button onClick={() => navigate('/login')}>Kirjaudu</button>
+            <button onClick={() => (handleLoginBtn)}>Kirjaudu</button>
             <button onClick={() => navigate('/login')}>Rekisteröidy</button>
           </div>
           <div className="ad-div">
