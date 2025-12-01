@@ -9,7 +9,7 @@ import {
 import {authenticateToken} from '../../middlewares/authentication.js';
 import {body} from 'express-validator';
 import {validationErrors} from '../../middlewares/error-handlers.js';
-import {upload} from '../../middlewares/upload.js';
+import {upload, createThumbnail} from '../../middlewares/upload.js';
 
 const foodMenuRouter = express.Router();
 
@@ -20,7 +20,7 @@ foodMenuRouter
   .get(validationErrors, getMenuItems)
   .post(
     authenticateToken,
-    //upload.single('file'), // file needs to be created first before validations
+    upload.single('file'), // file needs to be created first before validations
     body('category_id').trim().isInt(),
     body('name').trim().notEmpty().isLength({max: 255}),
     body('name_en').trim().notEmpty().isLength({max: 255}),
@@ -32,9 +32,10 @@ foodMenuRouter
     body('allows_spice_custom').trim().notEmpty().isInt({min: 0, max: 1}),
     body('available_proteins'), //.isAlphanumeric(),
     body('default_protein'), //.isAlphanumeric(),
-    body('image_url').notEmpty(), //.isAlphanumeric(),
+    //body('image_url').notEmpty(), //.isAlphanumeric(),
     body('is_available').trim().notEmpty().isInt({min: 0, max: 1}),
     validationErrors,
+    createThumbnail,
     postMenuItem
   );
 
@@ -54,9 +55,10 @@ foodMenuRouter
     body('allows_spice_custom').trim().notEmpty().isInt({min: 0, max: 1}),
     body('available_proteins'), //.isAlphanumeric(),
     body('default_protein'), //.isAlphanumeric(),
-    body('image_url').notEmpty(), //.isAlphanumeric(),
+    //body('image_url').notEmpty(), //.isAlphanumeric(),
     body('is_available').trim().notEmpty().isInt({min: 0, max: 1}),
     validationErrors,
+    createThumbnail,
     putMenuItem
   )
   .delete(authenticateToken, validationErrors, deleteMenuItem);
