@@ -21,10 +21,10 @@ const LoginForm = () => {
 
      return (
          <>
-             <h1>Login</h1>
+             <h1>Kirjaudu sisään!</h1>
              <form onSubmit={ () => {handleSubmit} }>
                   <div>
-                      <label htmlFor="loginuser">Username</label>
+                      <label htmlFor="loginuser">Käyttäjänimi: </label>
                      <input
                          name="username"
                          type="text"
@@ -34,7 +34,7 @@ const LoginForm = () => {
                      />
                  </div>
                  <div>
-                     <label htmlFor="loginpassword">Password</label>
+                     <label htmlFor="loginpassword">Salasana: </label>
                       <input
                          name="password"
                          type="password"
