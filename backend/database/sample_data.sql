@@ -1,9 +1,9 @@
 USE mexican_restaurant;
 
 INSERT INTO users (username, email, password_hash, phone, role) VALUES
-('admin', 'admin@restaurant.fi', 'password', '+358123456789', 'admin'),
-('liisa', 'liisa@example.fi', 'password', '+358112233445', 'customer'),
-('minna', 'minna@example.fi', 'password', '+358998877665', 'customer');
+('admin', 'admin@restaurant.fi', '$2b$10$By.jHCduv8a0eqeJDW/7Re2RF6IkfQeCOQHFnyUlcnUlsf8D7UifW', '+358123456789', 'admin'),
+('liisa', 'liisa@example.fi', '$2b$10$By.jHCduv8a0eqeJDW/7Re2RF6IkfQeCOQHFnyUlcnUlsf8D7UifW', '+358112233445', 'customer'),
+('minna', 'minna@example.fi', '$2b$10$By.jHCduv8a0eqeJDW/7Re2RF6IkfQeCOQHFnyUlcnUlsf8D7UifW', '+358998877665', 'customer');
 
 INSERT INTO categories (name, display_order, is_active) VALUES
 ('Snacks', 1, TRUE),
