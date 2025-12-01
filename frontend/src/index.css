@@ -1,3 +1,11 @@
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+}
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -13,6 +21,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+
+
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -26,8 +37,7 @@ body {
   margin: 0;
   display: flex;
   place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+ 
 }
 
 input {
@@ -96,6 +106,26 @@ button:focus-visible {
 
 .edit-prof p {
   float: right;
+}
+
+.contacts {
+  margin-top: 10rem;
+}
+
+.footer {
+  margin-top: 10rem;
+  padding-bottom: 0;
+  height: 20rem;
+  width: 100%;
+  background-color:rgb(249, 226, 195);
+  color: white;
+}
+
+.main-content {
+  width: 80%;
+  margin: auto;
+  justify-content: center;
+  place-items: center;
 }
 
 

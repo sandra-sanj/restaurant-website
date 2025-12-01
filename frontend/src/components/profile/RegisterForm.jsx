@@ -21,10 +21,10 @@ const RegisterForm = () => {
 
      return (
          <>
-            <h1>Register</h1>
+            <h1> Luo käyttäjä</h1>
             <form onSubmit={ () => {handleSubmit} }>
                 <div>
-                    <label htmlFor="registerUser">Username</label>
+                    <label htmlFor="registerUser">Käyttäjänimi: </label>
                     <input
                         name="username"
                         type="text"
@@ -33,7 +33,7 @@ const RegisterForm = () => {
                     />
                 </div>
                 <div>
-                    <label htmlFor="registerPassword">Password</label>
+                    <label htmlFor="registerPassword">Salasana: </label>
                     <input
                         name="password"
                         type="password"
@@ -42,7 +42,7 @@ const RegisterForm = () => {
                     />
                 </div>
                 <div>
-                    <label htmlFor="loginuser">Email</label>
+                    <label htmlFor="registerEmail">Sähköposti: </label>
                     <input
                         name="email"
                         type="text"
@@ -51,7 +51,7 @@ const RegisterForm = () => {
                     />
                 </div>
                 <div>
-                    <label htmlFor="registerAddress">Address</label>
+                    <label htmlFor="registerAddress">Osoite: </label>
                     <input
                         name="address"
                         type="text"
@@ -59,7 +59,7 @@ const RegisterForm = () => {
                         onChange={ (e) => {handleInputChange(e)} }
                     />
                 </div>
-                <button type="submit">Register</button>
+                <button type="submit">Luo käyttäjä</button>
             </form>
         </>
     );
