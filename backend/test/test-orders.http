@@ -1,7 +1,7 @@
 ### API HTTP request tests for orders
 
 ### Token for user admin (admin)
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkByZXN0YXVyYW50LmZpIiwicGhvbmUiOiIrMzU4MTIzNDU2Nzg5Iiwicm9sZSI6ImFkbWluIiwiaXNfYWN0aXZlIjoxLCJpYXQiOjE3NjQ2NjQzMDEsImV4cCI6MTc2NDgzNzEwMX0.-xJjn3Id7t_V6N13C0vb7-lfgOjn-_rNJOCN74DtP40
+@adminToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkByZXN0YXVyYW50LmZpIiwicGhvbmUiOiIrMzU4MTIzNDU2Nzg5Iiwicm9sZSI6ImFkbWluIiwiaXNfYWN0aXZlIjoxLCJpYXQiOjE3NjQ2NjQzMDEsImV4cCI6MTc2NDgzNzEwMX0.-xJjn3Id7t_V6N13C0vb7-lfgOjn-_rNJOCN74DtP40
 
 
 
@@ -20,7 +20,7 @@
 
 ### Get all orders (admin only - require token)
 GET http://localhost:3000/api/v1/orders
-Authorization: Bearer {{token}}
+Authorization: Bearer {{adminToken}}
 
 
 ### Get user's orders by user ID
@@ -30,11 +30,11 @@ Authorization: Bearer {{token_user2}}
 
 ### Get order by ID
 GET http://localhost:3000/api/v1/orders/3
-Authorization: Bearer {{token}}
+Authorization: Bearer {{adminToken}}
 
 ### Get order details with items
 GET http://localhost:3000/api/v1/orders/1/details
-Authorization: Bearer {{token}}
+Authorization: Bearer {{adminToken}}
 
 
 ### Create order as guest (No Token needed)
@@ -93,15 +93,16 @@ Content-Type: application/json
 
 
 ### Update order
-PUT http://localhost:3000/api/v1/orders/14
+PUT http://localhost:3000/api/v1/orders/5
 Content-Type: application/json
+Authorization: Bearer {{adminToken}}
 
 {
-    "customer_name": "Liisa Hoffren",
-    "customer_email": "liisa.hoffren@example.com",
-    "customer_phone": "+358992233445",
-    "order_type": "delivery",
-    "delivery_address": "Karamalmi 12, 0070 Espoo"
+    "customer_name": "Maija Lehtonen",
+    "customer_email": "maija.lehtonen@example.com",
+    "customer_phone": "+358992244444",
+    "order_type": "pickup",
+    "delivery_address": "Leppavaara 12, 0070 Espoo"
 }
 
 
@@ -111,7 +112,7 @@ DELETE http://localhost:3000/api/v1/orders/11
 
 
 ### Login as customer
-@token_user2 = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJ1c2VybmFtZSI6ImxpaXNhIiwiZW1haWwiOiJsaWlzYUBleGFtcGxlLmZpIiwicGhvbmUiOiIrMzU4MTEyMjMzNDQ1Iiwicm9sZSI6ImN1c3RvbWVyIiwiaXNfYWN0aXZlIjoxLCJpYXQiOjE3NjQ2ODI0OTYsImV4cCI6MTc2NDg1NTI5Nn0.1boD-XXYaX2fD4rS2m926V6UnDyyg2m0g7Z0ZaueRCM
+@user2_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJ1c2VybmFtZSI6ImxpaXNhIiwiZW1haWwiOiJsaWlzYUBleGFtcGxlLmZpIiwicGhvbmUiOiIrMzU4MTEyMjMzNDQ1Iiwicm9sZSI6ImN1c3RvbWVyIiwiaXNfYWN0aXZlIjoxLCJpYXQiOjE3NjQ2ODI0OTYsImV4cCI6MTc2NDg1NTI5Nn0.1boD-XXYaX2fD4rS2m926V6UnDyyg2m0g7Z0ZaueRCM
 
 
 ### Negative tests
@@ -123,11 +124,11 @@ GET http://localhost:3000/api/v1/orders
 
 ### Try to access admin route with customer token (should fail with 403
 GET http://localhost:3000/api/v1/orders
-Authorization: Bearer {{token_user2}}
+Authorization: Bearer {{user2_token}}
 
 
 
 ### Try to access another user's orders (should fail with 403)
 GET http://localhost:3000/api/v1/orders/user/3
-Authorization: Bearer {{token_user2}}
+Authorization: Bearer {{user2_token}}
 

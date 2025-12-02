@@ -24,7 +24,7 @@ orderRouter.route('/').get(authenticateToken, checkAdmin, getAllOrders);
 orderRouter
   .route('/:id') // Get order by id with authentication
   .get(authenticateToken, checkAdmin, getOrdersById)
-  .put(putOrder)
+  .put(authenticateToken, checkAdmin, putOrder) //Admin only
   .delete(deleteOrder);
 
 orderRouter

@@ -107,31 +107,30 @@ const postOrder = async (req, res) => {
   }
 };
 
+// PUT update order (Admin only)
 const putOrder = async (req, res) => {
-  const order = await findOrderById(req.params.id);
+  try {
+    // Authentication check now handled by middleware
+    const order = await findOrderById(req.params.id);
 
-  if (!order) {
-    res.status(404).json({message: 'Order not found'});
-    return;
-  }
+    if (!order) {
+      res.status(404).json({message: 'Order not found'});
+      return;
+    }
 
-  /* TODO: check if user is admin (add authentication later)
-  if (res.locals.user?.role !== 'admin') {
-    return res
-      .status(403)
-      .json({message: 'Admin access required to update orders'});
-  }
-  */
+    const result = await updateOrder(req.params.id, req.body);
 
-  const result = await updateOrder(req.params.id, req.body);
-
-  if (result) {
-    res.status(200).json({
-      message: 'Order updated',
-      result,
-    });
-  } else {
-    res.status(400).json({message: 'Could not update order'});
+    if (result) {
+      res.status(200).json({
+        message: 'Order updated',
+        result,
+      });
+    } else {
+      res.status(400).json({message: 'Could not update order'});
+    }
+  } catch (error) {
+    console.error('Error updating order: ', error);
+    res.status(500).json({message: 'Error updating order'});
   }
 };
 
