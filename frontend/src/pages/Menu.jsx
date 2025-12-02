@@ -24,8 +24,7 @@ function Menu() {
         <Outlet></Outlet>
       </div>
       
-      <HighlightCard />
-      <FoodCard />
+
       {/*<FoodCardPortrait />*/}
     </>
   );
