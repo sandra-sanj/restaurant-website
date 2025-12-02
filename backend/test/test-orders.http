@@ -8,7 +8,7 @@
  Content-Type: application/json
 
  {
-    "username": "liisa",
+    "username": "admin",
     "password": "password"
  }
 
@@ -27,7 +27,7 @@ Authorization: Bearer {{token}}
 
 ### Get order details with items
 GET http://localhost:3000/api/v1/orders/1/details
-
+Authorization: Bearer {{token}}
 
 ### Get user's orders by user ID
 GET http://localhost:3000/api/v1/orders/user/1

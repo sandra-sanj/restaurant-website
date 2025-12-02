@@ -27,7 +27,9 @@ orderRouter
   .put(putOrder)
   .delete(deleteOrder);
 
-orderRouter.route('/:id/details').get(getOrderDetails);
+orderRouter
+  .route('/:id/details')
+  .get(authenticateToken, checkAdmin, getOrderDetails);
 
 orderRouter.route('/user/:userId').get(getUsersOrders);
 

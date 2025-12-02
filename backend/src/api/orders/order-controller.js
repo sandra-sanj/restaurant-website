@@ -36,6 +36,7 @@ const getOrdersById = async (req, res) => {
   }
 };
 
+// GET order details with items
 const getOrderDetails = async (req, res) => {
   try {
     const order = await findOrderWithItemsById(req.params.id);
