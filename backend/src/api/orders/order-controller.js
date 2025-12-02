@@ -8,10 +8,19 @@ import {
   removeOrder,
 } from './order-model.js';
 
+// GET all orders (Admin only)
 const getAllOrders = async (req, res) => {
-  res.json(await listAllOrders());
+  try {
+    // Authentication check now handled by middleware
+    const orders = await listAllOrders();
+    res.json(orders);
+  } catch (error) {
+    console.error('Error getting all orders: ', error);
+    res.status(500).json({message: 'Error fetching orders'});
+  }
 };
 
+// GET order by ID
 const getOrdersById = async (req, res) => {
   const order = await findOrderById(req.params.id);
 

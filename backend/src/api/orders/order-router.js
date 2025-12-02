@@ -10,9 +10,16 @@ import {
   deleteOrder,
 } from './order-controller.js';
 
+import {authenticateToken} from '../../middlewares/authentication.js';
+import {checkAdmin} from '../../middlewares/check-admin.js';
+
 const orderRouter = express.Router();
 
-orderRouter.route('/').get(getAllOrders).post(postOrder);
+// Public route (no auth required)?
+orderRouter.route('/').post(postOrder); // Guest can order
+
+// Admin only routes
+orderRouter.route('/').get(authenticateToken, checkAdmin, getAllOrders);
 
 orderRouter.route('/:id').get(getOrdersById).put(putOrder).delete(deleteOrder);
 

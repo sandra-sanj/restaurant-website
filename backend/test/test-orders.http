@@ -1,17 +1,32 @@
 ### API HTTP request tests for orders
 
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkByZXN0YXVyYW50LmZpIiwicGhvbmUiOiIrMzU4MTIzNDU2Nzg5Iiwicm9sZSI6ImFkbWluIiwiaXNfYWN0aXZlIjoxLCJpYXQiOjE3NjQ2NjQzMDEsImV4cCI6MTc2NDgzNzEwMX0.-xJjn3Id7t_V6N13C0vb7-lfgOjn-_rNJOCN74DtP40
+
+
+### First login as admin to get token
+ POST http://localhost:3000/api/v1/auth/login
+ Content-Type: application/json
+
+ {
+    "username": "admin",
+    "password": "password"
+ }
+
+
+
 ### Orders
 
 ### Get all orders
 GET http://localhost:3000/api/v1/orders
+Authorization: Bearer {{token}}
 
 
 ### Get order by ID
-GET http://localhost:3000/api/v1/orders/14
+GET http://localhost:3000/api/v1/orders/4
 
 
 ### Get order details with items
-GET http://localhost:3000/api/v1/orders/14/details
+GET http://localhost:3000/api/v1/orders/1/details
 
 
 ### Get user's orders by user ID
