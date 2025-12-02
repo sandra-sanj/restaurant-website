@@ -22,22 +22,32 @@ const getAllOrders = async (req, res) => {
 
 // GET order by ID
 const getOrdersById = async (req, res) => {
-  const order = await findOrderById(req.params.id);
+  try {
+    const order = await findOrderById(req.params.id);
 
-  if (order) {
-    res.status(200).json(order);
-  } else {
-    res.status(404).json({message: 'Order not found'});
+    if (order) {
+      res.status(200).json(order);
+    } else {
+      res.status(404).json({message: 'Order not found'});
+    }
+  } catch (error) {
+    console.error('Error fetching order: ', error);
+    res.status(500).json({message: 'Error fetching order'});
   }
 };
 
 const getOrderDetails = async (req, res) => {
-  const order = await findOrderWithItemsById(req.params.id);
+  try {
+    const order = await findOrderWithItemsById(req.params.id);
 
-  if (order) {
-    res.status(200).json(order);
-  } else {
-    res.status(404).json({message: 'Order not found'});
+    if (order) {
+      res.status(200).json(order);
+    } else {
+      res.status(404).json({message: 'Order not found'});
+    }
+  } catch (error) {
+    console.error('Error fetching order details: ', error);
+    res.status(500).json({message: 'Error fetching order details'});
   }
 };
 

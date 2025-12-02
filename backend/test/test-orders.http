@@ -1,14 +1,14 @@
 ### API HTTP request tests for orders
 
+### Token for user admin (admin)
 @token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkByZXN0YXVyYW50LmZpIiwicGhvbmUiOiIrMzU4MTIzNDU2Nzg5Iiwicm9sZSI6ImFkbWluIiwiaXNfYWN0aXZlIjoxLCJpYXQiOjE3NjQ2NjQzMDEsImV4cCI6MTc2NDgzNzEwMX0.-xJjn3Id7t_V6N13C0vb7-lfgOjn-_rNJOCN74DtP40
-
 
 ### First login as admin to get token
  POST http://localhost:3000/api/v1/auth/login
  Content-Type: application/json
 
  {
-    "username": "admin",
+    "username": "liisa",
     "password": "password"
  }
 
@@ -22,8 +22,8 @@ Authorization: Bearer {{token}}
 
 
 ### Get order by ID
-GET http://localhost:3000/api/v1/orders/4
-
+GET http://localhost:3000/api/v1/orders/3
+Authorization: Bearer {{token}}
 
 ### Get order details with items
 GET http://localhost:3000/api/v1/orders/1/details
@@ -38,7 +38,7 @@ POST http://localhost:3000/api/v1/orders
 Content-Type: application/json
 
 {
-    "user_id": 3,
+    "user_id": ,
     "customer_name": "minna Meikäläinen",
     "customer_email": "minnaa@test.com",
     "customer_phone": "+358223344556",

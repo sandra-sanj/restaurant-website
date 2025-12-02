@@ -15,13 +15,17 @@ import {checkAdmin} from '../../middlewares/check-admin.js';
 
 const orderRouter = express.Router();
 
-// Public route (no auth required)?
+// Public route (no auth required)
 orderRouter.route('/').post(postOrder); // Guest can order
 
 // Admin only routes
 orderRouter.route('/').get(authenticateToken, checkAdmin, getAllOrders);
 
-orderRouter.route('/:id').get(getOrdersById).put(putOrder).delete(deleteOrder);
+orderRouter
+  .route('/:id') // Get order by id with authentication
+  .get(authenticateToken, checkAdmin, getOrdersById)
+  .put(putOrder)
+  .delete(deleteOrder);
 
 orderRouter.route('/:id/details').get(getOrderDetails);
 
