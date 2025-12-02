@@ -3,9 +3,12 @@
 ### Token for user admin (admin)
 @adminToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkByZXN0YXVyYW50LmZpIiwicGhvbmUiOiIrMzU4MTIzNDU2Nzg5Iiwicm9sZSI6ImFkbWluIiwiaXNfYWN0aXZlIjoxLCJpYXQiOjE3NjQ2NjQzMDEsImV4cCI6MTc2NDgzNzEwMX0.-xJjn3Id7t_V6N13C0vb7-lfgOjn-_rNJOCN74DtP40
 
+### Login as customer
+@user2_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJ1c2VybmFtZSI6ImxpaXNhIiwiZW1haWwiOiJsaWlzYUBleGFtcGxlLmZpIiwicGhvbmUiOiIrMzU4MTEyMjMzNDQ1Iiwicm9sZSI6ImN1c3RvbWVyIiwiaXNfYWN0aXZlIjoxLCJpYXQiOjE3NjQ2ODI0OTYsImV4cCI6MTc2NDg1NTI5Nn0.1boD-XXYaX2fD4rS2m926V6UnDyyg2m0g7Z0ZaueRCM
 
 
-### First login as admin to get token
+
+### Login as admin to get token
  POST http://localhost:3000/api/v1/auth/login
  Content-Type: application/json
 
@@ -14,6 +17,14 @@
     "password": "password"
  }
 
+### Login as customer (liisa)
+ POST http://localhost:3000/api/v1/auth/login
+ Content-Type: application/json
+
+ {
+    "username": "liisa",
+    "password": "password"
+ }
 
 
 ### Orders
@@ -23,21 +34,23 @@ GET http://localhost:3000/api/v1/orders
 Authorization: Bearer {{adminToken}}
 
 
-### Get user's orders by user ID
+### Get user's orders by user ID (only order owner or admin)
 GET http://localhost:3000/api/v1/orders/user/2
 Authorization: Bearer {{user2_token}}
 
 
 ### Get order by ID
 GET http://localhost:3000/api/v1/orders/3
-Authorization: Bearer {{adminToken}}
+Authorization: Bearer {{user2_token}}
 
-### Get order details with items
+
+### Get order details with items (only order owner or admin)
 GET http://localhost:3000/api/v1/orders/1/details
-Authorization: Bearer {{adminToken}}
+Authorization: Bearer {{user2_token}}
 
 
-### Create order as guest (No Token needed)
+### Create order as guest (No Token needed) - return full order details immediately
+### (Note: Guest cannot view order later without account)
 POST http://localhost:3000/api/v1/orders
 Content-Type: application/json
 
@@ -92,7 +105,7 @@ Content-Type: application/json
 }
 
 
-### Update order
+### Update order (admin only)
 PUT http://localhost:3000/api/v1/orders/5
 Content-Type: application/json
 Authorization: Bearer {{adminToken}}
@@ -106,18 +119,13 @@ Authorization: Bearer {{adminToken}}
 }
 
 
-### Delete order
+### Delete order (admin only)
 DELETE http://localhost:3000/api/v1/orders/6
 Authorization: Bearer {{adminToken}}
 
 
 
-### Login as customer
-@user2_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJ1c2VybmFtZSI6ImxpaXNhIiwiZW1haWwiOiJsaWlzYUBleGFtcGxlLmZpIiwicGhvbmUiOiIrMzU4MTEyMjMzNDQ1Iiwicm9sZSI6ImN1c3RvbWVyIiwiaXNfYWN0aXZlIjoxLCJpYXQiOjE3NjQ2ODI0OTYsImV4cCI6MTc2NDg1NTI5Nn0.1boD-XXYaX2fD4rS2m926V6UnDyyg2m0g7Z0ZaueRCM
-
-
 ### Negative tests
-
 
 ### Try to access route without token (should fail with 401)
 GET http://localhost:3000/api/v1/orders
@@ -133,3 +141,7 @@ Authorization: Bearer {{user2_token}}
 GET http://localhost:3000/api/v1/orders/user/3
 Authorization: Bearer {{user2_token}}
 
+
+### Try to access another user's order by ID (Should fail with 403)
+GET http://localhost:3000/api/v1/orders/2
+Authorization: Bearer {{user2_token}}
