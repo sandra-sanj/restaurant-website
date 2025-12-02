@@ -134,21 +134,16 @@ const putOrder = async (req, res) => {
   }
 };
 
+// DELETE order (Admin only)
 const deleteOrder = async (req, res) => {
   try {
+    // Authentication check now handled by middleware
+
     const order = await findOrderById(req.params.id);
 
     if (!order) {
       return res.status(404).json({message: 'Order not found'});
     }
-
-    /* TODO: check if user is admin (add authentication later)
-      if (res.locals.user?.role !== 'admin') {
-        return res
-          .status(403)
-          .json({message: 'Admin access required to delete orders'});
-      }
-    */
 
     const result = await removeOrder(req.params.id);
 

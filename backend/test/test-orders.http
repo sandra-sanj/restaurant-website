@@ -25,7 +25,7 @@ Authorization: Bearer {{adminToken}}
 
 ### Get user's orders by user ID
 GET http://localhost:3000/api/v1/orders/user/2
-Authorization: Bearer {{token_user2}}
+Authorization: Bearer {{user2_token}}
 
 
 ### Get order by ID
@@ -107,7 +107,8 @@ Authorization: Bearer {{adminToken}}
 
 
 ### Delete order
-DELETE http://localhost:3000/api/v1/orders/11
+DELETE http://localhost:3000/api/v1/orders/6
+Authorization: Bearer {{adminToken}}
 
 
 
