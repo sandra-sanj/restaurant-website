@@ -37,12 +37,12 @@ GET http://localhost:3000/api/v1/orders/1/details
 Authorization: Bearer {{token}}
 
 
-### Create new order (not registered customer)
+### Create order as guest (No Token needed)
 POST http://localhost:3000/api/v1/orders
 Content-Type: application/json
 
 {
-    "user_id": 3,
+    "user_id": null,
     "customer_name": "minna Meikäläinen",
     "customer_email": "minnaa@test.com",
     "customer_phone": "+358223344556",

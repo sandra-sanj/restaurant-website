@@ -18,7 +18,7 @@ const orderRouter = express.Router();
 // Public route (no auth required)
 orderRouter.route('/').post(postOrder); // Guest can order
 
-// Admin only routes
+// Admin only routes (admin can view all orders)
 orderRouter.route('/').get(authenticateToken, checkAdmin, getAllOrders);
 
 orderRouter

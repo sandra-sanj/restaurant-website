@@ -79,20 +79,31 @@ const getUsersOrders = async (req, res) => {
   }
 };
 
+// POST create order (Public - guest allowed)
 const postOrder = async (req, res) => {
-  const orderData = {
-    ...req.body,
-  };
+  try {
+    const orderData = {
+      ...req.body,
+    };
 
-  const result = await addOrder(orderData);
+    // If user is logged in, use their user_id
+    if (res.locals.user?.user_id) {
+      orderData.user_id = res.locals.user.user_id;
+    }
 
-  if (result?.order_id) {
-    res.status(201).json({
-      message: 'New order created',
-      result,
-    });
-  } else {
-    res.status(400).json({message: 'Could not create order'});
+    const result = await addOrder(orderData);
+
+    if (result?.order_id) {
+      res.status(201).json({
+        message: 'New order created',
+        result,
+      });
+    } else {
+      res.status(400).json({message: 'Could not create order'});
+    }
+  } catch (error) {
+    console.error('Error creating order: ', error);
+    res.status(500).json({message: 'Error creating order'});
   }
 };
 
