@@ -2,11 +2,16 @@ import MenuNav from '../components/menu/MenuNav';
 import FoodCard from '../components/menu/FoodCard';
 import FoodCardPortrait from '../components/menu/FoodCardPortrait';
 import HighlightCard from '../components/menu/HighlightCard';
+import Mains from "../components/menu/Mains";
+import Snacks from "../components/menu/Snacks";
+import Desserts from "../components/menu/Desserts";
+import Drinks from "../components/menu/Drinks";
+import { Outlet, Route , Routes } from 'react-router';
 
 function Menu() {
   
   // TODO: hae kaikki ruoat tietokannasta, näytä kaikki menussa
-  // TODO: näytä ruokalajit kategorian mukaan
+  // TODO: näytä ruokalajit kategorian mukaan, conditional rendering
 
   return (
     <>
@@ -15,6 +20,9 @@ function Menu() {
       <br />
       <MenuNav />
       <br />
+      <div className='menu-sections'>
+        <Outlet></Outlet>
+      </div>
       
       <HighlightCard />
       <FoodCard />

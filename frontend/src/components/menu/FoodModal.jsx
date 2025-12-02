@@ -9,7 +9,7 @@ const FoodModal = ({onAddToCart, onClose}) => {
             &times;
           </span>
           <img
-            src="../src/assets/img/muut/tostada-liha-ehka-vege.jpg"
+            src="../src/assets/img/muut/landscape/tostada2.jpg"
             alt="Tostada"
             width={'auto'}
             className="rounded-md"

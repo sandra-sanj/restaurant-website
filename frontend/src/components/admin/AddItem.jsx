@@ -1,4 +1,3 @@
-
 const AddItem = ({onClose}) => {
   return (
     <>
@@ -30,14 +29,53 @@ const AddItem = ({onClose}) => {
             Hinta (€):
             <input name="price" className="bg-stone-100" />
           </label>
-          <label className="mb-3">
-            Kategoria (alasvetovalikko):
-            <input name="category" className="bg-stone-100" />
-          </label>
-          <label className="mb-3">
-            Ruokavaliot (alasvetovalikko):
-            <input name="diets" className="bg-stone-100" />
-          </label>
+
+          <div className="mb-3">
+            <p>Kategoria:</p>
+            <select name="category">
+              <option value="snacks">Snacks</option>
+              <option value="mains">Mains</option>
+              <option value="desserts">Desserts</option>
+              <option value="drinks">Drinks</option>
+            </select>
+          </div>
+
+          <div className="mb-3">
+            <p>Ruokavaliot:</p>
+            <label>
+              L
+              <input
+                type="checkbox"
+                //checked={inputs.lactoseFree}
+                name="lactoseFree"
+              />
+            </label>
+            <label>
+              G
+              <input
+                type="checkbox"
+                //checked={inputs.glutenFree}
+                name="glutenFree"
+              />
+            </label>
+            <label>
+              M
+              <input
+                type="checkbox"
+                //checked={inputs.milkFree}
+                name="milkFree"
+              />
+            </label>
+            <label>
+              VEG
+              <input
+                type="checkbox"
+                //checked={inputs.vegan}
+                name="vegan"
+              />
+            </label>
+          </div>
+
           <label className="mb-3">
             Kuva:
             <input name="image" className="bg-stone-100" />
