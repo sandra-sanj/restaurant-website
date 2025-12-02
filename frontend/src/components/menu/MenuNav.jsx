@@ -1,21 +1,23 @@
+import { Link } from "react-router";
+
 const MenuNav = () => {
   return (
     <>
       <ul className="flex flex-row gap-5">
         <li>
-          <a href="">Kaikki</a>
+          <Link to="/menu">Kaikki</Link>
         </li>
         <li>
-          <a href="">Alkuruoat</a>
+          <Link to="/menu/mains">Pääruoat</Link>
         </li>
         <li>
-          <a href="">Pääruoat</a>
+          <Link to="/menu/snacks">Snacks</Link>
         </li>
         <li>
-          <a href="">Jälkiruoat</a>
+          <Link to="/menu/desserts">Desserts</Link>
         </li>
         <li>
-          <a href="">Juomat</a>
+          <Link to="/menu/drinks">Drinks</Link>
         </li>
       </ul>
     </>

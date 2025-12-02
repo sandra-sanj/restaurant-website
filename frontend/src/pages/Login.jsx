@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import LoginForm from '../components/profile/LoginForm';
 import RegisterForm from '../components/profile/RegisterForm';
+import { Outlet } from 'react-router';
 
+//TODO: kun menee etusvun linkstä tulee myös, että voi sittenkin kirjautua
 
-//add conditional rendering to show either login or register and add button
 const Login = () => {
   const [showForm, setShowForm] = useState(false);
   const [buttonText, setButtonText] = useState("Kirjaudu sisään!");
@@ -18,11 +19,11 @@ const Login = () => {
   return(
   <>
     {showForm ? <LoginForm /> : <RegisterForm />}
+    <Outlet></Outlet>
     <p>{pText}</p>
     <button onClick={() => {handleButton()} }>{buttonText}</button>
   </>
   );
 };
-
 
 export default Login;
