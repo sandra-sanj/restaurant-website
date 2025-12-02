@@ -12,27 +12,28 @@ import {
 
 import {authenticateToken} from '../../middlewares/authentication.js';
 import {checkAdmin} from '../../middlewares/check-admin.js';
+import {checkOrderAccess} from '../../middlewares/check-order-access.js';
 
 const orderRouter = express.Router();
 
 // Public route (no auth required)
 orderRouter.route('/').post(postOrder); // Guest can order
 
-// Protected route (user must be logged in), users own orders
-orderRouter.route('/user/:userId').get(authenticateToken, getUsersOrders);
-
 // Admin only routes (admin can view all orders)
 orderRouter.route('/').get(authenticateToken, checkAdmin, getAllOrders);
 
-//Admin oly routes for specific order
+// Protected route (user must be logged in), users own orders
+orderRouter.route('/user/:userId').get(authenticateToken, getUsersOrders);
+
+// Individual order routes
 orderRouter
   .route('/:id')
-  .get(authenticateToken, checkAdmin, getOrdersById)
+  .get(authenticateToken, checkOrderAccess, getOrdersById)
   .put(authenticateToken, checkAdmin, putOrder)
   .delete(authenticateToken, checkAdmin, deleteOrder);
 
 orderRouter
   .route('/:id/details')
-  .get(authenticateToken, checkAdmin, getOrderDetails);
+  .get(authenticateToken, checkOrderAccess, getOrderDetails);
 
 export default orderRouter;

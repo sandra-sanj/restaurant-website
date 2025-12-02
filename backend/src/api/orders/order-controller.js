@@ -96,7 +96,7 @@ const postOrder = async (req, res) => {
     if (result?.order_id) {
       res.status(201).json({
         message: 'New order created',
-        result,
+        result, // This contains full order details // Guest get this info now, can't view it later without account
       });
     } else {
       res.status(400).json({message: 'Could not create order'});
