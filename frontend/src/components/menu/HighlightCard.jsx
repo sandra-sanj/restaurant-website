@@ -24,7 +24,7 @@ const HighlightCard = () => {
 
       <div className="bg-white-50 w-[500px] rounded-md mb-5 outline-10 outline-red-800">
         <img
-          src="../src/assets/img/muut/tostada-liha-ehka-vege.jpg"
+          src="../src/assets/img/muut/landscape/tostada2.jpg"
           alt="Tostada"
           width={'auto'}
           className="rounded-md"
