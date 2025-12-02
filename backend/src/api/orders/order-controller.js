@@ -52,9 +52,21 @@ const getOrderDetails = async (req, res) => {
   }
 };
 
+// GET user's orders (Customer - can only see their own orders)
 const getUsersOrders = async (req, res) => {
   try {
-    const orders = await findOrdersByUserId(req.params.userId);
+    const requestedUserId = parseInt(req.params.userId);
+    const loggedInUserId = res.locals.user?.user_id;
+    const userRole = res.locals.user?.role;
+
+    // Check if user is trying to access their own orders or is admin
+    if (loggedInUserId !== requestedUserId && userRole !== 'admin') {
+      return res
+        .status(403)
+        .json({message: 'You can only view your own orders'});
+    }
+
+    const orders = await findOrdersByUserId(requestedUserId);
 
     if (orders.length > 0) {
       res.status(200).json(orders);

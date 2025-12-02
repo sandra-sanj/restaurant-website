@@ -31,6 +31,7 @@ orderRouter
   .route('/:id/details')
   .get(authenticateToken, checkAdmin, getOrderDetails);
 
-orderRouter.route('/user/:userId').get(getUsersOrders);
+// Protected route (user must be logged in), users own orders
+orderRouter.route('/user/:userId').get(authenticateToken, getUsersOrders);
 
 export default orderRouter;

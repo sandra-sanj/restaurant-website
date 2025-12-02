@@ -3,6 +3,8 @@
 ### Token for user admin (admin)
 @token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkByZXN0YXVyYW50LmZpIiwicGhvbmUiOiIrMzU4MTIzNDU2Nzg5Iiwicm9sZSI6ImFkbWluIiwiaXNfYWN0aXZlIjoxLCJpYXQiOjE3NjQ2NjQzMDEsImV4cCI6MTc2NDgzNzEwMX0.-xJjn3Id7t_V6N13C0vb7-lfgOjn-_rNJOCN74DtP40
 
+
+
 ### First login as admin to get token
  POST http://localhost:3000/api/v1/auth/login
  Content-Type: application/json
@@ -30,7 +32,8 @@ GET http://localhost:3000/api/v1/orders/1/details
 Authorization: Bearer {{token}}
 
 ### Get user's orders by user ID
-GET http://localhost:3000/api/v1/orders/user/1
+GET http://localhost:3000/api/v1/orders/user/2
+Authorization: Bearer {{token_user2}}
 
 
 ### Create new order (not registered customer)
@@ -38,7 +41,7 @@ POST http://localhost:3000/api/v1/orders
 Content-Type: application/json
 
 {
-    "user_id": ,
+    "user_id": 3,
     "customer_name": "minna Meikäläinen",
     "customer_email": "minnaa@test.com",
     "customer_phone": "+358223344556",
@@ -103,3 +106,9 @@ Content-Type: application/json
 
 ### Delete order
 DELETE http://localhost:3000/api/v1/orders/11
+
+
+
+### Login as customer
+@token_user2 = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJ1c2VybmFtZSI6ImxpaXNhIiwiZW1haWwiOiJsaWlzYUBleGFtcGxlLmZpIiwicGhvbmUiOiIrMzU4MTEyMjMzNDQ1Iiwicm9sZSI6ImN1c3RvbWVyIiwiaXNfYWN0aXZlIjoxLCJpYXQiOjE3NjQ2ODI0OTYsImV4cCI6MTc2NDg1NTI5Nn0.1boD-XXYaX2fD4rS2m926V6UnDyyg2m0g7Z0ZaueRCM
+
