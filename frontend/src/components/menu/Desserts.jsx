@@ -4,7 +4,9 @@ import HighlightCard from './HighlightCard';
 
 function Desserts() {
     return(
-        j
+        <>
+        <h1>Desserts</h1>
+        </>
     )
 };
 export default Desserts;

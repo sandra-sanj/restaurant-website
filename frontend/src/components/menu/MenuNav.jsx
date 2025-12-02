@@ -5,19 +5,19 @@ const MenuNav = () => {
     <>
       <ul className="flex flex-row gap-5">
         <li>
-          <Link to="/">Kaikki</Link>
+          <Link to="/menu">Kaikki</Link>
         </li>
         <li>
-          <Link to="/mains">Pääruoat</Link>
+          <Link to="/menu/mains">Pääruoat</Link>
         </li>
         <li>
-          <Link to="/snacks">Snacks</Link>
+          <Link to="/menu/snacks">Snacks</Link>
         </li>
         <li>
-          <Link to="/desserts">Desserts</Link>
+          <Link to="/menu/desserts">Desserts</Link>
         </li>
         <li>
-          <Link to="/drinks">Drinks</Link>
+          <Link to="/menu/drinks">Drinks</Link>
         </li>
       </ul>
     </>

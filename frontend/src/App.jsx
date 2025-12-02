@@ -13,6 +13,8 @@ import Mains from './components/menu/Mains'
 import Snacks from './components/menu/Snacks'
 import Desserts from './components/menu/Desserts'
 import Drinks from './components/menu/Drinks'
+import LoginForm from './components/profile/LoginForm'
+import RegisterForm from './components/profile/RegisterForm'
 
 const App = () => {
   return (
@@ -22,17 +24,19 @@ const App = () => {
         <main className='main-content'>
           <Routes>
             <Route path='/' element={<Home />}/>
-            <Route path='/menu' element={<Menu />}/>
+            <Route path='/menu/' element={<Menu />}>
+              <Route path='/menu/snacks' element={<Snacks />}/>
+              <Route path='/menu/mains' element={<Mains />}/>
+              <Route path='/menu/desserts' element={<Desserts />}/>
+              <Route path='/menu/drinks' element={<Drinks />}/>
+            </Route>  
             <Route path='/profile' element={<Profile />}/>
             <Route path='/admin' element={<Admin />}/>
             <Route path='/history' element={<AdminHistory />}/>
-            <Route path='/login' element={<Login />}/>
+            <Route path='/login/' element={<Login />}/>
+              <Route path='/login/login' element={<LoginForm/>}></Route>
+              <Route path='/login/register' element={<RegisterForm/>}></Route>
             <Route path='/cart' element={<Cart />}/>
-            <Route path='/mains' element={<Mains />}/>
-            <Route path='/snacks' element={<Snacks />}/>
-            <Route path='/desserts' element={<Desserts />}/>
-            <Route path='/drinks' element={<Drinks />}/>
-            
           </Routes>
         </main>
       </div>

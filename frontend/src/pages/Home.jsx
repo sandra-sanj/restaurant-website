@@ -19,8 +19,8 @@ function Home() {
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum veritatis suscipit quos dolorum </p>
           </div>
           <div>
-            <button onClick={() => (handleLoginBtn)}>Kirjaudu</button>
-            <button onClick={() => navigate('/login')}>Rekisteröidy</button>
+            <button onClick={() => navigate('/login/login')}>Kirjaudu</button>
+            <button onClick={() => navigate('/login/register')}>Rekisteröidy</button>
           </div>
           <div className="ad-div">
             <div>

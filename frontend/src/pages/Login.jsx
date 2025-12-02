@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import LoginForm from '../components/profile/LoginForm';
 import RegisterForm from '../components/profile/RegisterForm';
+import { Outlet } from 'react-router';
 
 
 
@@ -18,6 +19,7 @@ const Login = () => {
   return(
   <>
     {showForm ? <LoginForm /> : <RegisterForm />}
+    <Outlet></Outlet>
     <p>{pText}</p>
     <button onClick={() => {handleButton()} }>{buttonText}</button>
   </>
