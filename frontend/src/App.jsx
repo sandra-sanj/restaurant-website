@@ -2,7 +2,6 @@ import './App.css';
 import Home from "./pages/Home";
 import Menu from "./pages/Menu";
 import Profile from "./pages/Profile";
-import Cart from "./pages/Cart";
 import {Routes, Route} from "react-router";
 import NavBar from './components/NavBar';
 import Admin from './pages/Admin';
@@ -15,6 +14,9 @@ import Desserts from './components/menu/Desserts'
 import Drinks from './components/menu/Drinks'
 import LoginForm from './components/profile/LoginForm'
 import RegisterForm from './components/profile/RegisterForm'
+import CartPage from './pages/CartPage';
+import Cart from './components/shoppingcart/Cart';
+import Order from './components/shoppingcart/Order';
 
 const App = () => {
   return (
@@ -36,7 +38,10 @@ const App = () => {
             <Route path='/login/' element={<Login />}/>
               <Route path='/login/login' element={<LoginForm/>}></Route>
               <Route path='/login/register' element={<RegisterForm/>}></Route>
-            <Route path='/cart' element={<Cart />}/>
+            <Route path='/cart' element={<CartPage />}>
+              <Route path='/cart/cart' element={<Cart />}/>
+              <Route path='/cart/order'element={<Order/>} />
+            </Route>
           </Routes>
         </main>
       </div>

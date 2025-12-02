@@ -3,7 +3,7 @@ import LoginForm from '../components/profile/LoginForm';
 import RegisterForm from '../components/profile/RegisterForm';
 import { Outlet } from 'react-router';
 
-
+//TODO: kun menee etusvun linkstä tulee myös, että voi sittenkin kirjautua
 
 const Login = () => {
   const [showForm, setShowForm] = useState(false);

@@ -6,6 +6,7 @@ function Mains() {
     return (
         <>
             <h1>Mains</h1>
+            <FoodCard />
         </>
     )
 }
