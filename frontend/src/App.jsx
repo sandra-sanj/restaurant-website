@@ -9,6 +9,10 @@ import Admin from './pages/Admin';
 import AdminHistory from './pages/AdminHistory';
 import Login from './pages/Login';
 import Footer from './components/Footer'
+import Mains from './components/menu/Mains'
+import Snacks from './components/menu/Snacks'
+import Desserts from './components/menu/Desserts'
+import Drinks from './components/menu/Drinks'
 
 const App = () => {
   return (
@@ -24,6 +28,11 @@ const App = () => {
             <Route path='/history' element={<AdminHistory />}/>
             <Route path='/login' element={<Login />}/>
             <Route path='/cart' element={<Cart />}/>
+            <Route path='/mains' element={<Mains />}/>
+            <Route path='/snacks' element={<Snacks />}/>
+            <Route path='/desserts' element={<Desserts />}/>
+            <Route path='/drinks' element={<Drinks />}/>
+            
           </Routes>
         </main>
       </div>

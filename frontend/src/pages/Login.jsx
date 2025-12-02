@@ -4,7 +4,6 @@ import RegisterForm from '../components/profile/RegisterForm';
 
 
 
-//add conditional rendering to show either login or register and add button
 const Login = () => {
   const [showForm, setShowForm] = useState(false);
   const [buttonText, setButtonText] = useState("Kirjaudu sisään!");
