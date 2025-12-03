@@ -5,45 +5,49 @@ import {
 } from './allergen-model.js';
 
 // Get all allergens
-const getAllAllergens = async (req, res) => {
+const getAllAllergens = async (req, res, next) => {
   try {
     const allergens = await listAllAllergens();
     res.json(allergens);
   } catch (error) {
     console.error('Error fetching allergens: ', error);
-    res.status(500).json({message: 'Error fetching allergens'});
+    next(error);
   }
 };
 
 // Get allergen by ID
-const getAllergenById = async (req, res) => {
+const getAllergenById = async (req, res, next) => {
   try {
     const allergen = await findAllergenById(req.params.id);
 
     if (allergen) {
       res.status(200).json(allergen);
     } else {
-      res.status(404).json({message: 'Allergen not found'});
+      const error = new Error('Allergen not found');
+      error.status = 404;
+      return next(error);
     }
   } catch (error) {
     console.error('Error fetching allergen: ', error);
-    res.status(500).json({message: 'Error fetching allergen'});
+    next(error);
   }
 };
 
 // Get allergens for specific menu item
-const getMenuItemAllergens = async (req, res) => {
+const getMenuItemAllergens = async (req, res, next) => {
   try {
     const allergens = await findAllergensByMenuItemId(req.params.menuItemId);
 
     if (allergens.length > 0) {
       res.json(allergens);
     } else {
-      res.status(404).json({message: 'No allergens found for this menu item'});
+      const error = new Error('No allergens found for this menu item');
+      error.status = 404;
+      return next(error);
     }
   } catch (error) {
     console.error('Error fetching allergens for menu item: ', error);
-    res.status(500).json({message: 'Error fetching allergens menu item '});
+    next(error);
   }
 };
 
