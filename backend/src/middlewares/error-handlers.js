@@ -28,7 +28,7 @@ const errorHandler = (err, req, res, next) => {
 const validationErrors = async (req, res, next) => {
   // validation errors can be retrieved from the request object (added by express-validator middleware)
   const errors = validationResult(req);
-  console.log('validator', req.body, errors);
+  //console.log('validator', req.body, errors);
   // check if any validation errors
   if (!errors.isEmpty()) {
     const messages = errors

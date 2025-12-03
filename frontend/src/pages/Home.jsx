@@ -7,11 +7,6 @@ import Login from "./Login";
 function Home() {
   const navigate = useNavigate();
 
-  const handleLoginBtn = () => {
-    handleButton();
-    navigate('/login');
-  }
-
     return (
         <>
           <div>
@@ -57,7 +52,7 @@ function Home() {
               <img
               src="../src/assets/img/home/taco2.jpg"
               alt=""
-              onClick={() => navigate('/menu')}
+              onClick={() => navigate('/menu/mains')}
               />
               <p>PÄÄRUOAT</p>
             </div>
@@ -65,7 +60,7 @@ function Home() {
               <img
               src="../src/assets/img/home/nacho3.jpg"
               alt=""
-              onClick={() => navigate('/menu')}
+              onClick={() => navigate('/menu/snacks')}
               />
               <p>SNACKS</p>
             </div>
@@ -73,7 +68,7 @@ function Home() {
               <img
               src="../src/assets/img/home/flan2.jpg"
               alt=""
-              onClick={() => navigate('/menu')}
+              onClick={() => navigate('/menu/desserts')}
               />
               <p>JÄLKIRUOAT</p>
             </div>
@@ -81,7 +76,7 @@ function Home() {
               <img
               src="../src/assets/img/home/drinks.jpg"
               alt=""
-              onClick={() => navigate('/menu')}
+              onClick={() => navigate('/menu/drinks')}
               />
               <p>JUOMAT</p>
             </div>

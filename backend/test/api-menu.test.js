@@ -33,6 +33,8 @@ describe('POST /api/v1/auth/login', () => {
 });
 
 describe('Test menu endpoints', () => {
+  let itemId;
+
   describe('POST /api/v1/menu', () => {
     it('should add new menu item', async () => {
       const newMenuItem = {
@@ -47,7 +49,7 @@ describe('Test menu endpoints', () => {
         allows_spice_custom: 0,
         available_proteins: null,
         default_protein: null,
-        image_url: '/images/corn_chips.jpg',
+        //image_url: '/images/corn_chips.jpg',
         is_available: 1,
       };
 
@@ -59,6 +61,8 @@ describe('Test menu endpoints', () => {
 
       expect(res.statusCode).toEqual(201);
       expect(res.body).toHaveProperty('result');
+      itemId = res.body.result;
+      console.log(itemId);
     });
   });
 
@@ -91,6 +95,18 @@ describe('Test menu endpoints', () => {
   });
 
   // TODO: make tests for each menu item component
+
+  /* describe('DELETE /api/v1/menu/:id', () => {
+    it('should delete menu item', async () => {
+      const res = await request(app)
+        .delete(`/api/v1/menu/${userId}`)
+        .set('Authorization', `Bearer ${token}`)
+        .set('Accept', 'application/json');
+
+      // TODO: add all relevant assertions here
+      expect(res.statusCode).toEqual(200);
+    });
+  }); */
 });
 
 // TODO: test user access to menu without admin role

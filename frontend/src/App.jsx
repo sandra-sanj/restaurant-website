@@ -17,6 +17,7 @@ import RegisterForm from './components/profile/RegisterForm'
 import CartPage from './pages/CartPage';
 import Cart from './components/shoppingcart/Cart';
 import Order from './components/shoppingcart/Order';
+import All from './components/menu/All';
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
           <Routes>
             <Route path='/' element={<Home />}/>
             <Route path='/menu/' element={<Menu />}>
+              <Route path='/menu/' element={<All />} />
               <Route path='/menu/snacks' element={<Snacks />}/>
               <Route path='/menu/mains' element={<Mains />}/>
               <Route path='/menu/desserts' element={<Desserts />}/>
