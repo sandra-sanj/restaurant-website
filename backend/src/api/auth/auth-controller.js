@@ -4,7 +4,7 @@ import {getUserByUsername} from '../user/user-model.js';
 import 'dotenv/config';
 
 const postLogin = async (req, res) => {
-  console.log('postLogin', req.body);
+  //console.log('postLogin', req.body);
 
   // TODO: combine no user and no password match return messages into one, for enhanced security: "Username or password incorrect"
   const user = await getUserByUsername(req.body.username);
