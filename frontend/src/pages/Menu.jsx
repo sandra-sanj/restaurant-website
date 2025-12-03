@@ -9,9 +9,6 @@ import Drinks from "../components/menu/Drinks";
 import { Outlet, Route , Routes } from 'react-router';
 
 function Menu() {
-  
-  // TODO: hae kaikki ruoat tietokannasta, näytä kaikki menussa
-  // TODO: näytä ruokalajit kategorian mukaan, conditional rendering
 
   return (
     <>

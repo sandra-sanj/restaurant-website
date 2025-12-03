@@ -1,6 +1,7 @@
 import {useState} from 'react';
 import FoodModal from './FoodModal';
 import InfoCard from './InfoCard';
+import { Link } from 'react-router';
 
 const FoodCard = ({item}) => {
   const [foodModalOpen, setFoodModalOpen] = useState(false);
@@ -15,10 +16,10 @@ const FoodCard = ({item}) => {
     console.log('Lisää ostoskoriin pressed');
   };
 
-  //const handleInfoClick = () => {
-  //  console.log('Info pressed');
-  //  setInfoCardOpen(false);
-  //}
+  const handleInfoClick = () => {
+    console.log('Info pressed');
+    setInfoCardOpen(false);
+  }
 
   return (
     <>
