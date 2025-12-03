@@ -5,29 +5,32 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 function useMenu() {
     const [menuArray, setMenuArray] = useState([]);
-    
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         const getMenuItems = async () => {
             try {
+                setLoading(true);
                 const options = {
                     method: 'GET',
-                    headers: {
-                    'Access-Control-Allow-Origin': 'http://127.0.0.1:3000/'
-                    }
                 }
                 const menu = await fetchData(`${API_URL}/menu`, options)
-                console.log('Menu data:', menu);
+                console.log('menu:', menu);
                 setMenuArray(menu);
+                setError(null);
             } catch (e) {
                 console.error('Error fetching menu:', e);
+                setError('Error fetching menu');
                 setMenuArray([]);
+            } finally {
+                setLoading(false);
             }
         };
         getMenuItems();
     }, []);
 
-    return menuArray ;
+    return { menuArray, loading, error };
 }
 
 
