@@ -4,17 +4,17 @@ import {
   findTodaysLunchSpecial,
 } from './lunch-special-model.js';
 
-const getAllLunchSpecials = async (req, res) => {
+const getAllLunchSpecials = async (req, res, next) => {
   try {
     const specials = await listAllLunchSpecials();
     res.json(specials);
   } catch (error) {
     console.error('Error fetching lunch specials: ', error);
-    res.status(500).json({message: 'Error fetching lunch specials'});
+    next(error);
   }
 };
 
-const getLunchSpecialByDay = async (req, res) => {
+const getLunchSpecialByDay = async (req, res, next) => {
   try {
     const day = req.params.day.toLowerCase();
     const special = await findLunchSpecialByDay(day);
@@ -22,15 +22,17 @@ const getLunchSpecialByDay = async (req, res) => {
     if (special) {
       res.status(200).json(special);
     } else {
-      res.status(404).json({message: `No lunch special found for ${day}`});
+      const error = new Error(`No lunch special found for ${day}`);
+      error.status = 404;
+      return next(error);
     }
   } catch (error) {
     console.error('Error fetching lunch special by day: ', error);
-    res.status(500).json({message: 'Error fetching lunch special'});
+    next(error);
   }
 };
 
-const getTodaysLunchSpecial = async (req, res) => {
+const getTodaysLunchSpecial = async (req, res, next) => {
   try {
     const lunchSpecial = await findTodaysLunchSpecial();
 
@@ -49,14 +51,18 @@ const getTodaysLunchSpecial = async (req, res) => {
       const today = days[new Date().getDay()];
 
       if (today === 'saturday' || today === 'sunday') {
-        res.status(404).json({message: 'No lunch specials on weekends'});
+        const error = new Error('No lunch special on weekends');
+        error.status = 404;
+        return next(error);
       } else {
-        res.status(404).json({message: 'No lunch special available today'});
+        const error = new Error('No lunch special available today');
+        error.status = 404;
+        return next(error);
       }
     }
   } catch (error) {
     console.error('Error fetching lunch special by day; ', error);
-    res.status(500).json({message: 'Error fetching todays lunch special'});
+    next(error);
   }
 };
 
