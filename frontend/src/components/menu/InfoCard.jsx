@@ -1,4 +1,5 @@
 const InfoCard = ({onClose}) => {
+  const {item, setSelectedItem} = props;
   return (
     <>
       <div className="m-5 outline-2 outline-gray-400 rounded-md">

@@ -1,12 +1,10 @@
-import FoodCard from './FoodCard';
-import FoodCardPortrait from './FoodCardPortrait';
-import HighlightCard from './HighlightCard';
+import ShowCards from './ShowCards';
 
 function Desserts() {
     return(
         <>
-        <h1>Desserts</h1>
-        <FoodCard />
+          <h1>Desserts</h1>
+          <ShowCards category_id={3} ></ShowCards>
         </>
     )
 };
