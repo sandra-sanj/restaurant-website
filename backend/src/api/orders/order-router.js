@@ -82,7 +82,7 @@ orderRouter.route('/').post(
   body('items.*.selected_spice_level').optional().isInt(),
   body('items.*.selected_protein').optional().trim().isString(),
   body('items.*.special_requests').optional().trim().isString(),
-  body('user_id').optional().isInt(),
+  body('user_id').optional(),
 
   validationErrors,
   postOrder
