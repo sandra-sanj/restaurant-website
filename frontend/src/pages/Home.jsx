@@ -7,11 +7,6 @@ import Login from "./Login";
 function Home() {
   const navigate = useNavigate();
 
-  const handleLoginBtn = () => {
-    handleButton();
-    navigate('/login');
-  }
-
     return (
         <>
           <div>
