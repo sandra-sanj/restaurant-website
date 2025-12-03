@@ -2,11 +2,16 @@
 // How to handle errors in controller?
 import promisePool from '../../utils/database.js';
 
-/*const listAllUsers = async () => {
-  // TODO: remove this request or heavily limit it
+const listAllUsers = async () => {
   const result = await promisePool.query('SELECT * FROM users');
-  return result[0];
-};*/
+
+  // remove password_hash
+  const resultNoPassword = result[0].map((user) => {
+    const {password_hash, ...other} = user;
+    return other;
+  });
+  return resultNoPassword;
+};
 
 const findUserById = async (id) => {
   const [result] = await promisePool.execute(
@@ -17,7 +22,10 @@ const findUserById = async (id) => {
   if (result.length === 0) {
     return false;
   }
-  return result[0];
+
+  // remove password_hash
+  const {password_hash, ...other} = result[0];
+  return other;
 };
 
 const addUser = async (user) => {
@@ -92,7 +100,7 @@ const getUserByUsername = async (username) => {
 };
 
 export {
-  //listAllUsers,
+  listAllUsers,
   findUserById,
   addUser,
   modifyUser,
