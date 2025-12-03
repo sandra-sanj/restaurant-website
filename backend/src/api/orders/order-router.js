@@ -70,6 +70,20 @@ orderRouter.route('/').post(
       return true;
     }),
 
+  body('items')
+    .notEmpty()
+    .withMessage('Order must contain at least one item')
+    .isArray({min: 1}),
+
+  body('items.*menu_item_id').isInt({min: 1}),
+  body('items.*item_name').trim().notEmpty(),
+  body('items.*quantity').isInt({min: 1}),
+  body('items.*unit_price').isDecimal({force_decimal: true}),
+  body('items.*selected_spice_level').optional().isInt(),
+  body('items.*selected_protein').optional().trim().isString(),
+  body('items.*special_requests').optional().trim().isString(),
+  body('user_id').optional().isInt(),
+
   validationErrors,
   postOrder
 );
