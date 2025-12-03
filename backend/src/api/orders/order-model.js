@@ -110,9 +110,7 @@ const addOrder = async (order) => {
     console.log('orderresult', orderResult);
 
     if (orderResult.affectedRows === 0) {
-      return {
-        message: 'Failed to create order',
-      };
+      return false;
     }
 
     const orderId = orderResult.insertId;
@@ -136,9 +134,7 @@ const addOrder = async (order) => {
       const [itemResult] = await connection.execute(itemSql, itemParams);
 
       if (itemResult.affectedRows === 0) {
-        return {
-          message: 'Failed to add order item',
-        };
+        return false;
       }
     }
 
