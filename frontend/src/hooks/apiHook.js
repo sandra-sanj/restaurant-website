@@ -12,6 +12,9 @@ function useMenu() {
             try {
                 const options = {
                     method: 'GET',
+                    headers: {
+                    'Access-Control-Allow-Origin': 'http://127.0.0.1:3000/'
+                    }
                 }
                 const menu = await fetchData(`${API_URL}/menu`, options)
                 console.log('Menu data:', menu);
