@@ -25,7 +25,7 @@ orderRouter.route('/').post(
     .notEmpty()
     .withMessage('Customer name is required')
     .isLength({min: 2, max: 128})
-    .withMessage('Customer name must be 2-100 characters'),
+    .withMessage('Customer name must be 2-128 characters'),
 
   body('customer_email')
     .trim()
@@ -98,7 +98,52 @@ orderRouter.route('/user/:userId').get(authenticateToken, getUsersOrders);
 orderRouter
   .route('/:id')
   .get(authenticateToken, checkOrderAccess, getOrdersById)
-  .put(authenticateToken, checkAdmin, putOrder)
+  .put(
+    authenticateToken,
+    checkAdmin,
+
+    body('customer_name')
+      .optional()
+      .trim()
+      .isLength({min: 2, max: 128})
+      .withMessage('Customer name must be 2-128 characters'),
+
+    body('customer_email')
+      .optional()
+      .trim()
+      .isEmail()
+      .withMessage('Must be a valid email'),
+
+    body('customer_phone')
+      .optional()
+      .trim()
+      .custom((phone) => {
+        if (phone && !phone.startsWith('+358')) {
+          throw new Error('Phone number must be Finnish (+358)');
+        }
+        if (phone) {
+          const phoneNumber = phone.split('+')[1];
+          if (isNaN(phoneNumber)) {
+            throw new Error('Phone number must contain digits');
+          }
+          if (phoneNumber.length < 12) {
+            throw new Error('Phone number is too short');
+          }
+        }
+        return true;
+      }),
+
+    body('order_type')
+      .optional()
+      .trim()
+      .isIn(['pickup', 'delivery'])
+      .withMessage('Order type must be either pickup or delivery'),
+
+    body('delivery_address').optional().trim(),
+
+    validationErrors,
+    putOrder
+  )
   .delete(authenticateToken, checkAdmin, deleteOrder);
 
 orderRouter
