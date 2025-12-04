@@ -122,5 +122,60 @@ describe('Test order endpoints', () => {
       expect(res.body.result.user_id).toEqual(customerUserId);
       customerOrderId = res.body.result.order_id;
     });
+
+    it('should fail to create order with missing required fields', async () => {
+      const invalidOrder = {
+        customer_name: 'Test',
+        // Missing email, phone, items etc.
+      };
+
+      const res = await request(app)
+        .post('/api/v1/orders')
+        .send(invalidOrder)
+        .set('Accept', 'application/json');
+
+      expect(res.statusCode).toEqual(400);
+    });
+
+    it('should fail to create order with empty items array', async () => {
+      const invalidOrder = {
+        customer_name: 'Test User',
+        customer_email: 'test@example.com',
+        customer_phone: '+358123456788',
+        order_type: 'pickup',
+        items: [], // Empty items array
+      };
+
+      const res = await request(app)
+        .post('/api/v1/orders')
+        .send(invalidOrder)
+        .set('Accept', 'application/json');
+
+      expect(res.statusCode).toEqual(400);
+    });
+
+    it('should fail to create order with invalid Finnish phone number', async () => {
+      const invalidOrder = {
+        customer_name: 'Test User',
+        customer_email: 'test@example.com',
+        customer_phone: '+123467890', // Invalid Finnish number
+        order_type: 'pickup',
+        items: [
+          {
+            menu_item_id: 1,
+            item_name: 'test item',
+            quantity: 1,
+            unit_price: 7.9,
+          },
+        ],
+      };
+
+      const res = await request(app)
+        .post('/api/v1/orders')
+        .send(invalidOrder)
+        .set('Accept', 'application/json');
+
+      expect(res.statusCode).toEqual(400);
+    });
   });
 });
