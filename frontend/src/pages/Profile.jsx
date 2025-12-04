@@ -8,7 +8,8 @@ import { useState } from 'react';
 
 const Profile = () => {
     const [showModal, setShowModal] = useState(null);
-    //const {user} = useUser();
+    const token = localStorage.getItem('token');
+    
 
     const closeModal = () => setShowModal(null);
 

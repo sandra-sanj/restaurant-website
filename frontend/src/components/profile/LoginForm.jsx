@@ -11,8 +11,11 @@ const LoginForm = () => {
 
 
     const doLogin = () => {
-        console.log(inputs);
-        postLogin(inputs);
+        try {
+            postLogin(inputs);
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     const {postLogin} = useAuthentication();
@@ -22,7 +25,7 @@ const LoginForm = () => {
      return (
          <>
              <h1>Kirjaudu sisään!</h1>
-             <form onSubmit={ () => {handleSubmit} }>
+             <form onSubmit={ (e) => {handleSubmit(e)} }>
                   <div>
                       <label htmlFor="loginuser">Käyttäjänimi: </label>
                      <input
