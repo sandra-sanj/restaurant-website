@@ -1,8 +1,17 @@
 import express from 'express';
 import api from './api/index.js';
 import {errorHandler, notFoundHandler} from './middlewares/error-handlers.js';
+import cors from "cors";
 
 const app = express();
+
+//tän voi varmaan poistaa kun siirretään serverille
+app.use(cors({
+  origin: "http://localhost:5173",
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+}));
+
 
 app.use(express.static('public')); // website is served from public folder
 app.use('/uploads', express.static('uploads'));
