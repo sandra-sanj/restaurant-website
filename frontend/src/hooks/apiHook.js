@@ -37,14 +37,15 @@ function useMenu() {
 function useAuthentication() {
     try{
         const postLogin = async (inputs) => {
-            const fetchOptions = {
+            const options = {
                 method: 'POST',
                 headers: {
                 'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(inputs),
             };
-            const loginResult = await fetchData(`${API_URL}/auth/login`, fetchOptions); 
+            const loginResult = await fetchData(`${API_URL}/auth/login`, options); 
+            console.log(loginResult);
             return loginResult;
             };
             return {postLogin};
@@ -69,7 +70,7 @@ function useUser() {
 
    
         const postUser = async (inputs) => {
-            const postOptions = {
+            const options = {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -77,7 +78,7 @@ function useUser() {
                 body: JSON.stringify(inputs),
             }
 
-            const tokenResult = await fetchData(`${API_URL}/users`, postOptions);
+            const tokenResult = await fetchData(`${API_URL}/users`, options);
             return tokenResult;
         }
 
