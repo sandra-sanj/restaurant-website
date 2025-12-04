@@ -20,4 +20,23 @@ const authenticateToken = (req, res, next) => {
   }
 };
 
-export {authenticateToken};
+const optionalAuthentication = (req, res, next) => {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+
+  // If no token, proceed as guest
+  if (!token) {
+    return next();
+  }
+
+  // Verify token if present
+  try {
+    res.locals.user = jwt.verify(token, process.env.JWT_SECRET);
+    next();
+  } catch (err) {
+    // Invalid token, still proceed as guest
+    console.error('Invalid token, procceeding as guest');
+    next();
+  }
+};
+export {authenticateToken, optionalAuthentication};
