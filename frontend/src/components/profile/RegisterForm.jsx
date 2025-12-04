@@ -12,6 +12,8 @@ const RegisterForm = () => {
 
     const doRegister = () => {
         try {
+            inputs.role = 'customer';
+            inputs.is_active = 1;
             console.log(inputs);
             const userInfo = postUser(inputs);
             console.log(userInfo);
