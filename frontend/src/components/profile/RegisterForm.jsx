@@ -7,12 +7,18 @@ const RegisterForm = () => {
     username: '',
     password: '',
     email: '',
-    address: '',
+    phone: '',
     };
 
     const doRegister = () => {
-    console.log(inputs);
-    postUser(inputs);
+        try {
+            console.log(inputs);
+            const userInfo = postUser(inputs);
+            console.log(userInfo);
+
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     const {postUser} = useUser();
@@ -22,22 +28,13 @@ const RegisterForm = () => {
      return (
          <>
             <h1> Luo käyttäjä</h1>
-            <form onSubmit={ () => {handleSubmit} }>
+            <form onSubmit={ (e) => {handleSubmit(e)} }>
                 <div>
                     <label htmlFor="registerUser">Käyttäjänimi: </label>
                     <input
                         name="username"
                         type="text"
                         id="registerUser"
-                        onChange={ (e) => {handleInputChange(e)} }
-                    />
-                </div>
-                <div>
-                    <label htmlFor="registerPassword">Salasana: </label>
-                    <input
-                        name="password"
-                        type="password"
-                        id="registerPassword"
                         onChange={ (e) => {handleInputChange(e)} }
                     />
                 </div>
@@ -51,11 +48,20 @@ const RegisterForm = () => {
                     />
                 </div>
                 <div>
-                    <label htmlFor="registerAddress">Osoite: </label>
+                    <label htmlFor="registerPassword">Salasana: </label>
                     <input
-                        name="address"
+                        name="password"
+                        type="password"
+                        id="registerPassword"
+                        onChange={ (e) => {handleInputChange(e)} }
+                    />
+                </div>
+                <div>
+                    <label htmlFor="registerPhone">Puhelinnumero (muoto +358): </label>
+                    <input
+                        name="phone"
                         type="text"
-                        id="registerAddress"
+                        id="registerPhone"
                         onChange={ (e) => {handleInputChange(e)} }
                     />
                 </div>
