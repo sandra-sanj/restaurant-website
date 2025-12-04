@@ -8,9 +8,15 @@ afterAll(async () => {
 });
 
 let adminToken;
+let customerToken;
 
 const adminUser = {
   username: 'admin',
+  password: 'password',
+};
+
+const customerUser = {
+  username: 'liisa',
   password: 'password',
 };
 
@@ -28,6 +34,18 @@ describe('Test order endpoints', () => {
       expect(res.body).toHaveProperty('user');
       expect(res.body.token).toBeDefined();
       adminToken = res.body.token;
+    });
+
+    it('should login customer and return token', async () => {
+      const res = await request(app)
+        .post('/api/v1/auth/login')
+        .send(customerUser)
+        .set('Accept', 'application/json');
+
+      expect(res.statusCode).toEqual(200);
+      expect(res.body).toHaveProperty('user');
+      expect(res.body.token).toBeDefined();
+      customerToken = res.body.token;
     });
   });
 });
