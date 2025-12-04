@@ -145,3 +145,51 @@ Authorization: Bearer {{user2_token}}
 ### Try to access another user's order by ID (Should fail with 403)
 GET http://localhost:3000/api/v1/orders/2
 Authorization: Bearer {{user2_token}}
+
+
+
+
+
+### Validation tests
+
+### Create order with missing required fields (should fail 400)
+POST http://localhost:3000/api/v1/orders
+Content-Type: application/json
+
+{
+    "customer_name": "Test User",
+    "customer_email": "test@example.com"
+    // Missing phone, order_type, items
+}
+
+
+### Create order with invalid email (should fail 400)
+POST http://localhost:3000/api/v1/orders
+Content-Type: application/json
+
+{
+    "customer_name": "Test User",
+    "customer_email": "invalid-email",
+    "customer_phone": "+358123456789",
+    "order_type": "pickup",
+    "items": [
+        {
+         "menu_item_id": 3,
+            "item_name": "Kanatacot x 3",
+            "quantity": 2,
+            "unit_price": 14.50
+        }
+    ]
+}
+
+### Create order with empty items array (should fail 400)
+POST http://localhost:3000/api/v1/orders
+Content-Type: application/json
+
+{
+    "customer_name": "Test User",
+    "customer_email": "test@example.com",
+    "customer_phone": "+358123456789",
+    "order_type": "pickup",
+    "items": []
+}
