@@ -7,7 +7,7 @@ const useForm = (callback, initState) => {
         if (event) {
             event.preventDefault();
         }
-        callback(); 
+        callback(inputs); 
     };
 
     const handleInputChange = (event) => {
@@ -17,11 +17,16 @@ const useForm = (callback, initState) => {
             [event.target.name]: event.target.value,
         }));
     }
+
+    const resetForm = () => {
+      setInputs(initState);
+     };
     
     return {
         handleSubmit,
         handleInputChange,
         inputs,
+        resetForm
     };
 };
 
