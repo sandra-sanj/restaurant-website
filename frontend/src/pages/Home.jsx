@@ -20,7 +20,7 @@ function Home() {
           <div className="ad-div">
             <div>
               <img
-                src="../src/assets/img/paaruoat/tacoja.jpg"
+                src="../src/assets/img/home/home1.jpg"
                 alt=""
                 width="200" height='500'
                 onClick={() => navigate('/menu')}
@@ -29,7 +29,7 @@ function Home() {
             </div>  
             <div>
               <img
-                src="../src/assets/img/paaruoat/tacohand.jpg"
+                src="../src/assets/img/home/home2.jpg"
                 alt=""
                 width="200" height='500'
                 onClick={() => navigate('/menu')}
@@ -38,7 +38,7 @@ function Home() {
             </div>    
             <div>
               <img
-                src="../src/assets/img/paaruoat/bowlkasa.jpg"
+                src="../src/assets/img/home/home3.jpg"
                 alt=""
                 width="200" height='500'
                 onClick={() => navigate('/menu')}
@@ -50,7 +50,7 @@ function Home() {
           <div className="container-home">
             <div>
               <img
-              src="../src/assets/img/home/taco2.jpg"
+              src="../src/assets/img/home/mains.jpg"
               alt=""
               onClick={() => navigate('/menu/mains')}
               />
@@ -58,7 +58,7 @@ function Home() {
             </div>
             <div>
               <img
-              src="../src/assets/img/home/nacho3.jpg"
+              src="../src/assets/img/home/snacks.jpg"
               alt=""
               onClick={() => navigate('/menu/snacks')}
               />
@@ -66,7 +66,7 @@ function Home() {
             </div>
             <div>
               <img
-              src="../src/assets/img/home/flan2.jpg"
+              src="../src/assets/img/home/desserts.jpg"
               alt=""
               onClick={() => navigate('/menu/desserts')}
               />
