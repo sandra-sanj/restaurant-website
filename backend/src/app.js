@@ -1,17 +1,22 @@
 import express from 'express';
 import api from './api/index.js';
 import {errorHandler, notFoundHandler} from './middlewares/error-handlers.js';
-import cors from "cors";
+import cors from 'cors';
 
 const app = express();
 
 //tän voi varmaan poistaa kun siirretään serverille
-app.use(cors({
-  origin: "http://localhost:5173",
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"]
-}));
-
+app.use(
+  cors({
+    origin: [
+      'http://localhost:5173',
+      'https://wsk-server.francecentral.cloudapp.azure.com',
+      'https://www.wsk-server.francecentral.cloudapp.azure.com',
+    ],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  })
+);
 
 app.use(express.static('public')); // website is served from public folder
 app.use('/uploads', express.static('uploads'));
