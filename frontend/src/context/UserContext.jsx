@@ -7,14 +7,13 @@ const UserContext = createContext(null);
 const UserProvider = ({children}) => {
   const [user, setUser] = useState(null);
   const {postLogin} = useAuthentication();
-  const {getUserByToken} = useUser();
+  const {getUserByToken, editUser, deleteUser} = useUser();
   const navigate = useNavigate();
   const location = useLocation();
 
   const handleLogin = async (credentials) => {
     try {
       const userInfo = await postLogin(credentials);
-      console.log(userInfo);
       setUser(userInfo.user);
       localStorage.setItem('token', userInfo.token);
 
@@ -39,14 +38,12 @@ const UserProvider = ({children}) => {
   };
 
 
-    const handleAutoLogin = async () => {
+  const handleAutoLogin = async () => {
         try {
             const token = localStorage.getItem('token');
             if (token) {
                 const userResult = await getUserByToken(token);
                 setUser(userResult.user);
-                
-                console.log('location', location);
                 navigate(location.pathname);
             }
         } catch (e) {
@@ -54,12 +51,35 @@ const UserProvider = ({children}) => {
         }
     };
 
+    const handleEditedUser = async (inputs) => {
+      try {
+        const token = localStorage.getItem('token');
+        const response = await editUser(inputs, user.user_id, token);
+        console.log(response.message);
+        alert(response.message);
+        setUser(response.result);
+        navigate('/profile')
+      } catch (error) {
+        console.error(error) 
+      }
+    }
+
+    const handleDelete = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        const response = await deleteUser(user.user_id, token);
+        console.log(response.message);
+
+      } catch (error) {
+        console.error(error) 
+      }
+    }
+
   return (
-    <UserContext.Provider value={{handleLogin, handleLogout, handleAutoLogin, user}}>
+    <UserContext.Provider value={{handleLogin, handleLogout, handleAutoLogin, handleEditedUser, handleDelete, user}}>
       {children}
     </UserContext.Provider>
   );
 };
 
-//export const useUser = () => useContext(UserContext);
 export {  UserProvider, UserContext};

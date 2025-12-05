@@ -18,7 +18,6 @@ function ShowCards(props) {
     section = menuArray;
   }
 
-  console.log(section);
     return(
         <>
           {section.map((item) => (
