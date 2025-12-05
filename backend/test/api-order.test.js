@@ -241,4 +241,25 @@ describe('Test order endpoints', () => {
       expect(res.statusCode).toEqual(401);
     });
   });
+
+  describe('GET /api/v1/orders/user/:userId', () => {
+    it('should get users own orders (customer token)', async () => {
+      const res = await request(app)
+        .get(`/api/v1/orders/user/${customerUserId}`)
+        .set('Authorization', `Bearer ${customerToken}`)
+        .set('Accept', 'application/json');
+
+      expect(res.statusCode).toEqual(200);
+      expect(Array.isArray(res.body)).toBe(true);
+    });
+
+    it('should fail to get another users orders (customer token)', async () => {
+      const res = await request(app)
+        .get(`/api/v1/orders/user/1`)
+        .set('Authorization', `Bearer ${customerToken}`)
+        .set('Accept', 'application/json');
+
+      expect(res.statusCode).toEqual(403);
+    });
+  });
 });
