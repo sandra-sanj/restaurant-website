@@ -1,21 +1,34 @@
 import Modal from "../components/Modal";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useUserContext } from "../hooks/contextHook";
+import EditForm from "../components/profile/EditForm";
 
 
 const Profile = () => {
     const [showModal, setShowModal] = useState(null);
-    const [showEdit, setShowEdit] = useState(false);
+    const [showEdit, setShowEdit] = useState(true);
 
-    const { user, handleLogout } = useUserContext();
+    const { user, handleLogout, handleDelete } = useUserContext();
     
     const closeModal = () => setShowModal(null);
 
+    const handleEdit = () => {
+        setShowEdit(current => !current);
+    }
 
+    const deleteBtn = async () => {
+        await handleDelete();
+        await handleLogout();
+    }
+
+
+    useEffect(() => {
+        console.log('changed?');
+    }, [showEdit]);
 
     return (
         <div>
-            {user ? (
+            {user && showEdit ? (
                 <>
                     <h1>Moi {user.username}</h1> 
                     <div className="profile-bar">
@@ -58,14 +71,18 @@ const Profile = () => {
                         <h2>Maksu metodit</h2>
                     </Modal>
                 </>    
-                ) : (
-                  <p>tietoja ladataan</p>
-                    )
-                }
-
+            ) : (
+            <>
+              <EditForm></EditForm>
+              <button onClick={() => {handleEdit()}}>Lopeta</button>
+              <br></br>
+              <button onClick={deleteBtn}>Poista käyttäjä</button>
+            </>)}
+            
+            <br></br>
             <button onClick={handleLogout}>Kirjaudu ulos</button>
-                    <br/>
-            <button >Poista käyttäjä</button>
+            <br/>
+
             
         </div>
     );

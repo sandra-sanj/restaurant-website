@@ -55,6 +55,7 @@ function useAuthentication() {
         }    
 };
 
+
 function useUser() {
     const navigate = useNavigate();
     const [error, setError] = useState(null);
@@ -72,6 +73,7 @@ function useUser() {
 
                 const result = await fetchData(`${API_URL}/auth/me`, options);
                 setError(null);
+                return result;
             }catch(error) {
                 console.log(error);
                 setError(error);
@@ -102,7 +104,45 @@ function useUser() {
         setError('luonti epäonnistui');
         return error;
     }};
-    return {getUserByToken, postUser};
+
+    const editUser = async (inputs, id, token) => {
+        try {
+            const options = {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: 'Bearer ' + token,
+                },
+                body: JSON.stringify(inputs),
+            }
+
+            const result = await fetchData(`${API_URL}/users/${id}`, options)
+            return result;
+
+
+        } catch(error) {
+            console.log(error);
+        }
+    }
+
+    const deleteUser = async (id, token) => {
+        try {
+            const options = {
+                method: 'DELETE',
+                headers: {
+                    Authorization: 'Bearer ' + token,
+                }
+            }
+
+            const result = await fetchData(`${API_URL}/users/${id}`, options);
+            return result;
+
+        } catch(error) {
+            console.log(error);
+        }
+    }
+
+    return {getUserByToken, postUser, editUser, deleteUser};
 };
 
 export {useMenu, useAuthentication, useUser};
