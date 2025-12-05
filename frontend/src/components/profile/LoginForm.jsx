@@ -1,8 +1,8 @@
-
-import { useAuthentication } from "../../hooks/apiHook";
+import { useUserContext } from "../../hooks/contextHook";
 import useForm from "../../hooks/formHooks";
 
 const LoginForm = () => {
+    const { handleLogin } = useUserContext();
 
     const initValues = {
     username: '',
@@ -10,19 +10,21 @@ const LoginForm = () => {
     };
 
 
-    const doLogin = () => {
-        console.log(inputs);
-        postLogin(inputs);
+    const doLogin = async () => {
+        try {
+            handleLogin(inputs);
+        } catch (error) {
+            console.error(error);
+        }
     };
 
-    const {postLogin} = useAuthentication();
 
     const {inputs, handleInputChange, handleSubmit} = useForm(doLogin, initValues);
 
      return (
          <>
              <h1>Kirjaudu sisään!</h1>
-             <form onSubmit={ () => {handleSubmit} }>
+             <form onSubmit={ (e) => {handleSubmit(e)} }>
                   <div>
                       <label htmlFor="loginuser">Käyttäjänimi: </label>
                      <input

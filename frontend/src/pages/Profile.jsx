@@ -1,22 +1,27 @@
-import {useUser} from "../hooks/apiHook";
 import Modal from "../components/Modal";
 import { useState } from 'react';
+import { useUserContext } from "../hooks/contextHook";
 
-//TODO: lisää ikonit maksumetodiin ja historiaan
-// tee mahdollisesti omat komponentit modaaleille?
-//pitäisikö vaihtaa EDIT napin kohdalle kieli ja tietojen kohdalle nuoli, mistä voi suoraan editoida?
 
 const Profile = () => {
     const [showModal, setShowModal] = useState(null);
-    //const {user} = useUser();
+    const [loading, setLoading] = useState(true);
 
+    const { user, handleLogout } = useUserContext();
+    console.log(user);
+    
     const closeModal = () => setShowModal(null);
+
+    function handleLogOutBtn() {
+        handleLogout();
+    }
 
 
     return (
         <div>
+            {user ? (
                 <>
-                    <h1>Moi jäsen</h1> 
+                    <h1>Moi {user.username}</h1> 
                     <div className="profile-bar">
                         <button onClick={() => 
                             setShowModal('history')}>Historia
@@ -29,19 +34,19 @@ const Profile = () => {
                         </button>
                     </div>
                     <div className="edit-prof" onClick={() => setShowModal('name')}>
-                        <h3>Nimi: nimi</h3>
+                        <h3>Nimi: {user.username} </h3>
                         <p>✎</p>
                     </div>
                     <div className="edit-prof">
-                        <h3>Sähköposti: email</h3>
+                        <h3>Sähköposti: {user.email} </h3>
                         <p>✎</p>
                     </div>  
                     <div className="edit-prof">
-                        <h3>Puhelinnumero: </h3>
+                        <h3>Puhelinnumero: {user.phone}</h3>
                         <p>✎</p>
                     </div>
                     <div className="edit-prof">   
-                        <h3>Osoite: </h3>
+                        <h3>Rooli: {user.role} </h3>
                         <p>✎</p>
                     </div>     
 
@@ -63,11 +68,16 @@ const Profile = () => {
                     <Modal isOpen={showModal === 'kieli' } onClose={closeModal}>
                         <h2>kielesi on suomi</h2>
                     </Modal>
+                </>    
+                ) : (
+                  <p>tietoja ladataan</p>
+                    )
+                }
 
-                    <button>Kirjaudu ulos</button>
+            <button onClick={handleLogOutBtn}>Kirjaudu ulos</button>
                     <br/>
-                    <button>Poista käyttäjä</button>
-                </>
+            <button >Poista käyttäjä</button>
+            
         </div>
     );
 };

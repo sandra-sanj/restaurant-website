@@ -12,16 +12,18 @@ const RegisterForm = () => {
 
     const doRegister = () => {
         try {
-            console.log(inputs);
+            inputs.role = 'customer';
+            inputs.is_active = 1;
             const userInfo = postUser(inputs);
-            console.log(userInfo);
+            console.log('userinfo: ', userInfo );
 
         } catch (error) {
             console.log(error);
         }
+        return;
     };
 
-    const {postUser} = useUser();
+    const { postUser } = useUser();
 
     const {inputs, handleInputChange, handleSubmit} = useForm(doRegister, initValues);
 
