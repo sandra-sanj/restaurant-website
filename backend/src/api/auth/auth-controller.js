@@ -9,12 +9,16 @@ const postLogin = async (req, res) => {
   // TODO: combine no user and no password match return messages into one, for enhanced security: "Username or password incorrect"
   const user = await getUserByUsername(req.body.username);
   if (!user) {
-    return res.status(401).json({message: 'No user with username'});
+    const error = new Error('No user with username');
+    error.status = 401;
+    return next(error);
   }
 
   // check if passwords match (plain text password (gets hashed here) and hashed password)
   if (!bcrypt.compareSync(req.body.password, user.password_hash)) {
-    return res.status(401).json({message: 'Password in incorrect'});
+    const error = new Error('Password is incorrect');
+    error.status = 401;
+    return next(error);
   }
 
   const userWithNoPassword = {
@@ -34,11 +38,20 @@ const postLogin = async (req, res) => {
 
 const getMe = async (req, res) => {
   //console.log('getMe', res.locals.user);
-  if (res.locals.user) {
+
+  if (!res.locals.user) {
+    const error = new Error('No user login token found');
+    error.status = 401;
+    return next(error);
+  }
+
+  /* if (res.locals.user) {
     res.json({message: 'token ok', user: res.locals.user});
   } else {
     res.status(401).json({message: 'Could not get user with token'});
-  }
+  } */
+
+  res.json({message: 'token ok', user: res.locals.user});
 };
 
 export {postLogin, getMe};
