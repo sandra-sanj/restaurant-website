@@ -262,4 +262,41 @@ describe('Test order endpoints', () => {
       expect(res.statusCode).toEqual(403);
     });
   });
+
+  /*
+    PUT tests (Update order)
+  */
+
+  describe('PUT /api/v1/orders/:id', () => {
+    it('should update order (admin token', async () => {
+      const updateData = {
+        customer_name: 'Updated customer name',
+        customer_phone: '+358999999999',
+        order_type: 'pickup',
+      };
+
+      const res = await request(app)
+        .put(`/api/v1/orders/${customerOrderId}`)
+        .set('Authorization', `Bearer ${adminToken}`)
+        .send(updateData)
+        .set('Accept', 'application/json');
+
+      expect(res.statusCode).toEqual(200);
+      expect(res.body).toHaveProperty('result');
+    });
+
+    it('should fail to update order (customer token) FAIL', async () => {
+      const updateData = {
+        customer_name: 'Should not work',
+      };
+
+      const res = await request(app)
+        .put(`/api/v1/orders/${customerOrderId}`)
+        .set('Authorization', `Bearer ${customerToken}`)
+        .send(updateData)
+        .set('Accept', 'application/json');
+
+      expect(res.statusCode).toEqual(403);
+    });
+  });
 });
