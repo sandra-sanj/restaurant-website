@@ -299,4 +299,52 @@ describe('Test order endpoints', () => {
       expect(res.statusCode).toEqual(403);
     });
   });
+
+  /*
+    DELETE order tests (Admin only)
+  */
+
+  describe('DELETE /api/v1/orders/:id', () => {
+    it('should delete order (admin token)', async () => {
+      // First create a new order to delete
+      const newOrder = {
+        customer_name: 'Order to delete',
+        customer_email: 'delete@example.com',
+        customer_phone: '+358123456789',
+        order_type: 'pickup',
+        items: [
+          {
+            menu_item_id: 1,
+            item_name: 'Maissilastut',
+            quantity: 1,
+            unit_price: 7.8,
+          },
+        ],
+      };
+
+      const createRes = await request(app)
+        .post('/api/v1/orders')
+        .send(newOrder)
+        .set('Accept', 'application/json');
+
+      const orderToDeleteId = createRes.body.result.order_id;
+
+      // Now delete the order
+      const deleteRes = await request(app)
+        .delete(`/api/v1/orders/${orderToDeleteId}`)
+        .set('Authorization', `Bearer ${adminToken}`)
+        .set('Accept', 'application/json');
+
+      expect(deleteRes.statusCode).toEqual(200);
+    });
+
+    it('should fail to delete order (customer token) FAIL', async () => {
+      const res = await request(app)
+        .delete(`/api/v1/orders/${customerOrderId}`)
+        .set('Authorization', `Bearer ${customerToken}`)
+        .set('Accept', 'application/json');
+
+      expect(res.statusCode).toEqual(403);
+    });
+  });
 });
