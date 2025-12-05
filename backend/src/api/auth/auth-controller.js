@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 import {getUserByUsername} from '../user/user-model.js';
 import 'dotenv/config';
 
-const postLogin = async (req, res) => {
+const postLogin = async (req, res, next) => {
   //console.log('postLogin', req.body);
 
   // TODO: combine no user and no password match return messages into one, for enhanced security: "Username or password incorrect"
@@ -36,7 +36,7 @@ const postLogin = async (req, res) => {
   res.json({user: userWithNoPassword, token});
 };
 
-const getMe = async (req, res) => {
+const getMe = async (req, res, next) => {
   //console.log('getMe', res.locals.user);
 
   if (!res.locals.user) {
