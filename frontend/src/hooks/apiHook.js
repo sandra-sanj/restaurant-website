@@ -18,7 +18,7 @@ function useMenu() {
                     method: 'GET',
                 }
                 const menu = await fetchData(`${API_URL}/menu`, options)
-                console.log('menu:', menu);
+                //console.log('menu:', menu);
                 setMenuArray(menu);
                 setError(null);
             } catch (e) {
@@ -47,7 +47,6 @@ function useAuthentication() {
                 body: JSON.stringify(inputs),
             };
             const loginResult = await fetchData(`${API_URL}/auth/login`, options); 
-            console.log(loginResult.token);
             return loginResult;
             };
             return {postLogin};

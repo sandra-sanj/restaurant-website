@@ -14,7 +14,6 @@ const UserProvider = ({children}) => {
   const handleLogin = async (credentials) => {
     try {
       const userInfo = await postLogin(credentials);
-      console.log(userInfo);
       setUser(userInfo.user);
       localStorage.setItem('token', userInfo.token);
 
@@ -61,5 +60,4 @@ const UserProvider = ({children}) => {
   );
 };
 
-//export const useUser = () => useContext(UserContext);
 export {  UserProvider, UserContext};
