@@ -56,7 +56,9 @@ const UserProvider = ({children}) => {
         const token = localStorage.getItem('token');
         const response = await editUser(inputs, user.user_id, token);
         console.log(response.message);
+        alert(response.message);
         setUser(response.result);
+        navigate('/profile')
       } catch (error) {
         console.error(error) 
       }

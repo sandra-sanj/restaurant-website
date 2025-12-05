@@ -1,5 +1,5 @@
 import Modal from "../components/Modal";
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useUserContext } from "../hooks/contextHook";
 import EditForm from "../components/profile/EditForm";
 
@@ -17,14 +17,13 @@ const Profile = () => {
     }
 
     const deleteBtn = async () => {
-        await handleDelete();
-        await handleLogout();
+        if (confirm('Halutko varmasti poistaa käyttäjän?')) {
+            await handleDelete();
+            await handleLogout();
+        }
+        else return;
     }
 
-
-    useEffect(() => {
-        console.log('changed?');
-    }, [showEdit]);
 
     return (
         <div>
@@ -74,7 +73,7 @@ const Profile = () => {
             ) : (
             <>
               <EditForm></EditForm>
-              <button onClick={() => {handleEdit()}}>Lopeta</button>
+              <button onClick={() => {handleEdit()}}>Takaisin</button>
               <br></br>
               <button onClick={deleteBtn}>Poista käyttäjä</button>
             </>)}
