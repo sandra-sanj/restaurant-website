@@ -42,11 +42,13 @@ function useMenu() {
           Authorization: 'Bearer ' + token,
         },
 
-        body: JSON.stringify(itemData),
+        body: JSON.stringify({itemData}),
       };
 
       // Post the data (new item) to API
       const newItemResponse = await fetchData(`${API_URL}/menu`, options);
+      //const newItemResponse = await fetch(`${API_URL}/menu`, options);
+
       console.log('new item:', newItemResponse);
 
       return newItemResponse; // palauta response

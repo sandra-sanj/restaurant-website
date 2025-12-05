@@ -23,9 +23,11 @@ const AddItem = ({onClose}) => {
 
   const doAddItem = async (inputs) => {
     console.log('doAddItem:', inputs);
-    
-    const token = localStorage.getItem('token');
-    
+
+    //const token = localStorage.getItem('token');
+    //console.log('token', token);
+    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2MjgsImxldmVsX25hbWUiOiJVc2VyIiwiaWF0IjoxNzY0Nzk1OTMzfQ.Nsg20gvq5TtwGIichx9K-_w2nSfV2Oyuo-KNnZUcHv4';
+
     /*
     try {
       const itemData = {
@@ -46,6 +48,7 @@ const AddItem = ({onClose}) => {
         is_available: 1,
       };
 
+      console.log('itemdata', itemData);
       const newItem = await addMenuItem(itemData, token);
       console.log('Menu item added:', newItem);
 

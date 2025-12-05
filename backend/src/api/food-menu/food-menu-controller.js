@@ -62,7 +62,8 @@ const getMenuItemById = async (req, res, next) => {
 };
 
 const postMenuItem = async (req, res, next) => {
-  console.log(req.file);
+  console.log('req file:', req.file);
+
   // check if file exists
   if (!req.file) {
     const error = new Error('Invalid or missing file');
@@ -107,7 +108,9 @@ const postMenuItem = async (req, res, next) => {
     error.status = 400;
     return next(error);
   }
+
   res.status(201).json({message: 'New menu item added', result});
+
 };
 
 const putMenuItem = async (req, res, next) => {

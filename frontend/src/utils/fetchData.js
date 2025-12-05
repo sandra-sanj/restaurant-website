@@ -1,13 +1,14 @@
 const fetchData = async (url, options = {}) => {
     const res = await fetch(url, options);
-    const response = await res.json();
     
     if(!res.ok) {
-        const error = new Error(response.message);
-        error.status = res.status;
+        const error = new Error('error');
+        //error.status = res.status;
         throw error;
     }
-    return response;
+    //const response = await res.json();
+
+    return res;
 };
 
 export {fetchData};
