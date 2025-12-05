@@ -183,6 +183,8 @@ describe('Test order endpoints', () => {
     GET tests (order retrieval)
   */
 
+  // Get all orders
+
   describe('GET /api/v1/orders', () => {
     it('should get all orders (admin token)', async () => {
       const res = await request(app)
@@ -211,6 +213,8 @@ describe('Test order endpoints', () => {
       expect(res.statusCode).toEqual(401);
     });
   });
+
+  // GET order by ID
 
   describe('GET /api/v1/orders/:id', () => {
     it('should get order by ID (admin token)', async () => {
@@ -242,6 +246,8 @@ describe('Test order endpoints', () => {
     });
   });
 
+  // GET orders for specific user
+
   describe('GET /api/v1/orders/user/:userId', () => {
     it('should get users own orders (customer token)', async () => {
       const res = await request(app)
@@ -260,6 +266,32 @@ describe('Test order endpoints', () => {
         .set('Accept', 'application/json');
 
       expect(res.statusCode).toEqual(403);
+    });
+  });
+
+  // GET order details with items
+
+  describe('GET /api/v1/orders/:id/details', () => {
+    it('should get order details with items (admin token)', async () => {
+      const res = await request(app)
+        .get(`/api/v1/orders/${customerOrderId}/details`)
+        .set('Authorization', `Bearer ${adminToken}`)
+        .set('Accept', 'application/json');
+
+      expect(res.statusCode).toEqual(200);
+      expect(res.body).toHaveProperty('items');
+      expect(Array.isArray(res.body.items)).toBe(true);
+    });
+
+    it('should get own order details with items (customer token)', async () => {
+      const res = await request(app)
+        .get(`/api/v1/orders/${customerOrderId}/details`)
+        .set('Authorization', `Bearer ${customerToken}`)
+        .set('Accept', 'application/json');
+
+      expect(res.statusCode).toEqual(200);
+      expect(res.body).toHaveProperty('items');
+      expect(Array.isArray(res.body.items)).toBe(true);
     });
   });
 
