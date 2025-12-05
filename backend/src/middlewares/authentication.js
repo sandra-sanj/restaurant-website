@@ -9,14 +9,18 @@ const authenticateToken = (req, res, next) => {
   //console.log('token', token);
 
   if (token == null) {
-    return res.sendStatus(401);
+    res.locals.user = undefined;
+    return next();
+    //return res.sendStatus(401);
   }
 
   try {
     res.locals.user = jwt.verify(token, process.env.JWT_SECRET);
     next();
   } catch (err) {
-    res.status(403).send({message: 'invalid token', error: err});
+    res.locals.user = undefined;
+    next();
+    //res.status(403).send({message: 'invalid token', error: err});
   }
 };
 
