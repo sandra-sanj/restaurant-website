@@ -11,7 +11,7 @@ const useForm = (callback, initState) => {
     };
 
     const handleInputChange = (event) => {
-        event.persist();
+        //event.persist();
         setInputs((inputs) => ({
             ...inputs,
             [event.target.name]: event.target.value,

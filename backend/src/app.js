@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import express from 'express';
 import api from './api/index.js';
 import {errorHandler, notFoundHandler} from './middlewares/error-handlers.js';

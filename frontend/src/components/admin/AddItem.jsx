@@ -15,22 +15,38 @@ const AddItem = ({onClose}) => {
     descriptionEn: '',
     price: '',
     category: '',
-    lactoseFree: false, // checkboxes
-    glutenFree: false,
-    milkFree: false,
-    vegan: false,
+    //lactoseFree: false, // checkboxes
+    //glutenFree: false,
+    //milkFree: false,
+    //vegan: false,
   };
 
   const doAddItem = async (inputs) => {
     console.log('doAddItem:', inputs);
-    //const token = localStorage.getItem('token');
-
+    
+    const token = localStorage.getItem('token');
+    
+    /*
     try {
       const itemData = {
         image: null,
       };
+*/
+    try {
+      // Send only the essential fields, no image, no checkboxes
+      const itemData = {
+        category_id: 1, // kovakoodattu
+        name: inputs.nameFi,
+        name_en: inputs.nameEn,
+        description: inputs.description,
+        description_en: inputs.descriptionEn,
+        price: inputs.price,
+        image_url: null,
+        image_thumb_url: null,
+        is_available: 1,
+      };
 
-      const newItem = await addMenuItem(itemData, inputs);
+      const newItem = await addMenuItem(itemData, token);
       console.log('Menu item added:', newItem);
 
       alert('Item added successfully');

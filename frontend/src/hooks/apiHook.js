@@ -30,8 +30,7 @@ function useMenu() {
     getMenuItems();
   }, []);
 
-  const addMenuItem = async (itemData, inputs) => { //, token) => {
-    // itemData is additional info, inputs = form fields
+  const addMenuItem = async (itemData, token) => {
     
     try {
       setLoading(true);
@@ -40,24 +39,25 @@ function useMenu() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          //Authorization: 'Bearer ' + token,
+          Authorization: 'Bearer ' + token,
         },
 
-        body: JSON.stringify({...inputs, ...itemData}),
+        body: JSON.stringify(itemData),
       };
 
       // Post the data (new item) to API
       const newItemResponse = await fetchData(`${API_URL}/menu`, options);
       console.log('new item:', newItemResponse);
-      //setMenuArray(menu);
-      setError(null);
+
+      return newItemResponse; // palauta response
+
     } catch (e) {
       console.error('Error adding item:', e);
-      setError('Error adding item');
       //setMenuArray([]);
     } finally {
       setLoading(false);
     }
+    
   };
 
   return {menuArray, loading, error, addMenuItem};
