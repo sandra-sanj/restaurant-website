@@ -18,10 +18,12 @@ import CartPage from './pages/CartPage';
 import Cart from './components/shoppingcart/Cart';
 import Order from './components/shoppingcart/Order';
 import All from './components/menu/All';
+import { UserProvider } from './context/UserContext';
 
 const App = () => {
   return (
     <>
+      <UserProvider>
       <div>
         <NavBar />
         <main className='main-content'>
@@ -46,8 +48,9 @@ const App = () => {
             </Route>
           </Routes>
         </main>
-      </div>
+       </div>
       <Footer />
+      </UserProvider>
     </>
   );
 };

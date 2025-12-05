@@ -15,6 +15,7 @@ const RegisterForm = () => {
             inputs.role = 'customer';
             inputs.is_active = 1;
             const userInfo = postUser(inputs);
+            console.log('userinfo: ', userInfo );
 
         } catch (error) {
             console.log(error);
@@ -22,10 +23,7 @@ const RegisterForm = () => {
         return;
     };
 
-    const {postUser, error, result } = useUser();
-
-    if(error) return <p>Error: {error}</p>
-    if(result) return <p>Kirjautuminen onnistui</p>
+    const { postUser } = useUser();
 
     const {inputs, handleInputChange, handleSubmit} = useForm(doRegister, initValues);
 

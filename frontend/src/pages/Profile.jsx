@@ -1,21 +1,21 @@
-import {useUser} from "../hooks/apiHook";
 import Modal from "../components/Modal";
 import { useState } from 'react';
+import { useUserContext } from "../hooks/contextHook";
 
-//TODO: lisää ikonit maksumetodiin ja historiaan
-// tee mahdollisesti omat komponentit modaaleille?
-//pitäisikö vaihtaa EDIT napin kohdalle kieli ja tietojen kohdalle nuoli, mistä voi suoraan editoida?
 
 const Profile = () => {
     const [showModal, setShowModal] = useState(null);
-    const token = localStorage.getItem('token');
+
+    const { user } = useUserContext();
     
 
     const closeModal = () => setShowModal(null);
 
 
+
     return (
         <div>
+            {user ? (
                 <>
                     <h1>Moi jäsen</h1> 
                     <div className="profile-bar">
@@ -68,7 +68,12 @@ const Profile = () => {
                     <button>Kirjaudu ulos</button>
                     <br/>
                     <button>Poista käyttäjä</button>
-                </>
+                </>    
+                ) : (
+                        <p>tietoja ladataan</p>
+                    )
+                }
+            
         </div>
     );
 };

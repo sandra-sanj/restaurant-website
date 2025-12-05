@@ -1,8 +1,8 @@
-
-import { useAuthentication } from "../../hooks/apiHook";
+import { useUserContext } from "../../hooks/contextHook";
 import useForm from "../../hooks/formHooks";
 
 const LoginForm = () => {
+    const { handleLogin } = useUserContext();
 
     const initValues = {
     username: '',
@@ -10,15 +10,14 @@ const LoginForm = () => {
     };
 
 
-    const doLogin = () => {
+    const doLogin = async () => {
         try {
-            postLogin(inputs);
+            await handleLogin(inputs);
         } catch (error) {
             console.error(error);
         }
     };
 
-    const {postLogin} = useAuthentication();
 
     const {inputs, handleInputChange, handleSubmit} = useForm(doLogin, initValues);
 

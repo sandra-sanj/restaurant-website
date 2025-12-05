@@ -48,7 +48,7 @@ function useAuthentication() {
                 body: JSON.stringify(inputs),
             };
             const loginResult = await fetchData(`${API_URL}/auth/login`, options); 
-            console.log(loginResult);
+            console.log(loginResult.token);
             navigate('/profile');
             localStorage.setItem('token', loginResult.token);
             return loginResult.user;
@@ -62,24 +62,26 @@ function useAuthentication() {
 function useUser() {
     const navigate = useNavigate();
     const [error, setError] = useState(null);
-    //const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(true);
     
-    const getUserByToken = async (token) => {
-        try {
-            const options = {
-                method: 'GET',
-                headers: {
-                    Authorization: 'Bearer ' + token,
-                },
-            }
+        const getUserByToken = async (token) => {
+            try {
+                setLoading(true);
+                const options = {
+                    method: 'GET',
+                    headers: {
+                        Authorization: 'Bearer ' + token,
+                    },
+                }
 
-            const result = await fetchData(`${API_URL}/auth/me`, options);
-            setError(null);
-            return { result, error }
-        }catch(error) {
-            console.log(error);
-            setError(error);
-        }    
+                const result = await fetchData(`${API_URL}/auth/me`, options);
+                setError(null);
+            }catch(error) {
+                console.log(error);
+                setError(error);
+            } finally {
+                setLoading(false);
+            }
         };
 
    
