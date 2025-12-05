@@ -1,7 +1,9 @@
-import {useState, useEffect} from 'react';
-import {fetchData} from '../utils/fetchData';
+import { useState, useEffect } from 'react';
+import { fetchData } from "../utils/fetchData";
+import { useNavigate } from 'react-router';
 
 const API_URL = import.meta.env.VITE_API_URL;
+
 
 function useMenu() {
   const [menuArray, setMenuArray] = useState([]);
@@ -76,7 +78,7 @@ function useAuthentication() {
                 body: JSON.stringify(inputs),
             };
             const loginResult = await fetchData(`${API_URL}/auth/login`, options); 
-            console.log(loginResult);
+            console.log(loginResult.token);
             return loginResult;
             };
             return {postLogin};
@@ -86,21 +88,33 @@ function useAuthentication() {
 };
 
 function useUser() {
-  try {
-    const getUserByToken = async (token) => {
-      const options = {
-        method: 'GET',
-        headers: {
-          Authorization: 'Bearer ' + token,
-        },
-      };
+    const navigate = useNavigate();
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(true);
+    
+        const getUserByToken = async (token) => {
+            try {
+                setLoading(true);
+                const options = {
+                    method: 'GET',
+                    headers: {
+                        Authorization: 'Bearer ' + token,
+                    },
+                }
 
-            const tokenResult = await fetchData(`${API_URL}/auth/me`, options);
-            return tokenResult;
+                const result = await fetchData(`${API_URL}/auth/me`, options);
+                setError(null);
+            }catch(error) {
+                console.log(error);
+                setError(error);
+            } finally {
+                setLoading(false);
+            }
         };
 
    
-        const postUser = async (inputs) => {
+    const postUser = async (inputs) => {
+        try {
             const options = {
                 method: 'POST',
                 headers: {
@@ -109,14 +123,18 @@ function useUser() {
                 body: JSON.stringify(inputs),
             }
 
-            const tokenResult = await fetchData(`${API_URL}/users`, options);
-            return tokenResult;
-        }
-
+            const result = await fetchData(`${API_URL}/users`, options);
+            console.log('testi', result.message);
+            setError(null);
+            navigate('/login/login');
+            return;
+        
+    } catch(error) {
+        console.error('error: ', error.message);
+        setError('luonti epäonnistui');
+        return error;
+    }};
     return {getUserByToken, postUser};
-  } catch (error) {
-    console.error(error);
-  }
-}
+};
 
 export {useMenu, useAuthentication, useUser};

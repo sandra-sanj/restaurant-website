@@ -18,10 +18,13 @@ import CartPage from './pages/CartPage';
 import Cart from './components/shoppingcart/Cart';
 import Order from './components/shoppingcart/Order';
 import All from './components/menu/All';
+import { UserProvider } from './context/UserContext';
+import ProtectedRoute from './components/ProtectedRoute';
 
 const App = () => {
   return (
     <>
+      <UserProvider>
       <div>
         <NavBar />
         <main className='main-content'>
@@ -34,7 +37,8 @@ const App = () => {
               <Route path='/menu/desserts' element={<Desserts />}/>
               <Route path='/menu/drinks' element={<Drinks />}/>
             </Route>  
-            <Route path='/profile' element={<Profile />}/>
+            <Route path='/profile'
+            element={<ProtectedRoute> <Profile /> </ProtectedRoute>}/>
             <Route path='/admin' element={<Admin />}/>
             <Route path='/history' element={<AdminHistory />}/>
             <Route path='/login/' element={<Login />}/>
@@ -46,8 +50,9 @@ const App = () => {
             </Route>
           </Routes>
         </main>
-      </div>
+       </div>
       <Footer />
+      </UserProvider>
     </>
   );
 };

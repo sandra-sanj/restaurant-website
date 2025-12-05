@@ -1,18 +1,49 @@
 import {Link} from "react-router";
+import { useUserContext } from "../hooks/contextHook";
+import { useEffect } from "react";
 
 function NavBar() {
+    const { handleAutoLogin, user} = useUserContext();
 
-    // TODO: transfer admin page (later) inside profile / registration AND history inside admin
+    useEffect(() => {
+        handleAutoLogin();
+    }, []);
 
     return <nav className="navbar">
         <div className="navbar-links">
-            <Link to="/" className="nav-link">Home </Link>
-            <Link to="/menu" className="nav-link">Menu </Link>
-            <Link to="/profile" className="nav-link">Profile </Link>
-            <Link to="/admin" className="nav-link">Admin </Link>
-            <Link to="/history" className="nav-link">History </Link>
-            <Link to="/login" className="nav-link">LogIn </Link>
-            <Link to="/cart" className="nav-link">Cart </Link>
+            <ul>
+                <li>
+                  <Link to="/" className="nav-link">Home </Link>
+                </li>
+                <li>
+                  <Link to="/menu" className="nav-link">Menu </Link>
+                </li>
+
+                {user ? (
+                  <>
+                    <li>
+                    <Link to="/profile" className="nav-link">Profile </Link>
+                    </li>
+                    <li>
+                    <Link to="/admin" className="nav-link">Admin </Link>
+                    </li>
+                    <li>
+                    <Link to="/history" className="nav-link">History </Link>
+                    </li>
+                  </>
+                ) : (
+                    <>
+                      <li>
+                        <Link to="/login" className="nav-link">LogIn </Link>
+
+                      </li>
+                    </>
+                )}
+                
+                <li>
+                  <Link to="/cart" className="nav-link">Cart </Link>
+                </li>
+            </ul>
         </div>
     </nav>
 }

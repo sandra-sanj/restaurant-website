@@ -21,8 +21,11 @@ const authenticateToken = (req, res, next) => {
 };
 
 const optionalAuthentication = (req, res, next) => {
-  const authHeader = req.headers['authorization'];
+  const authHeader = req.headers['Authorization'];
+  //const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
+
+  console.log('token authenticationista:', token);
 
   // If no token, proceed as guest
   if (!token) {
