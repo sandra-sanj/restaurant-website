@@ -12,7 +12,7 @@ const LoginForm = () => {
 
     const doLogin = async () => {
         try {
-            await handleLogin(inputs);
+            handleLogin(inputs);
         } catch (error) {
             console.error(error);
         }

@@ -37,7 +37,6 @@ function useMenu() {
 
 
 function useAuthentication() {
-    const navigate = useNavigate();
     try{
         const postLogin = async (inputs) => {
             const options = {
@@ -49,9 +48,7 @@ function useAuthentication() {
             };
             const loginResult = await fetchData(`${API_URL}/auth/login`, options); 
             console.log(loginResult.token);
-            navigate('/profile');
-            localStorage.setItem('token', loginResult.token);
-            return loginResult.user;
+            return loginResult;
             };
             return {postLogin};
         }catch(error){
