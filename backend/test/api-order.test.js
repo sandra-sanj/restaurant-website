@@ -55,8 +55,8 @@ describe('Test order endpoints', () => {
   });
 
   /*
-  POST tests (order creation)
-
+    POST tests (order creation)
+  */
 
   describe('POST /api/v1/orders', () => {
     it('should create new guest order (no token)', async () => {
@@ -178,7 +178,10 @@ describe('Test order endpoints', () => {
       expect(res.statusCode).toEqual(400);
     });
   });
-*/
+
+  /*
+    GET tests (order retrieval)
+  */
 
   describe('GET /api/v1/orders', () => {
     it('should get all orders (admin token)', async () => {
@@ -203,6 +206,36 @@ describe('Test order endpoints', () => {
     it('should fail to get all orders (no token) FAIL', async () => {
       const res = await request(app)
         .get('/api/v1/orders')
+        .set('Accept', 'application/json');
+
+      expect(res.statusCode).toEqual(401);
+    });
+  });
+
+  describe('GET /api/v1/orders/:id', () => {
+    it('should get order by ID (admin token)', async () => {
+      const res = await request(app)
+        .get(`/api/v1/orders/${customerOrderId}`)
+        .set('Authorization', `Bearer ${adminToken}`)
+        .set('Accept', 'application/json');
+
+      expect(res.statusCode).toEqual(200);
+      expect(res.body).toHaveProperty('order_id', customerOrderId);
+    });
+
+    it('should get own order by ID (customer token)', async () => {
+      const res = await request(app)
+        .get(`/api/v1/orders/${customerOrderId}`)
+        .set('Authorization', `Bearer ${customerToken}`)
+        .set('Accept', 'application/json');
+
+      expect(res.statusCode).toEqual(200);
+      expect(res.body).toHaveProperty('order_id', customerOrderId);
+    });
+
+    it('should fail to order without token FAIL', async () => {
+      const res = await request(app)
+        .get(`/api/v1/orders/${customerOrderId}`)
         .set('Accept', 'application/json');
 
       expect(res.statusCode).toEqual(401);
