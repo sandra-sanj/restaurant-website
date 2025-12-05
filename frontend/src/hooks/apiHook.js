@@ -64,26 +64,24 @@ function useMenu() {
 }
 
 function useAuthentication() {
-  try {
-    const postLogin = async (inputs) => {
-      const fetchOptions = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(inputs),
-      };
-      const loginResult = await fetchData(
-        `${API_URL}/auth/login`,
-        fetchOptions,
-      );
-      return loginResult;
-    };
-    return {postLogin};
-  } catch (error) {
-    console.error(error);
-  }
-}
+    try{
+        const postLogin = async (inputs) => {
+            const options = {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(inputs),
+            };
+            const loginResult = await fetchData(`${API_URL}/auth/login`, options); 
+            console.log(loginResult);
+            return loginResult;
+            };
+            return {postLogin};
+        }catch(error){
+            console.error(error);
+        }    
+};
 
 function useUser() {
   try {
@@ -95,22 +93,23 @@ function useUser() {
         },
       };
 
-      const tokenResult = await fetchData(`${API_URL}/auth/me`, options);
-      return tokenResult;
-    };
+            const tokenResult = await fetchData(`${API_URL}/auth/me`, options);
+            return tokenResult;
+        };
 
-    const postUser = async (inputs) => {
-      const postOptions = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(inputs),
-      };
+   
+        const postUser = async (inputs) => {
+            const options = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(inputs),
+            }
 
-      const tokenResult = await fetchData(`${API_URL}/users`, postOptions);
-      return tokenResult;
-    };
+            const tokenResult = await fetchData(`${API_URL}/users`, options);
+            return tokenResult;
+        }
 
     return {getUserByToken, postUser};
   } catch (error) {

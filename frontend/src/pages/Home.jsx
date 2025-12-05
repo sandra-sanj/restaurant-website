@@ -7,6 +7,8 @@ import Login from "./Login";
 function Home() {
   const navigate = useNavigate();
 
+  const imgSrc = "/images/";
+
     return (
         <>
           <div>
@@ -20,7 +22,7 @@ function Home() {
           <div className="ad-div">
             <div>
               <img
-                src="../src/assets/img/paaruoat/tacoja.jpg"
+                src={imgSrc + "/home/home1.jpg"}
                 alt=""
                 width="200" height='500'
                 onClick={() => navigate('/menu')}
@@ -29,7 +31,7 @@ function Home() {
             </div>  
             <div>
               <img
-                src="../src/assets/img/paaruoat/tacohand.jpg"
+                src={imgSrc + "/home/home2.jpg"}
                 alt=""
                 width="200" height='500'
                 onClick={() => navigate('/menu')}
@@ -38,7 +40,7 @@ function Home() {
             </div>    
             <div>
               <img
-                src="../src/assets/img/paaruoat/bowlkasa.jpg"
+                src={imgSrc + "/home/home3.jpg"}
                 alt=""
                 width="200" height='500'
                 onClick={() => navigate('/menu')}
@@ -50,7 +52,7 @@ function Home() {
           <div className="container-home">
             <div>
               <img
-              src="../src/assets/img/home/taco2.jpg"
+              src={imgSrc + "/home/mains.jpg"}
               alt=""
               onClick={() => navigate('/menu/mains')}
               />
@@ -58,7 +60,7 @@ function Home() {
             </div>
             <div>
               <img
-              src="../src/assets/img/home/nacho3.jpg"
+              src={imgSrc + "/home/snacks.jpg"}
               alt=""
               onClick={() => navigate('/menu/snacks')}
               />
@@ -66,7 +68,7 @@ function Home() {
             </div>
             <div>
               <img
-              src="../src/assets/img/home/flan2.jpg"
+              src={imgSrc + "/home/desserts.jpg"}
               alt=""
               onClick={() => navigate('/menu/desserts')}
               />
@@ -74,7 +76,7 @@ function Home() {
             </div>
             <div>
               <img
-              src="../src/assets/img/home/drinks.jpg"
+              src={imgSrc + "/home/drinks.jpg"}
               alt=""
               onClick={() => navigate('/menu/drinks')}
               />
