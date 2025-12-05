@@ -10,7 +10,10 @@ import {
   deleteOrder,
 } from './order-controller.js';
 
-import {authenticateToken} from '../../middlewares/authentication.js';
+import {
+  authenticateToken,
+  optionalAuthentication,
+} from '../../middlewares/authentication.js';
 import {checkAdmin} from '../../middlewares/check-admin.js';
 import {checkOrderAccess} from '../../middlewares/check-order-access.js';
 import {body} from 'express-validator';
@@ -20,6 +23,7 @@ const orderRouter = express.Router();
 
 // Public route (no auth required)
 orderRouter.route('/').post(
+  optionalAuthentication,
   body('customer_name')
     .trim()
     .notEmpty()

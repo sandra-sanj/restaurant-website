@@ -8,7 +8,8 @@
     "dev": "nodemon src/index.js",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "test:api-user": "node --experimental-vm-modules node_modules/jest/bin/jest.js test/api-user.test.js",
-    "test:api-menu": "node --experimental-vm-modules node_modules/jest/bin/jest.js test/api-menu.test.js"
+    "test:api-menu": "node --experimental-vm-modules node_modules/jest/bin/jest.js test/api-menu.test.js",
+    "test:api-order": "node --experimental-vm-modules node_modules/jest/bin/jest.js test/api-order.test.js"
   },
   "keywords": [],
   "author": "",

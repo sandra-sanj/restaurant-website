@@ -101,7 +101,7 @@ const addOrder = async (order) => {
       customer_name,
       customer_email,
       customer_phone,
-      delivery_address,
+      delivery_address || null,
       order_type,
     ];
 
