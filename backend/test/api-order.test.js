@@ -56,7 +56,7 @@ describe('Test order endpoints', () => {
 
   /*
   POST tests (order creation)
-  */
+
 
   describe('POST /api/v1/orders', () => {
     it('should create new guest order (no token)', async () => {
@@ -176,6 +176,36 @@ describe('Test order endpoints', () => {
         .set('Accept', 'application/json');
 
       expect(res.statusCode).toEqual(400);
+    });
+  });
+*/
+
+  describe('GET /api/v1/orders', () => {
+    it('should get all orders (admin token)', async () => {
+      const res = await request(app)
+        .get('/api/v1/orders')
+        .set('Authorization', `Bearer ${adminToken}`)
+        .set('Accept', 'application/json');
+
+      expect(res.statusCode).toEqual(200);
+      expect(Array.isArray(res.body)).toBe(true);
+    });
+
+    it('should fail to get all orders (customer token) FAIL', async () => {
+      const res = await request(app)
+        .get('/api/v1/orders')
+        .set('Authorization', `Bearer ${customerToken}`)
+        .set('Accept', 'application/json');
+
+      expect(res.statusCode).toEqual(403);
+    });
+
+    it('should fail to get all orders (no token) FAIL', async () => {
+      const res = await request(app)
+        .get('/api/v1/orders')
+        .set('Accept', 'application/json');
+
+      expect(res.statusCode).toEqual(401);
     });
   });
 });
