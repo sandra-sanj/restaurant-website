@@ -60,3 +60,6 @@ GET http://localhost:3000/api/v1/lunch/today
 ### Get lunch for specific day
 GET http://localhost:3000/api/v1/lunch/tuesday
 
+
+### Get weather information
+GET http://localhost:3000/api/v1/weather

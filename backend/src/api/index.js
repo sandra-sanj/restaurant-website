@@ -7,6 +7,7 @@ import orderRouter from './orders/order-router.js';
 import allergenRouter from './food-menu/allergen-router.js';
 import categoryRouter from './food-menu/category-router.js';
 import lunchRouter from './food-menu/lunch-special-router.js';
+import weatherRouter from './weather-api/weather-router.js';
 
 const router = express.Router();
 
@@ -19,5 +20,6 @@ router.use('/orders', orderRouter);
 router.use('/allergens', allergenRouter);
 router.use('/categories', categoryRouter);
 router.use('/lunch', lunchRouter);
+router.use('/weather', weatherRouter);
 
 export default router;

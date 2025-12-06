@@ -13,7 +13,7 @@ const RESTAURANT_LOCATION = {
  * Get current weather for restaurant location
  */
 
-const getWeatherInfo = async () => {
+const getWeatherInfo = async (req, res, next) => {
   const apiKey = process.env.OPENWEATHER_API_KEY;
 
   if (!apiKey) {
