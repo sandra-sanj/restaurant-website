@@ -1,5 +1,17 @@
+import DeleteConfirmation from './DeleteConfirmation';
+import {useState} from 'react';
+
 const DeleteItem = ({onClose}) => {
-  // TODO: lisää x-nappeihin onClick -> avaa DeleteConfirmation-komponentin
+  const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false);
+
+  const handleDeleteClick = () => {
+    setDeleteConfirmationOpen(true);
+  };
+
+  const handleCloseClick = () => {
+    setDeleteConfirmationOpen(false);
+  }
+
   return (
     <>
       <div className="m-5 outline-2 outline-gray-400 rounded-md w-[400px]">
@@ -19,22 +31,33 @@ const DeleteItem = ({onClose}) => {
           <table className="w-full border-collapse text-left">
             <tbody>
               {/* TODO: Hae tähän menun tuotteet */}
-              {["Maissilastut", "Maissilastut", "Maissilastut", "Maissilastut", "Maissilastut", "Maissilastut"].map(
-                (item, idx) => (
-                  <tr key={idx} className="hover:bg-gray-100">
-                    <td className="p-2">
-                      <button className="bg-[#982A2A]! text-white px-2 py-1 rounded-xl hover:opacity-90">
-                        x
-                      </button>
-                    </td>
-                    <td className="p-2">{item}</td>
-                  </tr>
-                )
-              )}
+              {[
+                'Maissilastut',
+                'Maissilastut',
+                'Maissilastut',
+                'Maissilastut',
+                'Maissilastut',
+                'Maissilastut',
+              ].map((item, idx) => (
+                <tr key={idx} className="hover:bg-gray-100">
+                  <td className="p-2">
+                    <button
+                      className="bg-[#982A2A]! text-white px-2 py-1 rounded-xl hover:opacity-90"
+                      onClick={handleDeleteClick}
+                    >
+                      x
+                    </button>
+                  </td>
+                  <td className="p-2">{item}</td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
+        
       </div>
+      {deleteConfirmationOpen && (<DeleteConfirmation onClose={handleCloseClick} />
+        )}
     </>
   );
 };

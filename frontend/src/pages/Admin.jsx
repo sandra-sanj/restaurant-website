@@ -1,10 +1,8 @@
-import TableRowAdmin from './../components/admin/tableRow';
 import EditMenu from './../components/admin/EditMenu';
 import AddItem from '../components/admin/AddItem';
 import EditItem from './../components/admin/EditItem';
 import DeleteItem from '../components/admin/DeleteItem';
 import {useState} from 'react';
-import DeleteConfirmation from '../components/admin/DeleteConfirmation';
 import {
   Table,
   TableHeader,
@@ -113,8 +111,7 @@ const Admin = () => {
       {editItemOpen && <EditItem onClose={handleButtonCloseClick} />}
 
       {deleteItemOpen && <DeleteItem onClose={handleButtonCloseClick} />}
-
-      <DeleteConfirmation onClose={handleButtonCloseClick} />
+      
     </>
   );
 };
