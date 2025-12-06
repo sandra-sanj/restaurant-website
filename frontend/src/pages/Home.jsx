@@ -13,8 +13,6 @@ function Home() {
     <>
       <div>
         <h1>Taqueria 21</h1>
-        
-        <Button className="bg-primary text-primary-foreground hover:bg-[#7A2020]">Testi1</Button>
         <p>Pieni pala Meksikoa keskellä Helsinkiä</p>
       </div>
       <div>
