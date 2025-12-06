@@ -24,7 +24,7 @@ const FoodModal = ({onAddToCart, onClose}) => {
             kuvaus: tähän tulee ruoan kuvaus, ja tämä avautuu jos painaa
             ruokakortin Lisää tilaukseen-nappia
           </p>
-          <p>Tulisuus: X X X (jos ruoassa mahdollista säätää)</p>
+          <p>Tulisuus: X X X </p>
           <div>
             <label>
               Lisätiedot:

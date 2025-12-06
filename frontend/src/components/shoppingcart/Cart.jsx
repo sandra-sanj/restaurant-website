@@ -1,5 +1,4 @@
 function Cart() {
-  // TODO: lisää nav-bar: linkki menuun, h1 Ostoskori
 
   return (
     <>
