@@ -61,5 +61,10 @@ GET http://localhost:3000/api/v1/lunch/today
 GET http://localhost:3000/api/v1/lunch/tuesday
 
 
+
+
+
+### Weather test
+
 ### Get weather information
 GET http://localhost:3000/api/v1/weather

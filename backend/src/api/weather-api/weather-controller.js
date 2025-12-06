@@ -46,10 +46,11 @@ const getWeatherInfo = async (req, res, next) => {
         visibility: data.visibility / 1000, // Convert to km
         cloudiness: data.clouds.all,
       },
-      lastUpdatedISO: new Date().toISOString(),
       timeZone: 'Europe/Helsinki',
+      lastUpdatedISO: new Date().toISOString(),
       lastUpdated: new Date().toLocaleString('fi-FI'),
     };
+    res.set('Cache-Control', 'public, max-age=300'); // Cache for 5 minutes
     res.json(weatherInfo);
   } catch (error) {
     console.error('Error fetching weather info: ', error);
