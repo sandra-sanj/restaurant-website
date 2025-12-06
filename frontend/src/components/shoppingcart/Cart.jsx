@@ -23,7 +23,7 @@ function Cart() {
         <h1 className="text-lg">Ostoskori</h1>
       </div>
 
-      {/* Delivery method - TODO: valittu nappi on vihreä, klikkaus togglaa värin*/}
+      {/* Delivery method*/}
       <div className="flex flex-col gap-2 p-4 bg-white">
         <h2 className="font-semibold">Toimitustapa</h2>
         <div className="flex flex-row justify-center gap-2">
