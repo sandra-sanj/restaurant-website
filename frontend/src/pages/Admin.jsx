@@ -1,10 +1,11 @@
-import TableRow from './../components/admin/tableRow';
+import TableRowAdmin from './../components/admin/tableRow';
 import EditMenu from './../components/admin/EditMenu';
 import AddItem from '../components/admin/AddItem';
 import EditItem from './../components/admin/EditItem';
 import DeleteItem from '../components/admin/DeleteItem';
 import {useState} from 'react';
 import DeleteConfirmation from '../components/admin/DeleteConfirmation';
+import { Table, TableHeader, TableBody, TableRow, TableCell, TableHead } from "@/components/ui/table";
 
 // TODO: lisää admin-navigaatio: button: historia/avoimet tilaukset, p: Ylläpito ja p: käyttäjänimi
 
@@ -34,6 +35,7 @@ const Admin = () => {
 
   return (
     <>
+    
       <h1>Admin</h1>
 
       <div className="flex flex-row">
@@ -54,9 +56,9 @@ const Admin = () => {
         </thead>
 
         <tbody>
-          <TableRow />
-          <TableRow />
-          <TableRow />
+          <TableRowAdmin />
+          <TableRowAdmin />
+          <TableRowAdmin />
         </tbody>
       </table>
 

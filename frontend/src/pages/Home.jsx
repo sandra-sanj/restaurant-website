@@ -1,5 +1,6 @@
 import {useNavigate} from 'react-router';
 import Login from './Login';
+import { Button } from "@/components/ui/button"
 
 //TODO: varmista että navigaatio oikeaan osoitteeseen
 // sitten ehkä oma funktio
@@ -12,6 +13,8 @@ function Home() {
     <>
       <div>
         <h1>Taqueria 21</h1>
+        
+        <Button className="bg-primary text-primary-foreground hover:bg-[#7A2020]">Testi1</Button>
         <p>Pieni pala Meksikoa keskellä Helsinkiä</p>
       </div>
       <div>
