@@ -1,6 +1,7 @@
 import {useNavigate} from 'react-router';
 import Login from './Login';
-import { Button } from "@/components/ui/button"
+import {Button} from '@/components/ui/button';
+import WeatherWidget from '../components/WeatherWidget';
 
 //TODO: varmista että navigaatio oikeaan osoitteeseen
 // sitten ehkä oma funktio
@@ -15,6 +16,8 @@ function Home() {
         <h1>Taqueria 21</h1>
         <p>Pieni pala Meksikoa keskellä Helsinkiä</p>
       </div>
+      <WeatherWidget />{' '}
+      {/* tarvittaessa myöhemmin voi siirtää muualle, jos tää ei ole hyvää paikkaa esim.footer */}
       <div>
         <button onClick={() => navigate('/login/login')}>Kirjaudu</button>
         <button onClick={() => navigate('/login/register')}>
