@@ -1,48 +1,121 @@
-
-const EditItem = ({onClose}) => {
+const EditItem = ({ onClose }) => {
   return (
     <>
       <div className="m-5 outline-2 outline-gray-400 rounded-md">
-        <div>
-          <span className="cursor-pointer" onClick={onClose}>
+
+        {/* Header */}
+        <div className="flex justify-between items-center bg-secondary text-secondary-foreground p-4 rounded-t-md">
+          <p className="font-bold">Muokkaa tuotetta</p>
+          <span
+            className="cursor-pointer font-bold text-lg hover:text-gray-400"
+            onClick={onClose}
+          >
             &times;
           </span>
-          <p className="font-bold">Muokkaa tuotetta (header)</p>
         </div>
-        <div className="flex flex-col">
-          <label className="mb-3">
+
+        {/* Form */}
+        <div className="flex flex-col p-4 gap-4 bg-white w-[400px]">
+
+          <label className="flex flex-col gap-1">
             Nimi:
-            <input name="nameFi" className="bg-stone-100" />
+            <input
+              name="nameFi"
+              className="bg-stone-100 p-1 rounded"
+              type="text"
+            />
           </label>
-          <label className="mb-3">
+
+          <label className="flex flex-col gap-1">
             Nimi englanniksi:
-            <input name="nameEn" className="bg-stone-100" />
+            <input
+              name="nameEn"
+              className="bg-stone-100 p-1 rounded"
+              type="text"
+            />
           </label>
-          <label className="mb-3">
+
+          <label className="flex flex-col gap-1">
             Kuvaus:
-            <input name="description" className="bg-stone-100" />
+            <input
+              name="description"
+              className="bg-stone-100 p-1 rounded"
+              type="text"
+            />
           </label>
-          <label className="mb-3">
+
+          <label className="flex flex-col gap-1">
             Kuvaus englanniksi:
-            <input name="descriptionEn" className="bg-stone-100" />
+            <input
+              name="descriptionEn"
+              className="bg-stone-100 p-1 rounded"
+              type="text"
+            />
           </label>
-          <label className="mb-3">
+
+          <label className="flex flex-col gap-1">
             Hinta (€):
-            <input name="price" className="bg-stone-100" />
+            <input
+              name="price"
+              className="bg-stone-100 p-1 rounded"
+              type="text"
+            />
           </label>
-          <label className="mb-3">
-            Kategoria (alasvetovalikko):
-            <input name="category" className="bg-stone-100" />
-          </label>
-          <label className="mb-3">
-            Ruokavaliot (alasvetovalikko):
-            <input name="diets" className="bg-stone-100" />
-          </label>
-          <label className="mb-3">
-            Kuva:
-            <input name="image" className="bg-stone-100" />
-          </label>
-          <button>Vahvista</button>
+
+          {/* Kategoria */}
+          <div className="flex flex-col gap-1">
+            <p>Kategoria:</p>
+            <select
+              name="category"
+              className="bg-stone-100 p-1 rounded"
+            >
+              <option value="snacks">Snacks</option>
+              <option value="mains">Mains</option>
+              <option value="desserts">Desserts</option>
+              <option value="drinks">Drinks</option>
+            </select>
+          </div>
+
+          {/* Ruokavaliot */}
+          <div className="flex flex-col gap-2">
+            <p>Ruokavaliot:</p>
+            <div className="flex gap-4 items-center">
+              <label className="flex items-center gap-1">
+                L
+                <input type="checkbox" name="lactoseFree" />
+              </label>
+
+              <label className="flex items-center gap-1">
+                G
+                <input type="checkbox" name="glutenFree" />
+              </label>
+
+              <label className="flex items-center gap-1">
+                M
+                <input type="checkbox" name="milkFree" />
+              </label>
+
+              <label className="flex items-center gap-1">
+                VEG
+                <input type="checkbox" name="vegan" />
+              </label>
+            </div>
+          </div>
+
+          {/* Kuva */}
+          <div className="flex flex-col gap-1">
+            <p>Kuva:</p>
+            <input
+              name="image"
+              type="file"
+              className="bg-stone-100 p-1 rounded"
+            />
+          </div>
+
+          <button className="mt-4 bg-secondary text-secondary-foreground py-2 rounded hover:opacity-90">
+            Vahvista
+          </button>
+
         </div>
       </div>
     </>
@@ -50,3 +123,4 @@ const EditItem = ({onClose}) => {
 };
 
 export default EditItem;
+
