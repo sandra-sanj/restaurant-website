@@ -18,17 +18,17 @@ function NavBar() {
                 <li>
                   <Link to="/menu" className="nav-link">Menu </Link>
                 </li>
+                <li>
+                  <Link to="/admin" className="nav-link">Admin </Link>
+                </li>
+                <li>
+                  <Link to="/history" className="nav-link">History </Link>
+                </li>
 
                 {user ? (
                   <>
                     <li>
                     <Link to="/profile" className="nav-link">Profile </Link>
-                    </li>
-                    <li>
-                    <Link to="/admin" className="nav-link">Admin </Link>
-                    </li>
-                    <li>
-                    <Link to="/history" className="nav-link">History </Link>
                     </li>
                   </>
                 ) : (

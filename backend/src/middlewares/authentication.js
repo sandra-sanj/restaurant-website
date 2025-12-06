@@ -9,20 +9,27 @@ const authenticateToken = (req, res, next) => {
   //console.log('token', token);
 
   if (token == null) {
-    return res.sendStatus(401);
+    res.locals.user = undefined;
+    return next();
+    //return res.sendStatus(401);
   }
 
   try {
     res.locals.user = jwt.verify(token, process.env.JWT_SECRET);
     next();
   } catch (err) {
-    res.status(403).send({message: 'invalid token', error: err});
+    res.locals.user = undefined;
+    next();
+    //res.status(403).send({message: 'invalid token', error: err});
   }
 };
 
 const optionalAuthentication = (req, res, next) => {
-  const authHeader = req.headers['authorization'];
+  const authHeader = req.headers['Authorization'];
+  //const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
+
+  console.log('token authenticationista:', token);
 
   // If no token, proceed as guest
   if (!token) {

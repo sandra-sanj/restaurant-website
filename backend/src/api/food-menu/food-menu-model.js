@@ -11,7 +11,7 @@ const findMenuItemById = async (id) => {
     `SELECT * FROM menu_items WHERE menu_item_id = ?;`,
     [id]
   );
-  console.log('rows', rows);
+  //console.log('rows', rows);
   if (rows.length === 0) {
     return false;
   }
@@ -57,7 +57,7 @@ const addMenuItem = async (menuItem) => {
   ];
 
   const result = await promisePool.execute(sql, params);
-  console.log('result', result);
+  //console.log('result', result);
 
   if (result[0].affectedRows === 0) {
     return false;
@@ -71,7 +71,7 @@ const modifyMenuItem = async (menuItem, id) => {
     [menuItem, id]
   );
 
-  const [result] = await promisePool.execute(sql);
+  const [result] = await promisePool.query(sql);
   if (result.changedRows === 0) {
     return false;
   }
@@ -83,7 +83,7 @@ const removeMenuItem = async (id) => {
     'DELETE FROM menu_items WHERE menu_item_id = ?',
     [id]
   );
-  console.log('rows', rows);
+  //console.log('rows', rows);
   if (rows.affectedRows === 0) {
     return false;
   }
