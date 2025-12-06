@@ -17,9 +17,9 @@ function useMenu() {
         const options = {
           method: 'GET',
         };
-        const menu = await fetchData(`${API_URL}/menu`, options);
-        console.log('menu:', menu);
-        setMenuArray(menu);
+        const response = await fetchData(`${API_URL}/menu`, options);
+        //console.log('menu:', response);
+        setMenuArray(response.result);
         setError(null);
       } catch (e) {
         console.error('Error fetching menu:', e);
@@ -31,6 +31,7 @@ function useMenu() {
     };
     getMenuItems();
   }, []);
+
 
   const addMenuItem = async (itemData, token) => {
     

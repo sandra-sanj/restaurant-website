@@ -26,7 +26,6 @@ const EditForm = () => {
         return;
     };
 
-    //const { postUser } = useUser();
 
     const {inputs, handleInputChange, handleSubmit} = useForm(doEdit, initValues);
 
