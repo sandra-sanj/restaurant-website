@@ -98,11 +98,12 @@ const Admin = () => {
         </TableBody>
       </Table>
 
-      <footer className="mt-4">
+      <footer className="mt-4 ">
         <EditMenu
           addItemClick={handleAddItemClick}
           editItemClick={handleEditItemClick}
           deleteItemClick={handleDeleteItemClick}
+          
         />
       </footer>
 

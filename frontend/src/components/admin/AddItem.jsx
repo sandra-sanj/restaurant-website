@@ -78,7 +78,7 @@ const AddItem = ({onClose}) => {
     <>
       <div className="m-5 outline-2 outline-gray-400 rounded-md">
         {/* Header */}
-        <div className="flex justify-between items-center bg-secondary text-secondary-foreground p-4 rounded-t-md">
+        <div className="flex justify-between items-center text-white p-4 rounded-t-md bg-[#2A4B11]!">
           <p className="font-bold">Lisää tuote</p>
           <span
             className="cursor-pointer font-bold text-lg hover:text-gray-400"
@@ -235,7 +235,7 @@ const AddItem = ({onClose}) => {
 
           <button
             onClick={handleSubmit}
-            className="mt-4 bg-secondary text-secondary-foreground py-2 rounded hover:opacity-90"
+            className="mt-4 bg-[#2A4B11]! text-white py-2 rounded hover:opacity-90"
           >
             Lisää
           </button>

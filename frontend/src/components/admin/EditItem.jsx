@@ -4,7 +4,7 @@ const EditItem = ({ onClose }) => {
       <div className="m-5 outline-2 outline-gray-400 rounded-md">
 
         {/* Header */}
-        <div className="flex justify-between items-center bg-secondary text-secondary-foreground p-4 rounded-t-md">
+        <div className="flex justify-between items-center bg-[#2A4B11]! text-white p-4 rounded-t-md">
           <p className="font-bold">Muokkaa tuotetta</p>
           <span
             className="cursor-pointer font-bold text-lg hover:text-gray-400"
@@ -112,7 +112,7 @@ const EditItem = ({ onClose }) => {
             />
           </div>
 
-          <button className="mt-4 bg-secondary text-secondary-foreground py-2 rounded hover:opacity-90">
+          <button className="mt-4 bg-[#2A4B11]! text-white py-2 rounded hover:opacity-90">
             Vahvista
           </button>
 
