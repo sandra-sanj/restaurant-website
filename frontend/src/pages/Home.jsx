@@ -19,7 +19,7 @@ function Home() {
       <WeatherWidget />{' '}
       {/* tarvittaessa myöhemmin voi siirtää muualle, jos tää ei ole hyvää paikkaa esim.footer */}
       <div>
-        <button onClick={() => navigate('/login/login')}>Kirjaudu</button>
+        <button onClick={() => navigate('/login')}>Kirjaudu</button>
         <button onClick={() => navigate('/login/register')}>
           Rekisteröidy
         </button>
