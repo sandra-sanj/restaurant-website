@@ -60,6 +60,30 @@ function useMenu() {
     }
   };
 
+  const modifyMenuItem = async (item, token) => {
+    try {
+      const options = {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + token,
+        },
+
+        body: JSON.stringify(item),
+      };
+
+      const modifyResponse = await fetchData(
+        `${API_URL}/menu/${item.menu_item_id}`,
+        options,
+      );
+
+      return modifyResponse;
+      
+    } catch (e) {
+      console.error('Modify item failed:', e);
+    }
+  };
+
   const deleteMenuItem = async (item, token) => {
     try {
       const options = {
@@ -72,16 +96,26 @@ function useMenu() {
         body: JSON.stringify({item}),
       };
 
-      const deleteResponse = await fetchData(`${API_URL}/menu/${item.menu_item_id}`, options);
+      const deleteResponse = await fetchData(
+        `${API_URL}/menu/${item.menu_item_id}`,
+        options,
+      );
       console.log('del.response:', deleteResponse);
-      
+
       return deleteResponse;
     } catch (error) {
       console.error('Delete item failed: ', error);
     }
   };
 
-  return {menuArray, loading, error, addMenuItem, deleteMenuItem};
+  return {
+    menuArray,
+    loading,
+    error,
+    addMenuItem,
+    modifyMenuItem,
+    deleteMenuItem,
+  };
 }
 
 function useAuthentication() {

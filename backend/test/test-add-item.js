@@ -10,7 +10,7 @@ import promisePool from '../src/utils/database.js';
       `INSERT INTO menu_items
       (category_id, name, name_en, description, description_en, price, is_available)
       VALUES (?, ?, ?, ?, ?, ?, ?)`,
-      [3, 'Joku testijälkkäri', 'Test dessert EN', 'Kuvaus jotain jeejee', 'Description EN here', 11.9, 1]
+      [2, 'Joku testiruoka', 'Test EN', 'joku kuvaus tässä', 'Description EN here', 10.9, 1]
     );
     console.log('Added item ID:', result.insertId);
   } catch (err) {
