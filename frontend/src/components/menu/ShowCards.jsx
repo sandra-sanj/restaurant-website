@@ -14,7 +14,6 @@ function ShowCards(props) {
   
   
   let section = menuArray.filter(item => item.category_id === props.category_id);
-  console.log(section);
 
   if (!props.category_id) {
     section = menuArray;

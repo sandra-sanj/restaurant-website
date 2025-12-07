@@ -3,11 +3,12 @@ import { useOrderContext } from "../../hooks/contextHook";
 
 
 
-
 const AddToCart = (props) => {
     const {item, setSelectedItem} = props;
     const [quantity, setQuantity] = useState(1);
     const [spiceLevel, setSpiceLevel] = useState(null);
+    const [price, setPrice] = useState(null);
+
 
     const {handleAddItem} = useOrderContext();
 
@@ -17,8 +18,11 @@ const AddToCart = (props) => {
     }, [item]);
 
     useEffect(() => {
-        if (item && quantity > 0) item.quantity = quantity;
-        console.log(item);
+        if (item && quantity > 0) {
+            item.quantity = quantity;
+            const newPrice = (item.price * quantity);
+            setPrice(newPrice.toFixed(2));
+        }
     }, [item, quantity]);
 
     useEffect(() => {
@@ -26,6 +30,13 @@ const AddToCart = (props) => {
       item.selected_spice_level = spiceLevel;
     }
     }, [item, spiceLevel]);
+
+    const handleAddToCart = () => {
+        item.price = price;
+        handleAddItem(item);
+        console.log(`${item.name} added to cart`);
+        setSelectedItem('');
+    }
 
 
     if (!item) return null;
@@ -89,7 +100,7 @@ const AddToCart = (props) => {
                             <button onClick={() => setQuantity(q => Math.max(1, q - 1))}>-</button>
                             <p>{quantity}</p>
                             <button onClick={() => setQuantity(q => q + 1)}>+</button>
-                            <button onClick={() => handleAddItem({item})}>Lisää ostoskoriin {item.price} €</button>
+                            <button onClick={() => handleAddToCart()}>Lisää ostoskoriin {price} €</button>
                         </div>
                 </div>
 

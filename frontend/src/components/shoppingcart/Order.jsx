@@ -1,5 +1,5 @@
 import { useOrderContext } from "../../hooks/contextHook";
-import FoodCard from "../menu/FoodCard";
+import OrderCard from "./OrderCard";
 
 //swtich this to cart
 //FoodCard but for items in shopping cart?
@@ -10,18 +10,6 @@ function Order() {
 
     return (
         <> 
-          <h1>Ostoskori</h1>
-          <h2>Tuotteet</h2>
-           {order ? order.map((item) => (
-            <FoodCard 
-              key={item.id}
-              item={item}
-            />
-                
-            )) : (
-                <p>Ei tilauksia tällä hetkellä</p>
-            )
-            }
         </>
     )
 } 

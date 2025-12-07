@@ -4,21 +4,41 @@ const OrderContext = createContext(null);
 
 const OrderProvider = ({children}) => {
     const [order, setOrder] = useState([]);
+    const [totalPrice, setTotalPrice] = useState(0);
 
     const handleAddItem = (item) => {
-        setOrder((prevOrder) => [...prevOrder, {menu_item_id: item.menu_item_id, item_name: item.name, selected_protein: item.selected_protein, selected_spice_level: item.selected_spice_level, quantity: item.quantity, unit_price: item.price, special_request: item.special_request, }]); //arvot saattaa joutua fiksaamaa
-        console.log(order);
+        //creates new object so the original stays the same
+        const unitPrice = Number(item.price);
+        const quantity = Number(item.quantity);
+
+        const cartItem = {
+            menu_item_id: item.menu_item_id,
+            item_name: item.item_name ?? item.name,
+            selected_protein: item.selected_protein,
+            selected_spice_level: item.selected_spice_level,
+            quantity: quantity,
+            unit_price: unitPrice,
+            special_request: item.special_request,
+        };
+
+        setOrder((prevOrder) => [...prevOrder, cartItem]);
     }
 
+
     const handleRemoveItem = (menu_item_id) => {
-        setOrder((prevOrder) => prevOrder.filter(item => item.id !== menu_item_id ))
+        setOrder((prevOrder) => {
+            const removed = prevOrder.filter(i => i.menu_item_id !== menu_item_id);
+            return removed;
+        });
     }
 
     const value = {
         order,
+        totalPrice,
         handleAddItem,
         handleRemoveItem
     }
+
 
 
 

@@ -1,8 +1,4 @@
-import {useState} from 'react';
-import FoodModal from './oldAddToCart';
-import InfoCard from './InfoCard';
-import { Link } from 'react-router';
-import ShowCards from './ShowCards';
+
 
 const FoodCard = (props) => {
   const { item, setSelectedItem} = props;
