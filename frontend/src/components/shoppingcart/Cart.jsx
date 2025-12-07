@@ -25,14 +25,14 @@ function Cart() {
       <div className="flex justify-center p-4 rounded-t-md">
         <h1 className="text-lg">Ostoskori</h1>
       </div>
-
       {/* Delivery method*/}
       <div className="flex flex-col gap-2 p-4 bg-white">
         <h2 className="font-semibold">Toimitustapa</h2>
         <div className="flex flex-row justify-center gap-2">
           <button className={`px-3 py-1 rounded border ${selectedDelivery === "delivery" ? "bg-[#2A4B11]! text-white" : "bg-white text-black"}`} onClick={() => handleDeliveryClick("delivery")}>Toimitus</button>
           <button className={`px-3 py-1 rounded border ${selectedDelivery === "pickup" ? "bg-[#2A4B11]! text-white" : "bg-white text-black"}`} onClick={() => handleDeliveryClick("pickup")}>Nouto</button>
-    
+        </div>
+      </div>
     
 
       {/* Products */}
@@ -47,15 +47,15 @@ function Cart() {
             }
             <div className="flex gap-2 items-center">
               <div>
-                <p className="font-medium">{item.name}</p>
-                <p>{item.price.toFixed(2)} €</p>
+                <p className="font-medium"></p>
+                <p>{} €</p>
               </div>
             </div>
             <div className="flex gap-2 items-center">
               <button className="border rounded bg-[#982A2A]! text-white">x</button>
               <div className="flex items-center gap-1">
                 <button className="px-2 py-1 border rounded">-</button>
-                <span>{item.qty}</span>
+                <span></span>
                 <button className="px-2 py-1 border rounded">+</button>
               </div>
             </div>
@@ -75,9 +75,7 @@ function Cart() {
       <div className="p-4 bg-white mt-2 flex">
         <button className="w-full py-2 rounded border bg-[#2A4B11]! text-white">Kassalle</button>
       </div>
-    </div>
-    
-    </div> 
+ 
 </>
 
 );
