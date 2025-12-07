@@ -9,7 +9,7 @@ function ShowCards(props) {
 
   const { menuArray, loading, error } = useMenu();
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return;
   if (error) return <p>Error: {error}</p>;
   
   

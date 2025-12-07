@@ -1,13 +1,19 @@
 import { useEffect, useState } from "react";
 import { useOrderContext } from "../../hooks/contextHook";
+import Modal from '../Modal';
 
 
 
 const AddToCart = (props) => {
+    useEffect(() => {
+
+    })
     const {item, setSelectedItem} = props;
     const [quantity, setQuantity] = useState(1);
     const [spiceLevel, setSpiceLevel] = useState(null);
     const [price, setPrice] = useState(null);
+    const [showModal, setShowModal] = useState(false);
+
 
 
     const {handleAddItem} = useOrderContext();
@@ -15,6 +21,7 @@ const AddToCart = (props) => {
     useEffect(() => {
         setQuantity(1);
         setSpiceLevel(null);
+        setShowModal(true);
     }, [item]);
 
     useEffect(() => {
@@ -38,13 +45,15 @@ const AddToCart = (props) => {
         setSelectedItem('');
     }
 
+    
+
 
     if (!item) return null;
 
     return (
         <>
-          {item && (
-            <dialog open>
+            {item && (
+                <Modal isOpen={showModal} onClose={() => setSelectedItem('')}>
                 <div className="m-5 outline-2 outline-gray-400 rounded-md w-[500px]">
                     <div>
                     <span className="cursor-pointer" onClick={() => setSelectedItem('')}>
@@ -105,7 +114,7 @@ const AddToCart = (props) => {
                 </div>
 
 
-            </dialog>
+            </Modal>
           )}
         
         </>
