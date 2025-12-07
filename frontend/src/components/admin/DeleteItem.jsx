@@ -1,19 +1,32 @@
+import {useMenu} from '../../hooks/apiHook';
 import DeleteConfirmation from './DeleteConfirmation';
 import {useState} from 'react';
 
 const DeleteItem = ({onClose}) => {
   const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
 
-  const handleDeleteClick = () => {
+  const {menuArray, loading, error} = useMenu();
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error}</p>;
+
+  const handleDeleteClick = (item) => {
+    setSelectedItem(item);
     setDeleteConfirmationOpen(true);
   };
 
   const handleCloseClick = () => {
     setDeleteConfirmationOpen(false);
-  }
+    setSelectedItem(null);  // Reset selected item
+  };
 
   return (
     <>
+    {deleteConfirmationOpen && (
+        <DeleteConfirmation onClose={handleCloseClick} selectedItem={selectedItem} />
+      )}
+      
       <div className="m-5 outline-2 outline-gray-400 rounded-md w-[400px]">
         {/* Header */}
         <div className="flex justify-between items-center bg-[#982A2A] text-white p-4 rounded-t-md">
@@ -27,37 +40,32 @@ const DeleteItem = ({onClose}) => {
         </div>
 
         {/* Body */}
-        <div className="bg-white p-4 rounded-b-md">
+        <div className="bg-white p-1 rounded-b-md">
           <table className="w-full border-collapse text-left">
             <tbody>
-              {/* TODO: Hae tähän menun tuotteet */}
-              {[
-                'Maissilastut',
-                'Maissilastut',
-                'Maissilastut',
-                'Maissilastut',
-                'Maissilastut',
-                'Maissilastut',
-              ].map((item, idx) => (
-                <tr key={idx} className="hover:bg-gray-100">
-                  <td className="p-2">
+              
+              {menuArray.map((item) => (
+                <tr
+                  key={item.menu_item_id}
+                  //item={item}
+                  className="hover:bg-gray-100"
+                >
+                  <td className="p-0">
                     <button
-                      className="bg-[#982A2A]! text-white px-2 py-1 rounded-xl hover:opacity-90"
-                      onClick={handleDeleteClick}
+                      className="bg-[#982A2A]! text-white px-1 py-0.5 rounded-xl hover:opacity-90 m-2!"
+                      onClick={() => handleDeleteClick(item)}
                     >
                       x
                     </button>
                   </td>
-                  <td className="p-2">{item}</td>
+                  <td className="p-0">{item.name}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
-        
       </div>
-      {deleteConfirmationOpen && (<DeleteConfirmation onClose={handleCloseClick} />
-        )}
+      
     </>
   );
 };
