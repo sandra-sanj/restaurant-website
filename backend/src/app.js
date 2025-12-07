@@ -6,7 +6,6 @@ import cors from 'cors';
 
 const app = express();
 
-//tän voi varmaan poistaa kun siirretään serverille
 app.use(
   cors({
     origin: [

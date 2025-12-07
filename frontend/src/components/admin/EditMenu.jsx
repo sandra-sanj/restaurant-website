@@ -2,9 +2,17 @@ const EditMenu = ({addItemClick, editItemClick, deleteItemClick}) => {
   return (
     <>
       <h2>Muokkaa ruokalistaa</h2>
-      <button onClick={addItemClick}>Lisää tuote</button>
-      <button onClick={editItemClick}>Muokkaa tuotetta</button>
-      <button onClick={deleteItemClick}>Poista tuote</button>
+      <div className="flex flex-row">
+        <button onClick={addItemClick} className="bg-[#982A2A]! text-white">
+          Lisää tuote
+        </button>
+        <button onClick={editItemClick} className="bg-[#982A2A]! text-white">
+          Muokkaa tuotetta
+        </button>
+        <button onClick={deleteItemClick} className="bg-[#982A2A]! text-white">
+          Poista tuote
+        </button>
+      </div>
     </>
   );
 };

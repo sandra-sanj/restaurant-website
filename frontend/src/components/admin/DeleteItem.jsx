@@ -1,68 +1,63 @@
-const DeleteItem = ({onClose}) => {
+import DeleteConfirmation from './DeleteConfirmation';
+import {useState} from 'react';
 
-  // TODO: lisää x-nappeihin onClick -> avaa DeleteCOnfirmation-komponentin
+const DeleteItem = ({onClose}) => {
+  const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false);
+
+  const handleDeleteClick = () => {
+    setDeleteConfirmationOpen(true);
+  };
+
+  const handleCloseClick = () => {
+    setDeleteConfirmationOpen(false);
+  }
+
   return (
     <>
-      <div className="m-5 outline-2 outline-gray-400 rounded-md">
-        <div>
-          <span className="cursor-pointer" onClick={onClose}>
+      <div className="m-5 outline-2 outline-gray-400 rounded-md w-[400px]">
+        {/* Header */}
+        <div className="flex justify-between items-center bg-[#982A2A] text-white p-4 rounded-t-md">
+          <p className="font-bold">Poista tuote</p>
+          <span
+            className="cursor-pointer font-bold text-lg hover:opacity-80"
+            onClick={onClose}
+          >
             &times;
           </span>
-          <p className="font-bold">Poista tuote (header)</p>
         </div>
 
-        <div>
-          <table>
-            <thead>
-              <tr>
-                <th>Poista</th>
-                <th>Tuote</th>
-              </tr>
-            </thead>
-
+        {/* Body */}
+        <div className="bg-white p-4 rounded-b-md">
+          <table className="w-full border-collapse text-left">
             <tbody>
-              <tr>
-                <td>
-                  <button>x</button>
-                </td>
-                <td>Maissilastut</td>
-              </tr>
-              <tr>
-                <td>
-                  <button>x</button>
-                </td>
-                <td>Maissilastut</td>
-              </tr>
-              <tr>
-                <td>
-                  <button>x</button>
-                </td>
-                <td>Maissilastut</td>
-              </tr>
-              <tr>
-                <td>
-                  <button>x</button>
-                </td>
-                <td>Maissilastut</td>
-              </tr>
-              <tr>
-                <td>
-                  <button>x</button>
-                </td>
-                <td>Maissilastut</td>
-              </tr>
-              <tr>
-                <td>
-                  <button>x</button>
-                </td>
-                <td>Maissilastut</td>
-              </tr>
+              {/* TODO: Hae tähän menun tuotteet */}
+              {[
+                'Maissilastut',
+                'Maissilastut',
+                'Maissilastut',
+                'Maissilastut',
+                'Maissilastut',
+                'Maissilastut',
+              ].map((item, idx) => (
+                <tr key={idx} className="hover:bg-gray-100">
+                  <td className="p-2">
+                    <button
+                      className="bg-[#982A2A]! text-white px-2 py-1 rounded-xl hover:opacity-90"
+                      onClick={handleDeleteClick}
+                    >
+                      x
+                    </button>
+                  </td>
+                  <td className="p-2">{item}</td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
-
         
       </div>
+      {deleteConfirmationOpen && (<DeleteConfirmation onClose={handleCloseClick} />
+        )}
     </>
   );
 };

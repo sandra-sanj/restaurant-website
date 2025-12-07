@@ -24,9 +24,8 @@ const AddItem = ({onClose}) => {
   const doAddItem = async (inputs) => {
     console.log('doAddItem:', inputs);
 
-    //const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token');
     //console.log('token', token);
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2MjgsImxldmVsX25hbWUiOiJVc2VyIiwiaWF0IjoxNzY0Nzk1OTMzfQ.Nsg20gvq5TtwGIichx9K-_w2nSfV2Oyuo-KNnZUcHv4';
 
     /*
     try {
@@ -78,68 +77,80 @@ const AddItem = ({onClose}) => {
   return (
     <>
       <div className="m-5 outline-2 outline-gray-400 rounded-md">
-        <div>
-          <span className="cursor-pointer" onClick={onClose}>
+        {/* Header */}
+        <div className="flex justify-between items-center text-white p-4 rounded-t-md bg-[#2A4B11]!">
+          <p className="font-bold">Lisää tuote</p>
+          <span
+            className="cursor-pointer font-bold text-lg hover:text-gray-400"
+            onClick={onClose}
+          >
             &times;
           </span>
-          <p className="font-bold">Lisää tuote (header)</p>
         </div>
-        <div className="flex flex-col">
-          <label className="mb-3">
+
+        {/* Form */}
+        <div className="flex flex-col p-4 gap-4 bg-white w-[400px]">
+
+          <label className="flex flex-col gap-1">
             Nimi:
             <input
               name="nameFi"
-              className="bg-stone-100"
+              className="bg-stone-100 p-1 rounded"
               id="nameFi"
               type="text"
               onChange={handleInputChange}
             />
           </label>
-          <label className="mb-3">
+
+          <label className="flex flex-col gap-1">
             Nimi englanniksi:
             <input
               name="nameEn"
-              className="bg-stone-100"
+              className="bg-stone-100 p-1 rounded"
               id="nameEn"
               type="text"
               onChange={handleInputChange}
             />
           </label>
-          <label className="mb-3">
+
+          <label className="flex flex-col gap-1">
             Kuvaus:
             <input
               name="description"
-              className="bg-stone-100"
+              className="bg-stone-100 p-1 rounded"
               id="description"
               type="text"
               onChange={handleInputChange}
             />
           </label>
-          <label className="mb-3">
+
+          <label className="flex flex-col gap-1">
             Kuvaus englanniksi:
             <input
               name="descriptionEn"
-              className="bg-stone-100"
+              className="bg-stone-100 p-1 rounded"
               id="descriptionEn"
               type="text"
               onChange={handleInputChange}
             />
           </label>
-          <label className="mb-3">
+
+          <label className="flex flex-col gap-1">
             Hinta (€):
             <input
               name="price"
-              className="bg-stone-100"
+              className="bg-stone-100 p-1 rounded"
               id="price"
               type="text"
               onChange={handleInputChange}
             />
           </label>
 
-          <div className="mb-3">
+          <div className="flex flex-col gap-1">
             <p>Kategoria:</p>
             <select
               name="category"
+              className="bg-stone-100 p-1 rounded"
               value={inputs.category}
               onChange={handleInputChange}
             >
@@ -150,72 +161,84 @@ const AddItem = ({onClose}) => {
             </select>
           </div>
 
-          <div className="mb-3">
+          <div className="flex flex-col gap-2">
             <p>Ruokavaliot:</p>
-            <label>
-              L
-              <input
-                type="checkbox"
-                name="lactoseFree"
-                checked={inputs.lactoseFree || false}
-                onChange={(e) =>
-                  handleInputChange({
-                    target: {name: e.target.name, value: e.target.checked},
-                  })
-                }
-              />
-            </label>
-            <label>
-              G
-              <input
-                type="checkbox"
-                name="glutenFree"
-                checked={inputs.glutenFree || false}
-                onChange={(e) =>
-                  handleInputChange({
-                    target: {name: e.target.name, value: e.target.checked},
-                  })
-                }
-              />
-            </label>
-            <label>
-              M
-              <input
-                type="checkbox"
-                name="milkFree"
-                checked={inputs.milkFree || false}
-                onChange={(e) =>
-                  handleInputChange({
-                    target: {name: e.target.name, value: e.target.checked},
-                  })
-                }
-              />
-            </label>
-            <label>
-              VEG
-              <input
-                type="checkbox"
-                name="vegan"
-                checked={inputs.vegan || false}
-                onChange={(e) =>
-                  handleInputChange({
-                    target: {name: e.target.name, value: e.target.checked},
-                  })
-                }
-              />
-            </label>
+            <div className="flex gap-4 items-center">
+              <label className="flex items-center gap-1">
+                L
+                <input
+                  type="checkbox"
+                  name="lactoseFree"
+                  checked={inputs.lactoseFree || false}
+                  onChange={(e) =>
+                    handleInputChange({
+                      target: {name: e.target.name, value: e.target.checked},
+                    })
+                  }
+                />
+              </label>
+
+              <label className="flex items-center gap-1">
+                G
+                <input
+                  type="checkbox"
+                  name="glutenFree"
+                  checked={inputs.glutenFree || false}
+                  onChange={(e) =>
+                    handleInputChange({
+                      target: {name: e.target.name, value: e.target.checked},
+                    })
+                  }
+                />
+              </label>
+
+              <label className="flex items-center gap-1">
+                M
+                <input
+                  type="checkbox"
+                  name="milkFree"
+                  checked={inputs.milkFree || false}
+                  onChange={(e) =>
+                    handleInputChange({
+                      target: {name: e.target.name, value: e.target.checked},
+                    })
+                  }
+                />
+              </label>
+
+              <label className="flex items-center gap-1">
+                VEG
+                <input
+                  type="checkbox"
+                  name="vegan"
+                  checked={inputs.vegan || false}
+                  onChange={(e) =>
+                    handleInputChange({
+                      target: {name: e.target.name, value: e.target.checked},
+                    })
+                  }
+                />
+              </label>
+            </div>
           </div>
 
-          <label className="mb-3">
-            Kuva:
+          <div className="flex flex-col gap-1">
+            <p>Kuva:</p>
             <input
               name="image"
               type="file"
               id="image"
-              className="bg-stone-100"
+              className="bg-stone-100 p-1 rounded"
+              onChange={handleImageChange}
             />
-          </label>
-          <button onClick={handleSubmit}>Lisää</button>
+          </div>
+
+          <button
+            onClick={handleSubmit}
+            className="mt-4 bg-[#2A4B11]! text-white py-2 rounded hover:opacity-90"
+          >
+            Lisää
+          </button>
         </div>
       </div>
     </>
