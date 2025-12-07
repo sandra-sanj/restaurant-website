@@ -68,6 +68,26 @@ function useMenu() {
   return {menuArray, loading, error, addMenuItem};
 }
 
+function useOrder() {
+  const postNewOrder = async ({order}) => {
+    try {
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(order),
+      };
+      const loginResult = await fetchData(`${API_URL}/orders`, options);
+      console.log(loginResult);
+
+    } catch(e) {
+      console.error(e);
+    }
+  }
+  return {postNewOrder};
+}
+
 function useAuthentication() {
     try{
         const postLogin = async (inputs) => {
@@ -84,7 +104,7 @@ function useAuthentication() {
             return {postLogin};
         }catch(error){
             console.error(error);
-        }    
+        };  
 };
 
 
@@ -177,4 +197,4 @@ function useUser() {
     return {getUserByToken, postUser, editUser, deleteUser};
 };
 
-export {useMenu, useAuthentication, useUser};
+export {useMenu, useOrder, useAuthentication, useUser};

@@ -12,12 +12,12 @@ const useUserContext = () => {
 };
 
 
-//const useOrderContext = () => {
-//    const context = useContext(OrderContext);
-//    if (!context) {
-//        throw new Error('error with orderContext');
-//    }
-//    return context;
-//}
-//
+const useOrderContext = () => {
+    const context = useContext(OrderContext);
+    if (!context) {
+        throw new Error('error with orderContext');
+    }
+    return context;
+}
+
 export { useUserContext, useOrderContext };
