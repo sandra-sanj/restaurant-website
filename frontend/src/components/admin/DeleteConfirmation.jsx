@@ -1,4 +1,4 @@
-const DeleteConfirmation = ({onClose}) => {
+const DeleteConfirmation = ({onClose, selectedItem}) => {
   
   const handleDeleteItemClick = () => {
     console.log('Delete from delete confirmation pressed');
@@ -14,7 +14,7 @@ const DeleteConfirmation = ({onClose}) => {
             &times;
           </span>
         </div>
-        <p className="p-3 pt-0">Poista "Kanatacot x 3"?</p> {/* TODO: lisää tähän oikean tuotteen nimi */}
+        <p className="p-3 pt-0">Poista {selectedItem.name}?</p>
         <button onClick={handleDeleteItemClick}
         className="bg-[#982A2A]! text-white px-2 py-1 rounded-xl hover:opacity-90"
         >Poista</button>
