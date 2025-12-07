@@ -16,8 +16,6 @@ function Home() {
         <h1>Taqueria 21</h1>
         <p>Pieni pala Meksikoa keskellä Helsinkiä</p>
       </div>
-      <WeatherWidget />{' '}
-      {/* tarvittaessa myöhemmin voi siirtää muualle, jos tää ei ole hyvää paikkaa esim.footer */}
       <div>
         <button onClick={() => navigate('/login/login')}>Kirjaudu</button>
         <button onClick={() => navigate('/login/register')}>
@@ -101,6 +99,8 @@ function Home() {
         <p>Sähköposti: info@taqueria21.fi</p>
         <p>Puhelinnumero: +358 7776669</p>
       </div>
+      <WeatherWidget />{' '}
+      {/* myöhemmin voi siirtää muualle, esim.footer, sidebar */}
     </>
   );
 }
