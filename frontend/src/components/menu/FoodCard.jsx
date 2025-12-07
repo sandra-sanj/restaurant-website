@@ -1,36 +1,11 @@
-import {useState} from 'react';
-import FoodModal from './FoodModal';
-import InfoCard from './InfoCard';
-import { Link } from 'react-router';
 
-const FoodCard = ({item}) => {
-  const [foodModalOpen, setFoodModalOpen] = useState(false);
-  const [infoCardOpen, setInfoCardOpen] = useState(false);
 
-  const handleButtonClick = () => {
-    setFoodModalOpen(false);
-    setInfoCardOpen(false);
-  };
+const FoodCard = (props) => {
+  const { item, setSelectedItem} = props;
 
-  const handleAddToCartClick = () => {
-    console.log('Lisää ostoskoriin pressed');
-  };
-
-  const handleInfoClick = () => {
-    console.log('Info pressed');
-    setInfoCardOpen(false);
-  }
 
   return (
     <>
-      {foodModalOpen && (
-        <FoodModal
-          onAddToCart={handleAddToCartClick}
-          onClose={handleButtonClick}
-        />
-      )}
-
-      {infoCardOpen && <InfoCard onClose={handleButtonClick} />}
 
       <div className="bg-white-50 w-[500px] rounded-md mb-5 outline-2 outline-gray-400">
         <img
@@ -41,19 +16,18 @@ const FoodCard = ({item}) => {
         />
         <div>
           <h2>{item.name}</h2>
-          <button onClick={() => setInfoCardOpen(true)}>i</button>
+          <button>i</button>
         </div>
 
         <p>
           {item.description}
         </p>
         <p>{item.price}</p>
-        <button onClick={() => setFoodModalOpen(true)}>
-          + Lisää tilaukseen
-        </button>
+        <button onClick={() => setSelectedItem(item)}>Lisää ostoskoriin</button>
       </div>
     </>
   );
 };
 
+//<Link to='/addtocard'A></Link>
 export default FoodCard;

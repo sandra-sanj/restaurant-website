@@ -1,26 +1,11 @@
 import {useState} from 'react';
-import FoodModal from './FoodModal';
-import InfoCard from './InfoCard';
+
 
 const HighlightCard = () => {
-  const [foodModalOpen, setFoodModalOpen] = useState(false);
-  const [infoCardOpen, setInfoCardOpen] = useState(false);
-
-  const handleButtonClick = () => {
-    setFoodModalOpen(false);
-    setInfoCardOpen(false);
-  };
-
-  const handleAddToCartClick = () => {
-    console.log('Lisää ostoskoriin pressed');
-  };
+  
 
   return (
     <>
-      {foodModalOpen && (
-        <FoodModal onAddToCart={handleAddToCartClick} onClose={handleButtonClick} />
-      )}
-      {infoCardOpen && <InfoCard onClose={handleButtonClick} />}
 
       <div className="bg-white-50 w-[500px] rounded-md mb-5 outline-10 outline-red-800">
         <img
@@ -32,7 +17,7 @@ const HighlightCard = () => {
         <div>
           <h2>Kanatacot x 3</h2>
           <p>Päivän lounas</p>
-          <button onClick={() => setInfoCardOpen(true)}>i</button>
+          <button >i</button>
         </div>
 
         <p>
@@ -40,7 +25,7 @@ const HighlightCard = () => {
           (voisi olla myös span?)
         </p>
         <p>13,90 €</p>
-        <button onClick={() => setFoodModalOpen(true)}>
+        <button>
           + Lisää tilaukseen
         </button>
       </div>

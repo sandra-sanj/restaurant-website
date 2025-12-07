@@ -2,10 +2,10 @@ import {useEffect, useState} from 'react';
 import {useMenu} from '../../hooks/apiHook';
 import useForm from '../../hooks/formHooks';
 
-// TODO: yhdistä logiikka banckendiin; submitin pitää oikeasti muokata tietokantaa
+// TODO: check if allergens are modified
 
 const EditItem = ({onClose}) => {
-  const {menuArray} = useMenu();
+  const {menuArray, modifyMenuItem} = useMenu();
   const [selectedItem, setSelectedItem] = useState(null);
 
   const initValues = {
@@ -21,6 +21,21 @@ const EditItem = ({onClose}) => {
     vegan: false,
   };
 
+  const handleEditItem = async (itemData) => {
+    const token = localStorage.getItem('token');
+
+      try {
+        const response = await modifyMenuItem(itemData, token);
+        console.log('Modify response', response);
+
+        //console.log('Päivitetty tuote:', itemData);
+        alert(`${itemData.name} muokattu.`);
+      } catch (e) {
+        console.error('Modify failed', e);
+        alert(`Cirhe: ${itemData.name} ei muokattu.`);
+      }
+  }
+
   const {handleSubmit, handleInputChange, inputs, resetForm} = useForm(
     (values) => {
       if (!selectedItem) {
@@ -30,22 +45,21 @@ const EditItem = ({onClose}) => {
       // Fill form with selected item values
       const itemData = {
         menu_item_id: selectedItem.menu_item_id,
-        category_id: values.category,
+        category_id: parseInt(values.category),
         name: values.nameFi,
         name_en: values.nameEn,
         description: values.description,
         description_en: values.descriptionEn,
-        price: values.price,
+        price: parseFloat(values.price),
         image_url: null,
         image_thumb_url: null,
         is_available: 1,
       };
 
-      console.log('Päivitetty tuote:', itemData);
-      alert('Tuote päivitetty!');
+      handleEditItem(itemData); // Callback 
     },
 
-    initValues, // Callback
+    initValues,
   );
 
   // Set item values to form
@@ -173,10 +187,10 @@ const EditItem = ({onClose}) => {
                 onChange={handleInputChange}
                 className="bg-stone-100 p-1 rounded"
               >
-                <option value="snacks">Snacks</option>
-                <option value="mains">Mains</option>
-                <option value="desserts">Desserts</option>
-                <option value="drinks">Drinks</option>
+                <option value={1}>Snacks</option>
+                <option value={2}>Mains</option>
+                <option value={3}>Desserts</option>
+                <option value={4}>Drinks</option>
               </select>
             </div>
 
@@ -200,35 +214,44 @@ const EditItem = ({onClose}) => {
 
                 <label className="flex items-center gap-1">
                   G
-                  <input type="checkbox" name="glutenFree" 
-                  checked={inputs.glutenFree}
+                  <input
+                    type="checkbox"
+                    name="glutenFree"
+                    checked={inputs.glutenFree}
                     onChange={(e) =>
                       handleInputChange({
                         target: {name: 'glutenFree', value: e.target.checked},
                       })
-                    }/>
+                    }
+                  />
                 </label>
 
                 <label className="flex items-center gap-1">
                   M
-                  <input type="checkbox" name="milkFree" 
-                  checked={inputs.milkFree}
+                  <input
+                    type="checkbox"
+                    name="milkFree"
+                    checked={inputs.milkFree}
                     onChange={(e) =>
                       handleInputChange({
                         target: {name: 'milkFree', value: e.target.checked},
                       })
-                    }/>
+                    }
+                  />
                 </label>
 
                 <label className="flex items-center gap-1">
                   VEG
-                  <input type="checkbox" name="vegan" 
-                  checked={inputs.vegan}
+                  <input
+                    type="checkbox"
+                    name="vegan"
+                    checked={inputs.vegan}
                     onChange={(e) =>
                       handleInputChange({
                         target: {name: 'vegan', value: e.target.checked},
                       })
-                    }/>
+                    }
+                  />
                 </label>
               </div>
             </div>
@@ -243,8 +266,10 @@ const EditItem = ({onClose}) => {
               />
             </div>
 
-            <button className="mt-4 bg-[#2A4B11]! text-white py-2 rounded hover:opacity-90"
-            onClick={handleSubmit}>
+            <button
+              className="mt-4 bg-[#2A4B11]! text-white py-2 rounded hover:opacity-90"
+              onClick={handleSubmit}
+            >
               Vahvista
             </button>
           </div>

@@ -6,9 +6,9 @@ import { Outlet } from 'react-router';
 //TODO: kun menee etusvun linkstä tulee myös, että voi sittenkin kirjautua
 
 const Login = () => {
-  const [showForm, setShowForm] = useState(false);
-  const [buttonText, setButtonText] = useState("Kirjaudu sisään!");
-  const [pText, setPtext] = useState("Oletko jo jäsen?")
+  const [showForm, setShowForm] = useState(true);
+  const [buttonText, setButtonText] = useState('Rekisteröidy!');
+  const [pText, setPtext] = useState("Eikö vielä tiliä?")
 
   const handleButton = () => {
     setShowForm(current => !current);

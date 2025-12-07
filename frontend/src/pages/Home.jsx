@@ -17,7 +17,7 @@ function Home() {
         <p>Pieni pala Meksikoa keskellä Helsinkiä</p>
       </div>
       <div>
-        <button onClick={() => navigate('/login/login')}>Kirjaudu</button>
+        <button onClick={() => navigate('/login')}>Kirjaudu</button>
         <button onClick={() => navigate('/login/register')}>
           Rekisteröidy
         </button>

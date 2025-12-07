@@ -75,11 +75,11 @@ const Profile = () => {
               <EditForm></EditForm>
               <button onClick={() => {handleEdit()}}>Takaisin</button>
               <br></br>
-              <button onClick={deleteBtn}>Poista käyttäjä</button>
+              <button onClick={() => deleteBtn()}>Poista käyttäjä</button>
             </>)}
             
             <br></br>
-            <button onClick={handleLogout}>Kirjaudu ulos</button>
+            <button onClick={() => handleLogout()}>Kirjaudu ulos</button>
             <br/>
 
             

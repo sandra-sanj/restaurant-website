@@ -60,6 +60,30 @@ function useMenu() {
     }
   };
 
+  const modifyMenuItem = async (item, token) => {
+    try {
+      const options = {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + token,
+        },
+
+        body: JSON.stringify(item),
+      };
+
+      const modifyResponse = await fetchData(
+        `${API_URL}/menu/${item.menu_item_id}`,
+        options,
+      );
+
+      return modifyResponse;
+      
+    } catch (e) {
+      console.error('Modify item failed:', e);
+    }
+  };
+
   const deleteMenuItem = async (item, token) => {
     try {
       const options = {
@@ -84,7 +108,36 @@ function useMenu() {
     }
   };
 
-  return {menuArray, loading, error, addMenuItem, deleteMenuItem};
+  return {
+    menuArray,
+    loading,
+    error,
+    addMenuItem,
+    modifyMenuItem,
+    deleteMenuItem,
+  };
+}
+
+
+
+function useOrder() {
+  const postNewOrder = async ({order}) => {
+    try {
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(order),
+      };
+      const loginResult = await fetchData(`${API_URL}/orders`, options);
+      console.log(loginResult);
+
+    } catch(e) {
+      console.error(e);
+    }
+  }
+  return {postNewOrder};
 }
 
 function useAuthentication() {

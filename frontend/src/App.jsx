@@ -20,11 +20,13 @@ import Order from './components/shoppingcart/Order';
 import All from './components/menu/All';
 import { UserProvider } from './context/UserContext';
 import ProtectedRoute from './components/ProtectedRoute';
+import { OrderProvider } from './context/OrderContext';
 
 const App = () => {
   return (
     <>
       <UserProvider>
+      <OrderProvider>
       <div>
         <NavBar />
         <main className='main-content'>
@@ -52,6 +54,7 @@ const App = () => {
         </main>
        </div>
       <Footer />
+      </OrderProvider>
       </UserProvider>
     </>
   );
