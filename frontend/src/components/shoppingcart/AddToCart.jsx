@@ -1,32 +1,34 @@
 import { useEffect, useState } from "react";
+import { useOrderContext } from "../../hooks/contextHook";
 
 
-const isItemSpicy = (item) => {
-    const [spiceLevel, setSpiceLevel] = useState(null);
 
-    useEffect(() => {
-        item.spice_level = spiceLevel;
-        console.log(spiceLevel);
-    }, [spiceLevel]);
-
-    //TODO: lisää proteiinin muokkaus niihin, mihin mahdollista
-    //lisää useEffect, jotta klikattaessa muuttuu punaiseksi
-    if (!item) {
-        return null;
-    }
-
-    if (item.allows_spice_custom === 1)
-        return item && (
-        <>
-            <button onClick={() => setSpiceLevel(1)}>Mild</button>
-            <button onClick={() => setSpiceLevel(2)}>Medium</button>
-            <button onClick={() => setSpiceLevel(3)}>Spicy</button>
-        </>
-    )
-};
 
 const AddToCart = (props) => {
     const {item, setSelectedItem} = props;
+    const [quantity, setQuantity] = useState(1);
+    const [spiceLevel, setSpiceLevel] = useState(null);
+
+    const {handleAddItem} = useOrderContext();
+
+    useEffect(() => {
+        setQuantity(1);
+        setSpiceLevel(null);
+    }, [item]);
+
+    useEffect(() => {
+        if (item && quantity > 0) item.quantity = quantity;
+        console.log(item);
+    }, [item, quantity]);
+
+    useEffect(() => {
+    if (item) {
+      item.selected_spice_level = spiceLevel;
+    }
+    }, [item, spiceLevel]);
+
+
+    if (!item) return null;
 
     return (
         <>
@@ -51,7 +53,25 @@ const AddToCart = (props) => {
                     <p>
                         {item.description}
                     </p>
-                    {isItemSpicy(item)}
+                    {item.allows_spice_custom === 1 && (
+                        <div className="flex gap-2">
+                        <button
+                            className={spiceLevel === 1 ? "bg-red-300" : ""}
+                            onClick={() => setSpiceLevel(1)}>
+                            Mild
+                        </button>
+                        <button
+                            className={spiceLevel === 2 ? "bg-red-300" : ""}
+                            onClick={() => setSpiceLevel(2)}>
+                            Medium
+                        </button>
+                        <button
+                            className={spiceLevel === 3 ? "bg-red-300" : ""}
+                            onClick={() => setSpiceLevel(3)}>
+                            Spicy
+                        </button>
+                        </div>
+                    )}
                     <div>
                         <label>
                         Lisätiedot:
@@ -65,17 +85,15 @@ const AddToCart = (props) => {
                         </label>
                     </div>
                     </div>
-
-                    <div className="flex flex-row">
-                    <button>-</button>
-                    <p>1</p> {/* Tähän tulee määrä jota voi muokata */}
-                    <button>+</button>
-                    <button>Lisää ostoskoriin {item.price} €</button>
-                    </div>
+                        <div className="flex flex-row items-center gap-2">
+                            <button onClick={() => setQuantity(q => Math.max(1, q - 1))}>-</button>
+                            <p>{quantity}</p>
+                            <button onClick={() => setQuantity(q => q + 1)}>+</button>
+                            <button onClick={() => handleAddItem({item})}>Lisää ostoskoriin {item.price} €</button>
+                        </div>
                 </div>
 
 
-                
             </dialog>
           )}
         

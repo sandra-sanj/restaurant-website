@@ -6,7 +6,8 @@ const OrderProvider = ({children}) => {
     const [order, setOrder] = useState([]);
 
     const handleAddItem = (item) => {
-        setOrder((prevOrder) => [...prevOrder, {menu_item_id: item.menu_item_id, item_name: item.name, selected_protein: item.selected_protein, selected_spice_level: item.selected_spice_level, quantity: item.quantity, unit_price: item.price, special_request: item.special_request, }]); //arvot saattaa joutua fiksaamaan
+        setOrder((prevOrder) => [...prevOrder, {menu_item_id: item.menu_item_id, item_name: item.name, selected_protein: item.selected_protein, selected_spice_level: item.selected_spice_level, quantity: item.quantity, unit_price: item.price, special_request: item.special_request, }]); //arvot saattaa joutua fiksaamaa
+        console.log(order);
     }
 
     const handleRemoveItem = (menu_item_id) => {
