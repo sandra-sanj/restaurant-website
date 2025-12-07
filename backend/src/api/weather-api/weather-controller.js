@@ -1,12 +1,11 @@
 import 'dotenv/config';
 
-// Restaurants location (later need to change with chosen name, address and lat/lon)
 const RESTAURANT_LOCATION = {
-  name: 'Mexican Restaurant',
-  address: 'Myllypurontie 1, 00920 Helsinki',
+  name: 'Taqueria 21',
+  address: 'Kalevankatu 21, 00100 Helsinki',
   city: 'Helsinki',
-  lat: 60.2094,
-  lon: 25.0778,
+  lat: 60.1921,
+  lon: 24.9458,
 };
 
 /*

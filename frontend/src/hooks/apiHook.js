@@ -262,7 +262,7 @@ function useWeather() {
         setError(null);
       } catch (e) {
         console.error('Error fetching weather:', e);
-        setError('Error fetching weather');
+        setError('Säätietojen lataus epäonnistui');
         setWeather(null);
       } finally {
         setLoading(false);
