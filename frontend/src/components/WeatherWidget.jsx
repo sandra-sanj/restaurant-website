@@ -44,6 +44,18 @@ function WeatherWidget() {
         <p>{weatherData.temperature}°C</p>
         <p>Tuntuu kuin {weatherData.feelsLike}°C</p>
       </div>
+
+      <p>{weatherData.description}</p>
+
+      <div>
+        <span>Kosteus:</span>
+        <span> {weatherData.humidity}%</span>
+      </div>
+
+      <div>
+        <span>Tuuli: {weatherData.windSpeed} m/s</span>
+      </div>
+      <div>Näkyvyys: {weatherData.visibility} km</div>
     </div>
   );
 }
