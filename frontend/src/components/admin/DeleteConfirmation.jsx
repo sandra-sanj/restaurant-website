@@ -1,9 +1,18 @@
-const DeleteConfirmation = ({onClose, selectedItem}) => {
-  
-  const handleDeleteItemClick = () => {
-    console.log('Delete from delete confirmation pressed');
-    // TODO: poista / piilota tuote
+import { useMenu } from "../../hooks/apiHook";
 
+const DeleteConfirmation = ({onClose, selectedItem}) => {
+
+  const {deleteMenuItem} = useMenu();
+  
+  const handleDeleteItemClick = async () => {
+    console.log('Delete from delete confirmation pressed');
+
+    const token = localStorage.getItem('token');
+    console.log('token DeleteConfirmationista:', token);
+
+    const delResponse = await deleteMenuItem(selectedItem, token);
+
+    console.log('delResponse:', delResponse);
   }
 
   return (

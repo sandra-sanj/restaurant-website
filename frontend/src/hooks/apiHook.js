@@ -60,7 +60,28 @@ function useMenu() {
     }
   };
 
-  return {menuArray, loading, error, addMenuItem};
+  const deleteMenuItem = async (item, token) => {
+    try {
+      const options = {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + token,
+        },
+
+        body: JSON.stringify({item}),
+      };
+
+      const deleteResponse = await fetchData(`${API_URL}/menu/${item.menu_item_id}`, options);
+      console.log('del.response:', deleteResponse);
+      
+      return deleteResponse;
+    } catch (error) {
+      console.error('Delete item failed: ', error);
+    }
+  };
+
+  return {menuArray, loading, error, addMenuItem, deleteMenuItem};
 }
 
 function useAuthentication() {
