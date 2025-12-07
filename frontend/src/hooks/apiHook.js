@@ -72,9 +72,12 @@ function useMenu() {
         body: JSON.stringify({item}),
       };
 
-      const deleteResponse = await fetchData(`${API_URL}/menu/${item.menu_item_id}`, options);
+      const deleteResponse = await fetchData(
+        `${API_URL}/menu/${item.menu_item_id}`,
+        options,
+      );
       console.log('del.response:', deleteResponse);
-      
+
       return deleteResponse;
     } catch (error) {
       console.error('Delete item failed: ', error);
@@ -206,7 +209,7 @@ function useWeather() {
         setError(null);
       } catch (e) {
         console.error('Error fetching weather:', e);
-        setError('Error fetching weather');
+        setError('Säätietojen lataus epäonnistui');
         setWeather(null);
       } finally {
         setLoading(false);
