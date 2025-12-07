@@ -1,6 +1,16 @@
+import { useOrderContext } from "../../hooks/contextHook";
+import OrderCard from "./OrderCard";
+
+//swtich this to cart
+//FoodCard but for items in shopping cart?
+
 function Order() {
-    return(
-        <p>this is tilaus</p>
+    const { order } = useOrderContext();
+
+
+    return (
+        <> 
+        </>
     )
 } 
 

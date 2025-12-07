@@ -118,6 +118,28 @@ function useMenu() {
   };
 }
 
+
+
+function useOrder() {
+  const postNewOrder = async ({order}) => {
+    try {
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(order),
+      };
+      const loginResult = await fetchData(`${API_URL}/orders`, options);
+      console.log(loginResult);
+
+    } catch(e) {
+      console.error(e);
+    }
+  }
+  return {postNewOrder};
+}
+
 function useAuthentication() {
   try {
     const postLogin = async (inputs) => {

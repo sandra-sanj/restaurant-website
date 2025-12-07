@@ -1,5 +1,4 @@
 import Cart from '../components/shoppingcart/Cart';
-import Order from '../components/shoppingcart/Order';
   
 
 
@@ -9,7 +8,7 @@ const CartPage = () => {
   return (
     <>
       <Cart></Cart>
-      <Order></Order>
+
     </>
   );
 }

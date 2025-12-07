@@ -5,7 +5,7 @@ const FoodModal = ({onAddToCart, onClose}) => {
     <>
       <div className="m-5 outline-2 outline-gray-400 rounded-md w-[500px]">
         <div>
-          <span className="cursor-pointer" onClick={onClose}>
+          <span className="cursor-pointer" onClick={() => setSelectedItem('')}>
             &times;
           </span>
           <img
@@ -24,7 +24,7 @@ const FoodModal = ({onAddToCart, onClose}) => {
             kuvaus: tähän tulee ruoan kuvaus, ja tämä avautuu jos painaa
             ruokakortin Lisää tilaukseen-nappia
           </p>
-          <p>Tulisuus: X X X (jos ruoassa mahdollista säätää)</p>
+          {foodOrnot(item)}
           <div>
             <label>
               Lisätiedot:
