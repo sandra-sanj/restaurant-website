@@ -27,9 +27,9 @@ function WeatherWidget() {
   const iconUrl = `https://openweathermap.org/img/wn/${weatherData.icon}@2x.png`;
 
   return (
-    <div className="max-w-[400px] max-h-[300px] mx-auto mt-4 p-6 rounded-2xl shadow-md">
-      <div className="text-center mb-2">
-        <h3 className="text-lg font-semibold mb-3">Sää - {city}</h3>
+    <div className="max-w-[400px] mx-auto mt-4 p-6 rounded-2xl shadow-md">
+      <div className="text-center mb-1">
+        <h3 className="text-lg font-semibold mb-1">Sää - {city}</h3>
       </div>
 
       <div className="flex items-center justify-center gap-4 mb-2">
@@ -40,22 +40,36 @@ function WeatherWidget() {
         />
       </div>
 
-      <div className="flex flex-col">
-        <p>{weatherData.temperature}°C</p>
-        <p>Tuntuu kuin {weatherData.feelsLike}°C</p>
+      <div>
+        <p className="text-2xl font-bold">{weatherData.temperature}°C</p>
+        <p className="text-gray-700">Tuntuu kuin {weatherData.feelsLike}°C</p>
       </div>
 
-      <p>{weatherData.description}</p>
+      <p className="text-center text-gray-700 capitalize mb-2">
+        {weatherData.description}
+      </p>
 
       <div>
-        <span>Kosteus:</span>
-        <span> {weatherData.humidity}%</span>
+        <span className="flex-1 text-gray-700">Kosteus:</span>
+        <span className="flex-1 text-gray-800"> {weatherData.humidity}%</span>
       </div>
 
       <div>
-        <span>Tuuli: {weatherData.windSpeed} m/s</span>
+        <span className="text-gray-700">Tuuli: </span>
+        <span className="flex-1 text-gray-800">
+          {weatherData.windSpeed} m/s
+        </span>
       </div>
-      <div>Näkyvyys: {weatherData.visibility} km</div>
+      <div>
+        <span className="text-gray-700">Näkyvyys: </span>
+        <span className="flex-1 text-gray-800">
+          {weatherData.visibility} km
+        </span>
+      </div>
+
+      <p className="text-center text-md text-gray-600 mt-4">
+        Päivitetty: {lastUpdated}
+      </p>
     </div>
   );
 }
