@@ -3,12 +3,11 @@ const fetchData = async (url, options = {}) => {
     
     if(!res.ok) {
         const error = new Error('error');
-        //error.status = res.status;
         throw error;
     }
-    //const response = await res.json();
+    const data = await res.json();  // change response to JSON
 
-    return res;
+    return data;
 };
 
 export {fetchData};
