@@ -66,8 +66,8 @@ const AddToCart = (props) => {
                         &times;
                     </span>
                     <img
-                        src="../src/assets/img/muut/landscape/tostada2.jpg"
-                        alt="Tostada"
+                        src={item.image_url}
+                        alt={item.description}
                         width={'auto'}
                         className="rounded-md"
                     />

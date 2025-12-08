@@ -48,7 +48,7 @@ const EditForm = () => {
                     <input
                         name="email"
                         placeholder={user.email}
-                        type="text"
+                        type="email"
                         id="EditEmail"
                         onChange={ (e) => {handleInputChange(e)} }
                     />

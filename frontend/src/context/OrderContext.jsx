@@ -4,6 +4,8 @@ const OrderContext = createContext(null);
 
 const OrderProvider = ({children}) => {
     const [cart, setCart] = useState([]);
+    const [order, setOrder] = useState([]);
+    const [delivery, setDelivery] = useState('delivery');
     
 
     const handleAddItem = (item) => {
@@ -24,6 +26,22 @@ const OrderProvider = ({children}) => {
         setCart((prevOrder) => [...prevOrder, cartItem]);
     }
 
+    const handleContactInfo = (info) => {
+        const contactInfo = {
+            user_id: info.user_id,
+            total_price: info.total_price,
+            customer_name: info.username,
+            customer_email: info.email,
+            customer_phone: info.phone,
+            delivery_address: info.address,
+            order_type: info.order_type,
+            items: cart
+        };
+        setOrder(contactInfo);
+        
+    }
+
+
 
     const calculateTotal = () => {
         return cart.reduce((sum, item) => sum + item.unit_price, 0).toFixed(2);
@@ -37,16 +55,27 @@ const OrderProvider = ({children}) => {
         // price of one item is price / quantity
     }
 
-    const value = {
-        cart,
-        calculateTotal,
-        handleAddItem,
-        handleRemoveItem,
-        setCart
+    const handleOrder = () => {
+        console.log('tästä sitten tilaus apiin');
+        console.log(order);
     }
 
 
 
+
+
+
+    const value = { //values for context provider
+        cart,
+        calculateTotal,
+        handleAddItem,
+        handleRemoveItem,
+        setCart,
+        handleOrder,
+        setDelivery,
+        delivery,
+        handleContactInfo,
+    }
 
     return ( 
     <OrderContext.Provider value={value}>

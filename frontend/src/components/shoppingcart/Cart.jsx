@@ -4,15 +4,20 @@ import OrderCard from "./OrderCard";
 
 
 
-function Cart() {
+function Cart(props) {
+  const {next, setNext} = props;
+
   const [selectedDelivery, setSelectedDelivery] = useState("delivery");
-  const [total, setTotal] = useState(null);
+
+  const { cart, calculateTotal, setDelivery } = useOrderContext();
+
 
   const handleDeliveryClick = (method) => {
      setSelectedDelivery(method);
+     setDelivery(method);
   }
 
-  const { cart, calculateTotal } = useOrderContext();
+  
   console.log(cart);
 
   const totalPrice = calculateTotal();
@@ -77,7 +82,7 @@ function Cart() {
             <>
               <p>Subtotal {Number(totalPrice).toFixed(2)} €</p>
               <p>Toimitusmaksu 4,90 €</p>
-              <p className="font-semibold">Yhteensä: {totalWithDelivery}</p>
+              <p className="font-semibold">Yhteensä: {totalWithDelivery.toFixed(2)} €</p>
             </>
 
           ) : (
@@ -88,7 +93,7 @@ function Cart() {
 
       {/* Checkout button */}
       <div className="p-4 bg-white mt-2 flex">
-        <button className="w-full py-2 rounded border bg-[#2A4B11]! text-white">Kassalle</button>
+        <button onClick={() => setNext('order')} className="w-full py-2 rounded border bg-[#2A4B11]! text-white">Kassalle</button>
       </div>
  
 </>
