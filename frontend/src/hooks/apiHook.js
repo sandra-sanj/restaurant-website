@@ -31,18 +31,19 @@ function useMenu() {
     getMenuItems();
   }, []);
 
-  const addMenuItem = async (itemData, token) => {
+  const addMenuItem = async (formData, token) => {
     try {
       setLoading(true);
 
       const options = {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          //'Content-Type': 'application/json',
           Authorization: 'Bearer ' + token,
         },
 
-        body: JSON.stringify({itemData}),
+        //body: JSON.stringify(itemData),
+        body: formData,
       };
 
       // Post the data (new item) to API

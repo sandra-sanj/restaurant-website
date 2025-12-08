@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+/*import {useEffect, useState} from 'react';
 import {useMenu} from '../../hooks/apiHook.js';
 import useForm from '../../hooks/formHooks.js';
 
@@ -6,19 +6,10 @@ import useForm from '../../hooks/formHooks.js';
 // TODO: lähetä allergeenit erillisenä POST-pyyntönä
 
 const AddItem = ({onClose}) => {
-  //const [item, setItem] = useState(null);
+  const [item, setItem] = useState(null);
   const [imageFile, setImageFile] = useState(null);
 
   const {addMenuItem} = useMenu();
-
-  /*const handleItemChange = (event) => {
-    setItem(event.target.files[0]);
-    console.log('item state', item);
-  };*/
-
-  const handleImageChange = (event) => {
-    setImageFile(event.target.files[0]);
-  };
 
   const initValues = {
     nameFi: '',
@@ -26,7 +17,7 @@ const AddItem = ({onClose}) => {
     description: '',
     descriptionEn: '',
     price: '',
-    category: '1',  // Default value
+    category: '',
     lactoseFree: false, // checkboxes
     glutenFree: false,
     milkFree: false,
@@ -36,59 +27,49 @@ const AddItem = ({onClose}) => {
   const doAddItem = async (inputs) => {
     console.log('doAddItem:', inputs);
 
-    if (
-      !inputs.nameFi ||
-      !inputs.nameEn ||
-      !inputs.description ||
-      !inputs.descriptionEn ||
-      !inputs.price
-    ) {
-      alert('Täytä kaikki kentät!');
-      return;
-    }
-
-    if (!imageFile) {
-      alert('Kuva on pakollinen!');
-      return;
-    }
-
     const token = localStorage.getItem('token');
 
     try {
-      const formData = new FormData();
-      formData.append('category_id', parseInt(inputs.category));
-      formData.append('name', inputs.nameFi);
-      formData.append('name_en', inputs.nameEn);
-      formData.append('description', inputs.description || '');
-      formData.append('description_en', inputs.descriptionEn || '');
-      formData.append('price', parseFloat(inputs.price));
-      formData.append('ingredients', '-');
-      formData.append('spice_level', '0');
-      formData.append('allows_spice_custom', '0');
-      //formData.append('available_proteins', '');
-      //formData.append('default_protein', '');
-      formData.append('is_available', '1');
-      formData.append('file', imageFile);
+      // Send only the essential fields, no image, no checkboxes
+      const itemData = {
+        category_id: parseInt(inputs.category),
+        name: inputs.nameFi,
+        name_en: inputs.nameEn,
+        description: inputs.description,
+        description_en: inputs.descriptionEn,
+        price: parseFloat(inputs.price),
+        image_url: null,
+        image_thumb_url: null,
+        is_available: 1,
+      };
 
-      // Debug: Näytä FormData sisältö
-      console.log('FormData sisältö:');
-      for (let [key, value] of formData.entries()) {
-        console.log(key, ':', value);
-      }
+      //console.log('itemdata', itemData);
 
-      const newItemResponse = await addMenuItem(formData, token);
+      console.log('Sending itemData:', JSON.stringify(itemData, null, 2));
+
+      const newItemResponse = await addMenuItem(itemData, token);
+      console.log('Menu item added:', newItemResponse);
 
       if (newItemResponse !== null && newItemResponse !== undefined) {
-        alert(`Tuote "${inputs.nameFi}" lisätty`);
-        //resetForm();
-        setImageFile(null);
+        alert(`Tuote "${itemData.name}" lisätty`);
       } else {
-        alert(`Virhe tuotteen "${inputs.nameFi}" lisäämisessä`);
+        alert(`Virhe tuotteen "${itemData.name}" lisäämisessä`);
       }
+
+      // Clear the form
+      //resetForm();
     } catch (error) {
-      console.error('Failed to add item:', error);
-      alert('Virhe tuotteen lisäämisessä: ' + error.message);
+      console.log('Failed to add item:', error);
     }
+  };
+
+  const handleItemChange = (event) => {
+    setItem(event.target.files[0]);
+    console.log('item state', item);
+  };
+
+  const handleImageChange = (event) => {
+    setImageFile(event.target.files[0]);
   };
 
   const {handleSubmit, handleInputChange, inputs, resetForm} = useForm(
@@ -99,7 +80,7 @@ const AddItem = ({onClose}) => {
   return (
     <>
       <div className="m-5 outline-2 outline-gray-400 rounded-md">
-        {/* Header */}
+        
         <div className="flex justify-between items-center text-white p-4 rounded-t-md bg-[#2A4B11]!">
           <p className="font-bold">Lisää tuote</p>
           <span
@@ -110,7 +91,6 @@ const AddItem = ({onClose}) => {
           </span>
         </div>
 
-        {/* Form */}
         <div className="flex flex-col p-4 gap-4 bg-white w-[400px]">
           <label className="flex flex-col gap-1">
             Nimi:
@@ -267,3 +247,4 @@ const AddItem = ({onClose}) => {
 };
 
 export default AddItem;
+*/
