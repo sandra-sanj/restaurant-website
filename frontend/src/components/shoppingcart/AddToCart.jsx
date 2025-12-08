@@ -21,14 +21,16 @@ const AddToCart = (props) => {
     useEffect(() => {
         setQuantity(1);
         setSpiceLevel(null);
+        //setPrice(null);
         setShowModal(true);
     }, [item]);
 
     useEffect(() => {
         if (item && quantity > 0) {
             item.quantity = quantity;
-            const newPrice = (item.price ?? item.special_price * quantity);
+            const newPrice = (parseFloat(item.price) * quantity || parseFloat(item.special_price) * quantity);
             setPrice(newPrice.toFixed(2));
+            setSpiceLevel(spiceLevel);
         }
     }, [item, quantity]);
 
@@ -39,15 +41,14 @@ const AddToCart = (props) => {
     }, [item, spiceLevel]);
 
     const handleAddToCart = () => {
-        item.price = price;
+        //item.price = price;
+        item.quantity = quantity;
         handleAddItem(item);
         console.log(`${item.name} added to cart`);
         setSelectedItem('');
     }
 
     
-
-
     if (!item) return null;
 
     return (

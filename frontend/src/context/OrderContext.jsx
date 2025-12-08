@@ -8,8 +8,8 @@ const OrderProvider = ({children}) => {
 
     const handleAddItem = (item) => {
         //creates new object so the original stays the same
-        const unitPrice = Number(item.price ?? item.special_price);
         const quantity = Number(item.quantity);
+        const unitPrice = Number(item.price * quantity|| item.special_price * quantity);
 
         const cartItem = {
             unique_id: item.menu_item_id + Math.floor(Math.random() * 101), // unique id for map function in cart and removing item
