@@ -11,7 +11,7 @@ const OrderCard = (props) => {
         <div>
           <p>{item.item_name}</p>
           <p>{item.unit_price} €</p>
-          <button onClick={() => handleRemoveItem(item.menu_item_id)}>x</button>
+          <button onClick={() => handleRemoveItem(item.unique_id)}>x</button>
           <button>- {item.quantity} +</button>
         </div>
     )
