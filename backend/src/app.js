@@ -29,14 +29,13 @@ app.use('/uploads', express.static('uploads'));
 app.use(express.json()); // parse json data from http request
 app.use(express.urlencoded({extended: true}));
 app.use('/api/v1', api); // adds prefix and guides all requests to routes inside api
-//app.use('/api/v1/*', notFoundHandler); // default for all API routes not handled by routers above
 
 // for server side routing
-/* app.get('*', (req, res) => {
+app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
-}); */
+});
 
-app.use(notFoundHandler); // default for all routes not handled by routers above
+//app.use(notFoundHandler); // default for all routes not handled by routers above
 app.use(errorHandler); // error handler
 
 export default app;
