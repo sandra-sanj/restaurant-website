@@ -1,14 +1,13 @@
-import {Link} from "react-router";
-import { useUserContext } from "../hooks/contextHook";
+import {Link} from 'react-router';
+import {useUserContext} from '../hooks/contextHook';
 import {useLanguage} from '../hooks/useLanguage';
-import { useEffect } from "react";
+import {useEffect} from 'react';
 import {useState} from 'react';
 
 function NavBar() {
-    const { handleAutoLogin, user} = useUserContext();
-    const [isAdmin, setIsAdmin] = useState(false);
-    const {language, toggleLanguage, strings} = useLanguage();
-
+  const {handleAutoLogin, user} = useUserContext();
+  const [isAdmin, setIsAdmin] = useState(false);
+  const {language, toggleLanguage, strings} = useLanguage();
 
   useEffect(() => {
     handleAutoLogin();
@@ -17,7 +16,6 @@ function NavBar() {
   useEffect(() => {
     setIsAdmin(user?.role === 'admin');
   }, [user]);
-  
 
   return (
     <nav className="navbar h-16 top-0 bg-[#FFFFFF] flex items-center justify-center sticky border-b">
@@ -35,20 +33,19 @@ function NavBar() {
           </li>
 
           {user && isAdmin && (
-              <>
-                <li>
-                  <Link to="/admin" className="nav-link hover:text-[#a84040]">
-                    {strings.nav.admin}
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/history" className="nav-link hover:text-[#a84040]">
-                    {strings.nav.history}
-                  </Link>
-                </li>
-              </>
-            )}
-  
+            <>
+              <li>
+                <Link to="/admin" className="nav-link hover:text-[#a84040]">
+                  {strings.nav.admin}
+                </Link>
+              </li>
+              <li>
+                <Link to="/history" className="nav-link hover:text-[#a84040]">
+                  {strings.nav.history}
+                </Link>
+              </li>
+            </>
+          )}
 
           {user ? (
             <>
@@ -75,7 +72,10 @@ function NavBar() {
           </li>
 
           <li>
-            <button onClick={toggleLanguage} className="nav-link hover:bg-stone-100!">
+            <button
+              onClick={toggleLanguage}
+              className="nav-link hover:bg-stone-100!"
+            >
               {language === 'fi' ? '🇬🇧 EN' : '🇫🇮 FI'}
             </button>
           </li>
