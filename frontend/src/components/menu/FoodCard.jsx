@@ -3,13 +3,14 @@
 const FoodCard = (props) => {
   const { item, setSelectedItem} = props;
 
+  const API_UPLOADS_URL = import.meta.env.VITE_API_UPLOADS_URL;
 
   return (
     <>
 
       <div className="bg-white-50 w-[500px] rounded-md mb-5 outline-2 outline-gray-400">
         <img
-          src={item.image_url}
+          src={API_UPLOADS_URL + item.image_url}
           alt={item.description}
           width={'auto'}
           className="rounded-md"
