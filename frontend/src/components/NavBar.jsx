@@ -1,6 +1,7 @@
 import {Link} from 'react-router';
 import {useUserContext} from '../hooks/contextHook';
 import {useLanguage} from '../hooks/useLanguage';
+import LanguageSwitcher from './LanguageSwitcher';
 import {useEffect} from 'react';
 import {useState} from 'react';
 
@@ -72,12 +73,7 @@ function NavBar() {
           </li>
 
           <li>
-            <button
-              onClick={toggleLanguage}
-              className="nav-link hover:bg-stone-100!"
-            >
-              {language === 'fi' ? '🇬🇧 EN' : '🇫🇮 FI'}
-            </button>
+            <LanguageSwitcher />
           </li>
         </ul>
       </div>
