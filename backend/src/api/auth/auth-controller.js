@@ -4,8 +4,6 @@ import {getUserByUsername} from '../user/user-model.js';
 import 'dotenv/config';
 
 const postLogin = async (req, res, next) => {
-  //console.log('postLogin', req.body);
-
   // TODO: combine no user and no password match return messages into one, for enhanced security: "Username or password incorrect"
   const user = await getUserByUsername(req.body.username);
   if (!user) {
@@ -37,19 +35,11 @@ const postLogin = async (req, res, next) => {
 };
 
 const getMe = async (req, res, next) => {
-  //console.log('getMe', res.locals.user);
-
   if (!res.locals.user) {
     const error = new Error('No user login token found');
     error.status = 401;
     return next(error);
   }
-
-  /* if (res.locals.user) {
-    res.json({message: 'token ok', user: res.locals.user});
-  } else {
-    res.status(401).json({message: 'Could not get user with token'});
-  } */
 
   res.json({message: 'token ok', user: res.locals.user});
 };
