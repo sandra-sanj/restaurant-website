@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import {useMenu} from '../../hooks/apiHook';
 import DeleteConfirmation from './DeleteConfirmation';
 import {useState} from 'react';
@@ -7,6 +8,16 @@ const DeleteItem = ({onClose}) => {
   const [selectedItem, setSelectedItem] = useState(null);
 
   const {menuArray, loading, error} = useMenu();
+
+  const [menuItems, setMenuItems] = useState([]);
+
+  useEffect(() => {
+    setMenuItems(menuArray);
+  }, [menuArray]);
+
+  const handleItemDeleted = (deletedItemId) => {
+    setMenuItems(prev => prev.filter(item => item.menu_item_id !== deletedItemId));
+  }
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
@@ -18,15 +29,19 @@ const DeleteItem = ({onClose}) => {
 
   const handleCloseClick = () => {
     setDeleteConfirmationOpen(false);
-    setSelectedItem(null);  // Reset selected item
+    setSelectedItem(null); // Reset selected item
   };
 
   return (
     <>
-    {deleteConfirmationOpen && (
-        <DeleteConfirmation onClose={handleCloseClick} selectedItem={selectedItem} />
+      {deleteConfirmationOpen && (
+        <DeleteConfirmation
+          onClose={handleCloseClick}
+          selectedItem={selectedItem}
+          deleteSuccess={handleItemDeleted}
+        />
       )}
-      
+
       <div className="m-5 outline-2 outline-gray-400 rounded-md w-[400px]">
         {/* Header */}
         <div className="flex justify-between items-center bg-[#982A2A] text-white p-4 rounded-t-md">
@@ -43,11 +58,9 @@ const DeleteItem = ({onClose}) => {
         <div className="bg-white p-1 rounded-b-md">
           <table className="w-full border-collapse text-left">
             <tbody>
-              
-              {menuArray.map((item) => (
+              {menuItems.map((item) => (
                 <tr
                   key={item.menu_item_id}
-                  //item={item}
                   className="hover:bg-gray-100"
                 >
                   <td className="p-0">
@@ -65,7 +78,6 @@ const DeleteItem = ({onClose}) => {
           </table>
         </div>
       </div>
-      
     </>
   );
 };

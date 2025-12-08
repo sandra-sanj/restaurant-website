@@ -1,35 +1,40 @@
-import { useState } from 'react';
+import {useState} from 'react';
 import HistoryRow from './../components/admin/HistoryRow';
-import { Table, TableHeader, TableBody, TableRow, TableCell, TableHead } from '@/components/ui/table';
-import { useOrders } from '../hooks/orderHook';
+import {
+  Table,
+  TableHeader,
+  TableBody,
+  TableRow,
+  TableCell,
+  TableHead,
+} from '@/components/ui/table';
+import {useOrders} from '../hooks/orderHook';
 
 const AdminHistory = () => {
   const [filter, setFilter] = useState('today');
+  const {orders, loading, error} = useOrders();
 
   const handleFilterClick = (type) => {
-     setFilter(type);
+    setFilter(type);
   };
-
-  const {getOrders} = useOrders();
-
-  // mock-data
-  const orders = [
-    { id: 1, product: 'Tuote A', details: 'Lisätieto 1', quantity: 3, date: '2025-12-06' },
-    { id: 2, product: 'Tuote B', details: 'Lisätieto 2', quantity: 5, date: '2025-12-05' },
-    { id: 3, product: 'Tuote C', details: 'Lisätieto 3', quantity: 2, date: '2025-12-04' },
-    { id: 4, product: 'Tuote C', details: 'Lisätieto 3', quantity: 2, date: '2025-12-04' },
-  ];
-  
-
-
 
   return (
     <>
       <h1>Tilaushistoria</h1>
 
       <div className="flex flex-row gap-2 mb-4">
-        <button className={`px-3 py-1 rounded border ${filter === "today" ? "bg-[#2A4B11]! text-white" : "bg-white text-black"}`} onClick={() => handleFilterClick("today")}>Tämän päivän tilaukset</button>
-        <button className={`px-3 py-1 rounded border ${filter === "all" ? "bg-[#2A4B11]! text-white" : "bg-white text-black"}`} onClick={() => handleFilterClick("all")}>Kaikki tilaukset</button>
+        <button
+          className={`px-3 py-1 rounded border ${filter === 'today' ? 'bg-[#2A4B11]! text-white' : 'bg-white text-black'}`}
+          onClick={() => handleFilterClick('today')}
+        >
+          Tämän päivän tilaukset
+        </button>
+        <button
+          className={`px-3 py-1 rounded border ${filter === 'all' ? 'bg-[#2A4B11]! text-white' : 'bg-white text-black'}`}
+          onClick={() => handleFilterClick('all')}
+        >
+          Kaikki tilaukset
+        </button>
       </div>
 
       <p>Tähän populoidaan dataa tietokannasta</p>
@@ -49,7 +54,7 @@ const AdminHistory = () => {
         <TableBody>
           {orders.map((order) => (
             <TableRow key={order.id}>
-              <TableCell>{order.id}</TableCell>
+              <TableCell>{order.orderId}</TableCell>
               <TableCell>{order.product}</TableCell>
               <TableCell>{order.details}</TableCell>
               <TableCell>{order.quantity}</TableCell>

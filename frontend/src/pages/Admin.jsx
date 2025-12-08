@@ -11,6 +11,7 @@ import {
   TableCell,
   TableHead,
 } from '@/components/ui/table';
+import {useOrders} from '../hooks/orderHook';
 
 // TODO: lisää admin-navigaatio: button: historia/avoimet tilaukset, p: Ylläpito ja p: käyttäjänimi
 
@@ -19,8 +20,9 @@ const Admin = () => {
   const [editItemOpen, setEditItemOpen] = useState(false);
   const [deleteItemOpen, setDeleteItemOpen] = useState(false);
 
+  const {orders, loading, error} = useOrders();
+
   const handleButtonCloseClick = () => {
-    //console.log('handleButtonClick');
     setAddItemOpen(false);
     setEditItemOpen(false);
     setDeleteItemOpen(false);
@@ -28,53 +30,46 @@ const Admin = () => {
 
   const handleAddItemClick = () => {
     setAddItemOpen(true);
+    setEditItemOpen(false);
+    setDeleteItemOpen(false);
   };
 
   const handleEditItemClick = () => {
+    setAddItemOpen(false);
     setEditItemOpen(true);
+    setDeleteItemOpen(false);
   };
 
   const handleDeleteItemClick = () => {
+    setAddItemOpen(false);
+    setEditItemOpen(false);
     setDeleteItemOpen(true);
   };
 
-  // mock-data // TODO: korvaa tietokannan tilauksilla (käytä order_items = tuotteet tilausten sisällä)
-  const orders = [
-    {
-      id: 1,
-      product: 'Tuote A',
-      details: 'Lisätieto 1',
-      quantity: 3,
-    },
-    {
-      id: 2,
-      product: 'Tuote B',
-      details: 'Lisätieto 2',
-      quantity: 5,
-    },
-    {
-      id: 3,
-      product: 'Tuote C',
-      details: 'Lisätieto 3',
-      quantity: 2,
-    },
-  ];
+  const openOrders = orders.filter((order) => order.status === 'pending');
+  if (loading) return <p>Ladataan tilauksia...</p>;
+  if (error) return <p>{error}</p>;
+
+  // Get open orders id's to calculate total open orders count
+  const openOrderIds = [];
+  openOrders.forEach((item) => {
+    if (!openOrderIds.includes(item.orderId)) {
+      openOrderIds.push(item.orderId);
+    }
+  });
 
   return (
     <>
-      <h1>Admin</h1>
-
-      <div className="flex flex-row">
-        <h2>Avoimet tilaukset:</h2>
-        <p>{orders.length}</p>
+      <h1 className="m-3">Ylläpito</h1>
+      <div className="flex flex-row mt-5">
+        <h2 className="pr-1">Avoimet tilaukset:</h2>
+        <p className="">{openOrderIds.length}</p>
       </div>
-      <p>Tähän populoidaan dataa tietokannasta</p>
-      <br />
 
       <Table className="mt-4">
         <TableHeader>
           <TableRow>
-            <TableHead className="text-center">Id</TableHead>
+            <TableHead className="text-center">Tilauksen id</TableHead>
             <TableHead className="text-center">Tuote</TableHead>
             <TableHead className="text-center">Lisätiedot</TableHead>
             <TableHead className="text-center">Määrä</TableHead>
@@ -83,15 +78,16 @@ const Admin = () => {
         </TableHeader>
 
         <TableBody>
-          {orders.map((order) => (
+          {openOrders.map((order) => (
             <TableRow key={order.id}>
-              <TableCell>{order.id}</TableCell>
+              <TableCell>{order.orderId}</TableCell>
               <TableCell>{order.product}</TableCell>
               <TableCell>{order.details}</TableCell>
               <TableCell>{order.quantity}</TableCell>
-              <TableCell><input type='checkbox' name='done'></input></TableCell>
-
-            </TableRow> 
+              <TableCell>
+                <input type="checkbox" name="done"></input>
+              </TableCell>
+            </TableRow>
           ))}
         </TableBody>
       </Table>
@@ -101,17 +97,14 @@ const Admin = () => {
           addItemClick={handleAddItemClick}
           editItemClick={handleEditItemClick}
           deleteItemClick={handleDeleteItemClick}
-          
         />
       </footer>
-
 
       {addItemOpen && <AddItem onClose={handleButtonCloseClick} />}
 
       {editItemOpen && <EditItem onClose={handleButtonCloseClick} />}
 
       {deleteItemOpen && <DeleteItem onClose={handleButtonCloseClick} />}
-      
     </>
   );
 };

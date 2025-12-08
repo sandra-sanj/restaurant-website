@@ -25,17 +25,42 @@ const EditItem = ({onClose}) => {
   const handleEditItem = async (itemData) => {
     const token = localStorage.getItem('token');
 
-      try {
-        const response = await modifyMenuItem(itemData, token);
-        console.log('Modify response', response);
-
-        //console.log('Päivitetty tuote:', itemData);
-        alert(`${itemData.name} muokattu.`);
-      } catch (e) {
-        console.error('Modify failed', e);
-        alert(`Cirhe: ${itemData.name} ei muokattu.`);
+    try {
+      if (
+        !inputs.nameFi ||
+        !inputs.nameEn ||
+        !inputs.description ||
+        !inputs.descriptionEn ||
+        !inputs.price
+      ) {
+        alert('Täytä kaikki kentät!');
+        return;
       }
-  }
+
+      const editedPrice = itemData.price.toString().replace(',', '.');
+
+      // Check that price is numeric
+      if (isNaN(parseFloat(editedPrice))) {
+        alert('Syötä hinta numerona, esim. 10.90 tai 10,90');
+        return;
+      }
+
+      itemData.price = parseFloat(editedPrice).toFixed(2);
+
+      const response = await modifyMenuItem(itemData, token);
+      console.log('Modify response', response);
+
+      if (response) {
+        alert(`"${itemData.name}" muokattu.`);
+        onClose();
+        setSelectedItem(null);
+      } else {
+        alert(`Virhe: "${itemData.name}" ei muokattu.`);
+      }
+    } catch (e) {
+      console.error('Modify failed', e);
+    }
+  };
 
   const {handleSubmit, handleInputChange, inputs, resetForm} = useForm(
     (values) => {
@@ -51,13 +76,13 @@ const EditItem = ({onClose}) => {
         name_en: values.nameEn,
         description: values.description,
         description_en: values.descriptionEn,
-        price: parseFloat(values.price),
+        price: values.price,
         image_url: null,
         image_thumb_url: null,
         is_available: 1,
       };
 
-      handleEditItem(itemData); // Callback 
+      handleEditItem(itemData); // Callback
     },
 
     initValues,
@@ -76,7 +101,9 @@ const EditItem = ({onClose}) => {
       handleInputChange({
         target: {name: 'descriptionEn', value: selectedItem.description_en},
       });
+
       handleInputChange({target: {name: 'price', value: selectedItem.price}});
+      
       handleInputChange({
         target: {name: 'category', value: selectedItem.category_id},
       });
