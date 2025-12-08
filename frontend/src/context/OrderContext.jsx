@@ -12,7 +12,7 @@ const OrderProvider = ({children}) => {
         const quantity = Number(item.quantity);
 
         const cartItem = {
-            uniqeue_id: item.menu_item_id + Random.Number,
+            unique_id: item.menu_item_id + Math.floor(Math.random() * 101), // unique id for map function in cart and removing item
             menu_item_id: item.menu_item_id,
             item_name: item.item_name ?? item.name,
             selected_protein: item.selected_protein,
@@ -26,9 +26,9 @@ const OrderProvider = ({children}) => {
     }
 
 
-    const handleRemoveItem = (menu_item_id) => {
+    const handleRemoveItem = (unique_id) => {
         setOrder((prevOrder) => {
-            const removed = prevOrder.filter(i => i.menu_item_id !== menu_item_id);
+            const removed = prevOrder.filter(i => i.unique_id !== unique_id);
             return removed;
         });
     }
