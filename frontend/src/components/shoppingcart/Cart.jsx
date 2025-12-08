@@ -1,21 +1,32 @@
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import { useOrderContext } from "../../hooks/contextHook";
 import OrderCard from "./OrderCard";
 
 
 
-function Cart() {
+function Cart(props) {
+  const {next, setNext} = props;
+
   const [selectedDelivery, setSelectedDelivery] = useState("delivery");
+
+  const { cart, calculateTotal, setDelivery } = useOrderContext();
+
 
   const handleDeliveryClick = (method) => {
      setSelectedDelivery(method);
+     setDelivery(method);
   }
 
-  const { order, totalPrice } = useOrderContext();
-  console.log(order);
+  
+  console.log(cart);
+
+  const totalPrice = calculateTotal();
+  const totalWithDelivery = Number(totalPrice) + Number(4.9);
 
 
-  if (order.length < 1) return <p>Ostoskorisi on tyhjä</p>
+
+  if (cart.length < 1) return <p>Ostoskorisi on tyhjä</p>
+
 
 
   return (
@@ -38,7 +49,7 @@ function Cart() {
       {/* Products */}
       <div className="flex flex-col gap-2 p-4 bg-white mt-2">
         <h2 className="font-semibold">Tuotteet</h2>
-        { order.map((item) => (
+        { cart.map((item) => (
             <OrderCard 
               key={item.unique_id}
               item={item}
@@ -48,9 +59,10 @@ function Cart() {
             <div className="flex gap-2 items-center">
               <div>
                 <p className="font-medium"></p>
-                <p>{} €</p>
+                <p>{} </p>
               </div>
             </div>
+            {/*}
             <div className="flex gap-2 items-center">
               <button className="border rounded bg-[#982A2A]! text-white">x</button>
               <div className="flex items-center gap-1">
@@ -58,7 +70,7 @@ function Cart() {
                 <span></span>
                 <button className="px-2 py-1 border rounded">+</button>
               </div>
-            </div>
+            </div> */}
           </div>
         
       </div>
@@ -66,14 +78,22 @@ function Cart() {
 
       {/* Summary */}
       <div className="flex flex-col gap-1 p-4 bg-white mt-2">
-          <p>Subtotal {Number(totalPrice).toFixed(2)} €</p>
-          <p>Toimitusmaksu 4,90 €</p>
-        <p className="font-semibold">Yhteensä: 35,70 €</p>
+          {selectedDelivery === 'delivery' ? (
+            <>
+              <p>Subtotal {Number(totalPrice).toFixed(2)} €</p>
+              <p>Toimitusmaksu 4,90 €</p>
+              <p className="font-semibold">Yhteensä: {totalWithDelivery.toFixed(2)} €</p>
+            </>
+
+          ) : (
+            <p className="font-semibold">Yhteensä: {totalPrice}</p>
+          )}
+          
       </div>
 
       {/* Checkout button */}
       <div className="p-4 bg-white mt-2 flex">
-        <button className="w-full py-2 rounded border bg-[#2A4B11]! text-white">Kassalle</button>
+        <button onClick={() => setNext('order')} className="w-full py-2 rounded border bg-[#2A4B11]! text-white">Kassalle</button>
       </div>
  
 </>
