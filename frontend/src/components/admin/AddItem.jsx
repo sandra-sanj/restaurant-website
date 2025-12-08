@@ -47,6 +47,12 @@ const AddItem = ({onClose}) => {
       return;
     }
 
+    // Check that price is numeric
+    if (isNaN(parseFloat(inputs.price))) {
+      alert('Syötä hinta numerona, esim. 10.90 tai 10,90');
+      return;
+    }
+
     if (!imageFile) {
       alert('Kuva on pakollinen!');
       return;
@@ -61,7 +67,7 @@ const AddItem = ({onClose}) => {
       formData.append('name_en', inputs.nameEn);
       formData.append('description', inputs.description || '');
       formData.append('description_en', inputs.descriptionEn || '');
-      formData.append('price', parseFloat(inputs.price).toFixed(2));
+      formData.append('price', parseFloat(inputs.price.replace(',', '.')).toFixed(2));
       formData.append('ingredients', '-');
       formData.append('spice_level', 0);
       formData.append('allows_spice_custom', 0);
