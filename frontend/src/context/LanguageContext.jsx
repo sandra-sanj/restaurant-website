@@ -1,9 +1,10 @@
 import {createContext, useState, useEffect} from 'react';
 import strings from '../localization/translations';
 
-export const LanguageContext = createContext();
+const LanguageContext = createContext();
 
-export const LanguageProvider = ({children}) => {
+const LanguageProvider = ({children}) => {
+  // Get saved language from localStorage or default to 'fi'
   const [language, setLanguage] = useState(() => {
     return localStorage.getItem('language') || 'fi';
   });
@@ -26,3 +27,5 @@ export const LanguageProvider = ({children}) => {
     </LanguageContext.Provider>
   );
 };
+
+export {LanguageContext, LanguageProvider};
