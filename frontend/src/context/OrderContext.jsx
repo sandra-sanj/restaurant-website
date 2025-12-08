@@ -1,4 +1,5 @@
 import { createContext, useState, useContext, useEffect } from "react";
+import { useOrder } from "../hooks/apiHook";
 
 const OrderContext = createContext(null);
 
@@ -6,6 +7,7 @@ const OrderProvider = ({children}) => {
     const [cart, setCart] = useState([]);
     const [order, setOrder] = useState([]);
     const [delivery, setDelivery] = useState('delivery');
+    const {postNewOrder} = useOrder();
     
 
     const handleAddItem = (item) => {
@@ -58,6 +60,7 @@ const OrderProvider = ({children}) => {
     const handleOrder = () => {
         console.log('tästä sitten tilaus apiin');
         console.log(order);
+        postNewOrder(order);
     }
 
 

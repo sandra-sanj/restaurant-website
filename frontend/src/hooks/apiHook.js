@@ -297,4 +297,4 @@ function useWeather() {
   return {weather, loading, error};
 }
 
-export {useMenu, useAuthentication, useUser, useWeather};
+export {useMenu, useAuthentication, useUser, useOrder, useWeather};
