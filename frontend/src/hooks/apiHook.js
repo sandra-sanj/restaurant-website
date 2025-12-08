@@ -8,6 +8,7 @@ function useMenu() {
   const [menuArray, setMenuArray] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [todaysLunch, setTodaysLunch] = useState(null);
 
   useEffect(() => {
     const getMenuItems = async () => {
@@ -108,6 +109,27 @@ function useMenu() {
     }
   };
 
+  
+    useEffect(() => {
+      const getTodaysLunch = async () => {
+        try {
+        const options = {
+            method: 'GET',
+          };
+          const lunch = await fetchData(`${API_URL}/lunch/today`, options);
+          setTodaysLunch(lunch);
+          setError(null);
+          
+
+        } catch(e) {
+        console.error(e);
+        setError(e);
+      }};
+    getTodaysLunch();
+    }, [])
+  
+  
+
   return {
     menuArray,
     loading,
@@ -115,6 +137,7 @@ function useMenu() {
     addMenuItem,
     modifyMenuItem,
     deleteMenuItem,
+    todaysLunch,
   };
 }
 

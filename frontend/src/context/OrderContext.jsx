@@ -8,7 +8,7 @@ const OrderProvider = ({children}) => {
 
     const handleAddItem = (item) => {
         //creates new object so the original stays the same
-        const unitPrice = Number(item.price);
+        const unitPrice = Number(item.price ?? item.special_price);
         const quantity = Number(item.quantity);
 
         const cartItem = {
@@ -16,10 +16,10 @@ const OrderProvider = ({children}) => {
             menu_item_id: item.menu_item_id,
             item_name: item.item_name ?? item.name,
             selected_protein: item.selected_protein,
-            selected_spice_level: item.selected_spice_level,
+            selected_spice_level: item.selected_spice_level ?? item.spice_level,
             quantity: quantity,
             unit_price: unitPrice,
-            special_request: item.special_request,
+            special_request: item.special_request ?? null,
         };
 
         setOrder((prevOrder) => [...prevOrder, cartItem]);

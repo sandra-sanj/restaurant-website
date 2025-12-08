@@ -23,7 +23,7 @@ function ShowCards(props) {
     return(
         <>
           <AddToCart item={selectedItem} setSelectedItem={setSelectedItem} />
-          <HighlightCard></HighlightCard>
+          
           {section.map((item) => (
             <FoodCard 
               key={item.menu_item_id}

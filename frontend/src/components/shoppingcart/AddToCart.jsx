@@ -27,7 +27,7 @@ const AddToCart = (props) => {
     useEffect(() => {
         if (item && quantity > 0) {
             item.quantity = quantity;
-            const newPrice = (item.price * quantity);
+            const newPrice = (item.price ?? item.special_price * quantity);
             setPrice(newPrice.toFixed(2));
         }
     }, [item, quantity]);
