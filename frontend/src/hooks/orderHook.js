@@ -44,6 +44,7 @@ function useOrders() {
               quantity: item.quantity,
               //details: `Proteiini: ${item.selected_protein || '-'}, Tulisuus: ${item.selected_spice_level || '-'}, ${item.special_requests || ''}`,
               details: `${item.special_requests || '-'}`,
+              status: order.order_status,
             }));
           }),
         );
