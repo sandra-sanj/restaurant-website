@@ -55,6 +55,7 @@ function useMenu() {
       return newItemResponse; // palauta response
     } catch (e) {
       console.error('Error adding item:', e);
+      throw e;
       //setMenuArray([]);
     } finally {
       setLoading(false);
@@ -79,7 +80,6 @@ function useMenu() {
       );
 
       return modifyResponse;
-      
     } catch (e) {
       console.error('Modify item failed:', e);
     }
@@ -119,8 +119,6 @@ function useMenu() {
   };
 }
 
-
-
 function useOrder() {
   const postNewOrder = async ({order}) => {
     try {
@@ -133,11 +131,10 @@ function useOrder() {
       };
       const loginResult = await fetchData(`${API_URL}/orders`, options);
       console.log(loginResult);
-
-    } catch(e) {
+    } catch (e) {
       console.error(e);
     }
-  }
+  };
   return {postNewOrder};
 }
 

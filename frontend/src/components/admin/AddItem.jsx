@@ -25,8 +25,8 @@ const AddItem = ({onClose}) => {
     nameEn: '',
     description: '',
     descriptionEn: '',
-    price: '',
-    category: '1',  // Default value
+    price: 0,
+    category: 1, // Default value
     lactoseFree: false, // checkboxes
     glutenFree: false,
     milkFree: false,
@@ -61,13 +61,13 @@ const AddItem = ({onClose}) => {
       formData.append('name_en', inputs.nameEn);
       formData.append('description', inputs.description || '');
       formData.append('description_en', inputs.descriptionEn || '');
-      formData.append('price', parseFloat(inputs.price));
+      formData.append('price', parseFloat(inputs.price).toFixed(2));
       formData.append('ingredients', '-');
-      formData.append('spice_level', '0');
-      formData.append('allows_spice_custom', '0');
-      //formData.append('available_proteins', '');
-      //formData.append('default_protein', '');
-      formData.append('is_available', '1');
+      formData.append('spice_level', 0);
+      formData.append('allows_spice_custom', 0);
+      formData.append('available_proteins', 0);
+      formData.append('default_protein', 0);
+      formData.append('is_available', 1);
       formData.append('file', imageFile);
 
       // Debug: Näytä FormData sisältö
