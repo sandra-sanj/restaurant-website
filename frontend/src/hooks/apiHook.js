@@ -8,6 +8,7 @@ function useMenu() {
   const [menuArray, setMenuArray] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [todaysLunch, setTodaysLunch] = useState(null);
 
   useEffect(() => {
     const getMenuItems = async () => {
@@ -31,18 +32,19 @@ function useMenu() {
     getMenuItems();
   }, []);
 
-  const addMenuItem = async (itemData, token) => {
+  const addMenuItem = async (formData, token) => {
     try {
       setLoading(true);
 
       const options = {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          //'Content-Type': 'application/json',
           Authorization: 'Bearer ' + token,
         },
 
-        body: JSON.stringify({itemData}),
+        //body: JSON.stringify(itemData),
+        body: formData,
       };
 
       // Post the data (new item) to API
@@ -54,6 +56,7 @@ function useMenu() {
       return newItemResponse; // palauta response
     } catch (e) {
       console.error('Error adding item:', e);
+      throw e;
       //setMenuArray([]);
     } finally {
       setLoading(false);
@@ -78,7 +81,6 @@ function useMenu() {
       );
 
       return modifyResponse;
-      
     } catch (e) {
       console.error('Modify item failed:', e);
     }
@@ -108,6 +110,27 @@ function useMenu() {
     }
   };
 
+  
+    useEffect(() => {
+      const getTodaysLunch = async () => {
+        try {
+        const options = {
+            method: 'GET',
+          };
+          const lunch = await fetchData(`${API_URL}/lunch/today`, options);
+          setTodaysLunch(lunch);
+          setError(null);
+          
+
+        } catch(e) {
+        console.error(e);
+        setError(e);
+      }};
+    getTodaysLunch();
+    }, [])
+  
+  
+
   return {
     menuArray,
     loading,
@@ -115,10 +138,9 @@ function useMenu() {
     addMenuItem,
     modifyMenuItem,
     deleteMenuItem,
+    todaysLunch,
   };
 }
-
-
 
 function useOrder() {
   const postNewOrder = async ({order}) => {
@@ -132,11 +154,10 @@ function useOrder() {
       };
       const loginResult = await fetchData(`${API_URL}/orders`, options);
       console.log(loginResult);
-
-    } catch(e) {
+    } catch (e) {
       console.error(e);
     }
-  }
+  };
   return {postNewOrder};
 }
 
@@ -274,4 +295,4 @@ function useWeather() {
   return {weather, loading, error};
 }
 
-export {useMenu, useAuthentication, useUser, useWeather};
+export {useMenu, useAuthentication, useUser, useOrder, useWeather};

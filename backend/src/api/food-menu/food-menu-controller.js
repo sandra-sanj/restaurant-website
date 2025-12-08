@@ -58,7 +58,7 @@ const postMenuItem = async (req, res, next) => {
   };
   //console.log(menuItemData);
   menuItemData.image_url = req.file.filename;
-  menuItemData.image_thumb_url = req.file.thumbFilename;
+  menuItemData.image_thumb_url = req.file.thumbFilename || req.file.filename; // Use original file name if thumbnail fails
   //console.log(menuItemData);
 
   const result = await addMenuItem(menuItemData);

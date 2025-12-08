@@ -2,71 +2,93 @@ import {useEffect, useState} from 'react';
 import {useMenu} from '../../hooks/apiHook.js';
 import useForm from '../../hooks/formHooks.js';
 
+// TODO: lisää spice-levels yms puuttuvat kohdat
+// TODO: lähetä allergeenit erillisenä POST-pyyntönä
+
 const AddItem = ({onClose}) => {
-  const [item, setItem] = useState(null);
+  //const [item, setItem] = useState(null);
   const [imageFile, setImageFile] = useState(null);
 
   const {addMenuItem} = useMenu();
+
+  /*const handleItemChange = (event) => {
+    setItem(event.target.files[0]);
+    console.log('item state', item);
+  };*/
+
+  const handleImageChange = (event) => {
+    setImageFile(event.target.files[0]);
+  };
 
   const initValues = {
     nameFi: '',
     nameEn: '',
     description: '',
     descriptionEn: '',
-    price: '',
-    category: '',
-    //lactoseFree: false, // checkboxes
-    //glutenFree: false,
-    //milkFree: false,
-    //vegan: false,
+    price: 0,
+    category: 1, // Default value
+    lactoseFree: false, // checkboxes
+    glutenFree: false,
+    milkFree: false,
+    vegan: false,
   };
 
   const doAddItem = async (inputs) => {
     console.log('doAddItem:', inputs);
 
-    const token = localStorage.getItem('token');
-    //console.log('token', token);
-
-    /*
-    try {
-      const itemData = {
-        image: null,
-      };
-*/
-    try {
-      // Send only the essential fields, no image, no checkboxes
-      const itemData = {
-        category_id: 1, // kovakoodattu
-        name: inputs.nameFi,
-        name_en: inputs.nameEn,
-        description: inputs.description,
-        description_en: inputs.descriptionEn,
-        price: inputs.price,
-        image_url: null,
-        image_thumb_url: null,
-        is_available: 1,
-      };
-
-      console.log('itemdata', itemData);
-      const newItem = await addMenuItem(itemData, token);
-      console.log('Menu item added:', newItem);
-
-      alert('Item added successfully');
-
-      // Clear the form
-      //resetForm();
-    } catch (error) {
-      console.log('Failed to add item:', error);
+    if (
+      !inputs.nameFi ||
+      !inputs.nameEn ||
+      !inputs.description ||
+      !inputs.descriptionEn ||
+      !inputs.price
+    ) {
+      alert('Täytä kaikki kentät!');
+      return;
     }
-  };
 
-  const handleItemChange = (event) => {
-    setItem(event.target.files[0]);
-    console.log('item state', item);
-  };
+    if (!imageFile) {
+      alert('Kuva on pakollinen!');
+      return;
+    }
 
-  const handleImageChange = (event) => {
-    setImageFile(event.target.files[0]);
+    const token = localStorage.getItem('token');
+
+    try {
+      const formData = new FormData();
+      formData.append('category_id', parseInt(inputs.category));
+      formData.append('name', inputs.nameFi);
+      formData.append('name_en', inputs.nameEn);
+      formData.append('description', inputs.description || '');
+      formData.append('description_en', inputs.descriptionEn || '');
+      formData.append('price', parseFloat(inputs.price).toFixed(2));
+      formData.append('ingredients', '-');
+      formData.append('spice_level', 0);
+      formData.append('allows_spice_custom', 0);
+      formData.append('available_proteins', 0);
+      formData.append('default_protein', 0);
+      formData.append('is_available', 1);
+      formData.append('file', imageFile);
+
+      // Debug: Näytä FormData sisältö
+      console.log('FormData sisältö:');
+      for (let [key, value] of formData.entries()) {
+        console.log(key, ':', value);
+      }
+
+      const newItemResponse = await addMenuItem(formData, token);
+
+      if (newItemResponse !== null && newItemResponse !== undefined) {
+        alert(`Tuote "${inputs.nameFi}" lisätty`);
+        //resetForm();
+        setImageFile(null);
+      } else {
+        alert(`Virhe tuotteen "${inputs.nameFi}" lisäämisessä`);
+      }
+    } catch (error) {
+      console.error('Failed to add item:', error);
+      alert('Virhe tuotteen lisäämisessä: ' + error.message);
+    }
   };
 
   const {handleSubmit, handleInputChange, inputs, resetForm} = useForm(
@@ -90,7 +112,6 @@ const AddItem = ({onClose}) => {
 
         {/* Form */}
         <div className="flex flex-col p-4 gap-4 bg-white w-[400px]">
-
           <label className="flex flex-col gap-1">
             Nimi:
             <input
@@ -154,10 +175,10 @@ const AddItem = ({onClose}) => {
               value={inputs.category}
               onChange={handleInputChange}
             >
-              <option value="snacks">Snacks</option>
-              <option value="mains">Mains</option>
-              <option value="desserts">Desserts</option>
-              <option value="drinks">Drinks</option>
+              <option value={1}>Snacks</option>
+              <option value={2}>Mains</option>
+              <option value={3}>Desserts</option>
+              <option value={4}>Drinks</option>
             </select>
           </div>
 

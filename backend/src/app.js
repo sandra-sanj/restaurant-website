@@ -28,16 +28,23 @@ app.use(express.urlencoded({extended: true}));
 app.use('/api/v1', api); // adds prefix and guides all requests to routes inside api
 
 app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
-app.use(express.static(path.join(__dirname, '..', 'public'))); // website is served from public folder
+app.use(express.static(path.join(__dirname, '..', 'public', 'frontend'))); // website is served from public folder
+app.use(
+  '/docs',
+  express.static(path.join(__dirname, '..', 'public', 'apidoc'))
+); // apidocs
 
 // for server side routing, only static site
 app.use((req, res, next) => {
   if (!req.path.startsWith('/api/')) {
-    res.sendFile(path.join(__dirname, '..', 'public', 'index.html'), (err) => {
-      if (err) {
-        res.status(err.status || 500).send('Server error while loading page');
+    res.sendFile(
+      path.join(__dirname, '..', 'public', 'frontend', 'index.html'),
+      (err) => {
+        if (err) {
+          res.status(err.status || 500).send('Server error while loading page');
+        }
       }
-    });
+    );
   } else {
     next();
   }

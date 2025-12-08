@@ -1,9 +1,20 @@
-html {
+@import "tailwindcss";
+/*
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+*/
+
+html, body {
   height: 100%;
+  margin: 0;
 }
 
 body {
-  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  /*min-height: 100vh;*/
 }
 
 :root {
@@ -21,9 +32,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-
-
-
 a {
   font-weight: 500;
   color: #646cff;
@@ -31,13 +39,6 @@ a {
 }
 a:hover {
   color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
- 
 }
 
 input {
@@ -106,19 +107,6 @@ button:focus-visible {
 
 .edit-prof p {
   float: right;
-}
-
-.contacts {
-  margin-top: 10rem;
-}
-
-.footer {
-  margin-top: 10rem;
-  padding-bottom: 0;
-  height: 20rem;
-  width: 100%;
-  background-color:rgb(249, 226, 195);
-  color: white;
 }
 
 .main-content {

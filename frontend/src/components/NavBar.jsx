@@ -13,7 +13,7 @@ function NavBar() {
   }, []);
 
   return (
-    <nav className="navbar">
+    <nav className="navbar h-12">
       <div className="navbar-links">
         <ul>
           <li>

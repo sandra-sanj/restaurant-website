@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import HistoryRow from './../components/admin/HistoryRow';
 import { Table, TableHeader, TableBody, TableRow, TableCell, TableHead } from '@/components/ui/table';
+import { useOrders } from '../hooks/orderHook';
 
 const AdminHistory = () => {
   const [filter, setFilter] = useState('today');
@@ -9,6 +10,8 @@ const AdminHistory = () => {
      setFilter(type);
   };
 
+  const {getOrders} = useOrders();
+
   // mock-data
   const orders = [
     { id: 1, product: 'Tuote A', details: 'Lisätieto 1', quantity: 3, date: '2025-12-06' },
@@ -16,6 +19,9 @@ const AdminHistory = () => {
     { id: 3, product: 'Tuote C', details: 'Lisätieto 3', quantity: 2, date: '2025-12-04' },
     { id: 4, product: 'Tuote C', details: 'Lisätieto 3', quantity: 2, date: '2025-12-04' },
   ];
+  
+
+
 
   return (
     <>
