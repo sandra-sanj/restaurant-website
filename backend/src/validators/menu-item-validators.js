@@ -55,7 +55,7 @@ export const createSpiceLevelChain = () =>
     .trim()
     .notEmpty()
     .withMessage('spice_level is required')
-    .isInt()
+    .isInt({min: 0})
     .withMessage('spice_level must be an integer');
 
 export const createAllowsSpiceCustomChain = () =>
@@ -67,10 +67,10 @@ export const createAllowsSpiceCustomChain = () =>
     .withMessage('allows_spice_custom must be 0 or 1');
 
 export const createAvailableProteinsChain = () =>
-  body('available_proteins').optional().trim(); // could add .isArray() or .isAlphanumeric() depending on data format
+  body('available_proteins').optional().trim();
 
 export const createDefaultProteinChain = () =>
-  body('default_protein').optional().trim(); // could add .isAlphanumeric() if needed
+  body('default_protein').optional().trim();
 
 export const createIsAvailableChain = () =>
   body('is_available')
