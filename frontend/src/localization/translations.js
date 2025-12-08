@@ -12,8 +12,21 @@ const strings = new LocalizedStrings({
       login: 'Kirjaudu',
       cart: 'Ostoskori',
     },
+
     // Home page
-    home: {},
+    home: {
+      tagline: 'Pieni pala Meksikoa keskellä Helsinkiä',
+      register: 'Rekisteröidy',
+    },
+
+    // Menu categories page
+    menu: {
+      All: 'Kaikki',
+      mains: 'Pääruoat',
+      snacks: 'Snacks',
+      desserts: 'Jälkiruoat',
+      drinks: 'Juomat',
+    },
   },
 });
 
