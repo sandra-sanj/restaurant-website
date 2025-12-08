@@ -1,5 +1,4 @@
 import {useState} from 'react';
-import HistoryRow from './../components/admin/HistoryRow';
 import {
   Table,
   TableHeader,
@@ -36,9 +35,6 @@ const AdminHistory = () => {
           Kaikki tilaukset
         </button>
       </div>
-
-      <p>Tähän populoidaan dataa tietokannasta</p>
-      <br />
 
       <Table>
         <TableHeader>
