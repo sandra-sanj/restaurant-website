@@ -13,6 +13,7 @@ const AddToCart = (props) => {
     const [spiceLevel, setSpiceLevel] = useState(null);
     const [price, setPrice] = useState(null);
     const [showModal, setShowModal] = useState(false);
+    const [inputValue, setInputValue] = useState('');
 
 
 
@@ -20,8 +21,8 @@ const AddToCart = (props) => {
 
     useEffect(() => {
         setQuantity(1);
-        setSpiceLevel(null);
-        //setPrice(null);
+        //setSpiceLevel(null);
+        setInputValue('');
         setShowModal(true);
     }, [item]);
 
@@ -38,13 +39,17 @@ const AddToCart = (props) => {
     if (item) {
       item.selected_spice_level = spiceLevel;
     }
-    }, [item, spiceLevel]);
+    }, [spiceLevel]);
+
+    const handleInput = (event) => {
+        setInputValue(event.target.value);
+        item.special_request = inputValue;
+    }
 
     const handleAddToCart = () => {
-        //item.price = price;
-        item.quantity = quantity;
         handleAddItem(item);
         console.log(`${item.name} added to cart`);
+        console.log(`${item.special_request}`)
         setSelectedItem('');
     }
 
@@ -96,12 +101,14 @@ const AddToCart = (props) => {
                     <div>
                         <label>
                         Lisätiedot:
-                        <textarea
+                        <input onSubmit={(e) => handleInput(e)}
                             name="postContent"
                             rows={4}
                             cols={40}
-                            defaultValue="Kirjoita lisätietoa allergioista tai tilauksesta..."
+                            placeholder="Kirjoita lisätietoa allergioista tai tilauksesta..."
                             className="bg-neutral-50"
+                            value={inputValue}
+                            onChange={(e) => handleInput(e)}
                         />
                         </label>
                     </div>

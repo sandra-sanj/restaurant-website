@@ -5,7 +5,7 @@ import OrderCard from "./OrderCard";
 //FoodCard but for items in shopping cart?
 
 function Order() {
-    const { order } = useOrderContext();
+    const { cart } = useOrderContext();
 
 
     return (
