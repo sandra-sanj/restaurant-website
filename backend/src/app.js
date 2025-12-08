@@ -23,8 +23,8 @@ app.use(
   })
 );
 
-app.use(express.static('public')); // website is served from public folder
-app.use('/uploads', express.static('uploads'));
+app.use(express.static(path.join(__dirname, 'public'))); // website is served from public folder
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use(express.json()); // parse json data from http request
 app.use(express.urlencoded({extended: true}));
