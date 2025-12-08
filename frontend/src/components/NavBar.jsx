@@ -9,7 +9,7 @@ function NavBar() {
         handleAutoLogin();
     }, []);
 
-    return <nav className="navbar">
+    return <nav className="navbar h-12">
         <div className="navbar-links">
             <ul>
                 <li>

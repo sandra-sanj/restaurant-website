@@ -28,7 +28,7 @@ function WeatherWidget() {
   const iconUrl = `https://openweathermap.org/img/wn/${weatherData.icon}@2x.png`;
 
   return (
-    <div className="max-w-[380px] mx-auto mt-4 p-5 rounded-lg shadow bg-white border border-gray-100">
+    <div className="max-w-[380px] mx-auto mt-4 mb-4 p-5 rounded-lg shadow bg-white border border-gray-100">
       <div className="flex items-center gap-2 mb-5">
         <Cloud className="w-6 h-6 text-blue-500" />
         <h3 className="text-xl font-semibold text-gray-800">Sää - {city}</h3>

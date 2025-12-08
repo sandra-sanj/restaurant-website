@@ -2,6 +2,7 @@ import {useNavigate} from 'react-router';
 import Login from './Login';
 import {Button} from '@/components/ui/button';
 import WeatherWidget from '../components/WeatherWidget';
+import Contacts from '../components/home/Contacts';
 
 //TODO: varmista että navigaatio oikeaan osoitteeseen
 // sitten ehkä oma funktio
@@ -13,8 +14,8 @@ function Home() {
   return (
     <>
       <div>
-        <h1>Taqueria 21</h1>
-        <p>Pieni pala Meksikoa keskellä Helsinkiä</p>
+        <h1 className='p-5'>Taqueria 21</h1>
+        <p className='mb-3'>Pieni pala Meksikoa keskellä Helsinkiä</p>
       </div>
       <div>
         <button onClick={() => navigate('/login')}>Kirjaudu</button>
@@ -55,7 +56,7 @@ function Home() {
         </div>
       </div>
       <h3>MENU</h3>
-      <div className="container-home">
+      <div className="container-home mb-15">
         <div>
           <img
             src={imgSrc + '/home/mains.jpg'}
@@ -89,18 +90,7 @@ function Home() {
           <p>JUOMAT</p>
         </div>
       </div>
-      <h3>YHTEYSTIEDOT</h3>
-      <div className="contacts" id="contacts">
-        <p>Aukioloajat: </p>
-        <p>ma-pe: 11-22</p>
-        <p>la: 12-22</p>
-        <p>su: suljettu</p>
-        <p>Osoite: Kalevankatu 21, 00100 Helsinki</p>
-        <p>Sähköposti: info@taqueria21.fi</p>
-        <p>Puhelinnumero: +358 7776669</p>
-      </div>
-      <WeatherWidget />{' '}
-      {/* myöhemmin voi siirtää muualle, esim.footer, sidebar */}
+      
     </>
   );
 }
