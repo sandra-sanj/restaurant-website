@@ -1,18 +1,22 @@
 import {useMenu} from '../../hooks/apiHook';
 
-const DeleteConfirmation = ({onClose, selectedItem}) => {
+const DeleteConfirmation = ({onClose, selectedItem, deleteSuccess}) => {
   const {deleteMenuItem} = useMenu();
 
   const handleDeleteItemClick = async () => {
     console.log('Delete from delete confirmation pressed');
 
     const token = localStorage.getItem('token');
-    //console.log('token DeleteConfirmationista:', token);
 
     try {
       const delResponse = await deleteMenuItem(selectedItem, token);
       console.log('delResponse:', delResponse);
       alert(`${selectedItem.name} poistettu`);
+
+      if (deleteSuccess) {
+        deleteSuccess(selectedItem.menu_item_id); // Delete item from table
+      }
+
       onClose();
     } catch (e) {
       console.log(e);
