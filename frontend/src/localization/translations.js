@@ -27,6 +27,35 @@ const strings = new LocalizedStrings({
       desserts: 'Jälkiruoat',
       drinks: 'Juomat',
     },
+
+    //Contact info
+    contact: {
+      openingHours: 'Aukioloajat',
+      address: 'Osoite',
+      email: 'Sähköposti',
+      phone: 'Puhelinnumero',
+    },
+
+    // Weather
+    weather: {
+      weather: 'Sää',
+      loading: 'Ladataan säätietoja...',
+      humidity: 'Kosteus',
+      wind: 'Tuuli',
+      visibility: 'Näkyyvyys',
+      updated: 'Päivitetty',
+      feelsLike: 'Tuntuu kuin',
+    },
+
+    // Common
+    common: {
+      add: 'Lisää',
+      edit: 'Muokkaa',
+      delete: 'Poistaa',
+      save: 'Tallenna',
+      cancel: 'Peruuta',
+      confirm: 'Vahvista',
+    },
   },
 });
 
