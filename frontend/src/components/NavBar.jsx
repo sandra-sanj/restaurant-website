@@ -8,7 +8,7 @@ import {useState} from 'react';
 function NavBar() {
   const {handleAutoLogin, user} = useUserContext();
   const [isAdmin, setIsAdmin] = useState(false);
-  const {language, toggleLanguage, strings} = useLanguage();
+  const {strings} = useLanguage();
 
   useEffect(() => {
     handleAutoLogin();
