@@ -52,6 +52,7 @@ const EditItem = ({onClose}) => {
 
       if (response) {
         alert(`"${itemData.name}" muokattu.`);
+        onClose();
       } else {
         alert(`Virhe: "${itemData.name}" ei muokattu.`);
       }
