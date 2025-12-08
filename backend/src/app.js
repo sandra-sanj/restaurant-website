@@ -3,6 +3,11 @@ import express from 'express';
 import api from './api/index.js';
 import {errorHandler, notFoundHandler} from './middlewares/error-handlers.js';
 import cors from 'cors';
+import path from 'path';
+import {fileURLToPath} from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 
@@ -18,14 +23,43 @@ app.use(
   })
 );
 
-app.use(express.static('public')); // website is served from public folder
-app.use('/uploads', express.static('uploads'));
+app.use(express.json()); // parse json data from http request
+app.use(express.urlencoded({extended: true}));
+app.use('/api/v1', api); // adds prefix and guides all requests to routes inside api
+
+app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
+app.use(express.static(path.join(__dirname, '..', 'public'))); // website is served from public folder
+
+// for server side routing, only static site
+app.use((req, res, next) => {
+  if (!req.path.startsWith('/api/')) {
+    res.sendFile(path.join(__dirname, '..', 'public', 'index.html'), (err) => {
+      if (err) {
+        res.status(err.status || 500).send('Server error while loading page');
+      }
+    });
+  } else {
+    next();
+  }
+});
+
+/* app.use(express.static(path.join(__dirname, 'public'))); // website is served from public folder
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use(express.json()); // parse json data from http request
 app.use(express.urlencoded({extended: true}));
 app.use('/api/v1', api); // adds prefix and guides all requests to routes inside api
 
-app.use(notFoundHandler); // default for all routes not handled by routers above
+// for server side routing
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'), (error) => {
+    if (error) {
+      res.status(500).send('Error loading page');
+    }
+  });
+}); */
+
+//app.use(notFoundHandler); // default for all routes not handled by routers above
 app.use(errorHandler); // error handler
 
 export default app;

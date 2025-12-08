@@ -40,7 +40,7 @@ function Cart() {
         <h2 className="font-semibold">Tuotteet</h2>
         { order.map((item) => (
             <OrderCard 
-              key={item.menu_item_id}
+              key={item.unique_id}
               item={item}
               className="flex justify-between items-center border-b py-2"
             />)) 
