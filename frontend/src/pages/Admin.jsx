@@ -30,13 +30,19 @@ const Admin = () => {
 
   const handleAddItemClick = () => {
     setAddItemOpen(true);
+    setEditItemOpen(false);
+    setDeleteItemOpen(false);
   };
 
   const handleEditItemClick = () => {
+    setAddItemOpen(false);
     setEditItemOpen(true);
+    setDeleteItemOpen(false);
   };
 
   const handleDeleteItemClick = () => {
+    setAddItemOpen(false);
+    setEditItemOpen(false);
     setDeleteItemOpen(true);
   };
 
@@ -54,10 +60,10 @@ const Admin = () => {
 
   return (
     <>
-      <h1 className='m-3'>Ylläpito</h1>
+      <h1 className="m-3">Ylläpito</h1>
       <div className="flex flex-row mt-5">
-        <h2 className='pr-1'>Avoimet tilaukset:</h2>
-        <p className=''>{openOrderIds.length}</p>
+        <h2 className="pr-1">Avoimet tilaukset:</h2>
+        <p className="">{openOrderIds.length}</p>
       </div>
 
       <Table className="mt-4">
