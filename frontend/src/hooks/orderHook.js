@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { fetchData } from '../utils/fetchData';
+import {useState, useEffect} from 'react';
+import {fetchData} from '../utils/fetchData';
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -10,35 +10,49 @@ function useOrders() {
 
   useEffect(() => {
     const getOrders = async () => {
+      const token = localStorage.getItem('token');
 
       try {
         setLoading(true);
-
         const options = {
           method: 'GET',
+          headers: {
+            Authorization: 'Bearer ' + token,
+          },
         };
 
         const ordersRes = await fetchData(`${API_URL}/orders`, options);
-        
+
         const ordersWithItems = await Promise.all(
           ordersRes.map(async (order) => {
-            const itemsRes = await fetchData(`${API_URL}/orders/${order.order_id}/details`, { method: 'GET' });
-            return itemsRes.order_items.map(item => ({
-              id: order.order_id,
+            const itemsRes = await fetchData(
+              `${API_URL}/orders/${order.order_id}/details`,
+              {
+                method: 'GET',
+                headers: {
+                    Authorization: 'Bearer ' + token,
+                }
+            },
+            );
+
+            return itemsRes.items.map((item) => ({
+              id: item.order_item_id,
+              orderId: order.order_id,
               customer: order.customer_name,
-              date: order.created_at.split(' ')[0],
+              date: new Date(order.created_at).toLocaleDateString('fi-FI'),
               product: item.item_name,
               quantity: item.quantity,
-              details: `Protein: ${item.selected_protein || 'N/A'}, Spice: ${item.selected_spice_level || 'N/A'}, ${item.special_requests || ''}`,
+              //details: `Proteiini: ${item.selected_protein || '-'}, Tulisuus: ${item.selected_spice_level || '-'}, ${item.special_requests || ''}`,
+              details: `${item.special_requests || '-'}`,
             }));
-          })
+          }),
         );
 
         setOrders(ordersWithItems.flat());
         setError(null);
       } catch (e) {
         console.error('Error fetching orders:', e);
-        setError('Error fetching orders');
+        setError('Tilauksien haku epäonnistui');
         setOrders([]);
       } finally {
         setLoading(false);
@@ -48,7 +62,7 @@ function useOrders() {
     getOrders();
   }, []);
 
-  return { orders, loading, error };
+  return {orders, loading, error};
 }
 
-export { useOrders };
+export {useOrders};
