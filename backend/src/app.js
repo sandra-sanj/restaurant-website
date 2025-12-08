@@ -32,7 +32,11 @@ app.use('/api/v1', api); // adds prefix and guides all requests to routes inside
 
 // for server side routing
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  res.sendFile(path.join(__dirname, 'public', 'index.html'), (error) => {
+    if (error) {
+      res.status(500).send('Error loading page');
+    }
+  });
 });
 
 //app.use(notFoundHandler); // default for all routes not handled by routers above
