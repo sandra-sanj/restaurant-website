@@ -20,16 +20,16 @@ function NavBar() {
   
 
   return (
-    <nav className="navbar h-12">
+    <nav className="navbar h-16 top-0 bg-[#FFFFFF] flex items-center justify-center sticky border-b">
       <div className="navbar-links">
-        <ul>
+        <ul className="flex items-center [&>li]:text-black font-medium [&>li]:decoration-inherit">
           <li>
-            <Link to="/" className="nav-link">
+            <Link to="/" className="nav-link hover:text-[#a84040]">
               {strings.nav.home}
             </Link>
           </li>
           <li>
-            <Link to="/menu" className="nav-link">
+            <Link to="/menu" className="nav-link hover:text-[#a84040]">
               {strings.nav.menu}
             </Link>
           </li>
@@ -37,12 +37,12 @@ function NavBar() {
           {user && isAdmin && (
               <>
                 <li>
-                  <Link to="/admin" className="nav-link">
+                  <Link to="/admin" className="nav-link hover:text-[#a84040]">
                     {strings.nav.admin}
                   </Link>
                 </li>
                 <li>
-                  <Link to="/history" className="nav-link">
+                  <Link to="/history" className="nav-link hover:text-[#a84040]">
                     {strings.nav.history}
                   </Link>
                 </li>
@@ -53,7 +53,7 @@ function NavBar() {
           {user ? (
             <>
               <li>
-                <Link to="/profile" className="nav-link">
+                <Link to="/profile" className="nav-link hover:text-[#a84040]">
                   {strings.nav.profile}
                 </Link>
               </li>
@@ -61,7 +61,7 @@ function NavBar() {
           ) : (
             <>
               <li>
-                <Link to="/login" className="nav-link">
+                <Link to="/login" className="nav-link hover:text-[#a84040]">
                   {strings.nav.login}
                 </Link>
               </li>
@@ -69,13 +69,13 @@ function NavBar() {
           )}
 
           <li>
-            <Link to="/cart" className="nav-link">
+            <Link to="/cart" className="nav-link hover:text-[#a84040]">
               {strings.nav.cart}
             </Link>
           </li>
 
           <li>
-            <button onClick={toggleLanguage} className="nav-link">
+            <button onClick={toggleLanguage} className="nav-link hover:bg-stone-100!">
               {language === 'fi' ? '🇬🇧 EN' : '🇫🇮 FI'}
             </button>
           </li>

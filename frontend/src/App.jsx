@@ -27,10 +27,11 @@ const App = () => {
     <>
       <UserProvider>
         <OrderProvider>
-          <div className="flex flex-col">
+          <div className="flex flex-col bg-[#fdf8f8]">
             <NavBar />
             
-            <main className="main-content min-h-[calc(100vh-420px-48px-32px)]">
+            {/* Fixed min height to make nav top and footer bottom */}
+            <main className="main-content min-h-[calc(100vh-420px-64px)]">
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/menu/" element={<Menu />}>

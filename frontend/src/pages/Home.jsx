@@ -14,12 +14,20 @@ function Home() {
   return (
     <>
       <div>
-        <h1 className='p-5'>Taqueria 21</h1>
-        <p className='mb-3'>Pieni pala Meksikoa keskellä Helsinkiä</p>
+        <h1 className="p-5">Taqueria 21</h1>
+        <p className="mb-5 text-lg">Pieni pala Meksikoa keskellä Helsinkiä</p>
       </div>
       <div>
-        <button onClick={() => navigate('/login')}>Kirjaudu</button>
-        <button onClick={() => navigate('/login/register')}>
+        <button
+          onClick={() => navigate('/login')}
+          className="bg-[#982A2A]! text-white hover:bg-[#792121]!"
+        >
+          Kirjaudu
+        </button>
+        <button
+          onClick={() => navigate('/login/register')}
+          className="bg-[#982A2A]! text-white hover:bg-[#792121]!"
+        >
           Rekisteröidy
         </button>
       </div>
@@ -90,7 +98,6 @@ function Home() {
           <p>JUOMAT</p>
         </div>
       </div>
-      
     </>
   );
 }
