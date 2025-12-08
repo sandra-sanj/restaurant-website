@@ -29,6 +29,10 @@ app.use('/api/v1', api); // adds prefix and guides all requests to routes inside
 
 app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
 app.use(express.static(path.join(__dirname, '..', 'public', 'frontend'))); // website is served from public folder
+app.use(
+  '/docs',
+  express.static(path.join(__dirname, '..', 'public', 'apidoc'))
+); // apidocs
 
 // for server side routing, only static site
 app.use((req, res, next) => {
