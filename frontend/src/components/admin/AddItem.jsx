@@ -86,7 +86,7 @@ const AddItem = ({onClose}) => {
 
       if (newItemResponse !== null && newItemResponse !== undefined) {
         alert(`Tuote "${inputs.nameFi}" lisätty`);
-        //resetForm();
+        onClose();
         setImageFile(null);
       } else {
         alert(`Virhe tuotteen "${inputs.nameFi}" lisäämisessä`);
