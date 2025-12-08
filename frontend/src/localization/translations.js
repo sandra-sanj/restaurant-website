@@ -21,7 +21,7 @@ const strings = new LocalizedStrings({
 
     // Menu categories page
     menu: {
-      All: 'Kaikki',
+      all: 'Kaikki',
       mains: 'Pääruoat',
       snacks: 'Snacks',
       desserts: 'Jälkiruoat',
@@ -55,6 +55,63 @@ const strings = new LocalizedStrings({
       save: 'Tallenna',
       cancel: 'Peruuta',
       confirm: 'Vahvista',
+    },
+  },
+
+  en: {
+    // Navigation
+    nav: {
+      home: 'Home',
+      menu: 'Menu',
+      admin: 'Admin',
+      history: 'History',
+      profile: 'Profile',
+      login: 'Login',
+      cart: 'Cart',
+    },
+
+    // Home page
+    home: {
+      tagline: 'A little piece of Mexico in the heart of Helsinki',
+      register: 'Register',
+    },
+
+    // Menu categories page
+    menu: {
+      all: 'All',
+      mains: 'Mains',
+      snacks: 'Snacks',
+      desserts: 'Desserts',
+      drinks: 'Drinks',
+    },
+
+    //Contact info
+    contact: {
+      openingHours: 'Opening Hours',
+      address: 'Address',
+      email: 'Email',
+      phone: 'Phone',
+    },
+
+    // Weather
+    weather: {
+      weather: 'Weather',
+      loading: 'Loading weather data...',
+      humidity: 'Humidity',
+      wind: 'Wind',
+      visibility: 'Visibility',
+      updated: 'Updated',
+      feelsLike: 'Feels Like',
+    },
+
+    // Common
+    common: {
+      add: 'Add',
+      edit: 'Edit',
+      delete: 'Delete',
+      save: 'Save',
+      cancel: 'Cancel',
+      confirm: 'Confirm',
     },
   },
 });
