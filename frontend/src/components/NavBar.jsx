@@ -24,12 +24,12 @@ function NavBar() {
       <div className="navbar-links">
         <ul className="flex items-center [&>li]:text-black font-medium [&>li]:decoration-inherit">
           <li>
-            <Link to="/" className="nav-link hover:text-[#a84040]">
+            <Link to="/" className="nav-link hover:text-stone-500!">
               {strings.nav.home}
             </Link>
           </li>
           <li>
-            <Link to="/menu" className="nav-link hover:text-[#a84040]">
+            <Link to="/menu" className="nav-link hover:text-stone-500!">
               {strings.nav.menu}
             </Link>
           </li>
@@ -37,12 +37,12 @@ function NavBar() {
           {user && isAdmin && (
               <>
                 <li>
-                  <Link to="/admin" className="nav-link hover:text-[#a84040]">
+                  <Link to="/admin" className="nav-link hover:text-stone-500!">
                     {strings.nav.admin}
                   </Link>
                 </li>
                 <li>
-                  <Link to="/history" className="nav-link hover:text-[#a84040]">
+                  <Link to="/history" className="nav-link hover:text-stone-500!">
                     {strings.nav.history}
                   </Link>
                 </li>
@@ -53,7 +53,7 @@ function NavBar() {
           {user ? (
             <>
               <li>
-                <Link to="/profile" className="nav-link hover:text-[#a84040]">
+                <Link to="/profile" className="nav-link hover:text-stone-500!">
                   {strings.nav.profile}
                 </Link>
               </li>
@@ -61,7 +61,7 @@ function NavBar() {
           ) : (
             <>
               <li>
-                <Link to="/login" className="nav-link hover:text-[#a84040]">
+                <Link to="/login" className="nav-link hover:text-stone-500!">
                   {strings.nav.login}
                 </Link>
               </li>
@@ -69,7 +69,7 @@ function NavBar() {
           )}
 
           <li>
-            <Link to="/cart" className="nav-link hover:text-[#a84040]">
+            <Link to="/cart" className="nav-link hover:text-stone-500!">
               {strings.nav.cart}
             </Link>
           </li>
