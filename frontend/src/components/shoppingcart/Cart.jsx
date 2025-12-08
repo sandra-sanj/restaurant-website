@@ -62,7 +62,7 @@ function Cart(props) {
                 <p>{} </p>
               </div>
             </div>
-            {/*}
+            {/*} TODO: siirrä OrderCard.jsx
             <div className="flex gap-2 items-center">
               <button className="border rounded bg-[#982A2A]! text-white">x</button>
               <div className="flex items-center gap-1">
