@@ -61,7 +61,9 @@ function WeatherWidget() {
             <Droplets className="w-5 h-5 text-blue-500" />
           </div>
           <p className="text-sm text-gray-700">Kosteus:</p>
-          <p className="text-base font-semibold">{weatherData.humidity}%</p>
+          <p className="text-base font-semibold text-gray-900">
+            {weatherData.humidity}%
+          </p>
         </div>
 
         <div className="text-center p-2">
@@ -69,7 +71,7 @@ function WeatherWidget() {
             <Wind className="w-5 h-5 text-green-500" />
           </div>
           <p className="text-sm text-gray-700">Tuuli: </p>
-          <p className="text-base  font-semibold">
+          <p className="text-base  font-semibold text-gray-900">
             {weatherData.windSpeed} m/s
           </p>
         </div>
@@ -79,7 +81,9 @@ function WeatherWidget() {
             <Eye className="w-5 h-5 text-purple-500" />
           </div>
           <p className="text-sm text-gray-700">Näkyvyys: </p>
-          <p className="text-base font-semibold">{weatherData.visibility} km</p>
+          <p className="text-base font-semibold text-gray-900">
+            {weatherData.visibility} km
+          </p>
         </div>
       </div>
 
