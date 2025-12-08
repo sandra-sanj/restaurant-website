@@ -2,7 +2,8 @@ import {useEffect, useState} from 'react';
 import {useMenu} from '../../hooks/apiHook';
 import useForm from '../../hooks/formHooks';
 
-// TODO: check if allergens are modified
+// TODO: hae allergeenit erillisenä pyyntönä
+// TODO: toteuta kuvan lisäys -> tarvitsee formData-objektin!
 
 const EditItem = ({onClose}) => {
   const {menuArray, modifyMenuItem} = useMenu();
