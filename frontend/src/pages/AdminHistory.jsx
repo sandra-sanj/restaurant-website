@@ -17,6 +17,13 @@ const AdminHistory = () => {
     setFilter(type);
   };
 
+  const orderIds = [];
+  orders.forEach((item) => {
+    if (!orderIds.includes(item.orderId)) {
+      orderIds.push(item.orderId);
+    }
+  });
+
   return (
     <>
       <h1>Tilaushistoria</h1>
@@ -62,7 +69,7 @@ const AdminHistory = () => {
 
       <br />
       <footer>
-        <p>Tilauksia yhteensä {orders.length}</p>
+        <p>Tilauksia yhteensä {orderIds.length}</p>
       </footer>
     </>
   );
