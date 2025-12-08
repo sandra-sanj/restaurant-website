@@ -3,6 +3,7 @@ import Info from './Info';
 import { useMenu } from '../../hooks/apiHook';
 import { useState } from 'react';
 import AddToCart from '../shoppingcart/AddToCart';
+import HighlightCard from './HighlightCard';
 
 function ShowCards(props) {
   const [selectedItem, setSelectedItem] = useState(null);
@@ -22,7 +23,7 @@ function ShowCards(props) {
     return(
         <>
           <AddToCart item={selectedItem} setSelectedItem={setSelectedItem} />
-
+          <HighlightCard></HighlightCard>
           {section.map((item) => (
             <FoodCard 
               key={item.menu_item_id}
