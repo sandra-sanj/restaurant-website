@@ -22,7 +22,7 @@ function NavBar() {
         <ul>
           <li>
             <Link to="/" className="nav-link">
-              Home{' '}
+              Etusivu{' '}
             </Link>
           </li>
           <li>
@@ -35,12 +35,12 @@ function NavBar() {
               <>
                 <li>
                   <Link to="/admin" className="nav-link">
-                    Admin{' '}
+                    Ylläpito{' '}
                   </Link>
                 </li>
                 <li>
                   <Link to="/history" className="nav-link">
-                    History{' '}
+                    Tilaushistoria{' '}
                   </Link>
                 </li>
               </>,
@@ -50,7 +50,7 @@ function NavBar() {
             <>
               <li>
                 <Link to="/profile" className="nav-link">
-                  Profile{' '}
+                  Profiili{' '}
                 </Link>
               </li>
             </>
@@ -58,7 +58,7 @@ function NavBar() {
             <>
               <li>
                 <Link to="/login" className="nav-link">
-                  LogIn{' '}
+                  Kirjaudu{' '}
                 </Link>
               </li>
             </>
@@ -66,7 +66,7 @@ function NavBar() {
 
           <li>
             <Link to="/cart" className="nav-link">
-              Cart{' '}
+              Ostoskori{' '}
             </Link>
           </li>
         </ul>
