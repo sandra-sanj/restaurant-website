@@ -1,11 +1,14 @@
-import {Link} from 'react-router';
-import {useUserContext} from '../hooks/contextHook';
-import {useEffect} from 'react';
+import {Link} from "react-router";
+import { useUserContext } from "../hooks/contextHook";
+import {useLanguage} from '../hooks/useLanguage';
+import { useEffect } from "react";
 import {useState} from 'react';
 
 function NavBar() {
-  const {handleAutoLogin, user} = useUserContext();
-  const [isAdmin, setIsAdmin] = useState(false);
+    const { handleAutoLogin, user} = useUserContext();
+    const [isAdmin, setIsAdmin] = useState(false);
+    const {language, toggleLanguage, strings} = useLanguage();
+
 
   useEffect(() => {
     handleAutoLogin();
@@ -22,12 +25,12 @@ function NavBar() {
         <ul>
           <li>
             <Link to="/" className="nav-link">
-              Etusivu{' '}
+              {strings.nav.home}
             </Link>
           </li>
           <li>
             <Link to="/menu" className="nav-link">
-              Menu{' '}
+              {strings.nav.menu}
             </Link>
           </li>
 
@@ -35,22 +38,23 @@ function NavBar() {
               <>
                 <li>
                   <Link to="/admin" className="nav-link">
-                    Ylläpito{' '}
+                    {strings.nav.admin}
                   </Link>
                 </li>
                 <li>
                   <Link to="/history" className="nav-link">
-                    Tilaushistoria{' '}
+                    {strings.nav.history}
                   </Link>
                 </li>
-              </>,
+              </>
             )}
+  
 
           {user ? (
             <>
               <li>
                 <Link to="/profile" className="nav-link">
-                  Profiili{' '}
+                  {strings.nav.profile}
                 </Link>
               </li>
             </>
@@ -58,7 +62,7 @@ function NavBar() {
             <>
               <li>
                 <Link to="/login" className="nav-link">
-                  Kirjaudu{' '}
+                  {strings.nav.login}
                 </Link>
               </li>
             </>
@@ -66,8 +70,14 @@ function NavBar() {
 
           <li>
             <Link to="/cart" className="nav-link">
-              Ostoskori{' '}
+              {strings.nav.cart}
             </Link>
+          </li>
+
+          <li>
+            <button onClick={toggleLanguage} className="nav-link">
+              {language === 'fi' ? '🇬🇧 EN' : '🇫🇮 FI'}
+            </button>
           </li>
         </ul>
       </div>
