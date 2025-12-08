@@ -13,7 +13,6 @@ import {
 } from '@/components/ui/table';
 import {useOrders} from '../hooks/orderHook';
 
-// TODO: lisää admin-navigaatio: button: historia/avoimet tilaukset, p: Ylläpito ja p: käyttäjänimi
 
 const Admin = () => {
   const [addItemOpen, setAddItemOpen] = useState(false);
