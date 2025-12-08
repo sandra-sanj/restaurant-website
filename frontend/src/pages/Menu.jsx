@@ -1,6 +1,5 @@
 import MenuNav from '../components/menu/MenuNav';
 import FoodCard from '../components/menu/FoodCard';
-import FoodCardPortrait from '../components/menu/FoodCardPortrait';
 import HighlightCard from '../components/menu/HighlightCard';
 import Mains from "../components/menu/Mains";
 import Snacks from "../components/menu/Snacks";

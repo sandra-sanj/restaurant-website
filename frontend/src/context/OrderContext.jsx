@@ -12,6 +12,7 @@ const OrderProvider = ({children}) => {
         const quantity = Number(item.quantity);
 
         const cartItem = {
+            uniqeue_id: item.menu_item_id + Random.Number,
             menu_item_id: item.menu_item_id,
             item_name: item.item_name ?? item.name,
             selected_protein: item.selected_protein,
