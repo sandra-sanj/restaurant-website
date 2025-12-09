@@ -19,3 +19,5 @@ module.exports = {
   },
   plugins: [],
 };
+
+// Button hover: hover:bg-[#792121]!
