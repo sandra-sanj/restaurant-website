@@ -19,7 +19,7 @@ const strings = new LocalizedStrings({
       register: 'Rekisteröidy',
 
       //Contact info
-      contacts: 'YHTEISTIEDOT',
+      contacts: 'YHTEYSTIEDOT',
       openingHours: 'Aukioloajat:',
       maPe: 'ma-pe:',
       la: 'la:',
@@ -56,6 +56,25 @@ const strings = new LocalizedStrings({
       save: 'Tallenna',
       cancel: 'Peruuta',
       confirm: 'Vahvista',
+    },
+
+    //Login/Register forms
+    auth: {
+      loginTitle: 'Kirjaudu sisään!',
+      registerTitle: 'Luo käyttäjä',
+      username: 'Käyttäjänimi',
+      email: 'Sähköposti',
+      password: 'Salasana',
+      phone: 'Puhelinnumero',
+      phoneFormat: 'Puhelinnumero (muoto: +358)',
+      loginButton: 'Kirjaudu',
+      registerButton: 'Luo käyttäjä',
+    },
+
+    // Profile
+    profile: {
+      editTitle: 'Muokkaa käyttäjä',
+      saveButton: 'Tallenna',
     },
   },
 
@@ -116,6 +135,25 @@ const strings = new LocalizedStrings({
       save: 'Save',
       cancel: 'Cancel',
       confirm: 'Confirm',
+    },
+
+    //Login/Register forms
+    auth: {
+      loginTitle: 'Login!',
+      registerTitle: 'Create Account',
+      username: 'Username',
+      email: 'Email',
+      password: 'Password',
+      phone: 'Phone Number',
+      phoneFormat: 'Phone Number (format: +358)',
+      loginButton: 'Login',
+      registerButton: 'Create Account',
+    },
+
+    // Profile
+    profile: {
+      editTitle: 'Edit User',
+      saveButton: 'Save',
     },
   },
 });
