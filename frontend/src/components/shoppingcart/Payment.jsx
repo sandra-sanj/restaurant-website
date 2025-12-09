@@ -3,14 +3,13 @@ import { useOrderContext } from "../../hooks/contextHook";
 
 const Payment = (props) => {
     const [msg, setMsg] = useState('');
-    const {next, setNext} = props;
+    const {setNext, payment} = props;
     const {handleOrder} = useOrderContext();
 
     const handleClick = () => {
         setMsg('maksua suoritetaan...')
 
         setTimeout(() => {
-            console.log('5 sek kulunut');
             handleOrder();
             setNext('confirmation');
         }, 3000)
@@ -20,7 +19,8 @@ const Payment = (props) => {
     <>
         <dialog open>
             <form method="dialog">
-                <p>tähä valittu metodi</p>
+                <p>Valittu metodi: {payment}</p>
+                <p>Suorita maksu</p>
                 <button onClick={() => handleClick()}>ok</button>
             </form>
         </dialog>

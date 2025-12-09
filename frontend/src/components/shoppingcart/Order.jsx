@@ -39,7 +39,7 @@ function Order(props) {
 
     const placeOrder = () => {
         try {
-            inputs.total_price = total;
+            //inputs.total_price = total;
             inputs.order_type = delivery;
             console.log('con: ', inputs);
             handleContactInfo(inputs);
@@ -47,6 +47,10 @@ function Order(props) {
         } catch(error) {
             console.log(error);
         }
+    }
+
+    const handlePayment = (method) => {
+        setPayment(method);
     }
 
     
@@ -61,30 +65,16 @@ function Order(props) {
     <>
      <div className="flex flex-col gap-2 p-4 bg-white">
         <h2 className="font-semibold">Maksutapa</h2>
-        <div className="flex flex-row justify-center gap-2">
-          
-          <button className={`px-3 py-1 rounded border ${payment === "Mobilepay" ? "bg-[#2A4B11]! text-white" : "bg-white text-black"}`} onClick={() => setPayment("Mobilepay")}>Mobilepay</button>
+          <button className={`px-3 py-1 rounded border ${payment === "Mobilepay" ? "!bg-[#2A4B11] text-white" : "bg-white text-black"}`} onClick={() => handlePayment("Mobilepay")}>Mobilepay</button>
 
-          <button className={`px-3 py-1 rounded border ${payment === "Visa" ? "bg-[#2A4B11]! text-white" : "bg-white text-black"}`} onClick={() => setPayment("Visa")}>Visa</button>
-        </div>
+          <button className={`px-3 py-1 rounded border ${payment === "Applepay" ? "!bg-[#2A4B11] text-white" : "bg-white text-black"}`} onClick={() => handlePayment("Applepay")}>Applepay</button>
+        
+
+          <button className={`px-3 py-1 rounded border ${payment === "Visa" ? "!bg-[#2A4B11] text-white" : "bg-white text-black"}`} onClick={() => handlePayment("Visa")}>Visa</button>
+
+          <button className={`px-3 py-1 rounded border ${payment === "Mastercard" ? "!bg-[#2A4B11] text-white" : "bg-white text-black"}`} onClick={() => handlePayment("Mastercard")}>Mastercard</button>
+          
       </div>
-     <div>
-        <h2>Maksutavat</h2>
-        <ul>
-            <li>
-                <button onClick={setPayment('Mobilepay')}>Mobilepay</button>
-            </li>
-            <li>
-                <button onClick={setPayment('Visa')}>Visa</button>
-            </li>
-            <li>
-                <button onClick={setPayment('Mastercard')}>Mastercard</button>
-            </li>
-            <li>
-                <button onClick={setPayment('Apple pay')}>Apple pay</button>
-            </li>
-        </ul>
-        </div>
         <h2>Yhteystiedot: </h2>
         <form onSubmit={ (e) => {handleSubmit(e)} }>
             <div>

@@ -58,10 +58,10 @@ const OrderProvider = ({children}) => {
     }
 
     const handleOrder = () => {
-        console.log('tästä sitten tilaus apiin');
+        //console.log('tästä sitten tilaus apiin');
         console.log(order);
-        postNewOrder(order);
-        setCart([]);
+        postNewOrder({order});
+        //setCart([]);
     }
 
 
