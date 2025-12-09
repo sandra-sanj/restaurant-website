@@ -25,10 +25,11 @@ const EditForm = () => {
   const {inputs, handleInputChange, handleSubmit} = useForm(doEdit, initValues);
 
   return (
+    <div className='m-5'>
+    <h1 className=''>Muokkaa käyttäjää</h1>
     <div className="m-5 outline-2 outline-gray-400 rounded-md">
       {/* Header */}
-      <div className="flex justify-between items-center text-white p-4 rounded-t-md bg-[#982A2A]!">
-        <p className="font-bold">Muokkaa käyttäjää</p>
+      <div>
         {/*}
         <span
             className="cursor-pointer font-bold text-lg hover:text-gray-400"
@@ -40,7 +41,7 @@ const EditForm = () => {
       </div>
 
       {/* Form */}
-      <div className="flex flex-col p-4 gap-4 bg-white w-[400px]">
+      <div className="flex flex-col p-4 mt-7 gap-4 bg-white w-[400px]">
         <label className="flex flex-col gap-1">
           Käyttäjänimi:
           <input
@@ -100,6 +101,7 @@ const EditForm = () => {
           </button>
         </div>
       </div>
+    </div>
     </div>
   );
 };
