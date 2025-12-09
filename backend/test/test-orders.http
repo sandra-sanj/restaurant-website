@@ -30,7 +30,7 @@
 ### Orders
 
 ### Get all orders (admin only - require token)
-GET http://localhost:3000/api/v1/orders
+GET http://localhost:3000/api/v1/orders/8
 Authorization: Bearer {{adminToken}}
 
 
@@ -106,7 +106,7 @@ Content-Type: application/json
 
 
 ### Update order (admin only)
-PUT http://localhost:3000/api/v1/orders/5
+PUT http://localhost:3000/api/v1/orders/8
 Content-Type: application/json
 Authorization: Bearer {{adminToken}}
 
