@@ -1,4 +1,5 @@
 import {useNavigate} from 'react-router';
+import {useLanguage} from '../hooks/useLanguage';
 import Login from './Login';
 import {Button} from '@/components/ui/button';
 import WeatherWidget from '../components/WeatherWidget';
@@ -9,26 +10,28 @@ import Contacts from '../components/home/Contacts';
 function Home() {
   const navigate = useNavigate();
 
+  const {strings} = useLanguage();
+
   const imgSrc = '/images/';
 
   return (
     <>
       <div>
         <h1 className="p-5">Taqueria 21</h1>
-        <p className="mb-5 text-lg">Pieni pala Meksikoa keskellä Helsinkiä</p>
+        <p className="mb-5 text-lg">{strings.home.tagline}</p>
       </div>
       <div>
         <button
           onClick={() => navigate('/login')}
           className="bg-[#982A2A]! text-white hover:bg-[#792121]!"
         >
-          Kirjaudu
+          {strings.nav.login}
         </button>
         <button
           onClick={() => navigate('/login/register')}
           className="bg-[#982A2A]! text-white hover:bg-[#792121]!"
         >
-          Rekisteröidy
+          {strings.home.register}
         </button>
       </div>
       <div className="ad-div">
@@ -71,7 +74,7 @@ function Home() {
             alt=""
             onClick={() => navigate('/menu/mains')}
           />
-          <p>PÄÄRUOAT</p>
+          <p>{strings.menu.mains.toUpperCase()}</p>
         </div>
         <div>
           <img
@@ -79,7 +82,7 @@ function Home() {
             alt=""
             onClick={() => navigate('/menu/snacks')}
           />
-          <p>SNACKS</p>
+          <p>{strings.menu.snacks.toUpperCase()}</p>
         </div>
         <div>
           <img
@@ -87,7 +90,7 @@ function Home() {
             alt=""
             onClick={() => navigate('/menu/desserts')}
           />
-          <p>JÄLKIRUOAT</p>
+          <p>{strings.menu.desserts.toUpperCase()}</p>
         </div>
         <div>
           <img
@@ -95,7 +98,7 @@ function Home() {
             alt=""
             onClick={() => navigate('/menu/drinks')}
           />
-          <p>JUOMAT</p>
+          <p>{strings.menu.drinks.toUpperCase()}</p>
         </div>
       </div>
     </>
