@@ -8,10 +8,12 @@ import {
   TableHead,
 } from '@/components/ui/table';
 import {useOrders} from '../hooks/orderHook';
+import {useLanguage} from '../hooks/useLanguage';
 
 const AdminHistory = () => {
   const [filter, setFilter] = useState('today');
   const {orders, loading, error} = useOrders();
+  const {strings} = useLanguage();
 
   const handleFilterClick = (type) => {
     setFilter(type);
@@ -27,20 +29,20 @@ const AdminHistory = () => {
   return (
     <>
       <div className="w-full max-w-full min-h-[calc(100vh-64px-96px)] overflow-x-hidden">
-        <h1 className="my-6">Tilaushistoria</h1>
+        <h1 className="my-6">{strings.admin.history}</h1>
 
         <div className="flex flex-row gap-2 mb-4 w-full justify-center flex-wrap">
           <button
             className={`px-3 py-1 rounded border ${filter === 'today' ? 'bg-[#2A4B11]! text-white' : 'bg-white text-black border-stone-400!'}`}
             onClick={() => handleFilterClick('today')}
           >
-            Tämän päivän tilaukset
+            {strings.admin.todayOrders}
           </button>
           <button
             className={`px-3 py-1 rounded border ${filter === 'all' ? 'bg-[#2A4B11]! text-white' : 'bg-white text-black border-stone-400!'}`}
             onClick={() => handleFilterClick('all')}
           >
-            Kaikki tilaukset
+            {strings.admin.allOrders}
           </button>
         </div>
 
@@ -48,11 +50,21 @@ const AdminHistory = () => {
           <Table className="mt-4 mb-8 max-w-[80vw] mx-auto border border-stone-500">
             <TableHeader className="bg-[#982A2A] text-white">
               <TableRow>
-                <TableHead className="text-center">Id</TableHead>
-                <TableHead className="text-center">Tuote</TableHead>
-                <TableHead className="text-center">Lisätiedot</TableHead>
-                <TableHead className="text-center">Määrä</TableHead>
-                <TableHead className="text-center">Tilauspäivä</TableHead>
+                <TableHead className="text-center">
+                  {strings.admin.id}
+                </TableHead>
+                <TableHead className="text-center">
+                  {strings.admin.product}
+                </TableHead>
+                <TableHead className="text-center">
+                  {strings.admin.details}
+                </TableHead>
+                <TableHead className="text-center">
+                  {strings.admin.quantity}
+                </TableHead>
+                <TableHead className="text-center">
+                  {strings.admin.orderDate}
+                </TableHead>
               </TableRow>
             </TableHeader>
 
@@ -80,7 +92,7 @@ const AdminHistory = () => {
 
       <footer className="flex flex-col items-center justify-center bg-[#FFFFFF] w-full h-24 border-t bottom-0 sticky">
         <div className="w-full text-2xl font-bold flex flex-row gap-3 justify-center items-center mb-1">
-          <p>Tilauksia yhteensä</p>
+          <p>{strings.admin.totalOrders}</p>
           <p>{orderIds.length}</p>
         </div>
       </footer>

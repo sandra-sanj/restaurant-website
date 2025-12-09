@@ -37,6 +37,12 @@ const strings = new LocalizedStrings({
       visibility: 'Näkyvyys',
       updated: 'Päivitetty',
       feelsLike: 'Tuntuu kuin',
+
+      newItemLabel: 'Uutuus',
+      newItemName: 'Katkaraputaco',
+      chefFavoriteLabel: 'Kokin suosikki',
+      chefFavoriteName: 'Burrito bowl',
+      menuTitle: 'MENU',
     },
 
     // Menu categories page
@@ -98,6 +104,38 @@ const strings = new LocalizedStrings({
       save: 'Tallenna',
       cancel: 'Peruuta',
     },
+
+    // Admin page
+    admin: {
+      title: 'Ylläpito',
+      openOrders: 'Avoimet tilaukset',
+      orderId: 'Tilauksen id',
+      product: 'Tuote',
+      details: 'Lisätiedot',
+      quantity: 'Määrä',
+      done: 'Tehty',
+      editMenu: 'Muokkaa ruokalistaa',
+      loadingOrders: 'Ladataan tilauksia...',
+
+      // Admin History
+      history: 'Tilaushistoria',
+      todayOrders: 'Tämän päivän tilaukset',
+      allOrders: 'Kaikki tilaukset',
+      orderDate: 'Tilauspäivä',
+      totalOrders: 'Tilauksia yhteensä',
+      id: 'Id',
+    },
+
+    // Buttons/actions
+    actions: {
+      addItem: 'Lisää tuote',
+      editItem: 'Muokkaa tuotetta',
+      deleteItem: 'Poista tuote',
+      close: 'Sulje',
+      filter: 'Suodata',
+      today: 'Tänään',
+      all: 'Kaikki',
+    },
   },
 
   // English
@@ -138,6 +176,12 @@ const strings = new LocalizedStrings({
       visibility: 'Visibility',
       updated: 'Updated',
       feelsLike: 'Feels Like',
+
+      newItemLabel: 'New item',
+      newItemName: 'Shrimp Taco',
+      chefFavoriteLabel: "Chef's Favorite",
+      chefFavoriteName: 'Burrito bowl',
+      menuTitle: 'MENU',
     },
 
     // Menu categories page
@@ -199,6 +243,38 @@ const strings = new LocalizedStrings({
       logout: 'Logout',
       save: 'Save',
       cancel: 'Cancel',
+    },
+
+    // Admin page
+    admin: {
+      title: 'Admin',
+      openOrders: 'Open Orders',
+      orderId: 'Order ID',
+      product: 'Product',
+      details: 'Details',
+      quantity: 'Quantity',
+      done: 'Done',
+      editMenu: 'Edit Menu',
+      loadingOrders: 'Loading orders...',
+
+      // Admin History
+      history: 'Order History',
+      todayOrders: "Today's Orders",
+      allOrders: 'All Orders',
+      orderDate: 'Order Date',
+      totalOrders: 'Total Orders',
+      id: 'ID',
+    },
+
+    // Buttons/actions
+    actions: {
+      addItem: 'Add Item',
+      editItem: 'Edit Item',
+      deleteItem: 'Delete Item',
+      close: 'Close',
+      filter: 'Filter',
+      today: 'Today',
+      all: 'All',
     },
   },
 });

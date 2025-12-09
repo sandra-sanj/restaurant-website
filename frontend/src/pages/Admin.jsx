@@ -12,6 +12,7 @@ import {
   TableHead,
 } from '@/components/ui/table';
 import {useOrders} from '../hooks/orderHook';
+import {useLanguage} from '../hooks/useLanguage';
 
 // TODO: napit/kaikki keskelle, hover taulukon riveihin
 // TODO: vuorottelevat värit taulukkoon id:n mukaan?
@@ -23,6 +24,7 @@ const Admin = () => {
   const [deleteItemOpen, setDeleteItemOpen] = useState(false);
 
   const {orders, loading, error} = useOrders();
+  const {strings} = useLanguage();
 
   const handleButtonCloseClick = () => {
     setAddItemOpen(false);
@@ -49,7 +51,7 @@ const Admin = () => {
   };
 
   const openOrders = orders.filter((order) => order.status === 'pending');
-  if (loading) return <p>Ladataan tilauksia...</p>;
+  if (loading) return <p>{strings.admin.loadingOrders}</p>;
   if (error) return <p>{error}</p>;
 
   // Get open orders id's to calculate total open orders count
@@ -64,9 +66,9 @@ const Admin = () => {
     <>
       {/* Fixed min height to push footer to bottom */}
       <div className="w-full max-w-full min-h-[calc(100vh-64px-208px)] flex flex-col items-center">
-        <h1 className="mt-6">Ylläpito</h1>
+        <h1 className="mt-6">{strings.admin.title}</h1>
         <div className="flex flex-row mt-5 items-center justify-center gap-2">
-          <h2 className="">Avoimet tilaukset:</h2>
+          <h2 className="">{strings.admin.openOrders}:</h2>
           <p className="font-bold py-2">{openOrderIds.length}</p>
         </div>
 
@@ -74,11 +76,21 @@ const Admin = () => {
           <Table className="mt-4 mb-8 max-w-[80vw] mx-auto border border-stone-500">
             <TableHeader className="bg-[#982A2A] text-white">
               <TableRow>
-                <TableHead className="text-center">Tilauksen id</TableHead>
-                <TableHead className="text-center">Tuote</TableHead>
-                <TableHead className="text-center">Lisätiedot</TableHead>
-                <TableHead className="text-center">Määrä</TableHead>
-                <TableHead className="text-center">Tehty</TableHead>
+                <TableHead className="text-center">
+                  {strings.admin.orderId}
+                </TableHead>
+                <TableHead className="text-center">
+                  {strings.admin.product}
+                </TableHead>
+                <TableHead className="text-center">
+                  {strings.admin.details}
+                </TableHead>
+                <TableHead className="text-center">
+                  {strings.admin.quantity}
+                </TableHead>
+                <TableHead className="text-center">
+                  {strings.admin.done}
+                </TableHead>
               </TableRow>
             </TableHeader>
 
@@ -87,17 +99,18 @@ const Admin = () => {
                 const isEven = order.orderId % 2 === 0;
 
                 return (
-                <TableRow key={order.id}
-                  className={isEven ? 'bg-[#FFFFFF]' : 'bg-[#982a2a24]'
-                }>
-                  <TableCell>{order.orderId}</TableCell>
-                  <TableCell>{order.product}</TableCell>
-                  <TableCell>{order.details}</TableCell>
-                  <TableCell>{order.quantity}</TableCell>
-                  <TableCell>
-                    <input type="checkbox" name="done"></input>
-                  </TableCell>
-                </TableRow>
+                  <TableRow
+                    key={order.id}
+                    className={isEven ? 'bg-[#FFFFFF]' : 'bg-[#982a2a24]'}
+                  >
+                    <TableCell>{order.orderId}</TableCell>
+                    <TableCell>{order.product}</TableCell>
+                    <TableCell>{order.details}</TableCell>
+                    <TableCell>{order.quantity}</TableCell>
+                    <TableCell>
+                      <input type="checkbox" name="done"></input>
+                    </TableCell>
+                  </TableRow>
                 );
               })}
             </TableBody>
@@ -107,7 +120,7 @@ const Admin = () => {
 
       <footer className="flex flex-col items-center justify-center bg-[#FFFFFF] w-full h-52 border-t bottom-0 sticky">
         <div className="w-full mb-6 text-3xl font-bold">
-          <h2>Muokkaa ruokalistaa</h2>
+          <h2>{strings.admin.editMenu}</h2>
         </div>
 
         <EditMenu
