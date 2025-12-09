@@ -2,7 +2,7 @@ import './App.css';
 import Home from './pages/Home';
 import Menu from './pages/Menu';
 import Profile from './pages/Profile';
-import {Routes, Route} from 'react-router';
+import {Routes, Route, useLocation} from 'react-router';
 import NavBar from './components/NavBar';
 import Admin from './pages/Admin';
 import AdminHistory from './pages/AdminHistory';
@@ -23,6 +23,9 @@ import ProtectedRoute from './components/ProtectedRoute';
 import {OrderProvider} from './context/OrderContext';
 
 const App = () => {
+  const location = useLocation();
+  const hideMainFooter = ['/admin', '/history'].includes(location.pathname);
+
   return (
     <>
       <UserProvider>
@@ -45,8 +48,7 @@ const App = () => {
                   path="/profile"
                   element={
                     <ProtectedRoute>
-                      {' '}
-                      <Profile />{' '}
+                      <Profile />
                     </ProtectedRoute>
                   }
                 />
@@ -65,7 +67,7 @@ const App = () => {
               </Routes>
             </main>
           </div>
-          <Footer />
+          {!hideMainFooter && <Footer />}
         </OrderProvider>
       </UserProvider>
     </>
