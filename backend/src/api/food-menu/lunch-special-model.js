@@ -10,6 +10,7 @@ const listAllLunchSpecials = async () => {
      menu_items.description_en,
      menu_items.price AS regular_price,
      menu_items.image_url,
+     menu_items.image_thumb_url,
      menu_items.ingredients,
      menu_items.spice_level
      FROM lunch_specials
@@ -30,6 +31,7 @@ const findLunchSpecialByDay = async (day) => {
      menu_items.description_en,
      menu_items.price AS regular_price,
      menu_items.image_url,
+     menu_items.image_thumb_url,
      menu_items.ingredients,
      menu_items.spice_level
      FROM lunch_specials
@@ -68,6 +70,7 @@ const findTodaysLunchSpecial = async () => {
      menu_items.description_en,
      menu_items.price AS regular_price,
      menu_items.image_url,
+     menu_items.image_thumb_url,
      menu_items.ingredients,
      menu_items.spice_level
      FROM lunch_specials
