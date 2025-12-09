@@ -24,6 +24,7 @@ function ShowCards(props) {
     return(
         <>
           <AddToCart item={selectedItem} setSelectedItem={setSelectedItem} />
+          <InfoCard info={info} setInfoOpen={setInfoOpen}></InfoCard>
           
           {section.map((item) => (
             <FoodCard 

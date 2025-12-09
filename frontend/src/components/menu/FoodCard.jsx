@@ -6,7 +6,6 @@ const FoodCard = (props) => {
 
   return (
     <>
-      <InfoCard info={item} setInfoOpen={setInfoOpen}></InfoCard>
       <div className="bg-white-50 w-[500px] rounded-md mb-5 outline-2 outline-gray-400">
         <img
           src={API_UPLOADS_URL + item.image_thumb_url}
