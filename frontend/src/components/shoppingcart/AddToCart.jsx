@@ -16,9 +16,6 @@ const AddToCart = (props) => {
     const [price, setPrice] = useState(null);
     const [showModal, setShowModal] = useState(false);
     const [inputValue, setInputValue] = useState('');
-
-
-
     const {handleAddItem} = useOrderContext();
 
     useEffect(() => {
@@ -62,11 +59,8 @@ const AddToCart = (props) => {
         <>
             {item && (
                 <Modal isOpen={showModal} onClose={() => setSelectedItem('')}>
-                <div className="m-5 outline-2 outline-gray-400 rounded-md w-[500px]">
+                <div>
                     <div>
-                    <span className="cursor-pointer" onClick={() => setSelectedItem('')}>
-                        &times;
-                    </span>
                     <img
                         src={API_UPLOADS_URL + item.image_url}
                         alt={item.description}

@@ -1,21 +1,34 @@
-const InfoCard = ({onClose}) => {
-  const {item, setSelectedItem} = props;
+import { useEffect, useState } from "react";
+import Modal from "../Modal";
+
+
+//TODO: lisää allergenit
+const InfoCard = (props) => {
+  const {info, setInfoOpen} = props;
+  const [showModal, setShowModal] = useState(false);
+
+  console.log(info)
+
+  useEffect(() => {
+    setShowModal(true);
+  }, [info])
+
   return (
-    <>
-      <div className="m-5 outline-2 outline-gray-400 rounded-md">
+    <>{info &&(
+      <Modal isOpen={showModal} onClose={() => setInfoOpen('')}>
         <div>
-          <span className="cursor-pointer" onClick={onClose}>
-            &times;
-          </span>
-        </div>
         <div>
           <h2 className="font-bold">Info-kortti</h2>
-          <h2>Ruoan nimi</h2>
-          <p>Ruoan kuvaus lukee tässä </p>
-          <p>Ainesosat: </p>
+          <h2>{info.name}</h2>
+          <p>{info.description}</p>
+          <p>{info.ingridiens}</p>
           <p>Allergeenit: </p>
         </div>
       </div>
+      </Modal>
+
+
+    )}
     </>
   );
 };

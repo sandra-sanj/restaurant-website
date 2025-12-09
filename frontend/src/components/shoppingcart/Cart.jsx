@@ -1,15 +1,17 @@
-import {useState, useEffect} from "react";
+import {useEffect, useState} from "react";
 import { useOrderContext } from "../../hooks/contextHook";
 import OrderCard from "./OrderCard";
 
 
 
 function Cart(props) {
-  const {next, setNext} = props;
-
+  const {setNext} = props;
+  
   const [selectedDelivery, setSelectedDelivery] = useState("delivery");
+   const { cart, calculateTotal, setDelivery } = useOrderContext();
+  const [totalPrice, setTotalPrice] = useState(calculateTotal());
 
-  const { cart, calculateTotal, setDelivery } = useOrderContext();
+  
 
 
   const handleDeliveryClick = (method) => {
@@ -17,10 +19,11 @@ function Cart(props) {
      setDelivery(method);
   }
 
+ 
+
   
   console.log(cart);
 
-  const totalPrice = calculateTotal();
   const totalWithDelivery = Number(totalPrice) + Number(4.9);
 
 
@@ -55,6 +58,7 @@ function Cart(props) {
             <OrderCard 
               key={item.unique_id}
               item={item}
+              setTotalPrice={setTotalPrice}
               className="flex justify-between items-center border-b py-2"
             />)) 
             }
@@ -64,15 +68,6 @@ function Cart(props) {
                 <p>{} </p>
               </div>
             </div>
-            {/*} TODO: siirrä OrderCard.jsx
-            <div className="flex gap-2 items-center">
-              <button className="border rounded bg-[#982A2A]! text-white">x</button>
-              <div className="flex items-center gap-1">
-                <button className="px-2 py-1 border rounded">-</button>
-                <span></span>
-                <button className="px-2 py-1 border rounded">+</button>
-              </div>
-            </div> */}
           </div>
         
       </div>
@@ -88,7 +83,7 @@ function Cart(props) {
             </>
 
           ) : (
-            <p className="font-semibold">Yhteensä: {totalPrice}</p>
+            <p className="font-semibold">Yhteensä: {totalPrice} €</p>
           )}
           
       </div>
