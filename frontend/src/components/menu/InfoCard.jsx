@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
 import Modal from "../Modal";
 
+
+//TODO: lisää allergenit
 const InfoCard = (props) => {
   const {info, setInfoOpen} = props;
   const [showModal, setShowModal] = useState(false);
+
+  console.log(info)
 
   useEffect(() => {
     setShowModal(true);
