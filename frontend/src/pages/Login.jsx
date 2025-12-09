@@ -20,8 +20,8 @@ const Login = () => {
   <>
     {showForm ? <LoginForm /> : <RegisterForm />}
     <Outlet></Outlet>
-    <p>{pText}</p>
-    <button onClick={() => {handleButton()} }>{buttonText}</button>
+    <p className='mt-5'>{pText}</p>
+    <button className='bg-[#982A2a70]! text-black border-2 border-stone-300! hover:bg-[#982A2a90]!' onClick={() => {handleButton()} }>{buttonText}</button>
     
   </>
   );
