@@ -23,6 +23,7 @@ import {
   createAvailableProteinsChain,
   createDefaultProteinChain,
   createIsAvailableChain,
+  createAllergenIdsChain,
 } from '../../validators/menu-item-validators.js';
 
 const foodMenuRouter = express.Router();
@@ -44,6 +45,7 @@ foodMenuRouter.route('/').get(validationErrors, getMenuItems).post(
   createAvailableProteinsChain(),
   createDefaultProteinChain(),
   createIsAvailableChain(),
+  createAllergenIdsChain(),
   validationErrors,
   createThumbnail,
   postMenuItem
@@ -67,6 +69,7 @@ foodMenuRouter
     createAvailableProteinsChain().optional(),
     createDefaultProteinChain().optional(),
     createIsAvailableChain().optional(),
+    createAllergenIdsChain().optional(),
     validationErrors,
     createThumbnail,
     putMenuItem
