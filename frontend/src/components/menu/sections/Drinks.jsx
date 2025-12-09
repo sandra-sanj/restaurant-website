@@ -1,5 +1,5 @@
-import ShowCards from './ShowCards';
-import {useLanguage} from '../../hooks/useLanguage';
+import ShowCards from '../ShowCards';
+import {useLanguage} from '../../../hooks/useLanguage';
 
 function Drinks() {
   const {strings} = useLanguage();

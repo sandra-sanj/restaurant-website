@@ -1,6 +1,6 @@
-import ShowCards from './ShowCards';
-import HighlightCard from './HighlightCard';
-import {useLanguage} from '../../hooks/useLanguage';
+import ShowCards from '../ShowCards';
+import HighlightCard from '../HighlightCard';
+import {useLanguage} from '../../../hooks/useLanguage';
 
 function All() {
   const {strings} = useLanguage();

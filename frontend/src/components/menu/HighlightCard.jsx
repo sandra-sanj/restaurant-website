@@ -1,11 +1,13 @@
 import {useEffect, useState} from 'react';
 import {useMenu} from '../../hooks/apiHook';
 import AddToCart from '../shoppingcart/AddToCart';
+import InfoCard from './InfoCard';
 
 const API_UPLOADS_URL = import.meta.env.VITE_API_UPLOADS_URL;
 
 const HighlightCard = () => {
   const [selectedItem, setSelectedItem] = useState(null);
+  
 
   const {todaysLunch, error} = useMenu();
 
@@ -15,6 +17,7 @@ const HighlightCard = () => {
     <>
       {todaysLunch && (
         <div>
+          <InfoCard item={selectedItem} selectedItem={setSelectedItem}></InfoCard>
           <AddToCart item={selectedItem} setSelectedItem={setSelectedItem} />
           <div className="bg-white-50 w-[500px] rounded-md mb-5 outline-10 outline-red-800">
             <img
