@@ -49,12 +49,12 @@ const OrderProvider = ({children}) => {
         return cart.reduce((sum, item) => sum + item.unit_price * item.quantity, 0).toFixed(2);
     }
 
-    const handleRemoveItem = (unique_id) => {
+    const handleRemoveItem = async (unique_id) => {
         setCart((prevOrder) => {
             const removed = prevOrder.filter(i => i.unique_id !== unique_id);
+            calculateTotal();
             return removed;
         });
-        // price of one item is price / quantity
     }
 
     const handleOrder = () => {

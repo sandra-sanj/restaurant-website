@@ -10,8 +10,7 @@ const HighlightCard = () => {
   
   if (error) return <p>Error: {error}</p>;
 
-  
-  if(todaysLunch) console.log(todaysLunch)
+
   return (
   <>
     {todaysLunch && ( 
