@@ -74,10 +74,6 @@ const strings = new LocalizedStrings({
       hasAccount: 'Oletko jo jäsen?',
       saveButton: 'Tallenna',
       loginButton2: 'Kirjaudu sisään!',
-    },
-
-    // Profile
-    profile: {
       editTitle: 'Muokkaa käyttäjä',
     },
   },
@@ -157,10 +153,6 @@ const strings = new LocalizedStrings({
       hasAccount: 'Already have an account?',
       saveButton: 'Save',
       loginButton2: 'Login!',
-    },
-
-    // Profile
-    profile: {
       editTitle: 'Edit User',
     },
   },

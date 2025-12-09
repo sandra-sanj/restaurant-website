@@ -1,83 +1,91 @@
 import useForm from '../../hooks/formHooks';
-import { useUser } from '../../hooks/apiHook';
-import { useUserContext } from '../../hooks/contextHook';
+import {useLanguage} from '../../hooks/useLanguage';
+import {useUser} from '../../hooks/apiHook';
+import {useUserContext} from '../../hooks/contextHook';
 
 const EditForm = () => {
+  const {user, handleEditedUser} = useUserContext();
+  const {strings} = useLanguage();
 
-    const { user, handleEditedUser } = useUserContext();
-
-    const initValues = {
+  const initValues = {
     username: user.username,
     email: user.email,
     phone: user.phone,
-    };
+  };
 
-    const doEdit = () => {
-        try {
-            inputs.role = user.role;
-            inputs.is_active = user.is_active;
-            console.log('userinfo: ', inputs );
-            handleEditedUser(inputs);
+  const doEdit = () => {
+    try {
+      inputs.role = user.role;
+      inputs.is_active = user.is_active;
+      console.log('userinfo: ', inputs);
+      handleEditedUser(inputs);
+    } catch (error) {
+      console.log(error);
+    }
+    return;
+  };
 
+  const {inputs, handleInputChange, handleSubmit} = useForm(doEdit, initValues);
 
-        } catch (error) {
-            console.log(error);
+  return (
+    <>
+      <h2>{strings.auth.editTitle}</h2>
+      <form
+        onSubmit={(e) => {
+          handleSubmit(e);
+        }}
+      >
+        <div>
+          <label htmlFor="EditUser">{strings.auth.username}: </label>
+          <input
+            name="username"
+            placeholder={user.username}
+            type="text"
+            id="EditUser"
+            onChange={(e) => {
+              handleInputChange(e);
+            }}
+          />
+        </div>
+        <div>
+          <label htmlFor="EditEmail">{strings.auth.email}: </label>
+          <input
+            name="email"
+            placeholder={user.email}
+            type="email"
+            id="EditEmail"
+            onChange={(e) => {
+              handleInputChange(e);
+            }}
+          />
+        </div>
+        {
+          //    <div>
+          //    <label htmlFor="EditPassword">Salasana: </label>
+          //    <input
+          //        name="password"
+          //        type="password"
+          //        id="EditPassword"
+          //        onChange={ (e) => {handleInputChange(e)} }
+          //    />
+          //</div>
         }
-        return;
-    };
-
-
-    const {inputs, handleInputChange, handleSubmit} = useForm(doEdit, initValues);
-
-     return (
-         <>
-            <h2> Muokkaa käyttäjää </h2>
-            <form onSubmit={ (e) => {handleSubmit(e)} }>
-                <div>
-                    <label htmlFor="EditUser">Käyttäjänimi: </label>
-                    <input
-                        name="username"
-                        placeholder={user.username}
-                        type="text"
-                        id="EditUser"
-                        onChange={ (e) => {handleInputChange(e)} }
-                    />
-                </div>
-                <div>
-                    <label htmlFor="EditEmail">Sähköposti: </label>
-                    <input
-                        name="email"
-                        placeholder={user.email}
-                        type="email"
-                        id="EditEmail"
-                        onChange={ (e) => {handleInputChange(e)} }
-                    />
-                </div>
-                {
-                //    <div>
-                //    <label htmlFor="EditPassword">Salasana: </label>
-                //    <input
-                //        name="password"
-                //        type="password"
-                //        id="EditPassword"
-                //        onChange={ (e) => {handleInputChange(e)} }
-                //    />
-                //</div> 
-                }
-                <div>
-                    <label htmlFor="EditPhone">Puhelinnumero (muoto +358): </label>
-                    <input
-                        name="phone"
-                        placeholder={user.phone}
-                        type="text"
-                        id="EditPhone"
-                        onChange={ (e) => {handleInputChange(e)} }
-                    />
-                </div>
-                <button type="submit">Tallenna</button>
-            </form>
-        </>
-    );
+        <div>
+          <label htmlFor="EditPhone">{strings.auth.phoneFormat}: </label>
+          <input
+            name="phone"
+            placeholder={user.phone}
+            type="text"
+            id="EditPhone"
+            onChange={(e) => {
+              handleInputChange(e);
+            }}
+          />
+        </div>
+        <button type="submit">{strings.auth.saveButton}</button>
+      </form>
+    </>
+  );
 };
 
 export default EditForm;
