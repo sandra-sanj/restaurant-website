@@ -2,12 +2,13 @@ import { useOrderContext, useUserContext } from "../../hooks/contextHook";
 import OrderCard from "./OrderCard";
 import useForm from "../../hooks/formHooks";
 import { useState, useEffect } from "react";
+import Modal from "../Modal";
 
 //swtich this to cart
 //FoodCard but for items in shopping cart?
 
 function Order(props) {
-    const {next, setNext} = props;
+    const {setNext, payment, setPayment} = props;
     const { cart, delivery, calculateTotal, handleContactInfo } = useOrderContext();
     const {user} = useUserContext();
     const [initValues, setInitValues] = useState([]);
@@ -38,7 +39,7 @@ function Order(props) {
 
     const placeOrder = () => {
         try {
-            inputs.total_price = total;
+            //inputs.total_price = total;
             inputs.order_type = delivery;
             console.log('con: ', inputs);
             handleContactInfo(inputs);
@@ -48,15 +49,33 @@ function Order(props) {
         }
     }
 
+    const handlePayment = (method) => {
+        setPayment(method);
+    }
+
     
 
     //console.log(initValues);
     const {inputs, handleInputChange, handleSubmit} = useForm(placeOrder, initValues);
+
+
     
 
     return (
     <>
-        <h1>Yhteystiedot: </h1>
+     <div className="flex flex-col gap-2 p-4 bg-white">
+        <h2 className="font-semibold">Maksutapa</h2>
+          <button className={`px-3 py-1 rounded border ${payment === "Mobilepay" ? "!bg-[#2A4B11] text-white" : "bg-white text-black"}`} onClick={() => handlePayment("Mobilepay")}>Mobilepay</button>
+
+          <button className={`px-3 py-1 rounded border ${payment === "Applepay" ? "!bg-[#2A4B11] text-white" : "bg-white text-black"}`} onClick={() => handlePayment("Applepay")}>Applepay</button>
+        
+
+          <button className={`px-3 py-1 rounded border ${payment === "Visa" ? "!bg-[#2A4B11] text-white" : "bg-white text-black"}`} onClick={() => handlePayment("Visa")}>Visa</button>
+
+          <button className={`px-3 py-1 rounded border ${payment === "Mastercard" ? "!bg-[#2A4B11] text-white" : "bg-white text-black"}`} onClick={() => handlePayment("Mastercard")}>Mastercard</button>
+          
+      </div>
+        <h2>Yhteystiedot: </h2>
         <form onSubmit={ (e) => {handleSubmit(e)} }>
             <div>
                 <label htmlFor="ordername">Koko nimi: </label>
@@ -100,6 +119,8 @@ function Order(props) {
             </div>
             <button type="submit">Siirry maksuun</button>
         </form>
+            
+        
     </>
     )
 } 

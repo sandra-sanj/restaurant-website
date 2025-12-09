@@ -8,10 +8,11 @@ import Confirmation from '../components/shoppingcart/Confirmation';
 
 const CartPage = () => {
   const [next, setNext] = useState('cart');
+  const [payment, setPayment] = useState('Mobilepay');
 
     if (next === 'cart') return <Cart setNext={setNext}></Cart>;
-    else if(next === 'order') return <Order setNext={setNext}></Order>;
-    else if(next === 'payment') return <Payment setNext={setNext}></Payment>
+    else if(next === 'order') return <Order setNext={setNext} payment={payment} setPayment={setPayment}></Order>;
+    else if(next === 'payment') return <Payment setNext={setNext} payment={payment}></Payment>
     else if(next === 'confirmation') return <Confirmation></Confirmation>
 
 
