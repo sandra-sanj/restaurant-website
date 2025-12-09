@@ -30,13 +30,13 @@ const strings = new LocalizedStrings({
       phone: 'Puhelinnumero',
 
       // Weather
-      weather: 'Weather',
-      loading: 'Loading weather data...',
-      humidity: 'Humidity',
-      wind: 'Wind',
-      visibility: 'Visibility',
-      updated: 'Updated',
-      feelsLike: 'Feels Like',
+      weather: 'Sää',
+      loading: 'Ladataan säätietoja...',
+      humidity: 'Kosteus',
+      wind: 'Tuuli',
+      visibility: 'Näkyvyys',
+      updated: 'Päivitetty',
+      feelsLike: 'Tuntuu kuin',
     },
 
     // Menu categories page

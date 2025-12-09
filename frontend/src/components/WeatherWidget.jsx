@@ -1,13 +1,15 @@
 import {useWeather} from '../hooks/apiHook.js';
+import {useLanguage} from '../hooks/useLanguage';
 import {Eye, Wind, Droplets, Cloud, Thermometer} from 'lucide-react';
 
 function WeatherWidget() {
   const {weather, loading, error} = useWeather();
+  const {strings} = useLanguage();
 
   if (loading) {
     return (
       <div className="p-4 text-center text-gray-600">
-        <p>Ladataan säätietoja...</p>
+        <p>{strings.home.loading}</p>
       </div>
     );
   }
@@ -31,7 +33,9 @@ function WeatherWidget() {
     <div className="max-w-[380px] mx-auto mt-4 mb-4 p-5 rounded-lg shadow bg-white border border-gray-100">
       <div className="flex items-center gap-2 mb-5">
         <Cloud className="w-6 h-6 text-blue-500" />
-        <h3 className="text-xl font-semibold text-gray-800">Sää - {city}</h3>
+        <h3 className="text-xl font-semibold text-gray-800">
+          {strings.home.weather} - {city}
+        </h3>
       </div>
 
       <div className="flex items-center justify-center gap-8 mb-5">
@@ -46,7 +50,9 @@ function WeatherWidget() {
           </p>
           <div className="flex items-center gap-1 text-gray-600 ">
             <Thermometer className="w-4 h-4" />
-            <span>Tuntuu kuin {weatherData.feelsLike}°C</span>
+            <span>
+              {strings.home.feelsLike} {weatherData.feelsLike}°C
+            </span>
           </div>
         </div>
       </div>
@@ -60,7 +66,7 @@ function WeatherWidget() {
           <div className="flex justify-center mb-1">
             <Droplets className="w-5 h-5 text-blue-500" />
           </div>
-          <p className="text-sm text-gray-700">Kosteus:</p>
+          <p className="text-sm text-gray-700">{strings.home.humidity}:</p>
           <p className="text-base font-semibold text-gray-900">
             {weatherData.humidity}%
           </p>
@@ -70,7 +76,7 @@ function WeatherWidget() {
           <div className="flex justify-center mb-1">
             <Wind className="w-5 h-5 text-green-500" />
           </div>
-          <p className="text-sm text-gray-700">Tuuli: </p>
+          <p className="text-sm text-gray-700">{strings.home.wind}: </p>
           <p className="text-base  font-semibold text-gray-900">
             {weatherData.windSpeed} m/s
           </p>
@@ -80,7 +86,7 @@ function WeatherWidget() {
           <div className="flex justify-center mb-1">
             <Eye className="w-5 h-5 text-purple-500" />
           </div>
-          <p className="text-sm text-gray-700">Näkyvyys: </p>
+          <p className="text-sm text-gray-700">{strings.home.visibility}: </p>
           <p className="text-base font-semibold text-gray-900">
             {weatherData.visibility} km
           </p>
@@ -89,7 +95,7 @@ function WeatherWidget() {
 
       <div className="pt-3 border-t border-gray-100">
         <p className="text-center text-xs text-gray-600">
-          Päivitetty: {lastUpdated}
+          {strings.home.updated}: {lastUpdated}
         </p>
       </div>
     </div>
