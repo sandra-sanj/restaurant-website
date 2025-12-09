@@ -1,11 +1,21 @@
-import InfoCard from "./InfoCard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "../Modal";
+import { useAllergen } from "../../hooks/apiHook";
+
 const FoodCard = (props) => {
-  const {item, setSelectedItem, info, setInfoOpen} = props;
+  const {item, setSelectedItem,} = props;
   const [showModal, setShowModal] = useState(false);
+  const {getAllergen} = useAllergen();
+  const [allergens, setAllergens] = useState();
 
   const API_UPLOADS_URL = import.meta.env.VITE_API_UPLOADS_URL;
+
+  useEffect(() => {
+    const res = getAllergen(item.menu_item_id);
+    setAllergens(res.name);
+  }, [item])
+
+  
 
   return (
     <>
@@ -30,10 +40,10 @@ const FoodCard = (props) => {
           <div>
             <h2 className="font-bold">Ainesosat</h2>
             <p>{item.ingredients}</p>
-            <p>Allergeenit: </p>
+            <p>Allergeenit: {allergens}</p>
           </div>
         </div>
-        </Modal>
+      </Modal>
     </>
   );
 };
