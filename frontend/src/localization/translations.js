@@ -81,9 +81,9 @@ const strings = new LocalizedStrings({
       //Contact info
       contacts: 'CONTACT INFORMATION',
       openingHours: 'Opening Hours:',
-      maPe: 'mon-fri:',
-      la: 'Sat:',
-      su: 'Sun:',
+      maPe: 'Mon-Fri',
+      la: 'Sat',
+      su: 'Sun',
       closed: 'closed',
       address: 'Address',
       email: 'Email',
