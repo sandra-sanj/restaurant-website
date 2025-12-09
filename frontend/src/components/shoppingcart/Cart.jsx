@@ -40,7 +40,9 @@ function Cart(props) {
       <div className="flex flex-col gap-2 p-4 bg-white">
         <h2 className="font-semibold">Toimitustapa</h2>
         <div className="flex flex-row justify-center gap-2">
+          
           <button className={`px-3 py-1 rounded border ${selectedDelivery === "delivery" ? "bg-[#2A4B11]! text-white" : "bg-white text-black"}`} onClick={() => handleDeliveryClick("delivery")}>Toimitus</button>
+
           <button className={`px-3 py-1 rounded border ${selectedDelivery === "pickup" ? "bg-[#2A4B11]! text-white" : "bg-white text-black"}`} onClick={() => handleDeliveryClick("pickup")}>Nouto</button>
         </div>
       </div>
