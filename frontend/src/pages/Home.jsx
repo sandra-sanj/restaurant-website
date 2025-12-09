@@ -57,13 +57,13 @@ function Home() {
               onClick={() => navigate('/menu')}
               className="overflow-hidden h-[265px] rounded-sm cursor-pointer outline-1 outline-zinc-300 hover:brightness-85"
             />
-            <p className='text-white mt-2'>Uutuus:</p>
-            <p className='text-white'>Katkaraputaco</p>
+            <p className="text-white mt-2">{strings.home.newItemLabel}:</p>
+            <p className="text-white">{strings.home.newItemName}</p>
           </div>
 
           <div>
-            <p className='text-white'>Kokin suosikki:</p>
-            <p className='text-white mb-2'>Burrito bowl</p>
+            <p className="text-white">{strings.home.chefFavoriteLabel}:</p>
+            <p className="text-white mb-2">{strings.home.chefFavoriteName}</p>
             <img
               src={imgSrc + '/home/home3.jpg'}
               alt="Burrito bowl"
@@ -76,47 +76,51 @@ function Home() {
         </div>
       </div>
 
-      <div className='mt-6 flex flex-col items-center justify-center'>
-        <h3 
-        className='mb-6 text-xl font-bold cursor-pointer'
-        onClick={() => navigate('/menu')}
-        >MENU</h3>
+      <div className="mt-6 flex flex-col items-center justify-center">
+        <h3
+          className="mb-6 text-xl font-bold cursor-pointer"
+          onClick={() => navigate('/menu')}
+        >
+          {strings.home.menuTitle}
+        </h3>
         <div className="container-home mb-15 grid grid-cols-3 content-center justify-items-center max-w-[1000px]">
-          <div className='flex flex-col justify-center items-center'>
+          <div className="flex flex-col justify-center items-center">
             <img
               src={imgSrc + '/home/mains.jpg'}
               alt="Tacos"
               onClick={() => navigate('/menu/mains')}
               className="rounded-sm cursor-pointer outline-1 outline-zinc-300 hover:brightness-85"
             />
-            <p className='mt-2 text-md'>{strings.menu.mains.toUpperCase()}</p>
+            <p className="mt-2 text-md">{strings.menu.mains.toUpperCase()}</p>
           </div>
-          <div className='flex flex-col justify-center items-center'>
+          <div className="flex flex-col justify-center items-center">
             <img
               src={imgSrc + '/home/snacks.jpg'}
               alt="Corn chips"
               onClick={() => navigate('/menu/snacks')}
               className="rounded-sm cursor-pointer outline-1 outline-zinc-300 hover:brightness-85"
             />
-            <p className='mt-2 text-md'>{strings.menu.snacks.toUpperCase()}</p>
+            <p className="mt-2 text-md">{strings.menu.snacks.toUpperCase()}</p>
           </div>
-          <div className='flex flex-col justify-center items-center'>
+          <div className="flex flex-col justify-center items-center">
             <img
               src={imgSrc + '/home/desserts.jpg'}
               alt="Mexican caramel pudding"
               onClick={() => navigate('/menu/desserts')}
               className="rounded-sm cursor-pointer outline-1 outline-zinc-300 hover:brightness-85"
             />
-            <p className='mt-2 text-md'>{strings.menu.desserts.toUpperCase()}</p>
+            <p className="mt-2 text-md">
+              {strings.menu.desserts.toUpperCase()}
+            </p>
           </div>
-          <div className='flex flex-col justify-center items-center'>
+          <div className="flex flex-col justify-center items-center">
             <img
               src={imgSrc + '/home/drinks.jpg'}
               alt="Jarritos bottles"
               onClick={() => navigate('/menu/drinks')}
               className="rounded-sm cursor-pointer outline-1 outline-zinc-300 hover:brightness-85"
             />
-            <p className='mt-2 text-md'>{strings.menu.drinks.toUpperCase()}</p>
+            <p className="mt-2 text-md">{strings.menu.drinks.toUpperCase()}</p>
           </div>
         </div>
       </div>

@@ -37,6 +37,12 @@ const strings = new LocalizedStrings({
       visibility: 'Näkyvyys',
       updated: 'Päivitetty',
       feelsLike: 'Tuntuu kuin',
+
+      newItemLabel: 'Uutuus',
+      newItemName: 'Katkaraputaco',
+      chefFavoriteLabel: 'Kokin suosikki',
+      chefFavoriteName: 'Burrito bowl',
+      menuTitle: 'MENU',
     },
 
     // Menu categories page
@@ -138,6 +144,12 @@ const strings = new LocalizedStrings({
       visibility: 'Visibility',
       updated: 'Updated',
       feelsLike: 'Feels Like',
+
+      newItemLabel: 'New item',
+      newItemName: 'Shrimp Taco',
+      chefFavoriteLabel: "Chef's Favorite",
+      chefFavoriteName: 'Burrito bowl',
+      menuTitle: 'MENU',
     },
 
     // Menu categories page
