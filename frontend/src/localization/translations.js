@@ -68,13 +68,17 @@ const strings = new LocalizedStrings({
       phone: 'Puhelinnumero',
       phoneFormat: 'Puhelinnumero (muoto: +358)',
       loginButton: 'Kirjaudu',
+      register: 'Rekisteröidy!',
       registerButton: 'Luo käyttäjä',
+      noAcoount: 'Eikö vielä tiliä?',
+      hasAccount: 'Oletko jo jäsen?',
+      saveButton: 'Tallenna',
+      loginButton2: 'Kirjaudu sisään!',
     },
 
     // Profile
     profile: {
       editTitle: 'Muokkaa käyttäjä',
-      saveButton: 'Tallenna',
     },
   },
 
@@ -148,12 +152,16 @@ const strings = new LocalizedStrings({
       phoneFormat: 'Phone Number (format: +358)',
       loginButton: 'Login',
       registerButton: 'Create Account',
+      register: 'Register!',
+      noAcoount: "Don't have an account yet",
+      hasAccount: 'Already have an account?',
+      saveButton: 'Save',
+      loginButton2: 'Login!',
     },
 
     // Profile
     profile: {
       editTitle: 'Edit User',
-      saveButton: 'Save',
     },
   },
 });
