@@ -29,19 +29,22 @@ const Profile = () => {
         <div>
             {user && showEdit ? (
                 <>
-                    <h1>Moi {user.username}</h1> 
-                    <div className="profile-bar">
+                    <h1 className="mb-5">Moi, {user.username}!</h1> 
+                    <div className="profile-bar mb-5">
                         <button onClick={() => 
-                            setShowModal('history')}>Historia
+                            setShowModal('history')}
+                             className="bg-[#982A2A]! text-white">Historia
                         </button>
                         <button onClick={() =>
-                            setShowModal('payment')}>Maksu
+                            setShowModal('payment')}
+                             className="bg-[#982A2A]! text-white">Maksu
                         </button>
                         <button onClick={() => 
-                            handleEdit()}>✎
+                            handleEdit()}
+                             className="bg-[#982A2A]! text-white">✎
                         </button>
                     </div>
-                    <div className="edit-prof" onClick={() => setShowModal('name')}>
+                    <div className="edit-prof">
                         <h3>Nimi: {user.username} </h3>
                     </div>
                     <div className="edit-prof">
@@ -52,7 +55,12 @@ const Profile = () => {
                     </div>
                     <div className="edit-prof">   
                         <h3>Rooli: {user.role} </h3>
-                    </div>     
+                    </div>
+                    {/*
+                    <div className="edit-prof">   
+                        <h3>Since: {user.created_at} </h3>
+                    </div> 
+                    */}      
 
                     <Modal isOpen={showModal === 'name'} onClose={closeModal}>
                         <label htmlFor="editName"> Nimi: 
@@ -73,13 +81,17 @@ const Profile = () => {
             ) : (
             <>
               <EditForm></EditForm>
-              <button onClick={() => {handleEdit()}}>Takaisin</button>
+              
+              <button onClick={() => {handleEdit()}}
+                className="bg-[#982A2A]! text-white">Takaisin</button>
               <br></br>
-              <button onClick={() => deleteBtn()}>Poista käyttäjä</button>
+              <button onClick={() => deleteBtn()}
+                className="bg-[#982A2A]! text-white">Poista käyttäjä</button>
             </>)}
             
             <br></br>
-            <button onClick={() => handleLogout()}>Kirjaudu ulos</button>
+            <button onClick={() => handleLogout()}
+                className="bg-[#982A2A]! text-white">Kirjaudu ulos</button>
             <br/>
 
             
