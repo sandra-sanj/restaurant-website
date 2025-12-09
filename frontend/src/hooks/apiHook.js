@@ -153,6 +153,7 @@ function useOrder() {
         body: JSON.stringify(order),
       };
       const loginResult = await fetchData(`${API_URL}/orders`, options);
+      console.log(order);
       console.log(loginResult);
     } catch (e) {
       console.error(e);
