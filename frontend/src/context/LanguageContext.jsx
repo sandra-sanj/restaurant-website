@@ -1,28 +1,24 @@
-import {createContext, useState, useEffect} from 'react';
+import {createContext, useState} from 'react';
 import strings from '../localization/translations';
 
 const LanguageContext = createContext();
 
 const LanguageProvider = ({children}) => {
-  // Get saved language from localStorage or default to 'fi'
   const [language, setLanguage] = useState(() => {
-    return localStorage.getItem('language') || 'fi';
+    const saved = localStorage.getItem('language') || 'fi';
+    strings.setLanguage(saved);
+    return saved;
   });
 
-  // Update strings when language changes
-  useEffect(() => {
-    strings.setLanguage(language);
-    localStorage.setItem('language', language);
-  }, [language]);
-
   const toggleLanguage = () => {
-    setLanguage((prev) => (prev === 'fi' ? 'en' : 'fi'));
+    const newLang = language === 'fi' ? 'en' : 'fi';
+    strings.setLanguage(newLang);
+    localStorage.setItem('language', newLang);
+    setLanguage(newLang);
   };
 
   return (
-    <LanguageContext.Provider
-      value={{language, setLanguage, toggleLanguage, strings}}
-    >
+    <LanguageContext.Provider value={{language, toggleLanguage, strings}}>
       {children}
     </LanguageContext.Provider>
   );
