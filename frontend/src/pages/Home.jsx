@@ -41,7 +41,7 @@ function Home() {
             width="200"
             height="500"
             onClick={() => navigate('/menu')}
-            className="overflow-hidden h-full rounded-sm"
+            className="overflow-hidden h-full rounded-sm hover:brightness-50"
           />
           <p>Menu</p>
         </div>
@@ -55,7 +55,7 @@ function Home() {
               width="200"
               height="500"
               onClick={() => navigate('/menu')}
-              className="overflow-hidden h-[265px] rounded-sm cursor-pointer outline-1 outline-zinc-300"
+              className="overflow-hidden h-[265px] rounded-sm cursor-pointer outline-1 outline-zinc-300 hover:brightness-85"
             />
             <p className='text-white mt-2'>Uutuus:</p>
             <p className='text-white'>Katkaraputaco</p>
@@ -70,7 +70,7 @@ function Home() {
               width="200"
               height="500"
               onClick={() => navigate('/menu')}
-              className="overflow-hidden h-[265px] rounded-sm cursor-pointer outline-1 outline-zinc-300"
+              className="overflow-hidden h-[265px] rounded-sm cursor-pointer outline-1 outline-zinc-300 hover:brightness-85"
             />
           </div>
         </div>
@@ -87,7 +87,7 @@ function Home() {
               src={imgSrc + '/home/mains.jpg'}
               alt="Tacos"
               onClick={() => navigate('/menu/mains')}
-              className="rounded-sm cursor-pointer outline-1 outline-zinc-300"
+              className="rounded-sm cursor-pointer outline-1 outline-zinc-300 hover:brightness-85"
             />
             <p className='mt-2 text-md'>{strings.menu.mains.toUpperCase()}</p>
           </div>
@@ -96,7 +96,7 @@ function Home() {
               src={imgSrc + '/home/snacks.jpg'}
               alt="Corn chips"
               onClick={() => navigate('/menu/snacks')}
-              className="rounded-sm cursor-pointer outline-1 outline-zinc-300"
+              className="rounded-sm cursor-pointer outline-1 outline-zinc-300 hover:brightness-85"
             />
             <p className='mt-2 text-md'>{strings.menu.snacks.toUpperCase()}</p>
           </div>
@@ -105,7 +105,7 @@ function Home() {
               src={imgSrc + '/home/desserts.jpg'}
               alt="Mexican caramel pudding"
               onClick={() => navigate('/menu/desserts')}
-              className="rounded-sm cursor-pointer outline-1 outline-zinc-300"
+              className="rounded-sm cursor-pointer outline-1 outline-zinc-300 hover:brightness-85"
             />
             <p className='mt-2 text-md'>{strings.menu.desserts.toUpperCase()}</p>
           </div>
@@ -114,7 +114,7 @@ function Home() {
               src={imgSrc + '/home/drinks.jpg'}
               alt="Jarritos bottles"
               onClick={() => navigate('/menu/drinks')}
-              className="rounded-sm cursor-pointer outline-1 outline-zinc-300"
+              className="rounded-sm cursor-pointer outline-1 outline-zinc-300 hover:brightness-85"
             />
             <p className='mt-2 text-md'>{strings.menu.drinks.toUpperCase()}</p>
           </div>

@@ -1,7 +1,6 @@
 const EditMenu = ({addItemClick, editItemClick, deleteItemClick}) => {
   return (
     <>
-      <h2>Muokkaa ruokalistaa</h2>
       <div className="flex flex-row">
         <button onClick={addItemClick} className="bg-[#982A2A]! text-white">
           Lisää tuote

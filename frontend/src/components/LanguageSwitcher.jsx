@@ -6,7 +6,7 @@ const LanguageSwitcher = () => {
   return (
     <button
       onClick={toggleLanguage}
-      className="flex items-center gap-1 px-2 py-1 rounded hover:bg-stone-100! transition"
+      className="flex items-center gap-1 px-2 py-1 rounded hover:bg-stone-100! transition border-stone-400!"
       title={language === 'fi' ? 'Switch to English' : 'Vaihda Suomeksi'}
     >
       {language === 'fi' ? (
