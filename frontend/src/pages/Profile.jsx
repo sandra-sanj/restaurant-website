@@ -50,7 +50,7 @@ const Profile = () => {
                         </button>
                     </div>
                     <div className="edit-prof">
-                        <h3>:{strings.profile.name} {user.username} </h3>
+                        <h3>{strings.profile.name}: {user.username} </h3>
                     </div>
                     <div className="edit-prof">
                         <h3>{strings.profile.email}: {user.email} </h3>

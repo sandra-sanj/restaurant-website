@@ -23,10 +23,6 @@ const LoginForm = () => {
     doLogin,
     initValues,
   );
-  const {inputs, handleInputChange, handleSubmit} = useForm(
-    doLogin,
-    initValues,
-  );
 
   return (
     <div>
