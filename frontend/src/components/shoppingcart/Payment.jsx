@@ -20,10 +20,7 @@ const Payment = (props) => {
     <>
         <dialog open>
             <form method="dialog">
-                <p>Mobilepay</p>
-                <p>Visa</p>
-                <p>Nordea</p>
-                <p>S-pankki</p>
+                <p>tähä valittu metodi</p>
                 <button onClick={() => handleClick()}>ok</button>
             </form>
         </dialog>

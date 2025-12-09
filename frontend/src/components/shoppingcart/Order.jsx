@@ -2,12 +2,13 @@ import { useOrderContext, useUserContext } from "../../hooks/contextHook";
 import OrderCard from "./OrderCard";
 import useForm from "../../hooks/formHooks";
 import { useState, useEffect } from "react";
+import Modal from "../Modal";
 
 //swtich this to cart
 //FoodCard but for items in shopping cart?
 
 function Order(props) {
-    const {next, setNext} = props;
+    const {setNext, payment, setPayment} = props;
     const { cart, delivery, calculateTotal, handleContactInfo } = useOrderContext();
     const {user} = useUserContext();
     const [initValues, setInitValues] = useState([]);
@@ -52,11 +53,39 @@ function Order(props) {
 
     //console.log(initValues);
     const {inputs, handleInputChange, handleSubmit} = useForm(placeOrder, initValues);
+
+
     
 
     return (
     <>
-        <h1>Yhteystiedot: </h1>
+     <div className="flex flex-col gap-2 p-4 bg-white">
+        <h2 className="font-semibold">Maksutapa</h2>
+        <div className="flex flex-row justify-center gap-2">
+          
+          <button className={`px-3 py-1 rounded border ${payment === "Mobilepay" ? "bg-[#2A4B11]! text-white" : "bg-white text-black"}`} onClick={() => setPayment("Mobilepay")}>Mobilepay</button>
+
+          <button className={`px-3 py-1 rounded border ${payment === "Visa" ? "bg-[#2A4B11]! text-white" : "bg-white text-black"}`} onClick={() => setPayment("Visa")}>Visa</button>
+        </div>
+      </div>
+     <div>
+        <h2>Maksutavat</h2>
+        <ul>
+            <li>
+                <button onClick={setPayment('Mobilepay')}>Mobilepay</button>
+            </li>
+            <li>
+                <button onClick={setPayment('Visa')}>Visa</button>
+            </li>
+            <li>
+                <button onClick={setPayment('Mastercard')}>Mastercard</button>
+            </li>
+            <li>
+                <button onClick={setPayment('Apple pay')}>Apple pay</button>
+            </li>
+        </ul>
+        </div>
+        <h2>Yhteystiedot: </h2>
         <form onSubmit={ (e) => {handleSubmit(e)} }>
             <div>
                 <label htmlFor="ordername">Koko nimi: </label>
@@ -100,6 +129,8 @@ function Order(props) {
             </div>
             <button type="submit">Siirry maksuun</button>
         </form>
+            
+        
     </>
     )
 } 

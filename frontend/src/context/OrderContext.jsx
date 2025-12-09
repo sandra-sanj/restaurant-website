@@ -22,7 +22,7 @@ const OrderProvider = ({children}) => {
             selected_protein: item.selected_protein,
             selected_spice_level: item.selected_spice_level ?? item.spice_level,
             quantity: quantity,
-            unit_price: unitPrice * quantity,
+            unit_price: unitPrice,
             special_request: item.special_request ?? null,
         };
         setCart((prevOrder) => [...prevOrder, cartItem]);
@@ -46,7 +46,7 @@ const OrderProvider = ({children}) => {
 
 
     const calculateTotal = () => {
-        return cart.reduce((sum, item) => sum + item.unit_price, 0).toFixed(2);
+        return cart.reduce((sum, item) => sum + item.unit_price * item.quantity, 0).toFixed(2);
     }
 
     const handleRemoveItem = (unique_id) => {
@@ -61,8 +61,8 @@ const OrderProvider = ({children}) => {
         console.log('tästä sitten tilaus apiin');
         console.log(order);
         postNewOrder(order);
+        setCart([]);
     }
-
 
 
 
