@@ -25,8 +25,6 @@ const InfoCard = (props) => {
           <p>Allergeenit: </p>
         </div>
       </div>
-
-
       </Modal>
 
 
