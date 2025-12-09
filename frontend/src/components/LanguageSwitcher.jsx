@@ -11,12 +11,10 @@ const LanguageSwitcher = () => {
     >
       {language === 'fi' ? (
         <>
-          <span className="text-base">🇬🇧</span>
           <span className="text-md font-semibold">EN</span>
         </>
       ) : (
         <>
-          <span className="text-base">🇫🇮</span>
           <span className="text-md font-semibold">FI</span>
         </>
       )}
