@@ -1,9 +1,5 @@
 import {useNavigate} from 'react-router';
 import {useLanguage} from '../hooks/useLanguage';
-import Login from './Login';
-import {Button} from '@/components/ui/button';
-import WeatherWidget from '../components/WeatherWidget';
-import Contacts from '../components/home/Contacts';
 
 //TODO: varmista että navigaatio oikeaan osoitteeseen
 // sitten ehkä oma funktio
