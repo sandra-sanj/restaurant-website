@@ -16,9 +16,6 @@ const AddToCart = (props) => {
     const [price, setPrice] = useState(null);
     const [showModal, setShowModal] = useState(false);
     const [inputValue, setInputValue] = useState('');
-
-
-
     const {handleAddItem} = useOrderContext();
 
     useEffect(() => {

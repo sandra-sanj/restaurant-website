@@ -1,12 +1,13 @@
 import FoodCard from './FoodCard';
-import Info from './Info';
 import { useMenu } from '../../hooks/apiHook';
 import { useState } from 'react';
 import AddToCart from '../shoppingcart/AddToCart';
 import HighlightCard from './HighlightCard';
+import InfoCard from './InfoCard';
 
 function ShowCards(props) {
   const [selectedItem, setSelectedItem] = useState(null);
+  const [info, setInfoOpen] = useState(null);
 
   const { menuArray, loading, error } = useMenu();
 
@@ -29,8 +30,11 @@ function ShowCards(props) {
               key={item.menu_item_id}
               item={item}
               setSelectedItem={setSelectedItem}
+              info={info}
+              setInfoOpen={setInfoOpen}
             />
           ))}
+          
         </>
     )
 };
