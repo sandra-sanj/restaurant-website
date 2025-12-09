@@ -1,11 +1,13 @@
 import ShowCards from './ShowCards';
+import {useLanguage} from '../../hooks/useLanguage';
 
 function Snacks() {
-    return(
-        <>
-          <h1>Snacks</h1>
-          <ShowCards category_id={1} ></ShowCards>
-        </>
-    )
-};
+  const {strings} = useLanguage();
+  return (
+    <>
+      <h1>{strings.menu.snacks}</h1>
+      <ShowCards category_id={1}></ShowCards>
+    </>
+  );
+}
 export default Snacks;
