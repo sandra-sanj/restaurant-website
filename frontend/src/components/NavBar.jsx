@@ -19,7 +19,7 @@ function NavBar() {
   }, [user]);
 
   return (
-    <nav className="navbar h-16 top-0 bg-[#FFFFFF] flex items-center justify-center sticky border-b">
+    <nav className="navbar h-16 top-0 bg-[#FFFFFF] flex items-center justify-center sticky border-b z-1000">
       <div className="navbar-links">
         <ul className="flex items-center [&>li]:text-black font-medium [&>li]:decoration-inherit">
           <li>
