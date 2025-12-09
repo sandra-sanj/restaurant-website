@@ -17,6 +17,26 @@ const strings = new LocalizedStrings({
     home: {
       tagline: 'Pieni pala Meksikoa keskellä Helsinkiä',
       register: 'Rekisteröidy',
+
+      //Contact info
+      contacts: 'YHTEISTIEDOT',
+      openingHours: 'Aukioloajat:',
+      maPe: 'ma-pe:',
+      la: 'la:',
+      su: 'su:',
+      closed: 'suljettu',
+      address: 'Osoite',
+      email: 'Sähköposti',
+      phone: 'Puhelinnumero',
+
+      // Weather
+      weather: 'Weather',
+      loading: 'Loading weather data...',
+      humidity: 'Humidity',
+      wind: 'Wind',
+      visibility: 'Visibility',
+      updated: 'Updated',
+      feelsLike: 'Feels Like',
     },
 
     // Menu categories page
@@ -26,25 +46,6 @@ const strings = new LocalizedStrings({
       snacks: 'Snacks',
       desserts: 'Jälkiruoat',
       drinks: 'Juomat',
-    },
-
-    //Contact info
-    contact: {
-      openingHours: 'Aukioloajat',
-      address: 'Osoite',
-      email: 'Sähköposti',
-      phone: 'Puhelinnumero',
-    },
-
-    // Weather
-    weather: {
-      weather: 'Sää',
-      loading: 'Ladataan säätietoja...',
-      humidity: 'Kosteus',
-      wind: 'Tuuli',
-      visibility: 'Näkyyvyys',
-      updated: 'Päivitetty',
-      feelsLike: 'Tuntuu kuin',
     },
 
     // Common
@@ -57,6 +58,8 @@ const strings = new LocalizedStrings({
       confirm: 'Vahvista',
     },
   },
+
+  // English
 
   en: {
     // Navigation
@@ -74,6 +77,26 @@ const strings = new LocalizedStrings({
     home: {
       tagline: 'A little piece of Mexico in the heart of Helsinki',
       register: 'Register',
+
+      //Contact info
+      contacts: 'CONTACT INFORMATION',
+      openingHours: 'Opening Hours:',
+      maPe: 'mon-fri:',
+      la: 'Sat:',
+      su: 'Sun:',
+      closed: 'closed',
+      address: 'Address',
+      email: 'Email',
+      phone: 'Phone',
+
+      // Weather
+      weather: 'Weather',
+      loading: 'Loading weather data...',
+      humidity: 'Humidity',
+      wind: 'Wind',
+      visibility: 'Visibility',
+      updated: 'Updated',
+      feelsLike: 'Feels Like',
     },
 
     // Menu categories page
@@ -83,25 +106,6 @@ const strings = new LocalizedStrings({
       snacks: 'Snacks',
       desserts: 'Desserts',
       drinks: 'Drinks',
-    },
-
-    //Contact info
-    contact: {
-      openingHours: 'Opening Hours',
-      address: 'Address',
-      email: 'Email',
-      phone: 'Phone',
-    },
-
-    // Weather
-    weather: {
-      weather: 'Weather',
-      loading: 'Loading weather data...',
-      humidity: 'Humidity',
-      wind: 'Wind',
-      visibility: 'Visibility',
-      updated: 'Updated',
-      feelsLike: 'Feels Like',
     },
 
     // Common
