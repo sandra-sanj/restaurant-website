@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useOrderContext } from "../../hooks/contextHook";
 import Modal from '../Modal';
 
-
+//lisää select protein
 
 const AddToCart = (props) => {
     useEffect(() => {
