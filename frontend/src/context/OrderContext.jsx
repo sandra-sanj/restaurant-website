@@ -31,7 +31,7 @@ const OrderProvider = ({children}) => {
     const handleContactInfo = (info) => {
         const contactInfo = {
             user_id: info.user_id,
-            total_price: info.total_price,
+            //total_price: info.total_price,
             customer_name: info.username,
             customer_email: info.email,
             customer_phone: info.phone,

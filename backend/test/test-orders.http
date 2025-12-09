@@ -1,7 +1,7 @@
 ### API HTTP request tests for orders
 
 ### Token for user admin (admin)
-@adminToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkByZXN0YXVyYW50LmZpIiwicGhvbmUiOiIrMzU4MTIzNDU2Nzg5Iiwicm9sZSI6ImFkbWluIiwiaXNfYWN0aXZlIjoxLCJpYXQiOjE3NjQ2NjQzMDEsImV4cCI6MTc2NDgzNzEwMX0.-xJjn3Id7t_V6N13C0vb7-lfgOjn-_rNJOCN74DtP40
+@adminToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkByZXN0YXVyYW50LmZpIiwicGhvbmUiOiIrMzU4MTIzNDU2Nzg5Iiwicm9sZSI6ImFkbWluIiwiaXNfYWN0aXZlIjoxLCJpYXQiOjE3NjUyNzEzNTcsImV4cCI6MTc2NTQ0NDE1N30.Ovkj0fO5Xm3FLLfpZ0XzuSO1yTM2EwJSdHuzi2KhpDw
 
 ### Login as customer
 @user2_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJ1c2VybmFtZSI6ImxpaXNhIiwiZW1haWwiOiJsaWlzYUBleGFtcGxlLmZpIiwicGhvbmUiOiIrMzU4MTEyMjMzNDQ1Iiwicm9sZSI6ImN1c3RvbWVyIiwiaXNfYWN0aXZlIjoxLCJpYXQiOjE3NjQ2ODI0OTYsImV4cCI6MTc2NDg1NTI5Nn0.1boD-XXYaX2fD4rS2m926V6UnDyyg2m0g7Z0ZaueRCM
@@ -30,7 +30,7 @@
 ### Orders
 
 ### Get all orders (admin only - require token)
-GET http://localhost:3000/api/v1/orders
+GET http://localhost:3000/api/v1/orders/8
 Authorization: Bearer {{adminToken}}
 
 
@@ -106,16 +106,13 @@ Content-Type: application/json
 
 
 ### Update order (admin only)
-PUT http://localhost:3000/api/v1/orders/5
+PUT http://localhost:3000/api/v1/orders/8
 Content-Type: application/json
 Authorization: Bearer {{adminToken}}
 
 {
-    "customer_name": "Maija Lehtonen",
-    "customer_email": "maija.lehtonen@example.com",
-    "customer_phone": "+358992244444",
-    "order_type": "pickup",
-    "delivery_address": "Leppavaara 12, 0070 Espoo"
+
+    "order_status": "completed"
 }
 
 
