@@ -296,4 +296,23 @@ function useWeather() {
   return {weather, loading, error};
 }
 
-export {useMenu, useAuthentication, useUser, useOrder, useWeather};
+function useAllergen() {
+
+      const getAllergen = async (itemId) => {
+        try {
+        const options = {
+            method: 'GET',
+          };
+          const response = await fetchData(`${API_URL}allergens/${itemId}`, options);
+          console.log(response);
+          
+
+        } catch(e) {
+        console.error(e);
+        
+      }};
+
+    return {getAllergen};
+}
+
+export {useMenu, useAuthentication, useUser, useOrder, useWeather, useAllergen};

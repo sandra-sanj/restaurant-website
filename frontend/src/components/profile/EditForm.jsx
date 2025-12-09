@@ -1,8 +1,11 @@
 import useForm from '../../hooks/formHooks';
+import {useLanguage} from '../../hooks/useLanguage';
+import {useUser} from '../../hooks/apiHook';
 import {useUserContext} from '../../hooks/contextHook';
 
 const EditForm = () => {
   const {user, handleEditedUser} = useUserContext();
+  const {strings} = useLanguage();
 
   const initValues = {
     username: user.username,
@@ -26,7 +29,13 @@ const EditForm = () => {
 
   return (
     <div className='m-5'>
-    <h1 className=''>Muokkaa käyttäjää</h1>
+    <h1 className=''>{strings.auth.editTitle}</h1>
+    {/*<form
+        onSubmit={(e) => {
+          handleSubmit(e);
+        }}
+      >*/}
+
     <div className="m-5 outline-2 outline-gray-400 rounded-md">
       {/* Header */}
       <div>
@@ -43,26 +52,30 @@ const EditForm = () => {
       {/* Form */}
       <div className="flex flex-col p-4 mt-7 gap-4 bg-white w-[400px]">
         <label className="flex flex-col gap-1">
-          Käyttäjänimi:
+          {strings.auth.username}:
           <input
             name="username"
             placeholder={user.username}
             type="text"
             id="EditUser"
             className="bg-stone-100 p-1 rounded focus:bg-[#982a2a33] focus:border-[#982A2A]!"
-            onChange={handleInputChange}
+            onChange={(e) => {
+              handleInputChange(e);
+            }}
           />
         </label>
 
         <label className="flex flex-col gap-1">
-          Sähköposti:
+          {strings.auth.email}:
           <input
             name="email"
             placeholder={user.email}
             type="email"
             id="EditEmail"
             className="bg-stone-100 p-1 rounded focus:bg-[#982a2a33] focus:border-[#982A2A]!"
-            onChange={handleInputChange}
+            onChange={(e) => {
+              handleInputChange(e);
+            }}
           />
         </label>
 
@@ -74,20 +87,24 @@ const EditForm = () => {
             type="password"
             id="EditPassword"
             className="bg-stone-100 p-1 rounded focus:bg-[#982a2a33] focus:border-[#982A2A]!"
-            onChange={handleInputChange}
+            onChange={(e) => {
+              handleInputChange(e);
+            }}
           />
         </label>
         */}
 
         <label className="flex flex-col gap-1">
-          Puhelinnumero (muoto +358):
+          {strings.auth.phoneFormat}:
           <input
             name="phone"
             placeholder={user.phone}
             type="text"
             id="EditPhone"
             className="bg-stone-100 p-1 rounded focus:bg-[#982a2a33] focus:border-[#982A2A]!"
-            onChange={handleInputChange}
+            onChange={(e) => {
+              handleInputChange(e);
+            }}
           />
         </label>
 
@@ -97,7 +114,7 @@ const EditForm = () => {
             className="bg-[#982a2a33]! border-2! border-[#982A2A]! text-black py-2 rounded hover:opacity-90 mt-4 hover:bg-[#982a2a70]!"
             onClick={handleSubmit}
           >
-            Tallenna
+            {strings.auth.saveButton}
           </button>
         </div>
       </div>
