@@ -52,6 +52,14 @@ const strings = new LocalizedStrings({
       snacks: 'Snacks',
       desserts: 'Jälkiruoat',
       drinks: 'Juomat',
+      lunchSpecial: 'Päivän lounas',
+      ingredients: 'Ainesosat',
+      allergens: 'Allergeenit',
+    },
+
+    cart: {
+      addToCart: 'Lisää ostoskoriin',
+      addToOrder: '+ Lisää tilaukseen',
     },
 
     // Common
@@ -191,6 +199,14 @@ const strings = new LocalizedStrings({
       snacks: 'Snacks',
       desserts: 'Desserts',
       drinks: 'Drinks',
+      lunchSpecial: "Today's Lunch",
+      ingredients: 'Ingredients',
+      allergens: 'Allergens',
+    },
+
+    cart: {
+      addToCart: 'Add to Cart',
+      addToOrder: '+ Add to Order',
     },
 
     // Common
