@@ -4,6 +4,8 @@ import Modal from '../Modal';
 
 //lisää select protein
 
+const API_UPLOADS_URL = import.meta.env.VITE_API_UPLOADS_URL;
+
 const AddToCart = (props) => {
     useEffect(() => {
 
@@ -66,7 +68,7 @@ const AddToCart = (props) => {
                         &times;
                     </span>
                     <img
-                        src={item.image_url}
+                        src={API_UPLOADS_URL + item.image_url}
                         alt={item.description}
                         width={'auto'}
                         className="rounded-md"
