@@ -45,7 +45,7 @@ function Home() {
               /*width="200"
               height="500"*/
               onClick={() => navigate('/menu')}
-              className="overflow-hidden h-[265px] lg:h-[395px] max-w-[200px] lg:max-w-[300px] rounded-sm cursor-pointer outline-1 outline-zinc-300 hover:brightness-85"
+              className="overflow-hidden h-[265px] lg:h-[395px] max-w-[200px] lg:max-w-[300px] rounded-sm cursor-pointer outline-1 outline-zinc-300 transition-transform duration-300 hover:scale-102"
             />
             <p className="text-white mt-2">{strings.home.newItemLabel}:</p>
             <p className="text-white">{strings.home.newItemName}</p>
@@ -60,7 +60,7 @@ function Home() {
               /*width="200"
               height="500"*/
               onClick={() => navigate('/menu')}
-              className="overflow-hidden h-[265px] lg:h-[395px] max-w-[200px] lg:max-w-[300px] rounded-sm cursor-pointer outline-1 outline-zinc-300 hover:brightness-85"
+              className="overflow-hidden h-[265px] lg:h-[395px] max-w-[200px] lg:max-w-[300px] rounded-sm cursor-pointer outline-1 outline-zinc-300 transition-transform duration-300 hover:scale-102"
             />
           </div>
         </div>
@@ -79,7 +79,7 @@ function Home() {
               src={imgSrc + '/home/mains.jpg'}
               alt="Tacos"
               onClick={() => navigate('/menu/mains')}
-              className="rounded-sm cursor-pointer outline-1 outline-zinc-300 hover:brightness-85 h-40 w-40 object-cover lg:h-48 lg:w-48"
+              className="rounded-sm cursor-pointer outline-1 outline-zinc-300 h-40 w-40 object-cover lg:h-48 lg:w-48 transition-transform duration-300 hover:scale-104"
             />
             <p className="mt-2 text-md">{strings.menu.mains.toUpperCase()}</p>
           </div>
@@ -88,7 +88,7 @@ function Home() {
               src={imgSrc + '/home/snacks.jpg'}
               alt="Corn chips"
               onClick={() => navigate('/menu/snacks')}
-              className="rounded-sm cursor-pointer outline-1 outline-zinc-300 hover:brightness-85 h-40 w-40 object-cover lg:h-48 lg:w-48"
+              className="rounded-sm cursor-pointer outline-1 outline-zinc-300 h-40 w-40 object-cover lg:h-48 lg:w-48 transition-transform duration-300 hover:scale-104"
             />
             <p className="mt-2 text-md">{strings.menu.snacks.toUpperCase()}</p>
           </div>
@@ -97,7 +97,7 @@ function Home() {
               src={imgSrc + '/home/desserts.jpg'}
               alt="Mexican caramel pudding"
               onClick={() => navigate('/menu/desserts')}
-              className="rounded-sm cursor-pointer outline-1 outline-zinc-300 hover:brightness-85 h-40 w-40 object-cover lg:h-48 lg:w-48"
+              className="rounded-sm cursor-pointer outline-1 outline-zinc-300 h-40 w-40 object-cover lg:h-48 lg:w-48 transition-transform duration-300 hover:scale-104"
             />
             <p className="mt-2 text-md">
               {strings.menu.desserts.toUpperCase()}
@@ -108,7 +108,7 @@ function Home() {
               src={imgSrc + '/home/drinks.jpg'}
               alt="Jarritos bottles"
               onClick={() => navigate('/menu/drinks')}
-              className="rounded-sm cursor-pointer outline-1 outline-zinc-300 hover:brightness-85 h-40 w-40 object-cover lg:h-48 lg:w-48"
+              className="rounded-sm cursor-pointer outline-1 outline-zinc-300 h-40 w-40 object-cover lg:h-48 lg:w-48 transition-transform duration-300 hover:scale-104"
             />
             <p className="mt-2 text-md">{strings.menu.drinks.toUpperCase()}</p>
           </div>
