@@ -12,12 +12,12 @@ const AddToCart = (props) => {
     })
     const {item, setSelectedItem} = props;
     const [quantity, setQuantity] = useState(1);
-    const [spiceLevel, setSpiceLevel] = useState(null);
+    const [spiceLevel, setSpiceLevel] = useState(1);
     const [price, setPrice] = useState(null);
     const [showModal, setShowModal] = useState(false);
     const [inputValue, setInputValue] = useState('');
     const {handleAddItem} = useOrderContext();
-    const [protein, setProtein] = useState();
+    const [protein, setProtein] = useState('beef'); //default
 
     useEffect(() => {
         setQuantity(1);
