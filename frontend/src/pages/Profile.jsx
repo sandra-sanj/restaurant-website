@@ -36,7 +36,7 @@ const Profile = () => {
     <div className="p-3 mb-5">
       {user && showEdit ? (
         <>
-          <h1 className="m-5">
+          <h1 className="m-5 max-xs:text-5xl!">
             {strings.profile.welcome}, {user.username}!
           </h1>
           <div className="profile-bar mb-5">
@@ -61,33 +61,28 @@ const Profile = () => {
           </div>
 
           <div className="p-2 flex flex-col items-center">
-            <div className="p-2 min-w-[300px] text-left">
-              <div className="edit-prof">
+            <div className="p-2 w-full max-w-[350px] mx-auto max-sm:pl-10">
+              <div className="edit-prof *:text-left mb-2">
                 <h3>
                   {strings.profile.name}: {user.username}{' '}
                 </h3>
               </div>
-              <div className="edit-prof">
+              <div className="edit-prof *:text-left mb-2">
                 <h3>
                   {strings.profile.email}: {user.email}{' '}
                 </h3>
               </div>
-              <div className="edit-prof">
+              <div className="edit-prof *:text-left mb-2">
                 <h3>
                   {strings.profile.phone}: {user.phone}
                 </h3>
               </div>
-              <div className="edit-prof">
+              <div className="edit-prof *:text-left mb-2">
                 <h3>
                   {strings.profile.role}: {getRoleTranslation(user.role)}
                 </h3>
               </div>
 
-              {/*
-                    <div className="edit-prof">   
-                        <h3>Since: {user.created_at} </h3>
-                    </div> 
-                    */}
             </div>
           
 
