@@ -18,10 +18,10 @@ const Confirmation = () => {
             <div>
               <h2>Tuotteet: </h2>
               {orderResult.items.map((item) => (
-                <OrderedItem
+              <OrderedItem
                   key={item.order_item_id}
                   item={item}
-                  className="flex justify-between items-center border-b py-2"
+                  //className="flex justify-between items-center border-b py-2"
             />
           ))}
             <p>{orderResult.total_price} €</p>
