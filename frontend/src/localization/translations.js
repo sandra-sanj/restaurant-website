@@ -57,9 +57,38 @@ const strings = new LocalizedStrings({
       allergens: 'Allergeenit',
     },
 
+    // Cart
     cart: {
       addToCart: 'Lisää ostoskoriin',
       addToOrder: '+ Lisää tilaukseen',
+
+      // Spice levels
+      mild: 'Mieto',
+      medium: 'Medium',
+      spicy: 'Tulinen',
+
+      // Proteins
+      chicken: 'Kana',
+      beef: 'Nauta',
+      plantProtein: 'Kasviproteiini',
+      shrimp: 'Katkarapu',
+
+      // Additional info
+      additionalInfo: 'Lisätiedot',
+      additionalInfoPlaceholder:
+        'Kirjoita lisätietoa allergioista tai tilauksesta...',
+
+      // Cart page
+      title: 'Ostoskori',
+      emptyCart: 'Ostoskorisi on tyhjä',
+      deliveryMethod: 'Toimitustapa',
+      delivery: 'Toimitus',
+      pickup: 'Nouto',
+      products: 'Tuotteet',
+      subtotal: 'Subtotal',
+      deliveryFee: 'Toimitusmaksu',
+      total: 'Yhteensä',
+      checkout: 'Kassalle',
     },
 
     // Common
@@ -239,9 +268,38 @@ const strings = new LocalizedStrings({
       allergens: 'Allergens',
     },
 
+    // Cart
     cart: {
       addToCart: 'Add to Cart',
       addToOrder: '+ Add to Order',
+
+      // Spice levels
+      mild: 'Mild',
+      medium: 'Medium',
+      spicy: 'Spicy',
+
+      // Proteins
+      chicken: 'Chicken',
+      beef: 'Beef',
+      plantProtein: 'Plant Protein',
+      shrimp: 'Shrimp',
+
+      // Additional info
+      additionalInfo: 'Additional Information',
+      additionalInfoPlaceholder:
+        'Write additional information about allergies or your order...',
+
+      // Cart page
+      title: 'Shopping Cart',
+      emptyCart: 'Your cart is empty',
+      deliveryMethod: 'Delivery Method',
+      delivery: 'Delivery',
+      pickup: 'Pickup',
+      products: 'Products',
+      subtotal: 'Subtotal',
+      deliveryFee: 'Delivery Fee',
+      total: 'Total',
+      checkout: 'Checkout',
     },
 
     // Common
