@@ -80,11 +80,13 @@ button:focus-visible {
 }
 */
 
+/*
 .container-home img {
   height: 10rem;
   width: 10rem;
   object-fit: cover;
 }
+*/
 
 .edit-prof {
   display: flex;
