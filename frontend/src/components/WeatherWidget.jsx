@@ -16,8 +16,8 @@ function WeatherWidget() {
 
   if (error) {
     return (
-      <div className="p-4 text-sm text-red-700">
-        <p>{error}</p>
+      <div className="p-4 text-sm text-red-700 ">
+        <p className='bg-white p-2 rounded-sm'>{error}</p>
       </div>
     );
   }

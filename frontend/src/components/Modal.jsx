@@ -5,7 +5,7 @@ function Modal({ isOpen, onClose, children }) {
 
     return (
         <div
-          className="m-6 outline-2 outline-gray-400 rounded-md w-[400px] bg-[#FFFFFF] pb-3" onClick={onClose}>
+          className="m-6 outline-2 outline-gray-400 rounded-md  w-[300px] xs:w-[350px] bg-[#FFFFFF] pb-3" onClick={onClose}>
             <span className="cursor-pointer font-bold text-lg" onClick={() => onClose}>
             &times;
           </span>

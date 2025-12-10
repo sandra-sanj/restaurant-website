@@ -30,11 +30,11 @@ const App = () => {
     <>
       <UserProvider>
         <OrderProvider>
-          <div className="flex flex-col bg-[#fdf8f8] self-auto w-screen">
+          <div className="flex flex-col bg-[#fdf8f8] self-auto w-full">
             <NavBar />
             
             {/* Fixed min height to make nav top and footer bottom */}
-            <main className="main-content w-screen min-h-[calc(100vh-420px-64px)] flex flex-col justify-center items-center">
+            <main className="main-content w-full min-h-[calc(100vh-420px-64px)] flex flex-col justify-center items-center overflow-x-hidden">
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/menu/" element={<Menu />}>

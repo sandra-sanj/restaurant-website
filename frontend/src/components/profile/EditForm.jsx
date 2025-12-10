@@ -29,7 +29,7 @@ const EditForm = () => {
 
   return (
     <div className='m-5'>
-    <h1 className=''>{strings.auth.editTitle}</h1>
+    <h1 className='max-sm:text-4xl!'>{strings.auth.editTitle}</h1>
     {/*<form
         onSubmit={(e) => {
           handleSubmit(e);
@@ -50,7 +50,7 @@ const EditForm = () => {
       </div>
 
       {/* Form */}
-      <div className="flex flex-col p-4 mt-7 gap-4 bg-white w-[400px]">
+      <div className="flex flex-col p-4 mt-7 gap-4 bg-white w-full max-w-[400px] min-w-[300px] mx-auto">
         <label className="flex flex-col gap-1">
           {strings.auth.username}:
           <input
@@ -101,14 +101,14 @@ const EditForm = () => {
             placeholder={user.phone}
             type="text"
             id="EditPhone"
-            className="bg-stone-100 p-1 rounded focus:bg-[#982a2a33] focus:border-[#982A2A]!"
+            className="bg-stone-100 w-full p-1 rounded focus:bg-[#982a2a33] focus:border-[#982A2A]!"
             onChange={(e) => {
               handleInputChange(e);
             }}
           />
         </label>
 
-        <div className='w-full ml-30 mr-0'>
+        <div className='w-full'>
           <button
             type="submit"
             className="bg-[#982a2a33]! border-2! border-[#982A2A]! text-black py-2 rounded hover:opacity-90 mt-4 hover:bg-[#982a2a70]!"

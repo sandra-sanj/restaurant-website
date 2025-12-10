@@ -45,7 +45,7 @@ function Order(props) {
   return (
     <div className="bg-[#fcebeb] flex flex-row border border-stone-300 rounded-lg m-5">
       <span
-        className="cursor-pointer font-bold text-lg"
+        className="cursor-pointer font-bold text-lg ml-2 mt-1 w-[12px]"
         onClick={() => setNext('cart')}
       >
         {' '}

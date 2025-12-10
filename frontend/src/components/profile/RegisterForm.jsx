@@ -28,16 +28,16 @@ const RegisterForm = () => {
 
   return (
     <div>
-      <h1 className='mb-8 mt-5'>{strings.auth.registerTitle}</h1>
+      <h1 className='mb-8 mt-5 text-center max-sm:text-4xl!'>{strings.auth.registerTitle}</h1>
       <div>
         <form
           onSubmit={(e) => {
             handleSubmit(e);
           }}
         >
-          <div className='bg-[#FFFFFF] px-10 py-15 flex flex-col gap-8 w-[500px] border border-stone-300 rounded-md'>
-            <div className='flex flex-row items-start w-full'>
-              <label htmlFor="registerUser" className="text-left mr-12">{strings.auth.username}: </label>
+          <div className='bg-[#FFFFFF] px-5 py-8 sm:px-10 sm:py-15 flex flex-col gap-8 w-300px sm:w-[500px] border border-stone-300 rounded-md'>
+            <div className='flex flex-col xs:flex-row items-start w-full min-w-[300px]'>
+              <label htmlFor="registerUser" className="xs:text-left xs:mr-12">{strings.auth.username}: </label>
               <input
                 name="username"
                 type="text"
@@ -48,8 +48,8 @@ const RegisterForm = () => {
                 className='w-full'
               />
             </div>
-            <div className='flex flex-row items-start w-full'>
-              <label htmlFor="registerEmail" className="text-left mr-14.5">{strings.auth.email}: </label>
+            <div className='flex flex-col xs:flex-row items-start w-full'>
+              <label htmlFor="registerEmail" className="xs:text-left xs:mr-14.5">{strings.auth.email}: </label>
               <input
                 name="email"
                 type="text"
@@ -60,8 +60,8 @@ const RegisterForm = () => {
                 className='w-full'
               />
             </div>
-            <div className='flex flex-row items-start w-full'>
-              <label htmlFor="registerPassword" className="text-left mr-19">{strings.auth.password}: </label>
+            <div className='flex flex-col xs:flex-row items-start w-full'>
+              <label htmlFor="registerPassword" className="xs:text-left xs:mr-19">{strings.auth.password}: </label>
               <input
                 name="password"
                 type="password"
@@ -72,8 +72,8 @@ const RegisterForm = () => {
                 className='w-full'
               />
             </div>
-            <div className='flex flex-row items-start w-full'>
-              <label htmlFor="registerPhone" className="text-left mr-0">{strings.auth.phoneFormat}: </label>
+            <div className='flex flex-col xs:flex-row items-start w-full'>
+              <label htmlFor="registerPhone" className="xs:text-left sm:mr-0">{strings.auth.phoneFormat}: </label>
               <input
                 name="phone"
                 type="text"
