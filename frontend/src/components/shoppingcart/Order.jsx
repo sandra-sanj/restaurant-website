@@ -43,7 +43,7 @@ function Order(props) {
   //bg-white w-[400px]
   return (
     <div className="bg-[#fcebeb] flex flex-row border border-stone-300 rounded-lg m-5">
-      <span className="cursor-pointer font-bold text-lg" onClick={() => setNext('cart')}> {/*goes back to cart*/}
+      <span className="cursor-pointer font-bold text-lg ml-2 mt-1 w-[12px]" onClick={() => setNext('cart')}> {/*goes back to cart*/}
             &times;
           </span>
       <div className="m-8">

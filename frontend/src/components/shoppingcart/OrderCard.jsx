@@ -18,10 +18,10 @@ const OrderCard = (props) => {
   }, [quantity]);
 
   return (
-    <div className="mb-2 flex flex-row gap-5">
-      <div className='flex flex-col min-w-[200px] text-left justify-center'>
-        <p className="pl-5">{item.item_name}</p>
-        <p className='pl-5'>{(quantity * item.unit_price).toFixed(2)} €</p>
+    <div className="mb-2 flex flex-row gap-5 w-full">
+      <div className='flex flex-col min-w-[50px] max-w-[150px] text-left justify-center'>
+        <p className="sm:pl-5 max-xs:font-sm">{item.item_name}</p>
+        <p className='sm:pl-5 max-xs:font-sm'>{(quantity * item.unit_price).toFixed(2)} €</p>
       </div>
 
       <div className="flex flex-row w-full gap-2 items-center justify-end">

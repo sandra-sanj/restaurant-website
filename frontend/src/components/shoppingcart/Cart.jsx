@@ -19,11 +19,11 @@ function Cart(props) {
 
   const totalWithDelivery = Number(totalPrice) + Number(4.9);
 
-  if (cart.length < 1) return <p>Ostoskorisi on tyhjä</p>;
+  if (cart.length < 1) return <p className='text-lg'>Ostoskorisi on tyhjä</p>;
 
   return (
     <>
-      <div className="m-7 outline-2 outline-stone-500 rounded-md w-[500px]">
+      <div className="m-7 outline-2 outline-stone-500 rounded-md w-[350px] sm:w-[500px]">
         {/* Header */}
         <div className="flex justify-center p-4 bg-[#FFFFFF]">
           <h1 className="text-lg">Ostoskori</h1>
@@ -56,7 +56,7 @@ function Cart(props) {
               key={item.unique_id}
               item={item}
               setTotalPrice={setTotalPrice}
-              className="flex justify-between items-center border-b py-2"
+              className="flex justify-between items-center border-b py-2 w-full"
             />
           ))}
           <div className="flex gap-2 items-center">
