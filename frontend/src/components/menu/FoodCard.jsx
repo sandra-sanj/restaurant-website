@@ -16,10 +16,12 @@ const FoodCard = (props) => {
   useEffect(() => {
     const handleAllergens = async () => {
       const response = await getAllergen(item.menu_item_id);
-      const allergen = response.map(a => a.name);
-      const code = response.map(c => c.code);
-      setAllergens(allergen);
-      setCodes(code);
+      if(response) {
+        const allergen = response.map(a => a.name);
+        const code = response.map(c => c.code);
+        setAllergens(allergen);
+        setCodes(code);
+      }
       //console.log(allergen, codes);
     };
     

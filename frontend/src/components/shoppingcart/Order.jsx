@@ -13,12 +13,16 @@ function Order(props) {
   const {user} = useUserContext();
   const [initValues, setInitValues] = useState([]);
 
+
   const initValues1 = {
+    
     user_id: user.user_id,
     username: user.username,
     email: user.email,
     phone: user.phone,
     address: '',
+
+    
   };
 
   const initValues2 = {
@@ -36,7 +40,7 @@ function Order(props) {
 
   const placeOrder = () => {
     try {
-      //inputs.total_price = total;
+      inputs.user_id || null;
       inputs.order_type = delivery;
       console.log('con: ', inputs);
       handleContactInfo(inputs);
@@ -74,6 +78,7 @@ function Order(props) {
               name="username"
               type="text"
               id="ordername"
+              value={user.username || null}
               onChange={(e) => {
                 handleInputChange(e);
               }}
