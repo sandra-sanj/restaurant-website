@@ -1,6 +1,15 @@
-import {useEffect, useState, useRef} from 'react';
+import {useEffect, useState} from 'react';
 import {useMenu, useAllergens} from '../../hooks/apiHook';
 import useForm from '../../hooks/formHooks';
+import {
+  FormField,
+  CategorySelector,
+  SpiceLevelSelector,
+  ProteinSelector,
+  AllergenSelector,
+  AvailabilityToggle,
+  ImageUploadPreview,
+} from './ItemFormFields.jsx';
 
 const API_UPLOADS_URL = import.meta.env.VITE_API_UPLOADS_URL;
 
@@ -13,36 +22,20 @@ const EditItem = ({onClose}) => {
   const [selectedAllergens, setSelectedAllergens] = useState([]);
   const [originalAllergens, setOriginalAllergens] = useState([]);
 
-  const fileInputRef = useRef(null);
-
-  const handleImageChange = (event) => {
-    setImageFile(event.target.files[0]);
-  };
-
   const initValues = {
-    nameFi: '',
-    nameEn: '',
+    name: '',
+    name_en: '',
     description: '',
-    descriptionEn: '',
+    description_en: '',
     price: '',
-    category: '',
-    allergens: '',
+    category_id: 1,
+    is_available: true,
+    spice_level: 0,
+    allows_spice_custom: false,
+    available_proteins: [],
+    default_protein: '',
     ingredients: '',
-    isAvailable: false,
-    spiceLevel: 0,
-    allowsSpiceCustom: false,
-    availableProteins: [],
-    defaultProtein: '',
   };
-
-  const proteins = [
-    {id: 'chicken', name: 'Kana'},
-    {id: 'beef', name: 'Nauta'},
-    {id: 'vegan', name: 'Tofu'},
-    {id: 'shrimp', name: 'Kala'},
-  ];
-
-  const spiceLevels = [0, 1, 2, 3, 4, 5];
 
   const handleEditItem = async (formData, itemId, originalName) => {
     const token = localStorage.getItem('token');
@@ -91,137 +84,106 @@ const EditItem = ({onClose}) => {
 
   const {handleSubmit, handleInputChange, inputs, resetForm} = useForm(
     (values) => {
-      if (!selectedItem) {
-        return;
-      }
+      if (!selectedItem) return;
 
       const formData = new FormData();
-      // append only modified fields to formData
-      if (parseInt(values.category) !== selectedItem.category_id)
-        formData.append('category_id', parseInt(values.category));
-      if (values.nameFi !== selectedItem.name)
-        formData.append('name', values.nameFi);
-      if (values.nameEn !== selectedItem.name_en)
-        formData.append('name_en', values.nameEn);
-      if (values.description !== selectedItem.description)
-        formData.append('description', values.description);
-      if (values.descriptionEn !== selectedItem.description_en)
-        formData.append('description_en', values.descriptionEn);
-      if (parseFloat(values.price) !== parseFloat(selectedItem.price))
-        formData.append(
-          'price',
-          parseFloat(values.price.replace(',', '.')).toFixed(2),
-        );
 
-      if (parseInt(values.spiceLevel) !== parseInt(selectedItem.spice_level)) {
-        formData.append('spice_level', parseInt(values.spiceLevel));
-      }
+      // format price
+      const normalizePrice = (value) =>
+        parseFloat(value.toString().replace(',', '.')).toFixed(2);
 
-      if (values.allowsSpiceCustom !== selectedItem.allows_spice_custom) {
-        formData.append(
-          'allows_spice_custom',
-          values.allowsSpiceCustom ? 1 : 0,
-        );
-      }
+      // sort proteins alphabetically
+      const normalizeProteins = (value) =>
+        Array.isArray(value)
+          ? [...value].sort()
+          : (value
+              ?.split(',')
+              .map((s) => s.trim())
+              .filter(Boolean)
+              .sort() ?? []);
 
-      const proteinsDB = selectedItem.available_proteins
-        ? selectedItem.available_proteins
-            .split(',')
-            .map((s) => s.trim())
-            .filter(Boolean)
-        : [];
-      const proteinsUI = [...values.availableProteins].sort();
-      const cleanDB = [...proteinsDB].sort();
-      if (JSON.stringify(proteinsUI) !== JSON.stringify(cleanDB)) {
-        formData.append('available_proteins', proteinsUI.join(', '));
-      }
+      // add fields only if modified
+      Object.keys(initValues).forEach((key) => {
+        const uiValue = values[key]; // value of item in ui
+        let dbValue = selectedItem[key]; // current value of item in database
 
-      if (values.defaultProtein !== selectedItem.default_protein) {
-        formData.append('default_protein', values.defaultProtein);
-      }
+        switch (key) {
+          case 'price': {
+            const ui = normalizePrice(uiValue);
+            const db = normalizePrice(dbValue);
+            if (ui !== db) formData.append(key, ui);
+            break;
+          }
 
-      if (values.ingredients !== selectedItem.ingredients)
-        formData.append('ingredients', values.ingredients);
+          case 'allows_spice_custom':
+          case 'is_available': {
+            const ui = uiValue ? 1 : 0;
+            const db = dbValue ? 1 : 0;
+            if (ui !== db) formData.append(key, ui);
+            break;
+          }
 
-      const sortedAllergnsUI = [...selectedAllergens].sort();
+          case 'available_proteins': {
+            const ui = normalizeProteins(uiValue);
+            const db = normalizeProteins(dbValue);
+            if (JSON.stringify(ui) !== JSON.stringify(db)) {
+              formData.append(key, ui.join(', '));
+            }
+            break;
+          }
+
+          default: {
+            if (uiValue !== dbValue) formData.append(key, uiValue);
+          }
+        }
+      });
+
+      // allergens
+      const sortedAllergensUI = [...selectedAllergens].sort();
       const sortedAllergensDB = [...originalAllergens].sort();
       if (
-        JSON.stringify(sortedAllergnsUI) !== JSON.stringify(sortedAllergensDB)
+        JSON.stringify(sortedAllergensUI) !== JSON.stringify(sortedAllergensDB)
       ) {
-        formData.append('allergen_ids', JSON.stringify(sortedAllergnsUI));
+        formData.append('allergen_ids', JSON.stringify(sortedAllergensUI));
       }
 
-      if (values.isAvailable !== selectedItem.is_available)
-        formData.append('is_available', values.isAvailable ? 1 : 0);
-
-      // append image if selected
+      // add image if selected
       if (imageFile) formData.append('file', imageFile);
 
-      handleEditItem(formData, selectedItem.menu_item_id, values.nameFi); // Callback
+      handleEditItem(formData, selectedItem.menu_item_id, values.name); // Callback
     },
 
     initValues,
   );
 
+  // convert item to form value
+  const mapSelectedItemToFormValues = (item) =>
+    Object.fromEntries(
+      Object.keys(initValues).map((key) => {
+        if (key === 'available_proteins') {
+          return [
+            key,
+            item[key]
+              ? item[key]
+                  .split(',')
+                  .map((s) => s.trim())
+                  .filter(Boolean)
+              : [],
+          ];
+        }
+        return [key, item[key] ?? initValues[key]];
+      }),
+    );
+
   // Set item values to form
   useEffect(() => {
     if (selectedItem) {
-      handleInputChange({target: {name: 'nameFi', value: selectedItem.name}});
-      handleInputChange({
-        target: {name: 'nameEn', value: selectedItem.name_en},
-      });
-      handleInputChange({
-        target: {name: 'description', value: selectedItem.description},
-      });
-      handleInputChange({
-        target: {name: 'descriptionEn', value: selectedItem.description_en},
-      });
+      const values = mapSelectedItemToFormValues(selectedItem);
 
-      handleInputChange({target: {name: 'price', value: selectedItem.price}});
+      Object.entries(values).forEach(([key, value]) =>
+        handleInputChange({target: {name: key, value}}),
+      );
 
-      handleInputChange({
-        target: {name: 'category', value: selectedItem.category_id},
-      });
-
-      handleInputChange({
-        target: {name: 'isAvailable', value: selectedItem.is_available},
-      });
-
-      handleInputChange({
-        target: {name: 'ingredients', value: selectedItem.ingredients},
-      });
-
-      handleInputChange({
-        target: {name: 'spiceLevel', value: selectedItem.spice_level || 0},
-      });
-
-      handleInputChange({
-        target: {
-          name: 'allowsSpiceCustom',
-          value: selectedItem.allows_spice_custom || false,
-        },
-      });
-
-      handleInputChange({
-        target: {
-          name: 'availableProteins',
-          value: selectedItem.available_proteins
-            ? selectedItem.available_proteins
-                .split(',')
-                .map((s) => s.trim())
-                .filter((s) => s && s !== 'null') // remove empty and null
-            : [],
-        },
-      });
-
-      handleInputChange({
-        target: {
-          name: 'defaultProtein',
-          value: selectedItem.default_protein || '',
-        },
-      });
-
-      // get allergens
       getMenuItemAllergens(selectedItem.menu_item_id).then(
         (allergenObjects) => {
           const ids = allergenObjects.map((a) => a.allergen_id);
@@ -272,267 +234,101 @@ const EditItem = ({onClose}) => {
           </div>
 
           {/* Form */}
-          <div className="flex flex-col p-4 gap-4 bg-white w-[400px] *:flex *:flex-col *:gap-1">
-            <label>
-              Nimi:
-              <input
-                name="nameFi"
-                value={inputs.nameFi}
-                onChange={handleInputChange}
-                className="bg-stone-100 p-1 rounded"
-                type="text"
-              />
-            </label>
-            <label>
-              Nimi englanniksi:
-              <input
-                name="nameEn"
-                value={inputs.nameEn}
-                onChange={handleInputChange}
-                className="bg-stone-100 p-1 rounded"
-                type="text"
-              />
-            </label>
-            <label>
-              Kuvaus:
-              <input
-                name="description"
-                value={inputs.description}
-                onChange={handleInputChange}
-                className="bg-stone-100 p-1 rounded"
-                type="text"
-              />
-            </label>
-            <label>
-              Kuvaus englanniksi:
-              <input
-                name="descriptionEn"
-                value={inputs.descriptionEn}
-                onChange={handleInputChange}
-                className="bg-stone-100 p-1 rounded"
-                type="text"
-              />
-            </label>
-            <label>
-              Ainesosat:
-              <input
-                name="ingredients"
-                value={inputs.ingredients}
-                onChange={handleInputChange}
-                className="bg-stone-100 p-1 rounded"
-                type="text"
-              />
-            </label>
-            <label>
-              Hinta (€):
-              <input
-                name="price"
-                value={inputs.price}
-                onChange={handleInputChange}
-                className="bg-stone-100 p-1 rounded"
-                type="text"
-              />
-            </label>
-            {/* Kategoria */}
-            <div>
-              <p>Kategoria:</p>
-              <select
-                name="category"
-                value={inputs.category}
-                onChange={handleInputChange}
-                className="bg-stone-100 p-1 rounded"
-              >
-                <option value={1}>Snacks</option>
-                <option value={2}>Mains</option>
-                <option value={3}>Desserts</option>
-                <option value={4}>Drinks</option>
-              </select>
-            </div>
-            {/* Tulisuus */}
-            <div>
-              <p>Tulisuus:</p>
+          <div className="flex flex-col p-4 gap-4 bg-white w-[400px] *:flex *:flex-col space-y-5">
+            <FormField
+              label="Nimi"
+              name="name"
+              value={inputs.name}
+              onChange={handleInputChange}
+            />
+            <FormField
+              label="Nimi englanniksi"
+              name="name_en"
+              value={inputs.name_en}
+              onChange={handleInputChange}
+            />
+            <FormField
+              label="Kuvaus"
+              name="description"
+              value={inputs.description}
+              onChange={handleInputChange}
+            />
+            <FormField
+              label="Kuvaus englanniksi"
+              name="description_en"
+              value={inputs.description_en}
+              onChange={handleInputChange}
+            />
+            <FormField
+              label="Ainesosat"
+              name="ingredients"
+              value={inputs.ingredients}
+              onChange={handleInputChange}
+            />
+            <FormField
+              label="Hinta (€)"
+              name="price"
+              value={inputs.price}
+              onChange={handleInputChange}
+            />
 
-              <select
-                name="spiceLevel"
-                value={inputs.spiceLevel}
-                onChange={handleInputChange}
-                className="bg-stone-100 p-1 rounded"
-              >
-                {spiceLevels.map((lvl) => (
-                  <option key={lvl} value={lvl}>
-                    {lvl}
-                  </option>
-                ))}
-              </select>
+            <CategorySelector
+              value={inputs.category_id}
+              onChange={handleInputChange}
+            />
 
-              <label className="flex items-center gap-1 mt-1">
-                <input
-                  type="checkbox"
-                  name="allowsSpiceCustom"
-                  checked={inputs.allowsSpiceCustom}
-                  onChange={(e) =>
-                    handleInputChange({
-                      target: {
-                        name: 'allowsSpiceCustom',
-                        value: e.target.checked,
-                      },
-                    })
-                  }
-                />
-                Salli tulisuuden muokkaus
-              </label>
-            </div>
+            <SpiceLevelSelector
+              level={inputs.spice_level}
+              allowsCustom={inputs.allows_spice_custom}
+              onLevelChange={handleInputChange}
+              onCustomChange={(e) =>
+                handleInputChange({
+                  target: {
+                    name: 'allows_spice_custom',
+                    value: e.target.checked,
+                  },
+                })
+              }
+            />
 
-            {/* Proteiinit */}
-            <div>
-              <p>Proteiinit:</p>
-              {/* proteiinien checkboxit */}
-              <div className="flex flex-wrap gap-2">
-                {proteins.map((protein) => (
-                  <label key={protein.id} className="flex items-center gap-1">
-                    <input
-                      type="checkbox"
-                      checked={
-                        inputs.availableProteins
-                          ? inputs.availableProteins.includes(protein.id)
-                          : false
-                      }
-                      onChange={(e) => {
-                        const current = inputs.availableProteins || [];
-                        const updated = e.target.checked
-                          ? [...current, protein.id]
-                          : current.filter((p) => p !== protein.id);
+            <ProteinSelector
+              selected={inputs.available_proteins}
+              defaultProtein={inputs.default_protein}
+              onChange={(updatedProteins) =>
+                handleInputChange({
+                  target: {name: 'available_proteins', value: updatedProteins},
+                })
+              }
+              onDefaultChange={(default_protein) =>
+                handleInputChange({
+                  target: {name: 'default_protein', value: default_protein},
+                })
+              }
+            />
 
-                        handleInputChange({
-                          target: {name: 'availableProteins', value: updated},
-                        });
+            <AllergenSelector
+              allergens={allergens}
+              selected={selectedAllergens}
+              onChange={setSelectedAllergens}
+            />
 
-                        // reset default if removed
-                        if (!updated.includes(inputs.defaultProtein)) {
-                          handleInputChange({
-                            target: {name: 'defaultProtein', value: ''},
-                          });
-                        }
-                      }}
-                    />
-                    {protein.name}
-                  </label>
-                ))}
-              </div>
+            <AvailabilityToggle
+              name="is_available"
+              value={inputs.is_available}
+              onChange={handleInputChange}
+            />
 
-              <p className="mt-2">Oletusproteiini:</p>
-              <select
-                name="defaultProtein"
-                value={inputs.defaultProtein || ''}
-                onChange={handleInputChange}
-                className="bg-stone-100 p-1 rounded"
-              >
-                <option value="">Ei valittu</option>
+            <ImageUploadPreview
+              imageFile={imageFile}
+              onFileChange={(e) => setImageFile(e.target.files[0])}
+              onCancel={() => setImageFile(null)}
+              currentImageUrl={
+                selectedItem?.image_thumb_url
+                  ? `${API_UPLOADS_URL}/${selectedItem.image_thumb_url}`
+                  : null
+              }
+            />
 
-                {(inputs.availableProteins || []).map((id) => {
-                  const protein = proteins.find((p) => p.id === id);
-                  return (
-                    protein && (
-                      <option key={id} value={id}>
-                        {protein.name}
-                      </option>
-                    )
-                  );
-                })}
-              </select>
-            </div>
-
-            {/* Ruokavaliot */}
-            <div>
-              <p>Ruokavaliot:</p>
-              <div className="flex flex-wrap gap-2">
-                {allergens &&
-                  allergens.map((allergen) => (
-                    <label
-                      key={allergen.allergen_id}
-                      className="flex items-center gap-1"
-                    >
-                      <input
-                        type="checkbox"
-                        checked={selectedAllergens.includes(
-                          allergen.allergen_id,
-                        )}
-                        onChange={(e) => {
-                          const updated = e.target.checked
-                            ? [...selectedAllergens, allergen.allergen_id]
-                            : selectedAllergens.filter(
-                                (id) => id !== allergen.allergen_id,
-                              );
-                          setSelectedAllergens(updated);
-                        }}
-                      />
-                      {allergen.code}
-                    </label>
-                  ))}
-              </div>
-            </div>
-
-            {/* Saatavuus */}
-            <div>
-              <label>
-                Saatavuus:
-                <input
-                  type="checkbox"
-                  name="isAvailable"
-                  checked={inputs.isAvailable}
-                  onChange={(e) =>
-                    handleInputChange({
-                      target: {name: 'isAvailable', value: e.target.checked},
-                    })
-                  }
-                />
-              </label>
-            </div>
-            {/* Kuva */}
-            <div className="img:">
-              <p>Kuva:</p>
-              <input
-                name="image"
-                type="file"
-                className="bg-stone-100 p-1 rounded"
-                onChange={handleImageChange}
-                ref={fileInputRef}
-              />
-
-              {imageFile && (
-                <button
-                  type="button"
-                  className="text-red-600 underline text-sm"
-                  onClick={() => {
-                    setImageFile(null);
-                    if (fileInputRef.current) fileInputRef.current.value = null;
-                  }}
-                >
-                  Peruuta
-                </button>
-              )}
-
-              {/* Näytä lisätty kuva */}
-              {imageFile && (
-                <img
-                  src={URL.createObjectURL(imageFile)}
-                  alt="food"
-                  className="w-24 h-24 object-cover border rounded"
-                />
-              )}
-
-              {/* Näytä nykyinen kuva kun kuvaa ei ole päivitetty */}
-              {!imageFile && selectedItem?.image_thumb_url && (
-                <div className="flex flex-col mt-2">
-                  <p>Nykyinen kuva:</p>
-                  <img
-                    src={`${API_UPLOADS_URL}/${selectedItem.image_thumb_url}`}
-                    alt="Current"
-                    className="w-24 h-24 object-cover border rounded"
-                  />
-                </div>
-              )}
-            </div>
             <button
               className="mt-4 bg-[#2A4B11]! text-white py-2 rounded hover:opacity-90"
               onClick={handleSubmit}
