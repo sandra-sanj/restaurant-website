@@ -11,6 +11,8 @@ import {
   ImageUploadPreview,
 } from './ItemFormFields.jsx';
 
+import {useLanguage} from '../../hooks/useLanguage';
+
 const API_UPLOADS_URL = import.meta.env.VITE_API_UPLOADS_URL;
 
 const EditItem = ({onClose}) => {
@@ -21,6 +23,8 @@ const EditItem = ({onClose}) => {
   const {allergens, getMenuItemAllergens} = useAllergens();
   const [selectedAllergens, setSelectedAllergens] = useState([]);
   const [originalAllergens, setOriginalAllergens] = useState([]);
+
+  const {strings} = useLanguage();
 
   const initValues = {
     name: '',
@@ -54,14 +58,12 @@ const EditItem = ({onClose}) => {
         formData.description_en === '' ||
         formData.price === ''
       ) {
-        alert('Täytä kaikki kentät!');
+        alert(strings.adminForms.required);
         return;
       }
 
       if ([...formData.entries()].length === 0) {
-        alert(
-          'Mitään tietoa ei ole muokattu. Muokkaa yhtä tai useampaa tietoa.',
-        );
+        alert(strings.adminForms.noChanges);
         return;
       }
 
@@ -69,12 +71,14 @@ const EditItem = ({onClose}) => {
       console.log('Modify response', response);
 
       if (response) {
-        alert(`"${formData.name ? formData.name : originalName}" muokattu.`);
+        alert(
+          `"${formData.name ? formData.name : originalName}" ${strings.adminForms.itemEdited}.`,
+        );
         onClose();
         setSelectedItem(null);
       } else {
         alert(
-          `Virhe: "${formData.name ? formData.name : originalName}" ei muokattu.`,
+          `${strings.adminForms.error} "${formData.name ? formData.name : originalName}" ${strings.adminForms.itemNotEdited}.`,
         );
       }
     } catch (e) {
@@ -210,7 +214,7 @@ const EditItem = ({onClose}) => {
           }}
           className="bg-stone-100 p-1 rounded"
         >
-          <option value="">Valitse muokattava tuote</option>
+          <option value="">{strings.adminForms.selectProduct}</option>
           {menuArray.map((item) => (
             <option key={item.menu_item_id} value={item.menu_item_id}>
               {item.name}
@@ -224,7 +228,7 @@ const EditItem = ({onClose}) => {
         <div className="m-5 outline-2 outline-gray-400 rounded-md">
           {/* Header */}
           <div className="flex justify-between items-center bg-[#2A4B11]! text-white p-4 rounded-t-md">
-            <p className="font-bold">Muokkaa tuotetta</p>
+            <p className="font-bold">{strings.adminForms.editItemTitle}</p>
             <span
               className="cursor-pointer font-bold text-lg hover:text-gray-400"
               onClick={onClose}
@@ -236,37 +240,37 @@ const EditItem = ({onClose}) => {
           {/* Form */}
           <div className="flex flex-col p-4 gap-4 bg-white w-[400px] *:flex *:flex-col space-y-5">
             <FormField
-              label="Nimi"
+              label={strings.adminForms.name}
               name="name"
               value={inputs.name}
               onChange={handleInputChange}
             />
             <FormField
-              label="Nimi englanniksi"
+              label={strings.adminForms.nameEn}
               name="name_en"
               value={inputs.name_en}
               onChange={handleInputChange}
             />
             <FormField
-              label="Kuvaus"
+              label={strings.adminForms.description}
               name="description"
               value={inputs.description}
               onChange={handleInputChange}
             />
             <FormField
-              label="Kuvaus englanniksi"
+              label={strings.adminForms.descriptionEn}
               name="description_en"
               value={inputs.description_en}
               onChange={handleInputChange}
             />
             <FormField
-              label="Ainesosat"
+              label={strings.adminForms.ingredients}
               name="ingredients"
               value={inputs.ingredients}
               onChange={handleInputChange}
             />
             <FormField
-              label="Hinta (€)"
+              label={strings.adminForms.price}
               name="price"
               value={inputs.price}
               onChange={handleInputChange}
@@ -333,7 +337,7 @@ const EditItem = ({onClose}) => {
               className="mt-4 bg-[#2A4B11]! text-white py-2 rounded hover:opacity-90"
               onClick={handleSubmit}
             >
-              Vahvista
+              {strings.adminForms.confirm}
             </button>
           </div>
         </div>
