@@ -53,28 +53,34 @@ const HighlightCard = () => {
       {todaysLunch && (
         <div>
           <AddToCart item={selectedItem} setSelectedItem={setSelectedItem} />
-          <div className="bg-white-50 w-[500px] rounded-md mb-5 outline-10 outline-red-800">
-            <img
-              src={API_UPLOADS_URL + todaysLunch.image_thumb_url}
-              alt={displayDescription}
-              width={'auto'}
-              className="rounded-md"
-            />
-            <div>
-              <h2>{displayName}</h2>
-              <p>{strings.menu?.lunchSpecial || 'Päivän lounas'}</p>
-              <button onClick={() => setShowModal(true)}>i</button>
+
+          <div className="relative w-[500px] mb-5">
+            <div className="relative z-20 bg-white rounded-md p-4 outline-2 outline-red-800">
+              <img
+                src={API_UPLOADS_URL + todaysLunch.image_thumb_url}
+                alt={displayDescription}
+                width={'auto'}
+                className="rounded-md"
+              />
+              <div>
+                <h2>{displayName}</h2>
+                <p>{strings.menu?.lunchSpecial || 'Päivän lounas'}</p>
+                <button onClick={() => setShowModal(true)}>i</button>
+              </div>
+
+              <p>{displayDescription}</p>
+              <p>{todaysLunch.special_price}</p>
+              <p className="text-decoration-line: line-through">
+                {todaysLunch.regular_price}
+              </p>
+              <button onClick={() => setSelectedItem(todaysLunch)}>
+                {strings.cart?.addToOrder || '+ Lisää tilaukseen'}
+              </button>
             </div>
 
-            <p>{displayDescription}</p>
-            <p>{todaysLunch.special_price}</p>
-            <p className="text-decoration-line: line-through">
-              {todaysLunch.regular_price}
-            </p>
-            <button onClick={() => setSelectedItem(todaysLunch)}>
-              {strings.cart?.addToOrder || '+ Lisää tilaukseen'}
-            </button>
+            <div className="absolute -inset-1 rounded-md blur-md z-10 bg-red-800 opacity-40"></div>
           </div>
+
           <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
             <div>
               <div>
