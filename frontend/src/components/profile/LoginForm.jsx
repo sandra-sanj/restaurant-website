@@ -27,14 +27,14 @@ const LoginForm = () => {
   return (
     <div>
       <h1 className="mb-8 text-center max-sm:text-4xl!">{strings.auth.loginTitle}</h1>
-      <div className="flex flex-col sm:flex-row items-start w-full gap-2 sm:gap-4 min-w-[300px] sm:max-w-[400px] mx-auto">
+      <div className="flex flex-col items-center w-full gap-2 sm:gap-4 min-w-[300px] sm:max-w-[400px] mx-auto">
         <form
           onSubmit={(e) => {
             handleSubmit(e);
           }}
         >
-          <div className="bg-white px-4 py-6 sm:px-10 sm:py-15 flex flex-col gap-8 border border-stone-300! rounded-md">
-            <div className="flex flex-row items-start w-full">
+          <div className="bg-white px-4 py-6 sm:px-10 sm:py-15 flex flex-col gap-8 border border-stone-300! rounded-md items-center">
+            <div className="flex flex-col xs:flex-row items-start w-full">
               <label htmlFor="loginuser" className="text-left mr-4">
                 {strings.auth.username}:{' '}
               </label>
@@ -49,7 +49,7 @@ const LoginForm = () => {
                 className="w-full"
               />
             </div>
-            <div className="flex flex-row items-start w-full">
+            <div className="flex flex-col xs:flex-row items-start w-full">
               <label htmlFor="loginpassword" className="text-left mr-10">
                 {strings.auth.password}:{' '}
               </label>

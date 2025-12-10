@@ -36,7 +36,7 @@ const RegisterForm = () => {
           }}
         >
           <div className='bg-[#FFFFFF] px-5 py-8 sm:px-10 sm:py-15 flex flex-col gap-8 w-300px sm:w-[500px] border border-stone-300 rounded-md'>
-            <div className='flex flex-col xs:flex-row :items-start w-full min-w-[300px]'>
+            <div className='flex flex-col xs:flex-row items-start w-full min-w-[300px]'>
               <label htmlFor="registerUser" className="xs:text-left xs:mr-12">{strings.auth.username}: </label>
               <input
                 name="username"
@@ -48,7 +48,7 @@ const RegisterForm = () => {
                 className='w-full'
               />
             </div>
-            <div className='flex flex-col xs:flex-row xs:items-start w-full'>
+            <div className='flex flex-col xs:flex-row items-start w-full'>
               <label htmlFor="registerEmail" className="xs:text-left xs:mr-14.5">{strings.auth.email}: </label>
               <input
                 name="email"
@@ -60,7 +60,7 @@ const RegisterForm = () => {
                 className='w-full'
               />
             </div>
-            <div className='flex flex-col xs:flex-row xs:items-start w-full'>
+            <div className='flex flex-col xs:flex-row items-start w-full'>
               <label htmlFor="registerPassword" className="xs:text-left xs:mr-19">{strings.auth.password}: </label>
               <input
                 name="password"
@@ -72,7 +72,7 @@ const RegisterForm = () => {
                 className='w-full'
               />
             </div>
-            <div className='flex flex-col xs:flex-row xs:items-start w-full'>
+            <div className='flex flex-col xs:flex-row items-start w-full'>
               <label htmlFor="registerPhone" className="xs:text-left sm:mr-0">{strings.auth.phoneFormat}: </label>
               <input
                 name="phone"
