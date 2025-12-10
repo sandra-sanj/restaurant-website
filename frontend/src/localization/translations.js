@@ -89,6 +89,12 @@ const strings = new LocalizedStrings({
       deliveryFee: 'Toimitusmaksu',
       total: 'Yhteensä',
       checkout: 'Kassalle',
+
+      contactInfo: 'Yhteystiedot',
+      proceedToPayment: 'Siirry maksuun',
+      paymentMethod: 'Maksutapa',
+      address: 'Osoite',
+      username: 'Koko nimi',
     },
 
     // Common
@@ -300,6 +306,12 @@ const strings = new LocalizedStrings({
       deliveryFee: 'Delivery Fee',
       total: 'Total',
       checkout: 'Checkout',
+
+      contactInfo: 'Contact Information',
+      proceedToPayment: 'Proceed to Payment',
+      paymentMethod: 'Payment Method',
+      address: 'Address',
+      username: 'Full Name',
     },
 
     // Common
