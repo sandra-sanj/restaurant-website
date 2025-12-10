@@ -24,11 +24,12 @@ const Payment = (props) => {
 
     return (
     <>
-        <Modal isOpen={showModal} onClose={() => confirm('haluatko varmasti keskeyttää tilauksen?')}>
+        <Modal isOpen={showModal} onClose={() => confirm('Haluatko varmasti keskeyttää tilauksen?')}>
         
             <p>Valittu metodi: {payment}</p>
-            <p>Suorita maksu</p>
-            <button onClick={() => handleClick()}>ok</button>
+            <p className="mt-5 font-semibold ">Suorita maksu</p>
+            <button onClick={() => handleClick()}
+                className=" bg-[#2A4B11]! text-white">OK</button>
         </Modal>
         <p>{msg}</p>
     </>
