@@ -31,6 +31,7 @@ const AddItem = ({onClose}) => {
     glutenFree: false,
     milkFree: false,
     vegan: false,
+    isAvailable: true,
   };
 
   const doAddItem = async (inputs) => {
@@ -67,13 +68,16 @@ const AddItem = ({onClose}) => {
       formData.append('name_en', inputs.nameEn);
       formData.append('description', inputs.description || '');
       formData.append('description_en', inputs.descriptionEn || '');
-      formData.append('price', parseFloat(inputs.price.replace(',', '.')).toFixed(2));
+      formData.append(
+        'price',
+        parseFloat(inputs.price.replace(',', '.')).toFixed(2),
+      );
       formData.append('ingredients', '-');
       formData.append('spice_level', 0);
       formData.append('allows_spice_custom', 0);
       formData.append('available_proteins', 0);
       formData.append('default_protein', 0);
-      formData.append('is_available', 1);
+      formData.append('is_available', inputs.isAvailable);
       formData.append('file', imageFile);
 
       // Debug: Näytä FormData sisältö
@@ -239,6 +243,22 @@ const AddItem = ({onClose}) => {
                   type="checkbox"
                   name="vegan"
                   checked={inputs.vegan || false}
+                  onChange={(e) =>
+                    handleInputChange({
+                      target: {name: e.target.name, value: e.target.checked},
+                    })
+                  }
+                />
+              </label>
+            </div>
+
+            <div className="flex flex-col gap-1">
+              <label className="flex items-center gap-1">
+                Is Available
+                <input
+                  type="checkbox"
+                  name="isAvailable"
+                  checked={inputs.isAvailable || false}
                   onChange={(e) =>
                     handleInputChange({
                       target: {name: e.target.name, value: e.target.checked},
