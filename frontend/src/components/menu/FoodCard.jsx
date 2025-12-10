@@ -38,22 +38,25 @@ const FoodCard = (props) => {
 
   return (
     <>
-      <div className="bg-white-50 w-[500px] rounded-md mb-5 outline-2 outline-gray-400">
+      <div className="bg-white-50 w-[350px] md:w-[500px] rounded-md outline-2 outline-stone-400 bg-white m-3 flex flex-col">
         <img
           src={API_UPLOADS_URL + item.image_thumb_url}
           alt={displayDescription}
           width={'auto'}
-          className="rounded-md"
+          className="rounded-t-md border-b border-stone-200"
         />
-        <div>
-          <h2>{displayName}</h2>
-          <button onClick={() => setShowModal(true)}>i</button>
+        <div className='flex flex-row items-center justify-center'>
+          <h2 className='font-semibold'>{displayName}</h2>
+          <button onClick={() => setShowModal(true)}
+            className='bg-zinc-100! rounded-4xl! text-sm! font-bold border border-stone-500! hover:bg-zinc-200!'>i</button>
         </div>
 
-        <p>{displayDescription}</p>
+        <p className='p-3'>{displayDescription}</p>
         {codes.join(', ')}
-        <p>{item.price} €</p>
-        <button onClick={() => setSelectedItem(item)}>
+
+        <p className='font-semibold mt-3'>{item.price} €</p>
+        <button onClick={() => setSelectedItem(item)}
+          className='bg-[#2A4B11]! text-white!'>
           {strings.cart.addToCart}
         </button>
       </div>

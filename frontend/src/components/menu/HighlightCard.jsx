@@ -53,25 +53,27 @@ const HighlightCard = () => {
       {todaysLunch && (
         <div>
           <AddToCart item={selectedItem} setSelectedItem={setSelectedItem} />
-          <div className="bg-white-50 w-[500px] rounded-md mb-5 outline-10 outline-red-800">
+          <div className="bg-white-50 w-[350px] md:w-[500px] rounded-md outline-10 outline-red-800 bg-white m-3 flex flex-col">
             <img
               src={API_UPLOADS_URL + todaysLunch.image_thumb_url}
               alt={displayDescription}
               width={'auto'}
-              className="rounded-md"
+              className="rounded-t-md border-b border-stone-200"
             />
-            <div>
-              <h2>{displayName}</h2>
-              <p>{strings.menu?.lunchSpecial || 'Päivän lounas'}</p>
-              <button onClick={() => setShowModal(true)}>i</button>
+            <div className='flex flex-row items-center justify-center gap-5'>
+              <h2 className='font-semibold text-lg'>{displayName}</h2>
+              <p className='text-lg'>{strings.menu?.lunchSpecial || 'Päivän lounas'}</p>
+              <button onClick={() => setShowModal(true)}
+                className='bg-zinc-100! rounded-4xl! text-sm! font-bold border border-stone-500! hover:bg-zinc-200!'>i</button>
             </div>
 
-            <p>{displayDescription}</p>
-            <p>{todaysLunch.special_price}</p>
-            <p className="text-decoration-line: line-through">
-              {todaysLunch.regular_price}
+            <p className='p-3'>{displayDescription}</p>
+            <p className='font-semibold mt-3'>{todaysLunch.special_price} €</p>
+            <p className="text-decoration-line: line-through mt-2">
+              {todaysLunch.regular_price} €
             </p>
-            <button onClick={() => setSelectedItem(todaysLunch)}>
+            <button onClick={() => setSelectedItem(todaysLunch)}
+              className='bg-[#2A4B11]! text-white!'>
               {strings.cart?.addToOrder || '+ Lisää tilaukseen'}
             </button>
           </div>
