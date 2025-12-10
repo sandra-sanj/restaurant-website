@@ -1,13 +1,23 @@
-import {useEffect, useState} from 'react';
-import {useMenu} from '../../hooks/apiHook';
+import {useEffect, useState, useRef} from 'react';
+import {useMenu, useAllergens} from '../../hooks/apiHook';
 import useForm from '../../hooks/formHooks';
 
-// TODO: hae allergeenit erillisenä pyyntönä
-// TODO: toteuta kuvan lisäys -> tarvitsee formData-objektin!
+const API_UPLOADS_URL = import.meta.env.VITE_API_UPLOADS_URL;
 
 const EditItem = ({onClose}) => {
   const {menuArray, modifyMenuItem} = useMenu();
   const [selectedItem, setSelectedItem] = useState(null);
+  const [imageFile, setImageFile] = useState(null);
+
+  const {allergens, getMenuItemAllergens} = useAllergens();
+  const [selectedAllergens, setSelectedAllergens] = useState([]);
+  const [originalAllergens, setOriginalAllergens] = useState([]);
+
+  const fileInputRef = useRef(null);
+
+  const handleImageChange = (event) => {
+    setImageFile(event.target.files[0]);
+  };
 
   const initValues = {
     nameFi: '',
@@ -16,46 +26,63 @@ const EditItem = ({onClose}) => {
     descriptionEn: '',
     price: '',
     category: '',
-    lactoseFree: false,
-    glutenFree: false,
-    milkFree: false,
-    vegan: false,
+    allergens: '',
+    ingredients: '',
+    isAvailable: false,
+    spiceLevel: 0,
+    allowsSpiceCustom: false,
+    availableProteins: [],
+    defaultProtein: '',
   };
 
-  const handleEditItem = async (itemData) => {
+  const proteins = [
+    {id: 'chicken', name: 'Kana'},
+    {id: 'beef', name: 'Nauta'},
+    {id: 'vegan', name: 'Tofu'},
+    {id: 'shrimp', name: 'Kala'},
+  ];
+
+  const spiceLevels = [0, 1, 2, 3, 4, 5];
+
+  const handleEditItem = async (formData, itemId, originalName) => {
     const token = localStorage.getItem('token');
+
+    // Debug: Näytä FormData sisältö
+    console.log('FormData sisältö:', [...formData.entries()].length);
+    for (let [key, value] of formData.entries()) {
+      console.log(key, ':', value);
+    }
 
     try {
       if (
-        !inputs.nameFi ||
-        !inputs.nameEn ||
-        !inputs.description ||
-        !inputs.descriptionEn ||
-        !inputs.price
+        formData.name === '' ||
+        formData.name_en === '' ||
+        formData.description === '' ||
+        formData.description_en === '' ||
+        formData.price === ''
       ) {
         alert('Täytä kaikki kentät!');
         return;
       }
 
-      const editedPrice = itemData.price.toString().replace(',', '.');
-
-      // Check that price is numeric
-      if (isNaN(parseFloat(editedPrice))) {
-        alert('Syötä hinta numerona, esim. 10.90 tai 10,90');
+      if ([...formData.entries()].length === 0) {
+        alert(
+          'Mitään tietoa ei ole muokattu. Muokkaa yhtä tai useampaa tietoa.',
+        );
         return;
       }
 
-      itemData.price = parseFloat(editedPrice).toFixed(2);
-
-      const response = await modifyMenuItem(itemData, token);
+      const response = await modifyMenuItem(formData, itemId, token);
       console.log('Modify response', response);
 
       if (response) {
-        alert(`"${itemData.name}" muokattu.`);
+        alert(`"${formData.name ? formData.name : originalName}" muokattu.`);
         onClose();
         setSelectedItem(null);
       } else {
-        alert(`Virhe: "${itemData.name}" ei muokattu.`);
+        alert(
+          `Virhe: "${formData.name ? formData.name : originalName}" ei muokattu.`,
+        );
       }
     } catch (e) {
       console.error('Modify failed', e);
@@ -68,21 +95,69 @@ const EditItem = ({onClose}) => {
         return;
       }
 
-      // Fill form with selected item values
-      const itemData = {
-        menu_item_id: selectedItem.menu_item_id,
-        category_id: parseInt(values.category),
-        name: values.nameFi,
-        name_en: values.nameEn,
-        description: values.description,
-        description_en: values.descriptionEn,
-        price: values.price,
-        image_url: null,
-        image_thumb_url: null,
-        is_available: 1,
-      };
+      const formData = new FormData();
+      // append only modified fields to formData
+      if (parseInt(values.category) !== selectedItem.category_id)
+        formData.append('category_id', parseInt(values.category));
+      if (values.nameFi !== selectedItem.name)
+        formData.append('name', values.nameFi);
+      if (values.nameEn !== selectedItem.name_en)
+        formData.append('name_en', values.nameEn);
+      if (values.description !== selectedItem.description)
+        formData.append('description', values.description);
+      if (values.descriptionEn !== selectedItem.description_en)
+        formData.append('description_en', values.descriptionEn);
+      if (parseFloat(values.price) !== parseFloat(selectedItem.price))
+        formData.append(
+          'price',
+          parseFloat(values.price.replace(',', '.')).toFixed(2),
+        );
 
-      handleEditItem(itemData); // Callback
+      if (parseInt(values.spiceLevel) !== parseInt(selectedItem.spice_level)) {
+        formData.append('spice_level', parseInt(values.spiceLevel));
+      }
+
+      if (values.allowsSpiceCustom !== selectedItem.allows_spice_custom) {
+        formData.append(
+          'allows_spice_custom',
+          values.allowsSpiceCustom ? 1 : 0,
+        );
+      }
+
+      const proteinsDB = selectedItem.available_proteins
+        ? selectedItem.available_proteins
+            .split(',')
+            .map((s) => s.trim())
+            .filter(Boolean)
+        : [];
+      const proteinsUI = [...values.availableProteins].sort();
+      const cleanDB = [...proteinsDB].sort();
+      if (JSON.stringify(proteinsUI) !== JSON.stringify(cleanDB)) {
+        formData.append('available_proteins', proteinsUI.join(', '));
+      }
+
+      if (values.defaultProtein !== selectedItem.default_protein) {
+        formData.append('default_protein', values.defaultProtein);
+      }
+
+      if (values.ingredients !== selectedItem.ingredients)
+        formData.append('ingredients', values.ingredients);
+
+      const sortedAllergnsUI = [...selectedAllergens].sort();
+      const sortedAllergensDB = [...originalAllergens].sort();
+      if (
+        JSON.stringify(sortedAllergnsUI) !== JSON.stringify(sortedAllergensDB)
+      ) {
+        formData.append('allergen_ids', JSON.stringify(sortedAllergnsUI));
+      }
+
+      if (values.isAvailable !== selectedItem.is_available)
+        formData.append('is_available', values.isAvailable ? 1 : 0);
+
+      // append image if selected
+      if (imageFile) formData.append('file', imageFile);
+
+      handleEditItem(formData, selectedItem.menu_item_id, values.nameFi); // Callback
     },
 
     initValues,
@@ -103,10 +178,57 @@ const EditItem = ({onClose}) => {
       });
 
       handleInputChange({target: {name: 'price', value: selectedItem.price}});
-      
+
       handleInputChange({
         target: {name: 'category', value: selectedItem.category_id},
       });
+
+      handleInputChange({
+        target: {name: 'isAvailable', value: selectedItem.is_available},
+      });
+
+      handleInputChange({
+        target: {name: 'ingredients', value: selectedItem.ingredients},
+      });
+
+      handleInputChange({
+        target: {name: 'spiceLevel', value: selectedItem.spice_level || 0},
+      });
+
+      handleInputChange({
+        target: {
+          name: 'allowsSpiceCustom',
+          value: selectedItem.allows_spice_custom || false,
+        },
+      });
+
+      handleInputChange({
+        target: {
+          name: 'availableProteins',
+          value: selectedItem.available_proteins
+            ? selectedItem.available_proteins
+                .split(',')
+                .map((s) => s.trim())
+                .filter((s) => s && s !== 'null') // remove empty and null
+            : [],
+        },
+      });
+
+      handleInputChange({
+        target: {
+          name: 'defaultProtein',
+          value: selectedItem.default_protein || '',
+        },
+      });
+
+      // get allergens
+      getMenuItemAllergens(selectedItem.menu_item_id).then(
+        (allergenObjects) => {
+          const ids = allergenObjects.map((a) => a.allergen_id);
+          setSelectedAllergens(ids);
+          setOriginalAllergens(ids);
+        },
+      );
     } else {
       resetForm();
     }
@@ -150,8 +272,8 @@ const EditItem = ({onClose}) => {
           </div>
 
           {/* Form */}
-          <div className="flex flex-col p-4 gap-4 bg-white w-[400px]">
-            <label className="flex flex-col gap-1">
+          <div className="flex flex-col p-4 gap-4 bg-white w-[400px] *:flex *:flex-col *:gap-1">
+            <label>
               Nimi:
               <input
                 name="nameFi"
@@ -161,8 +283,7 @@ const EditItem = ({onClose}) => {
                 type="text"
               />
             </label>
-
-            <label className="flex flex-col gap-1">
+            <label>
               Nimi englanniksi:
               <input
                 name="nameEn"
@@ -172,8 +293,7 @@ const EditItem = ({onClose}) => {
                 type="text"
               />
             </label>
-
-            <label className="flex flex-col gap-1">
+            <label>
               Kuvaus:
               <input
                 name="description"
@@ -183,8 +303,7 @@ const EditItem = ({onClose}) => {
                 type="text"
               />
             </label>
-
-            <label className="flex flex-col gap-1">
+            <label>
               Kuvaus englanniksi:
               <input
                 name="descriptionEn"
@@ -194,8 +313,17 @@ const EditItem = ({onClose}) => {
                 type="text"
               />
             </label>
-
-            <label className="flex flex-col gap-1">
+            <label>
+              Ainesosat:
+              <input
+                name="ingredients"
+                value={inputs.ingredients}
+                onChange={handleInputChange}
+                className="bg-stone-100 p-1 rounded"
+                type="text"
+              />
+            </label>
+            <label>
               Hinta (€):
               <input
                 name="price"
@@ -205,9 +333,8 @@ const EditItem = ({onClose}) => {
                 type="text"
               />
             </label>
-
             {/* Kategoria */}
-            <div className="flex flex-col gap-1">
+            <div>
               <p>Kategoria:</p>
               <select
                 name="category"
@@ -221,79 +348,191 @@ const EditItem = ({onClose}) => {
                 <option value={4}>Drinks</option>
               </select>
             </div>
+            {/* Tulisuus */}
+            <div>
+              <p>Tulisuus:</p>
+
+              <select
+                name="spiceLevel"
+                value={inputs.spiceLevel}
+                onChange={handleInputChange}
+                className="bg-stone-100 p-1 rounded"
+              >
+                {spiceLevels.map((lvl) => (
+                  <option key={lvl} value={lvl}>
+                    {lvl}
+                  </option>
+                ))}
+              </select>
+
+              <label className="flex items-center gap-1 mt-1">
+                <input
+                  type="checkbox"
+                  name="allowsSpiceCustom"
+                  checked={inputs.allowsSpiceCustom}
+                  onChange={(e) =>
+                    handleInputChange({
+                      target: {
+                        name: 'allowsSpiceCustom',
+                        value: e.target.checked,
+                      },
+                    })
+                  }
+                />
+                Salli tulisuuden muokkaus
+              </label>
+            </div>
+
+            {/* Proteiinit */}
+            <div>
+              <p>Proteiinit:</p>
+              {/* proteiinien checkboxit */}
+              <div className="flex flex-wrap gap-2">
+                {proteins.map((protein) => (
+                  <label key={protein.id} className="flex items-center gap-1">
+                    <input
+                      type="checkbox"
+                      checked={
+                        inputs.availableProteins
+                          ? inputs.availableProteins.includes(protein.id)
+                          : false
+                      }
+                      onChange={(e) => {
+                        const current = inputs.availableProteins || [];
+                        const updated = e.target.checked
+                          ? [...current, protein.id]
+                          : current.filter((p) => p !== protein.id);
+
+                        handleInputChange({
+                          target: {name: 'availableProteins', value: updated},
+                        });
+
+                        // reset default if removed
+                        if (!updated.includes(inputs.defaultProtein)) {
+                          handleInputChange({
+                            target: {name: 'defaultProtein', value: ''},
+                          });
+                        }
+                      }}
+                    />
+                    {protein.name}
+                  </label>
+                ))}
+              </div>
+
+              <p className="mt-2">Oletusproteiini:</p>
+              <select
+                name="defaultProtein"
+                value={inputs.defaultProtein || ''}
+                onChange={handleInputChange}
+                className="bg-stone-100 p-1 rounded"
+              >
+                <option value="">Ei valittu</option>
+
+                {(inputs.availableProteins || []).map((id) => {
+                  const protein = proteins.find((p) => p.id === id);
+                  return (
+                    protein && (
+                      <option key={id} value={id}>
+                        {protein.name}
+                      </option>
+                    )
+                  );
+                })}
+              </select>
+            </div>
 
             {/* Ruokavaliot */}
-            <div className="flex flex-col gap-2">
+            <div>
               <p>Ruokavaliot:</p>
-              <div className="flex gap-4 items-center">
-                <label className="flex items-center gap-1">
-                  L
-                  <input
-                    type="checkbox"
-                    name="lactoseFree"
-                    checked={inputs.lactoseFree}
-                    onChange={(e) =>
-                      handleInputChange({
-                        target: {name: 'lactoseFree', value: e.target.checked},
-                      })
-                    }
-                  />
-                </label>
-
-                <label className="flex items-center gap-1">
-                  G
-                  <input
-                    type="checkbox"
-                    name="glutenFree"
-                    checked={inputs.glutenFree}
-                    onChange={(e) =>
-                      handleInputChange({
-                        target: {name: 'glutenFree', value: e.target.checked},
-                      })
-                    }
-                  />
-                </label>
-
-                <label className="flex items-center gap-1">
-                  M
-                  <input
-                    type="checkbox"
-                    name="milkFree"
-                    checked={inputs.milkFree}
-                    onChange={(e) =>
-                      handleInputChange({
-                        target: {name: 'milkFree', value: e.target.checked},
-                      })
-                    }
-                  />
-                </label>
-
-                <label className="flex items-center gap-1">
-                  VEG
-                  <input
-                    type="checkbox"
-                    name="vegan"
-                    checked={inputs.vegan}
-                    onChange={(e) =>
-                      handleInputChange({
-                        target: {name: 'vegan', value: e.target.checked},
-                      })
-                    }
-                  />
-                </label>
+              <div className="flex flex-wrap gap-2">
+                {allergens &&
+                  allergens.map((allergen) => (
+                    <label
+                      key={allergen.allergen_id}
+                      className="flex items-center gap-1"
+                    >
+                      <input
+                        type="checkbox"
+                        checked={selectedAllergens.includes(
+                          allergen.allergen_id,
+                        )}
+                        onChange={(e) => {
+                          const updated = e.target.checked
+                            ? [...selectedAllergens, allergen.allergen_id]
+                            : selectedAllergens.filter(
+                                (id) => id !== allergen.allergen_id,
+                              );
+                          setSelectedAllergens(updated);
+                        }}
+                      />
+                      {allergen.code}
+                    </label>
+                  ))}
               </div>
             </div>
 
-            {/* Kuva - TODO: lisää logiikka*/}
-            <div className="flex flex-col gap-1">
+            {/* Saatavuus */}
+            <div>
+              <label>
+                Saatavuus:
+                <input
+                  type="checkbox"
+                  name="isAvailable"
+                  checked={inputs.isAvailable}
+                  onChange={(e) =>
+                    handleInputChange({
+                      target: {name: 'isAvailable', value: e.target.checked},
+                    })
+                  }
+                />
+              </label>
+            </div>
+            {/* Kuva */}
+            <div className="img:">
               <p>Kuva:</p>
               <input
                 name="image"
                 type="file"
                 className="bg-stone-100 p-1 rounded"
+                onChange={handleImageChange}
+                ref={fileInputRef}
               />
-            </div>
 
+              {imageFile && (
+                <button
+                  type="button"
+                  className="text-red-600 underline text-sm"
+                  onClick={() => {
+                    setImageFile(null);
+                    if (fileInputRef.current) fileInputRef.current.value = null;
+                  }}
+                >
+                  Peruuta
+                </button>
+              )}
+
+              {/* Näytä lisätty kuva */}
+              {imageFile && (
+                <img
+                  src={URL.createObjectURL(imageFile)}
+                  alt="food"
+                  className="w-24 h-24 object-cover border rounded"
+                />
+              )}
+
+              {/* Näytä nykyinen kuva kun kuvaa ei ole päivitetty */}
+              {!imageFile && selectedItem?.image_thumb_url && (
+                <div className="flex flex-col mt-2">
+                  <p>Nykyinen kuva:</p>
+                  <img
+                    src={`${API_UPLOADS_URL}/${selectedItem.image_thumb_url}`}
+                    alt="Current"
+                    className="w-24 h-24 object-cover border rounded"
+                  />
+                </div>
+              )}
+            </div>
             <button
               className="mt-4 bg-[#2A4B11]! text-white py-2 rounded hover:opacity-90"
               onClick={handleSubmit}
