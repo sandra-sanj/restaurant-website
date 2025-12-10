@@ -46,7 +46,11 @@ const createThumbnail = async (req, res, next) => {
     const newFilename = `${base}_thumb${ext}`;
     const newPath = path.join(destination, newFilename);
 
-    await sharp(req.file.path).resize(600, 400).toFormat('png').toFile(newPath);
+    await sharp(req.file.path)
+      .rotate()
+      .resize(800, 600)
+      .toFormat('png')
+      .toFile(newPath);
     req.file.thumbFilename = newFilename; // save thumbnail to file object
   } catch (err) {
     console.error('Thumbnail creation failed:', err);
