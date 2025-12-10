@@ -1,7 +1,7 @@
 const EditMenu = ({addItemClick, editItemClick, deleteItemClick}) => {
   return (
     <>
-      <div className="flex flex-row">
+      <div className="flex flex-col md:flex-row">
         <button onClick={addItemClick} className="bg-[#982A2A]! text-white">
           Lisää tuote
         </button>

@@ -14,10 +14,6 @@ import {
 import {useOrders} from '../hooks/orderHook';
 import {useLanguage} from '../hooks/useLanguage';
 
-// TODO: napit/kaikki keskelle, hover taulukon riveihin
-// TODO: vuorottelevat värit taulukkoon id:n mukaan?
-// TODO: avaa delete confirmation taulukon viereen, ei ylös
-
 const Admin = () => {
   const [addItemOpen, setAddItemOpen] = useState(false);
   const [editItemOpen, setEditItemOpen] = useState(false);
@@ -65,30 +61,30 @@ const Admin = () => {
   return (
     <>
       {/* Fixed min height to push footer to bottom */}
-      <div className="w-full max-w-full min-h-[calc(100vh-64px-208px)] flex flex-col items-center">
+      <div className="w-full min-h-[calc(100vh-64px-208px)] flex flex-col items-center justify-center overflow-x-auto">
         <h1 className="mt-6">{strings.admin.title}</h1>
         <div className="flex flex-row mt-5 items-center justify-center gap-2">
-          <h2 className="">{strings.admin.openOrders}:</h2>
-          <p className="font-bold py-2">{openOrderIds.length}</p>
+          <h2 className="text-xl">{strings.admin.openOrders}:</h2>
+          <p className="font-bold py-2 text-xl">{openOrderIds.length}</p>
         </div>
 
-        <div className="w-full flex justify-center">
-          <Table className="mt-4 mb-8 max-w-[80vw] mx-auto border border-stone-500">
+        <div className="w-[95vw] flex justify-center">
+          <Table className="mt-4 mb-8 max-w-[1200px] min-w-[500px] w-full border border-stone-500 table-fixed mx-auto"> {/* mx-auto*/}
             <TableHeader className="bg-[#982A2A] text-white">
               <TableRow>
-                <TableHead className="text-center">
+                <TableHead className="text-center w-1/6">
                   {strings.admin.orderId}
                 </TableHead>
-                <TableHead className="text-center">
+                <TableHead className="text-center w-2/6">
                   {strings.admin.product}
                 </TableHead>
-                <TableHead className="text-center">
+                <TableHead className="text-center w-2/6">
                   {strings.admin.details}
                 </TableHead>
-                <TableHead className="text-center">
+                <TableHead className="text-center w-1/6">
                   {strings.admin.quantity}
                 </TableHead>
-                <TableHead className="text-center">
+                <TableHead className="text-center w-1/6">
                   {strings.admin.done}
                 </TableHead>
               </TableRow>
@@ -118,9 +114,9 @@ const Admin = () => {
         </div>
       </div>
 
-      <footer className="flex flex-col items-center justify-center bg-[#FFFFFF] w-full h-52 border-t bottom-0 sticky">
-        <div className="w-full mb-6 text-3xl font-bold">
-          <h2>{strings.admin.editMenu}</h2>
+      <footer className="flex flex-col items-center justify-center bg-[#FFFFFF] w-full md:h-52 border-t bottom-0 sticky">
+        <div className="w-full md:mb-6 max-md:mt-5 text-2xl md:text-3xl font-bold">
+          <h2 className='max-md:mb-2'>{strings.admin.editMenu}</h2>
         </div>
 
         <EditMenu

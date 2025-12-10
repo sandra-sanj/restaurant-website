@@ -28,10 +28,10 @@ const AdminHistory = () => {
 
   return (
     <>
-      <div className="w-full max-w-full min-h-[calc(100vh-64px-96px)] overflow-x-hidden">
+      <div className="w-full min-h-[calc(100vh-64px-96px)] overflow-x-auto flex flex-col items-center justify-center">
         <h1 className="my-6">{strings.admin.history}</h1>
 
-        <div className="flex flex-row gap-2 mb-4 w-full justify-center flex-wrap">
+        <div className="flex flex-col w-1/2 min-w-[300px] items-center mx-auto md:flex-row gap-2 md:mb-4 md:w-full justify-center flex-wrap max-md:gap-0">
           <button
             className={`px-3 py-1 rounded border ${filter === 'today' ? 'bg-[#2A4B11]! text-white' : 'bg-white text-black border-stone-400!'}`}
             onClick={() => handleFilterClick('today')}
@@ -46,23 +46,23 @@ const AdminHistory = () => {
           </button>
         </div>
 
-        <div className="w-full flex justify-center">
-          <Table className="mt-4 mb-8 max-w-[80vw] mx-auto border border-stone-500">
+        <div className="w-[95vw] flex justify-center">
+          <Table className="mt-4 mb-8 max-w-[1200px] min-w-[500px] w-full border border-stone-500 table-fixed mx-auto">
             <TableHeader className="bg-[#982A2A] text-white">
               <TableRow>
-                <TableHead className="text-center">
+                <TableHead className="text-center w-1/6">
                   {strings.admin.id}
                 </TableHead>
-                <TableHead className="text-center">
+                <TableHead className="text-center w-2/6">
                   {strings.admin.product}
                 </TableHead>
-                <TableHead className="text-center">
+                <TableHead className="text-center w-2/6">
                   {strings.admin.details}
                 </TableHead>
-                <TableHead className="text-center">
+                <TableHead className="text-center w-1/6">
                   {strings.admin.quantity}
                 </TableHead>
-                <TableHead className="text-center">
+                <TableHead className="text-center w-1/6">
                   {strings.admin.orderDate}
                 </TableHead>
               </TableRow>
