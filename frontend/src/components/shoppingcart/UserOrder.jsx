@@ -3,6 +3,7 @@ import OrderCard from './OrderCard';
 import useForm from '../../hooks/formHooks';
 import {useState, useEffect} from 'react';
 import Modal from '../Modal';
+import {useLanguage} from '../../hooks/useLanguage';
 
 //swtich this to cart
 //FoodCard but for items in shopping cart?
@@ -11,20 +12,15 @@ function UserOrder(props) {
   const {setNext, payment, setPayment} = props;
   const {cart, delivery, calculateTotal, handleContactInfo} = useOrderContext();
   const {user} = useUserContext();
-
-
+  const {strings} = useLanguage();
 
   const initValues = {
-    
     user_id: user.user_id,
     username: user.username,
     email: user.email,
     phone: user.phone,
     address: '',
-    
   };
-
-
 
   const placeOrder = () => {
     try {
@@ -50,11 +46,18 @@ function UserOrder(props) {
   //bg-white w-[400px]
   return (
     <div className="bg-[#fcebeb] flex flex-row border border-stone-300 rounded-lg m-5">
-        <span className="cursor-pointer font-bold text-lg" onClick={() => setNext('cart')}> {/*goes back to cart*/}
-            &times;
-        </span>
-        <div className="m-8">
-        <h2 className="text-xl mb-5 text-black font-semibold">Yhteystiedot</h2>
+      <span
+        className="cursor-pointer font-bold text-lg"
+        onClick={() => setNext('cart')}
+      >
+        {' '}
+        {/*goes back to cart*/}
+        &times;
+      </span>
+      <div className="m-8">
+        <h2 className="text-xl mb-5 text-black font-semibold">
+          {strings.cart?.contactInfo || 'Yhteystiedot'}
+        </h2>
         <form
           onSubmit={(e) => {
             handleSubmit(e);
@@ -63,7 +66,7 @@ function UserOrder(props) {
         >
           <div className="flex flex-col">
             <label htmlFor="ordername" className="flex flex-col">
-              Koko nimi:{' '}
+              {strings.cart?.username || 'Koko nimi'}:{' '}
             </label>
             <input
               name="username"
@@ -79,7 +82,7 @@ function UserOrder(props) {
           </div>
           <div>
             <label htmlFor="orderemail" className="flex flex-col">
-              Sähköposti:{' '}
+              {strings.auth?.email || 'Sähköposti'}:{' '}
             </label>
             <input
               name="email"
@@ -95,7 +98,7 @@ function UserOrder(props) {
           </div>
           <div>
             <label htmlFor="orderphone" className="flex flex-col gap-1">
-              Puhelinnumero:{' '}
+              {strings.auth?.phone || 'Puhelinnumero'}:{' '}
             </label>
             <input
               name="phone"
@@ -112,7 +115,7 @@ function UserOrder(props) {
           {delivery === 'delivery' && (
             <div>
               <label htmlFor="address" className="flex flex-col gap-1">
-              Osoite:{' '}
+                {strings.cart?.address || 'Osoite'}:{' '}
               </label>
               <input
                 name="address"
@@ -124,16 +127,21 @@ function UserOrder(props) {
                 autoComplete="address"
                 className="bg-stone-100 rounded"
                 required
-            />
-
+              />
             </div>
           )}
-          <button type="submit"
-          className='bg-[#2A4B11]! hover:bg-[#556d44]! text-white'>Siirry maksuun</button>
+          <button
+            type="submit"
+            className="bg-[#2A4B11]! hover:bg-[#556d44]! text-white"
+          >
+            {strings.cart?.proceedToPayment || 'Siirry maksuun'}
+          </button>
         </form>
       </div>
       <div className="flex flex-col gap-2 p-5 pt-8 bg-white border-l rounded-r-lg">
-        <h2 className="font-semibold text-xl">Maksutapa</h2>
+        <h2 className="font-semibold text-xl">
+          {strings.cart?.paymentMethod || 'Maksutapa'}
+        </h2>
         <button
           className={`px-3 py-1 rounded border ${payment === 'Mobilepay' ? '!bg-[#2A4B11] text-white' : 'bg-white text-black'}`}
           onClick={() => handlePayment('Mobilepay')}
