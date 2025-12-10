@@ -17,10 +17,11 @@ const AddToCart = (props) => {
     const [showModal, setShowModal] = useState(false);
     const [inputValue, setInputValue] = useState('');
     const {handleAddItem} = useOrderContext();
+    const [protein, setProtein] = useState();
 
     useEffect(() => {
         setQuantity(1);
-        //setSpiceLevel(null);
+        setSpiceLevel(null);
         setInputValue('');
         setShowModal(true);
     }, [item]);
@@ -31,14 +32,16 @@ const AddToCart = (props) => {
             const newPrice = (parseFloat(item.price) * quantity || parseFloat(item.special_price) * quantity);
             setPrice(newPrice.toFixed(2));
             setSpiceLevel(spiceLevel);
+            console.log(item);
         }
     }, [item, quantity]);
 
     useEffect(() => {
     if (item) {
       item.selected_spice_level = spiceLevel;
+      item.selected_protein = protein;
     }
-    }, [spiceLevel]);
+    }, [spiceLevel, protein]);
 
     const handleInput = (event) => {
         setInputValue(event.target.value);
@@ -91,6 +94,26 @@ const AddToCart = (props) => {
                             className={spiceLevel === 3 ? "bg-red-300" : ""}
                             onClick={() => setSpiceLevel(3)}>
                             Spicy
+                        </button>
+                        </div>
+                    )}
+                    {item.available_proteins && (
+                        <div className="flex gap-2">
+                        <button
+                            onClick={() => setProtein('chicken')}>
+                            Kana (L, G)
+                        </button>
+                        <button
+                            onClick={() => setProtein('beef')}>
+                            Nauta (L, G)
+                        </button>
+                        <button
+                            onClick={() => setProtein('vegan')}>
+                            Kasviproteiini (VE, L, G)
+                        </button>
+                        <button
+                            onClick={() => setProtein('shrimp')}>
+                            Katkarapu (L, G)
                         </button>
                         </div>
                     )}
