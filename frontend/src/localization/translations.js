@@ -49,7 +49,7 @@ const strings = new LocalizedStrings({
     menu: {
       all: 'Kaikki',
       mains: 'Pääruoat',
-      snacks: 'Snacks',
+      snacks: 'Alkuruoat',
       desserts: 'Jälkiruoat',
       drinks: 'Juomat',
       lunchSpecial: 'Päivän lounas',
@@ -123,7 +123,7 @@ const strings = new LocalizedStrings({
       hasAccount: 'Oletko jo jäsen?',
       saveButton: 'Tallenna',
       login: 'Kirjaudu sisään!',
-      editTitle: 'Muokkaa käyttäjä',
+      editTitle: 'Muokkaa käyttäjää',
     },
 
     profile: {
