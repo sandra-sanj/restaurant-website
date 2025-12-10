@@ -1,24 +1,38 @@
 import { useOrderContext } from "../../hooks/contextHook"
+import OrderedItem from "./OrderedItem";
 
 const Confirmation = () => {
-  const {order} = useOrderContext();
-  
+  const {orderResult} = useOrderContext();
+  console.log(orderResult);
     return(
-        <>
-          <h1>Tilaus onnistui! </h1>
+    <>
+      {orderResult && (
+        <div>
+          <h1>Kiitos tilauksesta! </h1>
           <p>Jos tilauksen kanssa on ongelmia, olethan yhteydessä ravintolaan (+358 7776669)</p>
           <div>
-            <p>Order ID: </p>
-            <p>OrderType</p>
+            <p>Order ID:{orderResult.order_id}</p>
+            <p>{orderResult.order_type}</p>
             <p>Payment</p>
 
             <div>
               <h2>Tuotteet: </h2>
+              {orderResult.items.map((item) => (
+                <OrderedItem
+                  key={item.order_item_id}
+                  item={item}
+                  className="flex justify-between items-center border-b py-2"
+            />
+          ))}
+            <p>{orderResult.total_price} €</p>
             </div>
           </div>
-          <p>This is confirmation</p>
-          <p>and here will be information of your order</p>
-        </>
+
+        </div>
+
+      )}
+          
+    </>
     )
 }
 export default Confirmation
