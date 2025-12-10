@@ -134,6 +134,38 @@ const strings = new LocalizedStrings({
       id: 'Id',
     },
 
+    adminForms: {
+      addProduct: 'Lisää tuote',
+      editProduct: 'Muokkaa tuotetta',
+      deleteProduct: 'Poista tuote',
+      close: 'Sulje',
+
+      // EditItem form
+      editItemTitle: 'Muokkaa tuotetta',
+      selectProduct: 'Valitse muokattava tuote',
+      name: 'Nimi',
+      nameEn: 'Nimi englanniksi',
+      description: 'Kuvaus',
+      descriptionEn: 'Kuvaus englanniksi',
+      price: 'Hinta (€)',
+      //priceError: 'Syötä hinta numerona, esim. 10.90 tai 10.90',
+      category: 'Kategoria',
+      diets: 'Ruokavaliot',
+      lactoseFree: 'L',
+      glutenFree: 'G',
+      milkFree: 'M',
+      vegan: 'VEG',
+      image: 'Kuva',
+      confirm: 'Vahvista',
+      fillAllFields: 'Täytä kaikki kentät!',
+      itemEdited: 'tuote muokattu',
+      itemNotEdited: 'tuote ei muokattu',
+
+      // Alerts/validation
+      required: 'Täytä kaikki kentät!',
+      //priceNumber: 'Syötä hinta numerona, esim. 10.90 tai 10,90',
+    },
+
     // Buttons/actions
     actions: {
       addItem: 'Lisää tuote',
@@ -280,6 +312,38 @@ const strings = new LocalizedStrings({
       orderDate: 'Order Date',
       totalOrders: 'Total Orders',
       id: 'ID',
+    },
+
+    adminForms: {
+      addProduct: 'Add Product',
+      editProduct: 'Edit Product',
+      deleteProduct: 'Delete Product',
+      close: 'Close',
+
+      // EditItem form
+      editItemTitle: 'Edit Product',
+      selectProduct: 'Select product to edit',
+      name: 'Name',
+      nameEn: 'Name in English',
+      description: 'Description',
+      descriptionEn: 'Description in English',
+      price: 'Price (€)',
+      priceError: 'Enter price as a number, e.g. 10.90 or 10,90',
+      category: 'Category',
+      diets: 'Diets',
+      lactoseFree: 'L',
+      glutenFree: 'G',
+      milkFree: 'M',
+      vegan: 'VEG',
+      image: 'Image',
+      confirm: 'Confirm',
+      fillAllFields: 'Fill all fields!',
+      itemEdited: 'product edited',
+      itemNotEdited: 'product not edited',
+
+      // Alerts/validation
+      required: 'Fill all fields!',
+      priceNumber: 'Enter price as a number, e.g. 10.90 or 10,90',
     },
 
     // Buttons/actions
