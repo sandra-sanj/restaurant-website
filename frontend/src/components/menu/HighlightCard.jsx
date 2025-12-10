@@ -14,11 +14,12 @@ const HighlightCard = () => {
   const [codes, setCodes] = useState([]);
 
   const {todaysLunch, error} = useMenu();
+  //console.log(todaysLunch);
 
 
   useEffect(() => {
     const handleAllergens = async () => {
-      const response = await getAllergen(item.menu_item_id);
+      const response = await getAllergen(todaysLunch.menu_item_id);
       console.log('res: ', response)
       const allergen = response.map(a => a.name);
       const code = response.map(c => c.code);
