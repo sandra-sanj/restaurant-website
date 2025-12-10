@@ -95,6 +95,15 @@ const strings = new LocalizedStrings({
       paymentMethod: 'Maksutapa',
       address: 'Osoite',
       username: 'Koko nimi',
+
+      thankYou: 'Kiitos tilauksesta!',
+      payment: 'Maksu',
+      processingPayment: 'maksua suoritetaan...',
+      cancelOrderConfirm: 'Haluatko varmasti keskeyttää tilauksen?',
+      selectedMethod: 'Valittu metodi',
+      executePayment: 'Suorita maksu',
+      pieces: 'kpl',
+      ok: 'OK',
     },
 
     // Common
@@ -312,6 +321,15 @@ const strings = new LocalizedStrings({
       paymentMethod: 'Payment Method',
       address: 'Address',
       username: 'Full Name',
+
+      thankYou: 'Thank you for your order!',
+      payment: 'Payment',
+      processingPayment: 'processing payment...',
+      cancelOrderConfirm: 'Do you really want to cancel the order?',
+      selectedMethod: 'Selected Method',
+      executePayment: 'Execute Payment',
+      pieces: 'pcs',
+      ok: 'OK',
     },
 
     // Common
