@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react';
 import {useMenu} from '../../hooks/apiHook';
 import AddToCart from '../shoppingcart/AddToCart';
 import Modal from '../Modal';
-import {useAllergen} from '../../hooks/apiHook';
+import {useAllergens} from '../../hooks/apiHook';
 import {useLanguage} from '../../hooks/useLanguage';
 
 const API_UPLOADS_URL = import.meta.env.VITE_API_UPLOADS_URL;
@@ -10,7 +10,7 @@ const API_UPLOADS_URL = import.meta.env.VITE_API_UPLOADS_URL;
 const HighlightCard = () => {
   const [selectedItem, setSelectedItem] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const {getAllergen} = useAllergen();
+  const {getMenuItemAllergens} = useAllergens();
   const [allergens, setAllergens] = useState([]);
   const [codes, setCodes] = useState([]);
 
@@ -19,8 +19,10 @@ const HighlightCard = () => {
   const {language, strings} = useLanguage();
 
   useEffect(() => {
+    if (!todaysLunch) return;
+
     const handleAllergens = async () => {
-      const response = await getAllergen(todaysLunch.menu_item_id);
+      const response = await getMenuItemAllergens(todaysLunch.menu_item_id);
       //console.log('res: ', response);
       const allergen = response.map((a) => a.name);
       const code = response.map((c) => c.code);
