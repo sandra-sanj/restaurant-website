@@ -12,7 +12,7 @@ import {
   TableHead,
 } from '@/components/ui/table';
 import {useOrders} from '../hooks/orderHook';
-
+import {useLanguage} from '../hooks/useLanguage';
 
 const Admin = () => {
   const [addItemOpen, setAddItemOpen] = useState(false);
@@ -20,6 +20,7 @@ const Admin = () => {
   const [deleteItemOpen, setDeleteItemOpen] = useState(false);
 
   const {orders, loading, error} = useOrders();
+  const {strings} = useLanguage();
 
   const handleButtonCloseClick = () => {
     setAddItemOpen(false);
@@ -46,7 +47,7 @@ const Admin = () => {
   };
 
   const openOrders = orders.filter((order) => order.status === 'pending');
-  if (loading) return <p>Ladataan tilauksia...</p>;
+  if (loading) return <p>{strings.admin.loadingOrders}</p>;
   if (error) return <p>{error}</p>;
 
   // Get open orders id's to calculate total open orders count
@@ -59,46 +60,71 @@ const Admin = () => {
 
   return (
     <>
-      <h1 className="m-3">Ylläpito</h1>
-      <div className="flex flex-row mt-5">
-        <h2 className="pr-1">Avoimet tilaukset:</h2>
-        <p className="">{openOrderIds.length}</p>
+      {/* Fixed min height to push footer to bottom */}
+      <div className="w-full min-h-[calc(100vh-64px-208px)] flex flex-col items-center justify-center overflow-x-auto">
+        <h1 className="mt-6">{strings.admin.title}</h1>
+        <div className="flex flex-row mt-5 items-center justify-center gap-2">
+          <h2 className="text-xl">{strings.admin.openOrders}:</h2>
+          <p className="font-bold py-2 text-xl">{openOrderIds.length}</p>
+        </div>
+
+        <div className="w-[95vw] flex justify-center">
+          <Table className="mt-4 mb-8 max-w-[1200px] min-w-[500px] w-full border border-stone-500 table-fixed mx-auto"> {/* mx-auto*/}
+            <TableHeader className="bg-[#982A2A] text-white">
+              <TableRow>
+                <TableHead className="text-center w-1/6">
+                  {strings.admin.orderId}
+                </TableHead>
+                <TableHead className="text-center w-2/6">
+                  {strings.admin.product}
+                </TableHead>
+                <TableHead className="text-center w-2/6">
+                  {strings.admin.details}
+                </TableHead>
+                <TableHead className="text-center w-1/6">
+                  {strings.admin.quantity}
+                </TableHead>
+                <TableHead className="text-center w-1/6">
+                  {strings.admin.done}
+                </TableHead>
+              </TableRow>
+            </TableHeader>
+
+            <TableBody>
+              {openOrders.map((order) => {
+                const isEven = order.orderId % 2 === 0;
+
+                return (
+                  <TableRow
+                    key={order.id}
+                    className={isEven ? 'bg-[#FFFFFF]' : 'bg-[#982a2a24]'}
+                  >
+                    <TableCell>{order.orderId}</TableCell>
+                    <TableCell>{order.product}</TableCell>
+                    <TableCell>{order.details}</TableCell>
+                    <TableCell>{order.quantity}</TableCell>
+                    <TableCell>
+                      <input type="checkbox" name="done"></input>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+        </div>
       </div>
 
-      <Table className="mt-4">
-        <TableHeader>
-          <TableRow>
-            <TableHead className="text-center">Tilauksen id</TableHead>
-            <TableHead className="text-center">Tuote</TableHead>
-            <TableHead className="text-center">Lisätiedot</TableHead>
-            <TableHead className="text-center">Määrä</TableHead>
-            <TableHead className="text-center">Tehty</TableHead>
-          </TableRow>
-        </TableHeader>
+      <footer className="flex flex-col items-center justify-center bg-[#FFFFFF] w-full md:h-52 border-t bottom-0 sticky">
+        <div className="w-full md:mb-6 max-md:mt-5 text-2xl md:text-3xl font-bold">
+          <h2 className='max-md:mb-2'>{strings.admin.editMenu}</h2>
+        </div>
 
-        <TableBody>
-          {openOrders.map((order) => (
-            <TableRow key={order.id}>
-              <TableCell>{order.orderId}</TableCell>
-              <TableCell>{order.product}</TableCell>
-              <TableCell>{order.details}</TableCell>
-              <TableCell>{order.quantity}</TableCell>
-              <TableCell>
-                <input type="checkbox" name="done"></input>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-
-      <footer className="mt-4 ">
         <EditMenu
           addItemClick={handleAddItemClick}
           editItemClick={handleEditItemClick}
           deleteItemClick={handleDeleteItemClick}
         />
       </footer>
-
       {addItemOpen && <AddItem onClose={handleButtonCloseClick} />}
 
       {editItemOpen && <EditItem onClose={handleButtonCloseClick} />}

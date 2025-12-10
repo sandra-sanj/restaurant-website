@@ -2,27 +2,30 @@ import './App.css';
 import Home from './pages/Home';
 import Menu from './pages/Menu';
 import Profile from './pages/Profile';
-import {Routes, Route} from 'react-router';
+import {Routes, Route, useLocation} from 'react-router';
 import NavBar from './components/NavBar';
 import Admin from './pages/Admin';
 import AdminHistory from './pages/AdminHistory';
 import Login from './pages/Login';
 import Footer from './components/Footer';
-import Mains from './components/menu/Mains';
-import Snacks from './components/menu/Snacks';
-import Desserts from './components/menu/Desserts';
-import Drinks from './components/menu/Drinks';
+import Mains from './components/menu/sections/Mains';
+import Snacks from './components/menu/sections/Snacks';
+import Desserts from './components/menu/sections/Desserts';
+import Drinks from './components/menu/sections/Drinks';
 import LoginForm from './components/profile/LoginForm';
 import RegisterForm from './components/profile/RegisterForm';
 import CartPage from './pages/CartPage';
 import Cart from './components/shoppingcart/Cart';
 import Order from './components/shoppingcart/Order';
-import All from './components/menu/All';
+import All from './components/menu/sections/All';
 import {UserProvider} from './context/UserContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import {OrderProvider} from './context/OrderContext';
 
 const App = () => {
+  const location = useLocation();
+  const hideMainFooter = ['/admin', '/history'].includes(location.pathname);
+
   return (
     <>
       <UserProvider>
@@ -45,8 +48,7 @@ const App = () => {
                   path="/profile"
                   element={
                     <ProtectedRoute>
-                      {' '}
-                      <Profile />{' '}
+                      <Profile />
                     </ProtectedRoute>
                   }
                 />
@@ -65,7 +67,7 @@ const App = () => {
               </Routes>
             </main>
           </div>
-          <Footer />
+          {!hideMainFooter && <Footer />}
         </OrderProvider>
       </UserProvider>
     </>

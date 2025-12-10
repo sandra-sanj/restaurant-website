@@ -1,83 +1,126 @@
 import useForm from '../../hooks/formHooks';
-import { useUser } from '../../hooks/apiHook';
-import { useUserContext } from '../../hooks/contextHook';
+import {useLanguage} from '../../hooks/useLanguage';
+import {useUser} from '../../hooks/apiHook';
+import {useUserContext} from '../../hooks/contextHook';
 
 const EditForm = () => {
+  const {user, handleEditedUser} = useUserContext();
+  const {strings} = useLanguage();
 
-    const { user, handleEditedUser } = useUserContext();
-
-    const initValues = {
+  const initValues = {
     username: user.username,
     email: user.email,
     phone: user.phone,
-    };
+  };
 
-    const doEdit = () => {
-        try {
-            inputs.role = user.role;
-            inputs.is_active = user.is_active;
-            console.log('userinfo: ', inputs );
-            handleEditedUser(inputs);
+  const doEdit = () => {
+    try {
+      inputs.role = user.role;
+      inputs.is_active = user.is_active;
+      console.log('userinfo: ', inputs);
+      handleEditedUser(inputs);
+    } catch (error) {
+      console.log(error);
+    }
+    return;
+  };
 
+  const {inputs, handleInputChange, handleSubmit} = useForm(doEdit, initValues);
 
-        } catch (error) {
-            console.log(error);
-        }
-        return;
-    };
+  return (
+    <div className='m-5'>
+    <h1 className=''>{strings.auth.editTitle}</h1>
+    {/*<form
+        onSubmit={(e) => {
+          handleSubmit(e);
+        }}
+      >*/}
 
+    <div className="m-5 outline-2 outline-gray-400 rounded-md">
+      {/* Header */}
+      <div>
+        {/*}
+        <span
+            className="cursor-pointer font-bold text-lg hover:text-gray-400"
+            onClick={onClose}
+          >
+            &times;
+          </span>
+          */}
+      </div>
 
-    const {inputs, handleInputChange, handleSubmit} = useForm(doEdit, initValues);
+      {/* Form */}
+      <div className="flex flex-col p-4 mt-7 gap-4 bg-white w-[400px]">
+        <label className="flex flex-col gap-1">
+          {strings.auth.username}:
+          <input
+            name="username"
+            placeholder={user.username}
+            type="text"
+            id="EditUser"
+            className="bg-stone-100 p-1 rounded focus:bg-[#982a2a33] focus:border-[#982A2A]!"
+            onChange={(e) => {
+              handleInputChange(e);
+            }}
+          />
+        </label>
 
-     return (
-         <>
-            <h2> Muokkaa käyttäjää </h2>
-            <form onSubmit={ (e) => {handleSubmit(e)} }>
-                <div>
-                    <label htmlFor="EditUser">Käyttäjänimi: </label>
-                    <input
-                        name="username"
-                        placeholder={user.username}
-                        type="text"
-                        id="EditUser"
-                        onChange={ (e) => {handleInputChange(e)} }
-                    />
-                </div>
-                <div>
-                    <label htmlFor="EditEmail">Sähköposti: </label>
-                    <input
-                        name="email"
-                        placeholder={user.email}
-                        type="email"
-                        id="EditEmail"
-                        onChange={ (e) => {handleInputChange(e)} }
-                    />
-                </div>
-                {
-                //    <div>
-                //    <label htmlFor="EditPassword">Salasana: </label>
-                //    <input
-                //        name="password"
-                //        type="password"
-                //        id="EditPassword"
-                //        onChange={ (e) => {handleInputChange(e)} }
-                //    />
-                //</div> 
-                }
-                <div>
-                    <label htmlFor="EditPhone">Puhelinnumero (muoto +358): </label>
-                    <input
-                        name="phone"
-                        placeholder={user.phone}
-                        type="text"
-                        id="EditPhone"
-                        onChange={ (e) => {handleInputChange(e)} }
-                    />
-                </div>
-                <button type="submit">Tallenna</button>
-            </form>
-        </>
-    );
+        <label className="flex flex-col gap-1">
+          {strings.auth.email}:
+          <input
+            name="email"
+            placeholder={user.email}
+            type="email"
+            id="EditEmail"
+            className="bg-stone-100 p-1 rounded focus:bg-[#982a2a33] focus:border-[#982A2A]!"
+            onChange={(e) => {
+              handleInputChange(e);
+            }}
+          />
+        </label>
+
+        {/* 
+        <label className="flex flex-col gap-1">
+          Salasana:
+          <input
+            name="password"
+            type="password"
+            id="EditPassword"
+            className="bg-stone-100 p-1 rounded focus:bg-[#982a2a33] focus:border-[#982A2A]!"
+            onChange={(e) => {
+              handleInputChange(e);
+            }}
+          />
+        </label>
+        */}
+
+        <label className="flex flex-col gap-1">
+          {strings.auth.phoneFormat}:
+          <input
+            name="phone"
+            placeholder={user.phone}
+            type="text"
+            id="EditPhone"
+            className="bg-stone-100 p-1 rounded focus:bg-[#982a2a33] focus:border-[#982A2A]!"
+            onChange={(e) => {
+              handleInputChange(e);
+            }}
+          />
+        </label>
+
+        <div className='w-full ml-30 mr-0'>
+          <button
+            type="submit"
+            className="bg-[#982a2a33]! border-2! border-[#982A2A]! text-black py-2 rounded hover:opacity-90 mt-4 hover:bg-[#982a2a70]!"
+            onClick={handleSubmit}
+          >
+            {strings.auth.saveButton}
+          </button>
+        </div>
+      </div>
+    </div>
+    </div>
+  );
 };
 
 export default EditForm;
