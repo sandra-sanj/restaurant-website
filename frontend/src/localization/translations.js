@@ -147,6 +147,7 @@ const strings = new LocalizedStrings({
       nameEn: 'Nimi englanniksi',
       description: 'Kuvaus',
       descriptionEn: 'Kuvaus englanniksi',
+      ingredients: 'Ainesosat',
       price: 'Hinta (€)',
       //priceError: 'Syötä hinta numerona, esim. 10.90 tai 10.90',
       category: 'Kategoria',
@@ -160,7 +161,9 @@ const strings = new LocalizedStrings({
       fillAllFields: 'Täytä kaikki kentät!',
       itemEdited: 'tuote muokattu',
       itemNotEdited: 'tuote ei muokattu',
-
+      noChanges:
+        'Mitään tietoa ei ole muokattu. Muokkaa yhtä tai useampaa tietoa.',
+      error: 'Virhe:',
       // Alerts/validation
       required: 'Täytä kaikki kentät!',
       //priceNumber: 'Syötä hinta numerona, esim. 10.90 tai 10,90',
@@ -327,6 +330,7 @@ const strings = new LocalizedStrings({
       nameEn: 'Name in English',
       description: 'Description',
       descriptionEn: 'Description in English',
+      ingredients: 'Ingredients',
       price: 'Price (€)',
       priceError: 'Enter price as a number, e.g. 10.90 or 10,90',
       category: 'Category',
@@ -340,8 +344,8 @@ const strings = new LocalizedStrings({
       fillAllFields: 'Fill all fields!',
       itemEdited: 'product edited',
       itemNotEdited: 'product not edited',
-
-      // Alerts/validation
+      noChanges: 'No information has been edited. Edit one or more items',
+      error: 'Error:',
       required: 'Fill all fields!',
       priceNumber: 'Enter price as a number, e.g. 10.90 or 10,90',
     },
