@@ -5,7 +5,7 @@ const Contacts = () => {
   const {strings} = useLanguage();
   return (
     <div>
-      <div className="mt-4 mb-4 text-md leading-9">
+      <div className="mt-4 mb-4 text-md leading-9 lg:text-lg">
         <h3 className="font-bold text-lg mb-4">{strings.home.contacts}</h3>
         <div className="mb-4">
           <p className="font-bold">{strings.home.openingHours}</p>
