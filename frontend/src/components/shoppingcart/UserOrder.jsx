@@ -7,23 +7,28 @@ import Modal from '../Modal';
 //swtich this to cart
 //FoodCard but for items in shopping cart?
 
-function Order(props) {
+function UserOrder(props) {
   const {setNext, payment, setPayment} = props;
   const {cart, delivery, calculateTotal, handleContactInfo} = useOrderContext();
   const {user} = useUserContext();
 
 
-  const initValues2 = {
-    username: '',
-    email: '',
-    phone: '',
+
+  const initValues = {
+    
+    user_id: user.user_id,
+    username: user.username,
+    email: user.email,
+    phone: user.phone,
     address: '',
+    
   };
 
 
 
   const placeOrder = () => {
     try {
+      inputs.user_id = user.user_id;
       inputs.order_type = delivery;
       console.log('con: ', inputs);
       handleContactInfo(inputs);
@@ -39,16 +44,17 @@ function Order(props) {
 
   //console.log(initValues);
   const {inputs, handleInputChange, handleSubmit} = useForm(
-    placeOrder, initValues2,);
+    placeOrder,
+    initValues,
+  );
   //bg-white w-[400px]
   return (
     <div className="bg-[#fcebeb] flex flex-row border border-stone-300 rounded-lg m-5">
-      <span className="cursor-pointer font-bold text-lg" onClick={() => setNext('cart')}> {/*goes back to cart*/}
+        <span className="cursor-pointer font-bold text-lg" onClick={() => setNext('cart')}> {/*goes back to cart*/}
             &times;
-          </span>
-      <div className="m-8">
+        </span>
+        <div className="m-8">
         <h2 className="text-xl mb-5 text-black font-semibold">Yhteystiedot</h2>
-        
         <form
           onSubmit={(e) => {
             handleSubmit(e);
@@ -63,13 +69,12 @@ function Order(props) {
               name="username"
               type="text"
               id="ordername"
+              value={user.username}
               onChange={(e) => {
                 handleInputChange(e);
               }}
               autoComplete="username"
-              autoFocus
               className="bg-stone-100 rounded"
-              required
             />
           </div>
           <div>
@@ -80,12 +85,12 @@ function Order(props) {
               name="email"
               type="email"
               id="orderemail"
+              value={user.email}
               onChange={(e) => {
                 handleInputChange(e);
               }}
               autoComplete="email"
               className="bg-stone-100 rounded"
-              required
             />
           </div>
           <div>
@@ -96,17 +101,16 @@ function Order(props) {
               name="phone"
               type="text"
               id="orderphone"
+              value={user.phone}
               onChange={(e) => {
                 handleInputChange(e);
               }}
               autoComplete="phone"
               className="bg-stone-100 rounded"
-              required
             />
           </div>
           {delivery === 'delivery' && (
             <div>
-              <div>
               <label htmlFor="address" className="flex flex-col gap-1">
               Osoite:{' '}
               </label>
@@ -121,7 +125,6 @@ function Order(props) {
                 className="bg-stone-100 rounded"
                 required
             />
-              </div>
 
             </div>
           )}
@@ -163,4 +166,4 @@ function Order(props) {
   );
 }
 
-export default Order;
+export default UserOrder;
