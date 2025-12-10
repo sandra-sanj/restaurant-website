@@ -4,9 +4,10 @@ import OrderCard from './OrderCard';
 
 function Cart(props) {
   const {setNext} = props;
+  const {cart, calculateTotal, setDelivery, delivery} = useOrderContext();
 
-  const [selectedDelivery, setSelectedDelivery] = useState('delivery');
-  const {cart, calculateTotal, setDelivery} = useOrderContext();
+  const [selectedDelivery, setSelectedDelivery] = useState(delivery);
+  
   const [totalPrice, setTotalPrice] = useState(calculateTotal());
 
   const handleDeliveryClick = (method) => {
