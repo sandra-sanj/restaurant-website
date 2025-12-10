@@ -69,7 +69,7 @@ function UserOrder(props) {
               name="username"
               type="text"
               id="ordername"
-              placeholder={user.username}
+              value={user.username}
               onChange={(e) => {
                 handleInputChange(e);
               }}
@@ -85,7 +85,7 @@ function UserOrder(props) {
               name="email"
               type="email"
               id="orderemail"
-              placeholder={user.email}
+              value={user.email}
               onChange={(e) => {
                 handleInputChange(e);
               }}
@@ -101,7 +101,7 @@ function UserOrder(props) {
               name="phone"
               type="text"
               id="orderphone"
-              placeholder={user.phone}
+              value={user.phone}
               onChange={(e) => {
                 handleInputChange(e);
               }}
