@@ -1,13 +1,13 @@
 import {useEffect, useState} from 'react';
 import {useLanguage} from '../../hooks/useLanguage';
 import Modal from '../Modal';
-import {useAllergen} from '../../hooks/apiHook';
+import {useAllergens} from '../../hooks/apiHook';
 
 const FoodCard = (props) => {
   const {item, setSelectedItem} = props;
   const {language, strings} = useLanguage();
   const [showModal, setShowModal] = useState(false);
-  const {getAllergen} = useAllergen();
+  const {getMenuItemAllergens} = useAllergens();
   const [allergens, setAllergens] = useState([]);
   const [codes, setCodes] = useState([]);
 
@@ -15,7 +15,7 @@ const FoodCard = (props) => {
 
   useEffect(() => {
     const handleAllergens = async () => {
-      const response = await getAllergen(item.menu_item_id);
+      const response = await getMenuItemAllergens(item.menu_item_id);
       if(response) {
         const allergen = response.map(a => a.name);
         const code = response.map(c => c.code);
