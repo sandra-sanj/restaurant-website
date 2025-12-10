@@ -17,7 +17,7 @@ function Home() {
         <p className="mb-5 text-lg">{strings.home.tagline}</p>
       </div>
 
-      <div className="flex flex-row items-center w-[100%] justify-center">
+      <div className="flex flex-row items-center w-full justify-center">
         <button
           onClick={() => navigate('/login')}
           className="bg-[#982A2A]! text-white hover:bg-[#792121]!"
@@ -33,29 +33,16 @@ function Home() {
       </div>
 
       <div className="ad-div w-screen flex items-center justify-center gap-2 bg-[#982A2A]">
-        {/*
-        <div className=''>
-          <img
-            src={imgSrc + '/home/home1.jpg'}
-            alt=""
-            width="200"
-            height="500"
-            onClick={() => navigate('/menu')}
-            className="overflow-hidden h-full rounded-sm hover:brightness-50"
-          />
-          <p>Menu</p>
-        </div>
-        */}
-
+        
         <div className="flex flex-row p-5 gap-4">
           <div>
             <img
               src={imgSrc + '/home/home2.jpg'}
               alt="Shrimp taco"
-              width="200"
-              height="500"
+              /*width="200"
+              height="500"*/
               onClick={() => navigate('/menu')}
-              className="overflow-hidden h-[265px] rounded-sm cursor-pointer outline-1 outline-zinc-300 hover:brightness-85"
+              className="overflow-hidden h-[265px] max-w-[200px] rounded-sm cursor-pointer outline-1 outline-zinc-300 hover:brightness-85"
             />
             <p className="text-white mt-2">{strings.home.newItemLabel}:</p>
             <p className="text-white">{strings.home.newItemName}</p>
@@ -67,10 +54,10 @@ function Home() {
             <img
               src={imgSrc + '/home/home3.jpg'}
               alt="Burrito bowl"
-              width="200"
-              height="500"
+              /*width="200"
+              height="500"*/
               onClick={() => navigate('/menu')}
-              className="overflow-hidden h-[265px] rounded-sm cursor-pointer outline-1 outline-zinc-300 hover:brightness-85"
+              className="overflow-hidden h-[265px] max-w-[200px] rounded-sm cursor-pointer outline-1 outline-zinc-300 hover:brightness-85"
             />
           </div>
         </div>
@@ -83,7 +70,7 @@ function Home() {
         >
           {strings.home.menuTitle}
         </h3>
-        <div className="container-home mb-15 grid grid-cols-3 content-center justify-items-center max-w-[1000px]">
+        <div className="container-home mb-15 grid grid-cols-2 md:grid-cols-4 gap-4 content-center justify-items-center max-w-[1000px]">
           <div className="flex flex-col justify-center items-center">
             <img
               src={imgSrc + '/home/mains.jpg'}

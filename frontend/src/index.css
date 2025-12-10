@@ -67,6 +67,7 @@ button:focus-visible {
   display: flex;
 }
 
+/*
 .container-home {
   width: 100%;
   display: flex;
@@ -77,6 +78,7 @@ button:focus-visible {
 .container-home div {
   width: 25%;
 }
+*/
 
 .container-home img {
   height: 10rem;
