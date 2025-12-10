@@ -19,7 +19,7 @@ const Payment = (props) => {
         setTimeout(() => {
             handleOrder();
             setNext('confirmation');
-        }, 3000)
+        }, 2000)
     }
 
     return (
