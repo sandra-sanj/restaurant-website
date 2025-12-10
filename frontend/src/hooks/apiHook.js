@@ -304,12 +304,13 @@ function useAllergen() {
             method: 'GET',
           };
           const response = await fetchData(`${API_URL}allergens/menu-item/${itemId}`, options);
-          console.log(response);
-          
+          //console.log(response);
+          //const allergens = await response.filter(a => a.allergen_id);
+          //console.log(allergens);
+          return response;
 
         } catch(e) {
-        console.error(e);
-        
+        //console.error(e);
       }};
 
     return {getAllergen};
