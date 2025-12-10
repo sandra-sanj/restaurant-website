@@ -32,7 +32,7 @@ function Home() {
         </button>
       </div>
 
-      <div className="ad-div w-full flex items-center justify-center gap-2 bg-[#982A2A] lg:mt-8">
+      <div className="ad-div w-screen flex items-center justify-center gap-2 bg-[#982A2A] lg:mt-8">
         
         <div className="flex flex-row p-5 gap-4 lg:gap-15 lg:p-15 lg:text-lg">
           <div>
