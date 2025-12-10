@@ -13,11 +13,11 @@ const Payment = (props) => {
       }, [])
 
     const handleClick = () => {
-        setShowModal(false)
+        setShowModal(false);
+        handleOrder();
         setMsg('maksua suoritetaan...')
 
         setTimeout(() => {
-            handleOrder();
             setNext('confirmation');
         }, 2000)
     }
