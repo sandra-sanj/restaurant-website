@@ -6,13 +6,13 @@ const FoodCard = (props) => {
   const {item, setSelectedItem,} = props;
   const [showModal, setShowModal] = useState(false);
   const {getAllergen} = useAllergen();
-  const [allergens, setAllergens] = useState();
+  const [allergens, setAllergens] = useState([]);
 
   const API_UPLOADS_URL = import.meta.env.VITE_API_UPLOADS_URL;
 
   useEffect(() => {
     const res = getAllergen(item.menu_item_id);
-    setAllergens(res.name);
+    setAllergens(res);
   }, [item])
 
   

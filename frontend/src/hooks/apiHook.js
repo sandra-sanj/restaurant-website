@@ -303,7 +303,7 @@ function useAllergen() {
         const options = {
             method: 'GET',
           };
-          const response = await fetchData(`${API_URL}allergens/${itemId}`, options);
+          const response = await fetchData(`${API_URL}allergens/menu-item/${itemId}`, options);
           console.log(response);
           
 

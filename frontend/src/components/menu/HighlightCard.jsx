@@ -11,7 +11,6 @@ const HighlightCard = () => {
   
 
   const {todaysLunch, error} = useMenu();
-  console.log(todaysLunch);
 
   if (error) return <p>Error: {error}</p>;
 
