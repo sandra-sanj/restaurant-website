@@ -13,7 +13,7 @@ function Home() {
   return (
     <div className="flex flex-col self-auto">
       <div className="flex flex-col justify-center items-center w-full">
-        <h1 className="p-5">Taqueria 21</h1>
+        <h1 className="p-5 lg:mt-5">Taqueria 21</h1>
         <p className="mb-5 text-lg">{strings.home.tagline}</p>
       </div>
 
@@ -32,9 +32,9 @@ function Home() {
         </button>
       </div>
 
-      <div className="ad-div w-screen flex items-center justify-center gap-2 bg-[#982A2A]">
+      <div className="ad-div w-screen flex items-center justify-center gap-2 bg-[#982A2A] lg:mt-8">
         
-        <div className="flex flex-row p-5 gap-4 lg:p-10 lg:text-lg">
+        <div className="flex flex-row p-5 gap-4 lg:gap-15 lg:p-15 lg:text-lg">
           <div>
             <img
               src={imgSrc + '/home/home2.jpg'}
@@ -42,7 +42,7 @@ function Home() {
               /*width="200"
               height="500"*/
               onClick={() => navigate('/menu')}
-              className="overflow-hidden h-[265px] lg:h-[329px] max-w-[200px] lg:max-w-[250px] rounded-sm cursor-pointer outline-1 outline-zinc-300 hover:brightness-85"
+              className="overflow-hidden h-[265px] lg:h-[395px] max-w-[200px] lg:max-w-[300px] rounded-sm cursor-pointer outline-1 outline-zinc-300 hover:brightness-85"
             />
             <p className="text-white mt-2">{strings.home.newItemLabel}:</p>
             <p className="text-white">{strings.home.newItemName}</p>
@@ -57,15 +57,15 @@ function Home() {
               /*width="200"
               height="500"*/
               onClick={() => navigate('/menu')}
-              className="overflow-hidden h-[265px] lg:h-[329px] max-w-[200px] lg:max-w-[250px] rounded-sm cursor-pointer outline-1 outline-zinc-300 hover:brightness-85"
+              className="overflow-hidden h-[265px] lg:h-[395px] max-w-[200px] lg:max-w-[300px] rounded-sm cursor-pointer outline-1 outline-zinc-300 hover:brightness-85"
             />
           </div>
         </div>
       </div>
 
-      <div className="mt-6 flex flex-col items-center justify-center">
+      <div className="mt-6 flex flex-col items-center justify-center lg:p-10">
         <h3
-          className="mb-6 text-xl lg:text-2xl font-bold cursor-pointer"
+          className="mb-6 text-xl lg:text-2xl lg:mb-12 font-bold cursor-pointer"
           onClick={() => navigate('/menu')}
         >
           {strings.home.menuTitle}
