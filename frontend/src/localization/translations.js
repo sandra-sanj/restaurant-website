@@ -85,7 +85,7 @@ const strings = new LocalizedStrings({
       delivery: 'Toimitus',
       pickup: 'Nouto',
       products: 'Tuotteet',
-      subtotal: 'Subtotal',
+      subtotal: 'Välisumma',
       deliveryFee: 'Toimitusmaksu',
       total: 'Yhteensä',
       checkout: 'Kassalle',

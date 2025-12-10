@@ -8,6 +8,7 @@ const OrderProvider = ({children}) => {
     const [order, setOrder] = useState([]);
     const [delivery, setDelivery] = useState('delivery');
     const {postNewOrder} = useOrder();
+    const [orderResult, setOrderResult] = useState([]);
 
     //tähän order state next ja setNext??
     
@@ -61,9 +62,15 @@ const OrderProvider = ({children}) => {
 
     const handleOrder = async () => {
         //console.log('tästä sitten tilaus apiin');
-        console.log('order: ', order);
-        const orderResponse = postNewOrder({order});
+        const orderResponse = await postNewOrder({order});
+        console.log(orderResponse);
         setCart([]);
+        setOrder([]);
+        if (orderResponse) { 
+            setOrderResult(orderResponse.result);
+            console.log(orderResponse.result);
+        };
+        
     }
 
 
@@ -80,6 +87,7 @@ const OrderProvider = ({children}) => {
         setDelivery,
         delivery,
         handleContactInfo,
+        orderResult,
     }
 
     return ( 
