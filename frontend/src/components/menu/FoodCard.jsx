@@ -8,14 +8,14 @@ const FoodCard = (props) => {
   const {language, strings} = useLanguage();
   const [showModal, setShowModal] = useState(false);
   const {getAllergen} = useAllergen();
-  const [allergens, setAllergens] = useState();
+  const [allergens, setAllergens] = useState([]);
 
   const API_UPLOADS_URL = import.meta.env.VITE_API_UPLOADS_URL;
 
   useEffect(() => {
     const res = getAllergen(item.menu_item_id);
-    setAllergens(res.name);
-  }, [item]);
+    setAllergens(res);
+  }, [item])
 
   // Get name and description in correct language
   const displayName = language === 'en' ? item.name_en : item.name;
