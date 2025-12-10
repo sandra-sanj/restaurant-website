@@ -19,12 +19,13 @@ const Payment = (props) => {
         setTimeout(() => {
             handleOrder();
             setNext('confirmation');
-        }, 3000)
+        }, 2000)
     }
 
     return (
     <>
-        <Modal isOpen={showModal} onClose={() => confirm('Haluatko varmasti keskeyttää tilauksen?')}>
+        <Modal isOpen={showModal} onClose={() => confirm('Haluatko varmasti keskeyttää tilauksen?') && setNext('cart')
+        }>
         
             <p>Valittu metodi: {payment}</p>
             <p className="mt-5 font-semibold ">Suorita maksu</p>

@@ -8,6 +8,8 @@ const OrderProvider = ({children}) => {
     const [order, setOrder] = useState([]);
     const [delivery, setDelivery] = useState('delivery');
     const {postNewOrder} = useOrder();
+
+    //tähän order state next ja setNext??
     
 
     const handleAddItem = (item) => {
@@ -57,11 +59,11 @@ const OrderProvider = ({children}) => {
         });
     }
 
-    const handleOrder = () => {
+    const handleOrder = async () => {
         //console.log('tästä sitten tilaus apiin');
-        console.log(order);
-        postNewOrder({order});
-        //setCart([]);
+        console.log('order: ', order);
+        const orderResponse = postNewOrder({order});
+        setCart([]);
     }
 
 
