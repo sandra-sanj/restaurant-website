@@ -11,7 +11,7 @@ const findMenuItemById = async (id) => {
     `SELECT * FROM menu_items WHERE menu_item_id = ?;`,
     [id]
   );
-  //console.log('rows', rows);
+
   if (rows.length === 0) {
     return false;
   }
@@ -57,8 +57,6 @@ const addMenuItem = async (menuItem) => {
   ];
 
   const result = await promisePool.execute(sql, params);
-  //console.log('result', result);
-
   if (result[0].affectedRows === 0) {
     return false;
   }
@@ -66,15 +64,37 @@ const addMenuItem = async (menuItem) => {
 };
 
 const modifyMenuItem = async (menuItem, id) => {
-  const sql = promisePool.format(
-    `UPDATE menu_items SET ? WHERE menu_item_id = ?`,
-    [menuItem, id]
-  );
+  let {allergen_ids, ...menuItemData} = menuItem;
 
-  const [result] = await promisePool.query(sql);
-  if (result.changedRows === 0) {
-    return false;
+  if (allergen_ids && typeof allergen_ids === 'string') {
+    allergen_ids = JSON.parse(allergen_ids);
   }
+
+  // try to update menu item
+  if (Object.keys(menuItemData).length > 0) {
+    const sql = promisePool.format(
+      `UPDATE menu_items SET ? WHERE menu_item_id = ?`,
+      [menuItemData, id]
+    );
+    await promisePool.query(sql);
+  }
+
+  // try to update allergens
+  if (allergen_ids) {
+    // delete old allergens
+    await promisePool.query(
+      `DELETE FROM menu_item_allergen WHERE menu_item_id = ?`,
+      [id]
+    );
+
+    // insert new allergens
+    if (allergen_ids.length > 0) {
+      const values = allergen_ids.map((a) => [id, parseInt(a)]);
+      const sqlAllergens = `INSERT INTO menu_item_allergen (menu_item_id, allergen_id) VALUES ?`;
+      await promisePool.query(sqlAllergens, [values]);
+    }
+  }
+
   return await findMenuItemById(id);
 };
 
@@ -83,14 +103,12 @@ const removeMenuItem = async (id) => {
     'DELETE FROM menu_items WHERE menu_item_id = ?',
     [id]
   );
-  //console.log('rows', rows);
+
   if (rows.affectedRows === 0) {
     return false;
   }
   return {message: 'success'};
 };
-
-//const listAvailableMenuItems
 
 export {
   listAllMenuItems,

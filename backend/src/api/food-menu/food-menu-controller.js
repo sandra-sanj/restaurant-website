@@ -72,7 +72,6 @@ const postMenuItem = async (req, res, next) => {
   }
 
   res.status(201).json({message: 'New menu item added', result});
-
 };
 
 const putMenuItem = async (req, res, next) => {

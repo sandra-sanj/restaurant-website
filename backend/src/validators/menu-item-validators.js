@@ -79,3 +79,9 @@ export const createIsAvailableChain = () =>
     .withMessage('is_available is required')
     .isInt({min: 0, max: 1})
     .withMessage('is_available must be 0 or 1');
+
+export const createAllergenIdsChain = () =>
+  body('allergen_ids')
+    .optional()
+    .isJSON()
+    .withMessage('allergen_ids must be valid JSON');

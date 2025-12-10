@@ -25,14 +25,16 @@ function ShowCards(props) {
     <>
       <AddToCart item={selectedItem} setSelectedItem={setSelectedItem} />
 
-      {section.map((item) => (
-        <FoodCard
-          key={item.menu_item_id}
-          item={item}
-          setSelectedItem={setSelectedItem}
-          language={language} //Pass language to FoodCard
-        />
-      ))}
+      {section
+        .filter((item) => item.is_available)
+        .map((item) => (
+          <FoodCard
+            key={item.menu_item_id}
+            item={item}
+            setSelectedItem={setSelectedItem}
+            language={language} //Pass language to FoodCard
+          />
+        ))}
     </>
   );
 }

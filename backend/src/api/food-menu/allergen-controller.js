@@ -38,13 +38,16 @@ const getMenuItemAllergens = async (req, res, next) => {
   try {
     const allergens = await findAllergensByMenuItemId(req.params.menuItemId);
 
-    if (allergens.length > 0) {
+    // allergens can be empty as not all items have allergens
+    res.status(200).json(allergens);
+
+    /* if (allergens.length > 0) {
       res.json(allergens);
     } else {
       const error = new Error('No allergens found for this menu item');
       error.status = 404;
       return next(error);
-    }
+    } */
   } catch (error) {
     console.error('Error fetching allergens for menu item: ', error);
     next(error);

@@ -63,20 +63,21 @@ function useMenu() {
     }
   };
 
-  const modifyMenuItem = async (item, token) => {
+  const modifyMenuItem = async (formData, itemId, token) => {
     try {
       const options = {
         method: 'PUT',
         headers: {
-          'Content-Type': 'application/json',
+          //'Content-Type': 'application/json',
           Authorization: 'Bearer ' + token,
         },
 
-        body: JSON.stringify(item),
+        //body: JSON.stringify(item),
+        body: formData,
       };
 
       const modifyResponse = await fetchData(
-        `${API_URL}/menu/${item.menu_item_id}`,
+        `${API_URL}/menu/${itemId}`,
         options,
       );
 
@@ -110,26 +111,22 @@ function useMenu() {
     }
   };
 
-  
-    useEffect(() => {
-      const getTodaysLunch = async () => {
-        try {
+  useEffect(() => {
+    const getTodaysLunch = async () => {
+      try {
         const options = {
-            method: 'GET',
-          };
-          const lunch = await fetchData(`${API_URL}/lunch/today`, options);
-          setTodaysLunch(lunch);
-          setError(null);
-          
-
-        } catch(e) {
+          method: 'GET',
+        };
+        const lunch = await fetchData(`${API_URL}/lunch/today`, options);
+        setTodaysLunch(lunch);
+        setError(null);
+      } catch (e) {
         console.error(e);
         setError(e);
-      }};
+      }
+    };
     getTodaysLunch();
-    }, [])
-  
-  
+  }, []);
 
   return {
     menuArray,
@@ -296,24 +293,59 @@ function useWeather() {
   return {weather, loading, error};
 }
 
-function useAllergen() {
+function useAllergens() {
+  const [allergens, setAllergens] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-      const getAllergen = async (itemId) => {
-        try {
+  useEffect(() => {
+    const getAllergens = async () => {
+      try {
+        setLoading(true);
         const options = {
-            method: 'GET',
-          };
-          const response = await fetchData(`${API_URL}allergens/menu-item/${itemId}`, options);
-          //console.log(response);
-          //const allergens = await response.filter(a => a.allergen_id);
-          //console.log(allergens);
-          return response;
+          method: 'GET',
+        };
+        const response = await fetchData(`${API_URL}/allergens`, options);
 
-        } catch(e) {
-        //console.error(e);
-      }};
+        setAllergens(response);
+        setError(null);
+      } catch (e) {
+        console.error('Error fetching allergens:', e);
+        setAllergens([]);
+        setError('Failed to fetch allergens');
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    return {getAllergen};
+    getAllergens();
+  }, []);
+
+  const getMenuItemAllergens = async (menuItemId) => {
+    try {
+      const options = {
+        method: 'GET',
+      };
+      const response = await fetchData(
+        `${API_URL}/allergens/menu-item/${menuItemId}`,
+        options,
+      );
+
+      return response || [];
+    } catch (e) {
+      console.error('Error fetching menu item allergens:', e);
+      return [];
+    }
+  };
+
+  return {allergens, loading, error, getMenuItemAllergens};
 }
 
-export {useMenu, useAuthentication, useUser, useOrder, useWeather, useAllergen};
+export {
+  useMenu,
+  useAuthentication,
+  useUser,
+  useOrder,
+  useWeather,
+  useAllergens,
+};

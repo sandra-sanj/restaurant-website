@@ -1,54 +1,52 @@
-import {useEffect, useState} from 'react';
-import {useMenu} from '../../hooks/apiHook.js';
+import {useState} from 'react';
+import {useMenu, useAllergens} from '../../hooks/apiHook.js';
 import useForm from '../../hooks/formHooks.js';
-
-// TODO: lisää spice-levels yms puuttuvat kohdat
-// TODO: lähetä allergeenit erillisenä POST-pyyntönä
+import {
+  FormField,
+  CategorySelector,
+  SpiceLevelSelector,
+  ProteinSelector,
+  AllergenSelector,
+  AvailabilityToggle,
+  ImageUploadPreview,
+} from './ItemFormFields.jsx';
 
 const AddItem = ({onClose}) => {
-  //const [item, setItem] = useState(null);
   const [imageFile, setImageFile] = useState(null);
-
   const {addMenuItem} = useMenu();
+  const {allergens} = useAllergens();
+  const [selectedAllergens, setSelectedAllergens] = useState([]);
 
-  /*const handleItemChange = (event) => {
-    setItem(event.target.files[0]);
-    console.log('item state', item);
-  };*/
-
-  const handleImageChange = (event) => {
-    setImageFile(event.target.files[0]);
-  };
-
+  // match values with database names
   const initValues = {
-    nameFi: '',
-    nameEn: '',
+    name: '',
+    name_en: '',
     description: '',
-    descriptionEn: '',
-    price: 0,
-    category: 1, // Default value
-    lactoseFree: false, // checkboxes
-    glutenFree: false,
-    milkFree: false,
-    vegan: false,
+    description_en: '',
+    price: '',
+    category_id: 1,
+    is_available: true,
+    spice_level: 0,
+    allows_spice_custom: false,
+    available_proteins: [],
+    default_protein: '',
+    ingredients: '',
   };
 
-  const doAddItem = async (inputs) => {
-    console.log('doAddItem:', inputs);
-
+  const doAddItem = async (values) => {
     if (
-      !inputs.nameFi ||
-      !inputs.nameEn ||
-      !inputs.description ||
-      !inputs.descriptionEn ||
-      !inputs.price
+      !values.name ||
+      !values.name_en ||
+      !values.description ||
+      !values.description_en ||
+      !values.price
     ) {
       alert('Täytä kaikki kentät!');
       return;
     }
 
     // Check that price is numeric
-    if (isNaN(parseFloat(inputs.price))) {
+    if (isNaN(parseFloat(values.price))) {
       alert('Syötä hinta numerona, esim. 10.90 tai 10,90');
       return;
     }
@@ -60,36 +58,41 @@ const AddItem = ({onClose}) => {
 
     const token = localStorage.getItem('token');
 
-    try {
-      const formData = new FormData();
-      formData.append('category_id', parseInt(inputs.category));
-      formData.append('name', inputs.nameFi);
-      formData.append('name_en', inputs.nameEn);
-      formData.append('description', inputs.description || '');
-      formData.append('description_en', inputs.descriptionEn || '');
-      formData.append('price', parseFloat(inputs.price.replace(',', '.')).toFixed(2));
-      formData.append('ingredients', '-');
-      formData.append('spice_level', 0);
-      formData.append('allows_spice_custom', 0);
-      formData.append('available_proteins', 0);
-      formData.append('default_protein', 0);
-      formData.append('is_available', 1);
-      formData.append('file', imageFile);
-
-      // Debug: Näytä FormData sisältö
-      console.log('FormData sisältö:');
-      for (let [key, value] of formData.entries()) {
-        console.log(key, ':', value);
+    const formData = new FormData();
+    // add all values to formData
+    Object.entries(values).forEach(([key, value]) => {
+      if (key === 'available_proteins') {
+        formData.append(key, value.join(', '));
+      } else if (key === 'price') {
+        formData.append(key, parseFloat(value).toFixed(2));
+      } else if (key === 'allows_spice_custom' || key === 'is_available') {
+        formData.append(key, value ? 1 : 0);
+      } else {
+        formData.append(key, value);
       }
+    });
+    formData.append('file', imageFile);
+    if (selectedAllergens.length)
+      formData.append('allergen_ids', JSON.stringify(selectedAllergens));
 
+    // Debug: Näytä FormData sisältö
+    console.log('FormData sisältö:');
+    for (let [key, value] of formData.entries()) {
+      console.log(key, ':', value);
+    }
+
+    try {
       const newItemResponse = await addMenuItem(formData, token);
 
       if (newItemResponse !== null && newItemResponse !== undefined) {
-        alert(`Tuote "${inputs.nameFi}" lisätty`);
-        onClose();
+        alert(`Tuote "${values.name}" lisätty`);
+        //onClose();
+        // do not close form, reset it
         setImageFile(null);
+        setSelectedAllergens([]);
+        resetForm();
       } else {
-        alert(`Virhe tuotteen "${inputs.nameFi}" lisäämisessä`);
+        alert(`Virhe tuotteen "${values.name}" lisäämisessä`);
       }
     } catch (error) {
       console.error('Failed to add item:', error);
@@ -117,148 +120,94 @@ const AddItem = ({onClose}) => {
         </div>
 
         {/* Form */}
-        <div className="flex flex-col p-4 gap-4 bg-white w-[400px]">
-          <label className="flex flex-col gap-1">
-            Nimi:
-            <input
-              name="nameFi"
-              className="bg-stone-100 p-1 rounded"
-              id="nameFi"
-              type="text"
+        <div className="flex flex-col p-4 gap-4 bg-white w-[400px] *:flex *:flex-col space-y-5">
+          <FormField
+            label="Nimi"
+            name="name"
+            value={inputs.name}
+            onChange={handleInputChange}
+          />
+          <FormField
+            label="Nimi englanniksi"
+            name="name_en"
+            value={inputs.name_en}
+            onChange={handleInputChange}
+          />
+          <FormField
+            label="Kuvaus"
+            name="description"
+            value={inputs.description}
+            onChange={handleInputChange}
+          />
+          <FormField
+            label="Kuvaus englanniksi"
+            name="description_en"
+            value={inputs.description_en}
+            onChange={handleInputChange}
+          />
+          <FormField
+            label="Ainesosat"
+            name="ingredients"
+            value={inputs.ingredients}
+            onChange={handleInputChange}
+          />
+          <FormField
+            label="Hinta (€)"
+            name="price"
+            value={inputs.price}
+            onChange={handleInputChange}
+          />
+
+          <CategorySelector
+            value={inputs.category_id}
+            onChange={handleInputChange}
+          />
+
+          <SpiceLevelSelector
+            level={inputs.spice_level}
+            allowsCustom={inputs.allows_spice_custom}
+            onLevelChange={handleInputChange}
+            onCustomChange={(e) =>
+              handleInputChange({
+                target: {name: 'allows_spice_custom', value: e.target.checked},
+              })
+            }
+          />
+
+          <ProteinSelector
+            selected={inputs.available_proteins}
+            defaultProtein={inputs.default_protein}
+            onChange={(updatedProteins) =>
+              handleInputChange({
+                target: {name: 'available_proteins', value: updatedProteins},
+              })
+            }
+            onDefaultChange={(default_protein) =>
+              handleInputChange({
+                target: {name: 'default_protein', value: default_protein},
+              })
+            }
+          />
+
+          <AllergenSelector
+            allergens={allergens}
+            selected={selectedAllergens}
+            onChange={setSelectedAllergens}
+          />
+
+          <div>
+            <AvailabilityToggle
+              name="is_available"
+              value={inputs.is_available}
               onChange={handleInputChange}
             />
-          </label>
-
-          <label className="flex flex-col gap-1">
-            Nimi englanniksi:
-            <input
-              name="nameEn"
-              className="bg-stone-100 p-1 rounded"
-              id="nameEn"
-              type="text"
-              onChange={handleInputChange}
-            />
-          </label>
-
-          <label className="flex flex-col gap-1">
-            Kuvaus:
-            <input
-              name="description"
-              className="bg-stone-100 p-1 rounded"
-              id="description"
-              type="text"
-              onChange={handleInputChange}
-            />
-          </label>
-
-          <label className="flex flex-col gap-1">
-            Kuvaus englanniksi:
-            <input
-              name="descriptionEn"
-              className="bg-stone-100 p-1 rounded"
-              id="descriptionEn"
-              type="text"
-              onChange={handleInputChange}
-            />
-          </label>
-
-          <label className="flex flex-col gap-1">
-            Hinta (€):
-            <input
-              name="price"
-              className="bg-stone-100 p-1 rounded"
-              id="price"
-              type="text"
-              onChange={handleInputChange}
-            />
-          </label>
-
-          <div className="flex flex-col gap-1">
-            <p>Kategoria:</p>
-            <select
-              name="category"
-              className="bg-stone-100 p-1 rounded"
-              value={inputs.category}
-              onChange={handleInputChange}
-            >
-              <option value={1}>Snacks</option>
-              <option value={2}>Mains</option>
-              <option value={3}>Desserts</option>
-              <option value={4}>Drinks</option>
-            </select>
           </div>
 
-          <div className="flex flex-col gap-2">
-            <p>Ruokavaliot:</p>
-            <div className="flex gap-4 items-center">
-              <label className="flex items-center gap-1">
-                L
-                <input
-                  type="checkbox"
-                  name="lactoseFree"
-                  checked={inputs.lactoseFree || false}
-                  onChange={(e) =>
-                    handleInputChange({
-                      target: {name: e.target.name, value: e.target.checked},
-                    })
-                  }
-                />
-              </label>
-
-              <label className="flex items-center gap-1">
-                G
-                <input
-                  type="checkbox"
-                  name="glutenFree"
-                  checked={inputs.glutenFree || false}
-                  onChange={(e) =>
-                    handleInputChange({
-                      target: {name: e.target.name, value: e.target.checked},
-                    })
-                  }
-                />
-              </label>
-
-              <label className="flex items-center gap-1">
-                M
-                <input
-                  type="checkbox"
-                  name="milkFree"
-                  checked={inputs.milkFree || false}
-                  onChange={(e) =>
-                    handleInputChange({
-                      target: {name: e.target.name, value: e.target.checked},
-                    })
-                  }
-                />
-              </label>
-
-              <label className="flex items-center gap-1">
-                VEG
-                <input
-                  type="checkbox"
-                  name="vegan"
-                  checked={inputs.vegan || false}
-                  onChange={(e) =>
-                    handleInputChange({
-                      target: {name: e.target.name, value: e.target.checked},
-                    })
-                  }
-                />
-              </label>
-            </div>
-          </div>
-
-          <div className="flex flex-col gap-1">
-            <p>Kuva:</p>
-            <input
-              name="image"
-              type="file"
-              id="image"
-              className="bg-stone-100 p-1 rounded"
-              onChange={handleImageChange}
-            />
-          </div>
+          <ImageUploadPreview
+            imageFile={imageFile}
+            onFileChange={(e) => setImageFile(e.target.files[0])}
+            onCancel={() => setImageFile(null)}
+          />
 
           <button
             onClick={handleSubmit}
