@@ -9,14 +9,26 @@ const FoodCard = (props) => {
   const [showModal, setShowModal] = useState(false);
   const {getAllergen} = useAllergen();
   const [allergens, setAllergens] = useState([]);
+  const [codes, setCodes] = useState([]);
 
   const API_UPLOADS_URL = import.meta.env.VITE_API_UPLOADS_URL;
 
   useEffect(() => {
-    const res = getAllergen(item.menu_item_id);
-    setAllergens(res);
+    const handleAllergens = async () => {
+      const response = await getAllergen(item.menu_item_id);
+      const allergen = response.map(a => a.name);
+      const code = response.map(c => c.code);
+      setAllergens(allergen);
+      setCodes(code);
+      //console.log(allergen, codes);
+    };
+    
+      handleAllergens();
+    
+    
   }, [item])
 
+  
   // Get name and description in correct language
   const displayName = language === 'en' ? item.name_en : item.name;
   const displayDescription =
@@ -37,7 +49,8 @@ const FoodCard = (props) => {
         </div>
 
         <p>{displayDescription}</p>
-        <p>{item.price}</p>
+        {codes.join(', ')}
+        <p>{item.price} €</p>
         <button onClick={() => setSelectedItem(item)}>
           {strings.cart.addToCart}
         </button>
@@ -48,7 +61,8 @@ const FoodCard = (props) => {
             <h2 className="font-bold">{strings.menu.ingredients}</h2>
             <p>{item.ingredients}</p>
             <p>
-              {strings.menu.allergens}: {allergens}
+              {strings.menu.allergens}: {allergens.join(', ')} 
+              <br></br>
             </p>
           </div>
         </div>
