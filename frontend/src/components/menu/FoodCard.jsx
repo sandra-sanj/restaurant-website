@@ -72,7 +72,6 @@ const FoodCard = (props) => {
           </div>
         </div>
       </Modal>
-      <div className='empty-div'></div>
     </>
   );
 };

@@ -19,8 +19,27 @@ const AdminHistory = () => {
     setFilter(type);
   };
 
+  const getToday = () => {
+    const today = new Date();
+    const month = today.getMonth() + 1;
+    const year = today.getFullYear();
+    const date = today.getDate();
+
+    return date + '.' + month + '.' + year;
+  };
+
+  const todayStr = getToday();
+
+  const filteredOrders = orders.filter((order) => {
+    if (filter === 'today') {
+      return order.date === todayStr; // Today's orders
+    } else {
+      return true; // All orders
+    }
+  });
+
   const orderIds = [];
-  orders.forEach((item) => {
+  filteredOrders.forEach((item) => {
     if (!orderIds.includes(item.orderId)) {
       orderIds.push(item.orderId);
     }
@@ -47,6 +66,9 @@ const AdminHistory = () => {
         </div>
 
         <div className="w-[95vw] flex justify-center">
+
+          {filteredOrders.length > 0 ? (
+
           <Table className="mt-4 mb-8 max-w-[1200px] min-w-[500px] w-full border border-stone-500 table-fixed mx-auto">
             <TableHeader className="bg-[#982A2A] text-white">
               <TableRow>
@@ -69,7 +91,7 @@ const AdminHistory = () => {
             </TableHeader>
 
             <TableBody>
-              {orders.map((order) => {
+              {filteredOrders.map((order) => {
                 const isEven = order.orderId % 2 === 0;
 
                 return (
@@ -87,6 +109,9 @@ const AdminHistory = () => {
               })}
             </TableBody>
           </Table>
+          ) : (
+            <p className='p-5 font-semibold text-red-700'>Ei tilauksia / No orders</p>
+          )}
         </div>
       </div>
 
