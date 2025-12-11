@@ -11,6 +11,7 @@ const EditForm = () => {
     username: user.username,
     email: user.email,
     phone: user.phone,
+    address: user.address,
   };
 
   const doEdit = () => {
@@ -102,6 +103,20 @@ const EditForm = () => {
             type="text"
             id="EditPhone"
             className="bg-stone-100 w-full p-1 rounded focus:bg-[#982a2a33] focus:border-[#982A2A]!"
+            onChange={(e) => {
+              handleInputChange(e);
+            }}
+          />
+        </label>
+
+        <label className="flex flex-col gap-1">
+          {strings.auth.address}:
+          <input
+            name="address"
+            placeholder={user.address}
+            type="address"
+            id="EditAddress"
+            className="bg-stone-100 p-1 rounded focus:bg-[#982a2a33] focus:border-[#982A2A]!"
             onChange={(e) => {
               handleInputChange(e);
             }}
