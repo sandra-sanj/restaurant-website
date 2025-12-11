@@ -51,7 +51,11 @@ The application provides features like:
 
 ### Admin Features
 
-- TODO
+- Add, edit, and delete menu items
+- View and manage all orders
+- Category management
+- Image uploading for menu items
+- Order history browsing
 
 ---
 
