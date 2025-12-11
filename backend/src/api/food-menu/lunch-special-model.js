@@ -12,7 +12,9 @@ const listAllLunchSpecials = async () => {
      menu_items.image_url,
      menu_items.image_thumb_url,
      menu_items.ingredients,
-     menu_items.spice_level
+     menu_items.spice_level,
+     menu_item.selected_protein,
+     menu_item.selected_spice_level
      FROM lunch_specials
      JOIN menu_items ON lunch_specials.menu_item_id = menu_items.menu_item_id
      WHERE lunch_specials.is_active = TRUE ORDER BY
