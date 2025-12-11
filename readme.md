@@ -2,6 +2,16 @@
 
 A full-stack web application for a Mexican restaurant featuring online ordering, menu-management, admin dashboards, and multilingual support (Finnish/English).
 
+## Table of Contents
+
+- What this Project Does
+- Why this Project is Useful
+- Application Features
+- Technologies Used
+- Install, initialize, develop and launch project
+- Links
+- Testing Instructions
+
 ## What this Project Does
 
 Taqueria 21 is a comprehensive restaurant management and ordering system that allows:
@@ -137,7 +147,6 @@ JWT_EXPIRES_IN=1d
 
 # OpenWeatherMap API
 OPENWEATHER_API_KEY=your_openweather_api_key
-
 ```
 
 Create a `.env` file in the frontend directory
