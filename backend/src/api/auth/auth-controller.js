@@ -41,19 +41,7 @@ const getMe = async (req, res, next) => {
     return next(error);
   }
 
-  // fetch user again so user info is up to date
-  try {
-    const latestUser = await findUserById(res.locals.user.user_id);
-    if (!latestUser) {
-      const error = new Error('User not found');
-      error.status = 404;
-      return next(error);
-    }
-
-    res.json({message: 'token ok', user: latestUser});
-  } catch (err) {
-    next(err);
-  }
+  res.json({message: 'token ok', user: res.locals.user});
 };
 
 export {postLogin, getMe};
