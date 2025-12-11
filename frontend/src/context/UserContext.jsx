@@ -59,8 +59,10 @@ const UserProvider = ({children}) => {
         alert(response.message);
         setUser(response.result);
         navigate('/profile')
+        return response;
       } catch (error) {
-        console.error(error) 
+        console.error(error);
+        throw error;
       }
     }
 
