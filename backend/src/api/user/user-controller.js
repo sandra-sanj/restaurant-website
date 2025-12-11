@@ -1,6 +1,7 @@
 import {
   listAllUsers,
   findUserById,
+  findEmail,
   addUser,
   modifyUser,
   removeUser,
@@ -75,6 +76,12 @@ const postUser = async (req, res, next) => {
     return next(error);
   }
 
+  if (await findEmail(req.body.email)) {
+    const error = new Error('Cannot add user, email already exists');
+    error.status = 409;
+    return next(error);
+  }
+
   // modify password to hash format before it is added to the database
   req.body.password_hash = await hashFormatPassword(req.body.password);
   delete req.body.password;
@@ -122,6 +129,13 @@ const putUser = async (req, res, next) => {
     existingUserByUsername.user_id !== user.user_id
   ) {
     const error = new Error('Username already exists');
+    error.status = 409;
+    return next(error);
+  }
+
+  const existingUserByEmail = await findEmail(req.body.email);
+  if (existingUserByEmail && existingUserByEmail.user_id !== user.user_id) {
+    const error = new Error('Email already exists');
     error.status = 409;
     return next(error);
   }
