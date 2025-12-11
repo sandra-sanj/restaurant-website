@@ -56,7 +56,7 @@ const FoodCard = (props) => {
 
         <p className='font-semibold mt-3'>{item.price} €</p>
         <button onClick={() => setSelectedItem(item)}
-          className='bg-[#2A4B11]! text-white!'>
+          className='bg-[#2A4B11]! text-white!' id='button-for-opening-modal'>
           {strings.cart.addToCart}
         </button>
       </div>
