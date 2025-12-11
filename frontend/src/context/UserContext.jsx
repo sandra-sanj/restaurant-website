@@ -58,6 +58,9 @@ const UserProvider = ({children}) => {
         console.log(response.message);
         alert(response.message);
         setUser(response.result);
+        
+        // same new token
+        localStorage.setItem("token", response.token);
         navigate('/profile')
         return response;
       } catch (error) {
