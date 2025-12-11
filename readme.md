@@ -43,9 +43,42 @@ The application provides features like:
 
 ---
 
-## Features
+## Application Features
 
-###
+### Customer Features
+
+- TODO
+
+### Admin Features
+
+- TODO
+
+---
+
+## Technologies Used
+
+### Frontend
+
+- **React 19** - UI framework
+- **React Router 7** - Client-side routing
+- **Tailwind CSS 4** - Styling
+- **Vite** - Build tool
+- **react-localization** - Multilingual support
+- **Lucide React** - Icons
+
+### Backend
+
+- **Node.js** - Runtime environment
+- **Express 5** - Web framework
+- **MySQL** - Database
+- **JWT** -Authentication
+- **bcrypt** - Password hashing
+- **express-validator** - input validation
+- **Multer & Sharp** - Image upload and processing
+
+### External APIs
+
+- **OpenWeatherMap API** - Weather data
 
 ## Install, initialize, develop and launch project
 
