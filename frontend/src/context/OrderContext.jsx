@@ -48,6 +48,7 @@ const OrderProvider = ({children}) => {
 
 
 
+
     const calculateTotal = () => {
         return cart.reduce((sum, item) => sum + item.unit_price * item.quantity, 0).toFixed(2);
     }
