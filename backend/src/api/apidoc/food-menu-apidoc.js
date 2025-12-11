@@ -162,7 +162,7 @@
  * @apiBody {String} [available_proteins] Optional comma-separated list of proteins.
  * @apiBody {String} [default_protein] Optional default protein choice.
  * @apiBody {Number=0,1} is_available Whether item is available (0 or 1, required).
- * @apiBody {String} [allergen_ids] Optional JSON string array of allergen IDs (e.g., "[1,2,3]").
+ * @apiBody {String} allergen_ids Optional JSON string array of allergen IDs (e.g., JSON array with IDs).
  *
  * @apiSuccess {String} message Success message.
  * @apiSuccess {Object} result Created menu item object.
@@ -257,7 +257,7 @@
  * @apiBody {String} [available_proteins] Comma-separated list of proteins.
  * @apiBody {String} [default_protein] Default protein choice.
  * @apiBody {Number=0,1} [is_available] Whether item is available (0 or 1).
- * @apiBody {String} [allergen_ids] Optional JSON string array of allergen IDs (e.g., "[1,2,3]"), replaces all existing allergens.
+ * @apiBody {String} allergen_ids Optional JSON string array of allergen IDs (e.g., JSON array with IDs), replaces all existing allergens.
  *
  * @apiSuccess {String} message Success message.
  * @apiSuccess {Object} result Updated menu item object.
