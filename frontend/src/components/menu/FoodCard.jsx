@@ -38,7 +38,7 @@ const FoodCard = (props) => {
 
   return (
     <>
-      <div className="bg-white-50 w-[350px] md:w-[500px] rounded-md outline-2 outline-stone-400 bg-white m-3 flex flex-col">
+      <div className="w-[350px] md:w-[500px] rounded-md outline-2 outline-stone-400 bg-white m-3 flex flex-col">
         <img
           src={API_UPLOADS_URL + item.image_thumb_url}
           alt={displayDescription}
