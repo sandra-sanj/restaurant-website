@@ -78,6 +78,7 @@ const LoginForm = () => {
           </div>
           <button
             type="submit"
+            id='loginBtn'
             className="bg-[#982A2A]! text-white hover:bg-[#982A2a90]!"
           >
             {strings.auth.loginButton}

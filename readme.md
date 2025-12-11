@@ -13,9 +13,10 @@ Taqueria 21 is a comprehensive restaurant management and ordering system that al
 The application provides features like:
 
 - Browsing menu with allergen and price information
-- Making online orders (pickup/delivery) with protein and spice level customization
+- Making online orders (pickup/delivery)
 - Admin functions for menu and order management
-- User authentication and o
+- User authentication and order history
+- Today's lunch special highlighting
 - Multilingual support (Finnish/English)
 - Real-time weather data from OpenWeather API
 - Responsive design for all devices
@@ -47,7 +48,16 @@ The application provides features like:
 
 ### Customer Features
 
-- TODO
+- Browse menu by category (All, Mains, Snacks, desserts, Drinks)
+- View today's lunch special highlited with discounted pricing
+- Clear pricing, allergen information, ingredient lists and menu description.
+- Shopping cart management (add/remove/change quantity)
+- Additional information input (special requests)
+- Delivery method selection (pickup/delivery)
+- Contact information input or auto-fill for logged-in users
+- User registration and login
+- Language switching (Fi/En)
+- Current weather information
 
 ### Admin Features
 
@@ -97,7 +107,17 @@ The application provides features like:
 
 #### Database
 
-TODO: instructions to database creation
+```sql
+-- Open MySQL command line
+-- Run the schema.sql file
+source path/backend/database/schema.sql
+
+-- Run the create-user.sql
+source path/backend/database/create-user.sql
+
+-- (Optional) Load sample data
+source path/backend/database/sample_data.sql
+```
 
 ### Development
 
@@ -135,62 +155,3 @@ TODO: instructions about adding project to server
 something something about **dist** folder
 
 ## REST API Documentation
-
-### Menu related requests (+ menu item allergen?)
-
-| Endpoint  | Method | Description                | Request Body (Example) | Response Body (Example) | Status Codes |
-| --------- | ------ | -------------------------- | ---------------------- | ----------------------- | ------------ |
-| /menu     | GET    | Retrieve all menu items    | -                      | -                       |              |
-| /menu/:id | GET    | Retrieve menu item with ID | -                      | -                       |              |
-| /menu     | POST   | Create new menu item       | -                      | -                       |              |
-| /menu/:id | PUT    | Modify menu item with ID   | -                      | -                       |              |
-| /menu/:id | DELETE | Delete menu item with ID   | -                      | -                       |              |
-
-### User related requests
-
-| Endpoint    | Method | Description                    | Request Body (Example) | Response Body (Example) | Status Codes  |
-| ----------- | ------ | ------------------------------ | ---------------------- | ----------------------- | ------------- |
-| /users      | GET    | Retrieve all users             | -                      | -                       |               |
-| /users/:id  | GET    | Retrieve user with ID          | -                      | -                       |               |
-| /users      | POST   | Create new user                | -                      | -                       | 201, 404, 409 |
-| /users/:id  | PUT    | Modify user with ID            | -                      | -                       |               |
-| /users/:id  | DELETE | Delete user with ID            | -                      | -                       | 200, 404      |
-| /auth/login | POST   | Create login token             | -                      | -                       |               |
-| /auth/me    | GET    | Retrieve user from login token | -                      | -                       |               |
-
-### Order related requests
-
-| Endpoint             | Method | Description                    | Request Body (Example) | Response Body (Example) | Status Codes       |
-| -------------------- | ------ | ------------------------------ | ---------------------- | ----------------------- | ------------------ |
-| /orders              | GET    | Get all orders                 | -                      | -                       | 200, 500           |
-| /orders/:id          | GET    | Get orders by ID               | -                      | -                       | 200, 404, 500      |
-| /orders/:id/details  | GET    | Get order by id with all items | -                      | -                       | 200, 404, 500      |
-| /orders/user/:userId | GET    | Get user order with items      | -                      | -                       | 200, 404, 500      |
-| /orders              | POST   | Create new order               | -                      | -                       | 201, 400           |
-| /orders/:id          | PUT    | Update order with id           | -                      | -                       | 200, 400, 404, 500 |
-| /orders/:id          | DELETE | Delete order with ID           | -                      | -                       | 200, 400, 404, 500 |
-
-### Other requests (allergens, categories, lunch specials)
-
-### Categories related requests
-
-| Endpoint        | Method | Description           | Request Body (Example) | Response Body (Example) | Status Codes  |
-| --------------- | ------ | --------------------- | ---------------------- | ----------------------- | ------------- |
-| /categories     | GET    | Get all categories    | -                      | -                       | 200, 500      |
-| /categories/:id | GET    | Get categoriess by ID | -                      | -                       | 200, 404, 500 |
-
-### Allergens related requests
-
-| Endpoint               | Method | Description                 | Request Body (Example) | Response Body (Example) | Status Codes  |
-| ---------------------- | ------ | --------------------------- | ---------------------- | ----------------------- | ------------- |
-| /allergens             | GET    | Get all allergens           | -                      | -                       | 200, 500      |
-| /allergens/:id         | GET    | Get allergens by ID         | -                      | -                       | 200, 404, 500 |
-| /allergens/:menuItemId | GET    | Get allergens for menu item | -                      | -                       | 200, 404, 500 |
-
-### Lunch-specials related requests
-
-| Endpoint     | Method | Description               | Request Body (Example) | Response Body (Example) | Status Codes  |
-| ------------ | ------ | ------------------------- | ---------------------- | ----------------------- | ------------- |
-| /lunch       | GET    | Get all lunch specials    | -                      | -                       | 200, 500      |
-| /lunch/today | GET    | Get today's lunch special | -                      | -                       | 200, 404, 500 |
-| /lunch/:day  | GET    | Get lunch special by day  | -                      | -                       | 200, 404, 500 |

@@ -151,7 +151,7 @@ function Order(props) {
           Mobilepay
         </button>
 
-        <button
+        <button id='applepay'
           className={`px-3 py-1 rounded border ${payment === 'Applepay' ? '!bg-[#2A4B11] text-white' : 'bg-white text-black'}`}
           onClick={() => handlePayment('Applepay')}
         >
