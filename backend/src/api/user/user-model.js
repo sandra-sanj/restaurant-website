@@ -1,5 +1,3 @@
-// Note: db functions are async and must be called with await from the controller
-// How to handle errors in controller?
 import promisePool from '../../utils/database.js';
 
 const listAllUsers = async () => {
@@ -28,23 +26,45 @@ const findUserById = async (id) => {
   return other;
 };
 
+const findEmail = async (email) => {
+  const [rows] = await promisePool.execute(
+    'SELECT user_id, email FROM users WHERE email = ?',
+    [email]
+  );
+
+  if (rows.length === 0) {
+    return false;
+  }
+  return rows[0];
+};
+
 const addUser = async (user) => {
-  const {username, email, password_hash, phone, role, is_active} = user;
+  const {username, email, password_hash, phone, address, role, is_active} =
+    user;
 
-  const sql = `INSERT INTO users (username, email, password_hash, phone, role, is_active)
-               VALUES (?, ?, ?, ?, ?, ?)`;
+  const sql = `INSERT INTO users (username, email, password_hash, phone, address, role, is_active)
+               VALUES (?, ?, ?, ?, ?, ?, ?)`;
 
-  const params = [username, email, password_hash, phone, role, is_active];
+  const params = [
+    username,
+    email,
+    password_hash,
+    phone || null,
+    address || null,
+    role,
+    is_active,
+  ];
+
   const result = await promisePool.execute(sql, params);
-  //console.log('result', result);
   if (result[0].affectedRows === 0) {
     return false;
   }
   return {user_id: result[0].insertId};
-  //return await findUserById(result[0].insertId);
 };
 
 const modifyUser = async (user, id) => {
+  if (!Object.keys(user).length) return false;
+
   const sql = promisePool.format(`UPDATE users SET ? WHERE user_id = ?`, [
     user,
     id,
@@ -57,14 +77,13 @@ const modifyUser = async (user, id) => {
   return await findUserById(id);
 };
 
-// TODO: remove user_id foreign key from orders table (but keep the order in history)
 const removeUser = async (id) => {
   // get a connection object from the pool
   const connection = await promisePool.getConnection();
 
   try {
     await connection.beginTransaction();
-    //await connection.execute('DELETE FROM wsk_cats WHERE owner = ?;', [id]);
+
     const sql = connection.format('DELETE FROM users WHERE user_id = ?', [id]);
 
     const [result] = await connection.execute(sql);
@@ -92,7 +111,7 @@ const getUserByUsername = async (username) => {
     'SELECT * FROM users WHERE username = ?',
     [username]
   );
-  //console.log('rows', rows);
+
   if (rows.length === 0) {
     return false;
   }
@@ -102,6 +121,7 @@ const getUserByUsername = async (username) => {
 export {
   listAllUsers,
   findUserById,
+  findEmail,
   addUser,
   modifyUser,
   removeUser,

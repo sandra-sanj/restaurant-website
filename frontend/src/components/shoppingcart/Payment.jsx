@@ -39,9 +39,10 @@ const Payment = (props) => {
         <p>
           {strings.cart?.selectedMethod || 'Valittu metodi'}: {payment}
         </p>
-        <p className="mt-5 font-semibold ">
+        <p className="mt-5 font-semibold">
           {strings.cart?.executePayment || 'Suorita maksu'}
         </p>
+        
         <button
           onClick={() => handleClick()}
           className=" bg-[#2A4B11]! text-white"

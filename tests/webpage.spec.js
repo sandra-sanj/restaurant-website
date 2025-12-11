@@ -1,20 +1,14 @@
 import { expect, test } from "@playwright/test";
 
-test("has title", async ({ page }) => {
-  await page.goto("http://localhost:3000");
-  // test for full title (fails)
-  // await expect(page).toHaveTitle("Test page");
 
-  // test that title contains "Test page" as substring
-  await expect(page).toHaveTitle(/Test page/);
+test("login works", async ({ page }) => {
+  await page.goto('https://wsk-server.francecentral.cloudapp.azure.com/login');
+  await page.fill("#loginuser", "userexample");
+  await page.fill("#password", "password");
+  await page.click("#loginBtn");
+  await expect(page).toHaveURL('https://wsk-server.francecentral.cloudapp.azure.com/profile/');
 });
 
-test("page has image of Helsinki", async ({ page }) => {
-  await page.goto("http://localhost:3000");
+test("")
 
-  await expect(page.getByRole("img")).toBeVisible();
-  await expect(page.getByRole("img")).toHaveAttribute(
-    "alt",
-    "City of Helsinki envisioned by AI"
-  );
-});
+

@@ -56,7 +56,7 @@ const MenuNav = () => {
         </div>
 
         <div className="p-2">
-          <li className="rounded-3xl p-0!">
+          <li className="rounded-3xl p-0!" id='desserts'>
             <NavLink
               to="/menu/desserts"
               className={() =>

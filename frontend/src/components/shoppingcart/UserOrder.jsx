@@ -9,10 +9,10 @@ import {useLanguage} from '../../hooks/useLanguage';
 //FoodCard but for items in shopping cart?
 
 function UserOrder(props) {
-  const {setNext, payment, setPayment} = props;
-  const {cart, delivery, calculateTotal, handleContactInfo} = useOrderContext();
-  const {user} = useUserContext();
-  const {strings} = useLanguage();
+  const { setNext, payment, setPayment } = props;
+  const { cart, delivery, calculateTotal, handleContactInfo } = useOrderContext();
+  const { user } = useUserContext();
+  const { strings } = useLanguage();
 
   const initValues = {
     user_id: user.user_id,
@@ -26,9 +26,8 @@ function UserOrder(props) {
     try {
       inputs.user_id = user.user_id;
       inputs.order_type = delivery;
-      console.log('con: ', inputs);
       handleContactInfo(inputs);
-      setNext('payment'); //opens payment component
+      setNext('payment');
     } catch (error) {
       console.log(error);
     }
@@ -38,137 +37,110 @@ function UserOrder(props) {
     setPayment(method);
   };
 
-  //console.log(initValues);
-  const {inputs, handleInputChange, handleSubmit} = useForm(
-    placeOrder,
-    initValues,
-  );
-  //bg-white w-[400px]
+  const { inputs, handleInputChange, handleSubmit } = useForm(placeOrder, initValues);
+
   return (
-    <div className="bg-[#fcebeb] flex flex-row border border-stone-300 rounded-lg m-5">
+    <div className="bg-[#fcebeb] flex flex-col sm:flex-row border border-stone-300 rounded-lg m-5 w-[300px] xs:w-[350px] sm:w-[600px]">
       <span
-        className="cursor-pointer font-bold text-lg"
+        className="cursor-pointer font-bold text-lg ml-2 mt-1 w-[12px]"
         onClick={() => setNext('cart')}
       >
-        {' '}
-        {/*goes back to cart*/}
         &times;
       </span>
-      <div className="m-8">
+
+      <div className="max-sm:mb-1 max-sm:mt-0 m-6 flex-1">
         <h2 className="text-xl mb-5 text-black font-semibold">
           {strings.cart?.contactInfo || 'Yhteystiedot'}
         </h2>
         <form
-          onSubmit={(e) => {
-            handleSubmit(e);
-          }}
-          className="flex flex-col items-center gap-3"
+          onSubmit={(e) => handleSubmit(e)}
+          className="flex flex-col items-center gap-3 w-full"
         >
-          <div className="flex flex-col">
+          <div className="flex flex-col w-full">
             <label htmlFor="ordername" className="flex flex-col">
-              {strings.cart?.username || 'Koko nimi'}:{' '}
+              {strings.cart?.username || 'Koko nimi'}:
             </label>
             <input
               name="username"
               type="text"
               id="ordername"
               value={user.username}
-              onChange={(e) => {
-                handleInputChange(e);
-              }}
+              onChange={handleInputChange}
               autoComplete="username"
-              className="bg-stone-100 rounded"
+              className="bg-stone-100 rounded w-full"
             />
           </div>
-          <div>
+
+          <div className="w-full">
             <label htmlFor="orderemail" className="flex flex-col">
-              {strings.auth?.email || 'Sähköposti'}:{' '}
+              {strings.auth?.email || 'Sähköposti'}:
             </label>
             <input
               name="email"
               type="email"
               id="orderemail"
               value={user.email}
-              onChange={(e) => {
-                handleInputChange(e);
-              }}
+              onChange={handleInputChange}
               autoComplete="email"
-              className="bg-stone-100 rounded"
+              className="bg-stone-100 rounded w-full"
             />
           </div>
-          <div>
+
+          <div className="w-full">
             <label htmlFor="orderphone" className="flex flex-col gap-1">
-              {strings.auth?.phone || 'Puhelinnumero'}:{' '}
+              {strings.auth?.phone || 'Puhelinnumero'}:
             </label>
             <input
               name="phone"
               type="text"
               id="orderphone"
               value={user.phone}
-              onChange={(e) => {
-                handleInputChange(e);
-              }}
+              onChange={handleInputChange}
               autoComplete="phone"
-              className="bg-stone-100 rounded"
+              className="bg-stone-100 rounded w-full"
             />
           </div>
+
           {delivery === 'delivery' && (
-            <div>
-              <label htmlFor="address" className="flex flex-col gap-1">
-                {strings.cart?.address || 'Osoite'}:{' '}
+            <div className="w-full">
+              <label htmlFor="address" className="flex flex-col gap-0 sm:gap-1">
+                {strings.cart?.address || 'Osoite'}:
               </label>
               <input
                 name="address"
                 type="text"
                 id="address"
-                onChange={(e) => {
-                  handleInputChange(e);
-                }}
+                onChange={handleInputChange}
                 autoComplete="address"
-                className="bg-stone-100 rounded"
+                className="bg-stone-100 rounded w-full"
                 required
               />
             </div>
           )}
+
           <button
             type="submit"
-            className="bg-[#2A4B11]! hover:bg-[#556d44]! text-white"
+            className="bg-[#2A4B11]! hover:bg-[#556d44] text-white! sm:px-4 sm:py-2 rounded w-1/2"
           >
             {strings.cart?.proceedToPayment || 'Siirry maksuun'}
           </button>
         </form>
       </div>
-      <div className="flex flex-col gap-2 p-5 pt-8 bg-white border-l rounded-r-lg">
+
+      <div className="flex flex-col items-center gap-2 max-sm:pb-3 p-5 sm:pt-8 bg-white border-t md:border-t-0 md:border-l max-sm:rounded-b-lg sm:rounded-r-lg sm:w-auto justify-end">
         <h2 className="font-semibold text-xl">
           {strings.cart?.paymentMethod || 'Maksutapa'}
         </h2>
-        <button
-          className={`px-3 py-1 rounded border ${payment === 'Mobilepay' ? '!bg-[#2A4B11] text-white' : 'bg-white text-black'}`}
-          onClick={() => handlePayment('Mobilepay')}
-        >
-          Mobilepay
-        </button>
 
-        <button
-          className={`px-3 py-1 rounded border ${payment === 'Applepay' ? '!bg-[#2A4B11] text-white' : 'bg-white text-black'}`}
-          onClick={() => handlePayment('Applepay')}
-        >
-          Applepay
-        </button>
-
-        <button
-          className={`px-3 py-1 rounded border ${payment === 'Visa' ? '!bg-[#2A4B11] text-white' : 'bg-white text-black'}`}
-          onClick={() => handlePayment('Visa')}
-        >
-          Visa
-        </button>
-
-        <button
-          className={`px-3 py-1 rounded border ${payment === 'Mastercard' ? '!bg-[#2A4B11] text-white' : 'bg-white text-black'}`}
-          onClick={() => handlePayment('Mastercard')}
-        >
-          Mastercard
-        </button>
+        {['Mobilepay', 'Applepay', 'Visa', 'Mastercard'].map((method) => (
+          <button
+            key={method}
+            className={`px-3 py-1 w-1/2 sm:w-full rounded border ${payment === method ? '!bg-[#2A4B11] text-white' : 'bg-white text-black border! border-gray-200!'}`}
+            onClick={() => handlePayment(method)}
+          >
+            {method}
+          </button>
+        ))}
       </div>
     </div>
   );

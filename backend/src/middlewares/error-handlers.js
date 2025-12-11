@@ -31,14 +31,17 @@ const validationErrors = async (req, res, next) => {
   //console.log('validator', req.body, errors);
   // check if any validation errors
   if (!errors.isEmpty()) {
-    const messages = errors
-      .array()
-      .map((error) => `${error.path}: ${error.msg}`)
-      .join(', ');
-    const error = new Error(messages);
-    error.status = 400;
-    next(error);
-    return;
+    console.error('Validation errors:', errors.array());
+
+    const formattedErrors = {};
+    errors.array().forEach((err) => {
+      formattedErrors[err.path] = err.msg;
+    });
+
+    return res.status(400).json({
+      message: 'Validation failed',
+      errors: formattedErrors,
+    });
   }
   next();
 };

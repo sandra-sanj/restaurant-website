@@ -80,7 +80,7 @@ const HighlightCard = () => {
               </p>
               <button onClick={() => setSelectedItem(todaysLunch)}
                 className='bg-[#2A4B11]! text-white!'>
-                {strings.cart?.addToOrder || '+ Lisää tilaukseen'}
+                {strings.cart?.addToCart || 'Lisää ostoskoriin'}
               </button>
             </div>
 

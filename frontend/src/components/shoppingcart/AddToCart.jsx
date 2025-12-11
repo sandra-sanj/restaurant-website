@@ -148,11 +148,11 @@ const AddToCart = (props) => {
                 className="px-3! py-1! border! border-stone-500! rounded-lg! hover:bg-stone-200!">
                 -
               </button>
-              <p>{quantity}</p>
+              <p id='quantityOfItems'>{quantity}</p>
               <button onClick={() => setQuantity((q) => q + 1)}
-                className="px-2.5! py-1! border! border-stone-500! rounded-lg! hover:bg-stone-200!">+</button>
+                className="px-2.5! py-1! border! border-stone-500! rounded-lg! hover:bg-stone-200!" id='quantity-plus-btn'>+</button>
               <button onClick={() => handleAddToCart()}
-                className='bg-[#2A4B11]! text-white!'>
+                className='bg-[#2A4B11]! text-white!' id='addToCartBtn'>
                 {strings.cart?.addToCart || 'Lisää ostoskoriin'} {price} €
               </button>
             </div>

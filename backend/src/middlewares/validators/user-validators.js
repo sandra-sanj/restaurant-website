@@ -1,14 +1,42 @@
 import {body} from 'express-validator';
+import {getUserByUsername, findEmail} from '../../api/user/user-model.js';
 
-export const createUsernameChain = () =>
+export const createUsernameChain = (userId) =>
   body('username')
     .trim()
     .isLength({min: 3, max: 20})
     .isAlphanumeric()
-    .withMessage('Username must be between 3 and 20 characters long');
+    .withMessage('Username must be between 3 and 20 characters long')
+    .custom(async (username) => {
+      const existingUser = await getUserByUsername(username);
+      if (existingUser && Number(existingUser.user_id) !== Number(userId)) {
+        throw new Error('Username already exists');
+      }
+      return true;
+    });
 
-export const createEmailChain = () =>
-  body('email').trim().isEmail().withMessage('Email must be valid');
+export const createEmailChain = (userId) =>
+  body('email')
+    .trim()
+    .isEmail()
+    .withMessage('Email must be valid')
+    .custom(async (email) => {
+      const existingEmail = await findEmail(email);
+      if (existingEmail && Number(existingEmail.user_id) !== Number(userId)) {
+        throw new Error('Email already exists');
+      }
+      return true;
+    });
+
+export const usernameValidator = (req, res, next) => {
+  if (!req.body.username) return next();
+  createUsernameChain(req.params.id)(req, res, next);
+};
+
+export const emailValidator = (req, res, next) => {
+  if (!req.body.email) return next();
+  createEmailChain(req.params.id)(req, res, next);
+};
 
 export const createPasswordChain = () =>
   body('password')
@@ -18,6 +46,7 @@ export const createPasswordChain = () =>
 
 export const createPhoneChain = () =>
   body('phone')
+    .optional()
     .trim()
     .custom(async (phone) => {
       if (!phone) {
@@ -37,6 +66,8 @@ export const createPhoneChain = () =>
         }
       }
     });
+
+export const createAddressChain = () => body('address').optional().trim();
 
 export const createRoleChain = () =>
   body('role')

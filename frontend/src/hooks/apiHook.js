@@ -151,7 +151,7 @@ function useOrder() {
       };
       const loginResult = await fetchData(`${API_URL}/orders`, options);
       console.log(loginResult.result);
-      return(loginResult);
+      return loginResult;
     } catch (e) {
       console.error(e);
     }
@@ -215,14 +215,13 @@ function useUser() {
       };
 
       const result = await fetchData(`${API_URL}/users`, options);
-      console.log('testi', result.message);
+      console.log(result);
       setError(null);
       navigate('/login/login');
-      return;
+      return {success: true, result};
     } catch (error) {
-      console.error('error: ', error.message);
-      setError('luonti epäonnistui');
-      return error;
+      setError(error.message);
+      throw error;
     }
   };
 
@@ -238,9 +237,11 @@ function useUser() {
       };
 
       const result = await fetchData(`${API_URL}/users/${id}`, options);
+      setError(null);
       return result;
     } catch (error) {
       console.log(error);
+      throw error;
     }
   };
 
