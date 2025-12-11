@@ -2,13 +2,16 @@ import {Link} from 'react-router';
 import {useUserContext} from '../hooks/contextHook';
 import {useLanguage} from '../hooks/useLanguage';
 import LanguageSwitcher from './LanguageSwitcher';
-import {useEffect} from 'react';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
+import { useOrderContext } from '../hooks/contextHook';
+
 
 function NavBar() {
   const {handleAutoLogin, user} = useUserContext();
+  const {cart, calculateQuantity} = useOrderContext();
   const [isAdmin, setIsAdmin] = useState(false);
   const {strings} = useLanguage();
+  const [quantity, setQuantity] = useState(calculateQuantity());
 
   useEffect(() => {
     handleAutoLogin();
@@ -17,6 +20,10 @@ function NavBar() {
   useEffect(() => {
     setIsAdmin(user?.role === 'admin');
   }, [user]);
+
+  useEffect(() => {
+    calculateQuantity();
+  }, [cart])
 
   return (
     <nav className="navbar h-16 top-0 bg-[#FFFFFF] flex items-center justify-center sticky border-b z-1000 w-full max-xs:overflow-x-scroll  max-xs:whitespace-nowrap">

@@ -52,6 +52,10 @@ const OrderProvider = ({children}) => {
         return cart.reduce((sum, item) => sum + item.unit_price * item.quantity, 0).toFixed(2);
     }
 
+    const calculateQuantity = () => {
+        return cart.reduce((sum, item) => sum + item.quantity, 0);
+    }
+
     const handleRemoveItem = async (unique_id) => {
         setCart((prevOrder) => {
             const removed = prevOrder.filter(i => i.unique_id !== unique_id);
@@ -80,6 +84,7 @@ const OrderProvider = ({children}) => {
     const value = { //values for context provider
         cart,
         calculateTotal,
+        calculateQuantity,
         handleAddItem,
         handleRemoveItem,
         setCart,
