@@ -18,6 +18,7 @@ const Admin = () => {
   const [addItemOpen, setAddItemOpen] = useState(false);
   const [editItemOpen, setEditItemOpen] = useState(false);
   const [deleteItemOpen, setDeleteItemOpen] = useState(false);
+  const [completedItems, setCompletedItems] = useState({});
 
   const {orders, loading, error} = useOrders();
   const {strings} = useLanguage();
@@ -46,6 +47,13 @@ const Admin = () => {
     setDeleteItemOpen(true);
   };
 
+  const handleCheckboxChange = (itemId) => {
+    setCompletedItems(prev => ({
+      ...prev,
+      [itemId]: !prev[itemId]
+    }));
+  };
+
   const openOrders = orders.filter((order) => order.status === 'pending');
   if (loading) return <p>{strings.admin.loadingOrders}</p>;
   if (error) return <p>{error}</p>;
@@ -69,7 +77,7 @@ const Admin = () => {
         </div>
 
         <div className="w-[95vw] flex justify-center">
-          <Table className="mt-4 mb-8 max-w-[1200px] min-w-[500px] w-full border border-stone-500 table-fixed mx-auto"> {/* mx-auto*/}
+          <Table className="mt-4 mb-8 max-w-[1200px] min-w-[500px] w-full border border-stone-500 table-fixed mx-auto">
             <TableHeader className="bg-[#982A2A] text-white">
               <TableRow>
                 <TableHead className="text-center w-1/6">
@@ -93,18 +101,22 @@ const Admin = () => {
             <TableBody>
               {openOrders.map((order) => {
                 const isEven = order.orderId % 2 === 0;
+                const isCompleted = completedItems[order.id] || false;
 
                 return (
                   <TableRow
                     key={order.id}
-                    className={isEven ? 'bg-[#FFFFFF]' : 'bg-[#982a2a24]'}
+                    className={`${isEven ? 'bg-[#FFFFFF]' : 'bg-[#982a2a24]'} ${isCompleted ? 'relative after:content-[""] after:absolute after:left-0 after:right-0 after:top-1/2 after:h-px after:bg-black after:-translate-y-1/2' : ''}`}
                   >
                     <TableCell>{order.orderId}</TableCell>
                     <TableCell>{order.product}</TableCell>
                     <TableCell>{order.details}</TableCell>
                     <TableCell>{order.quantity}</TableCell>
                     <TableCell>
-                      <input type="checkbox" name="done"></input>
+                      <input type="checkbox" name="done"
+                      checked={isCompleted}
+                      onChange={() => handleCheckboxChange(order.id)}
+                      ></input>
                     </TableCell>
                   </TableRow>
                 );

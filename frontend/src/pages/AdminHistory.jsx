@@ -45,6 +45,9 @@ const AdminHistory = () => {
     }
   });
 
+  if (loading) return <p>{strings.admin.loadingOrders}</p>;
+  if (error) return <p>{error}</p>;
+
   return (
     <>
       <div className="w-full min-h-[calc(100vh-64px-96px)] overflow-x-auto flex flex-col items-center justify-center">
@@ -66,51 +69,51 @@ const AdminHistory = () => {
         </div>
 
         <div className="w-[95vw] flex justify-center">
-
           {filteredOrders.length > 0 ? (
+            <Table className="mt-4 mb-8 max-w-[1200px] min-w-[500px] w-full border border-stone-500 table-fixed mx-auto">
+              <TableHeader className="bg-[#982A2A] text-white">
+                <TableRow>
+                  <TableHead className="text-center w-1/6">
+                    {strings.admin.id}
+                  </TableHead>
+                  <TableHead className="text-center w-2/6">
+                    {strings.admin.product}
+                  </TableHead>
+                  <TableHead className="text-center w-2/6">
+                    {strings.admin.details}
+                  </TableHead>
+                  <TableHead className="text-center w-1/6">
+                    {strings.admin.quantity}
+                  </TableHead>
+                  <TableHead className="text-center w-1/6">
+                    {strings.admin.orderDate}
+                  </TableHead>
+                </TableRow>
+              </TableHeader>
 
-          <Table className="mt-4 mb-8 max-w-[1200px] min-w-[500px] w-full border border-stone-500 table-fixed mx-auto">
-            <TableHeader className="bg-[#982A2A] text-white">
-              <TableRow>
-                <TableHead className="text-center w-1/6">
-                  {strings.admin.id}
-                </TableHead>
-                <TableHead className="text-center w-2/6">
-                  {strings.admin.product}
-                </TableHead>
-                <TableHead className="text-center w-2/6">
-                  {strings.admin.details}
-                </TableHead>
-                <TableHead className="text-center w-1/6">
-                  {strings.admin.quantity}
-                </TableHead>
-                <TableHead className="text-center w-1/6">
-                  {strings.admin.orderDate}
-                </TableHead>
-              </TableRow>
-            </TableHeader>
+              <TableBody>
+                {filteredOrders.map((order) => {
+                  const isEven = order.orderId % 2 === 0;
 
-            <TableBody>
-              {filteredOrders.map((order) => {
-                const isEven = order.orderId % 2 === 0;
-
-                return (
-                  <TableRow
-                    key={order.id}
-                    className={isEven ? 'bg-[#FFFFFF]' : 'bg-[#982a2a24]'}
-                  >
-                    <TableCell>{order.orderId}</TableCell>
-                    <TableCell>{order.product}</TableCell>
-                    <TableCell>{order.details}</TableCell>
-                    <TableCell>{order.quantity}</TableCell>
-                    <TableCell>{order.date}</TableCell>
-                  </TableRow>
-                );
-              })}
-            </TableBody>
-          </Table>
+                  return (
+                    <TableRow
+                      key={order.id}
+                      className={isEven ? 'bg-[#FFFFFF]' : 'bg-[#982a2a24]'}
+                    >
+                      <TableCell>{order.orderId}</TableCell>
+                      <TableCell>{order.product}</TableCell>
+                      <TableCell>{order.details}</TableCell>
+                      <TableCell>{order.quantity}</TableCell>
+                      <TableCell>{order.date}</TableCell>
+                    </TableRow>
+                  );
+                })}
+              </TableBody>
+            </Table>
           ) : (
-            <p className='p-5 font-semibold text-red-700'>Ei tilauksia / No orders</p>
+            <p className="p-5 font-semibold text-red-700">
+              Ei tilauksia / No orders
+            </p>
           )}
         </div>
       </div>
