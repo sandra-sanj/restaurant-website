@@ -40,7 +40,7 @@ function UserOrder(props) {
   const { inputs, handleInputChange, handleSubmit } = useForm(placeOrder, initValues);
 
   return (
-    <div className="bg-[#fcebeb] flex flex-col sm:flex-row border border-stone-300 rounded-lg m-5 w-[300px] xs:w-[350px] sm:w-[600px]">
+    <div className="bg-[#fcebeb] flex flex-col sm:flex-row border border-stone-300 rounded-lg m-5 w-[300px] xs:w-[350px] sm:w-[500px]">
       <span
         className="cursor-pointer font-bold text-lg ml-2 mt-1 w-[12px]"
         onClick={() => setNext('cart')}
@@ -120,7 +120,7 @@ function UserOrder(props) {
 
           <button
             type="submit"
-            className="bg-[#2A4B11]! hover:bg-[#556d44] text-white! sm:px-4 sm:py-2 rounded w-1/2"
+            className="bg-[#2A4B11]! hover:bg-[#556d44] text-white! sm:px-4 sm:py-2 rounded w-3/5 sm:w-2/3"
           >
             {strings.cart?.proceedToPayment || 'Siirry maksuun'}
           </button>
@@ -135,7 +135,7 @@ function UserOrder(props) {
         {['Mobilepay', 'Applepay', 'Visa', 'Mastercard'].map((method) => (
           <button
             key={method}
-            className={`px-3 py-1 w-1/2 sm:w-full rounded border ${payment === method ? '!bg-[#2A4B11] text-white' : 'bg-white text-black border! border-gray-200!'}`}
+            className={`xs:px-3 xs:py-1 w-1/2 sm:w-full rounded border ${payment === method ? '!bg-[#2A4B11] text-white' : 'bg-white text-black border! border-gray-200!'}`}
             onClick={() => handlePayment(method)}
           >
             {method}
