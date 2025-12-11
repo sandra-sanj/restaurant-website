@@ -10,6 +10,7 @@ import {
   AvailabilityToggle,
   ImageUploadPreview,
 } from './ItemFormFields.jsx';
+import Modal from '../Modal';
 
 import {useLanguage} from '../../hooks/useLanguage';
 
@@ -22,7 +23,13 @@ const EditItem = ({onClose}) => {
 
   const {allergens, getMenuItemAllergens} = useAllergens();
   const [selectedAllergens, setSelectedAllergens] = useState([]);
+
   const [originalAllergens, setOriginalAllergens] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    setShowModal(true);
+  }, []);
 
   const {strings} = useLanguage();
 
@@ -74,8 +81,9 @@ const EditItem = ({onClose}) => {
         alert(
           `"${formData.name ? formData.name : originalName}" ${strings.adminForms.itemEdited}.`,
         );
-        onClose();
+        //onClose();
         setSelectedItem(null);
+        
       } else {
         alert(
           `${strings.adminForms.error} "${formData.name ? formData.name : originalName}" ${strings.adminForms.itemNotEdited}.`,
@@ -202,8 +210,16 @@ const EditItem = ({onClose}) => {
 
   return (
     <>
+    <Modal
+          isOpen={showModal}
+          onClose={() => {
+            setShowModal(false);
+            onClose();
+          }}
+          unstyled={true}
+        >
       {/* Dropdown menu */}
-      <label className="flex flex-col gap-1">
+      <label className="flex flex-col gap-1 m-5">
         <select
           value={selectedItem?.menu_item_id || ''}
           onChange={(e) => {
@@ -225,7 +241,7 @@ const EditItem = ({onClose}) => {
 
       {/* Edit form - show when item is selected*/}
       {selectedItem && (
-        <div className="m-5 outline-2 outline-gray-400 rounded-md">
+        <div className="m-5 outline-2 outline-gray-400 rounded-md max-h-[80vh] overflow-y-auto">
           {/* Header */}
           <div className="flex justify-between items-center bg-[#2A4B11]! text-white p-4 rounded-t-md">
             <p className="font-bold">{strings.adminForms.editItemTitle}</p>
@@ -342,6 +358,7 @@ const EditItem = ({onClose}) => {
           </div>
         </div>
       )}
+      </Modal>
     </>
   );
 };

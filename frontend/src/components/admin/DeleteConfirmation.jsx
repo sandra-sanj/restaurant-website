@@ -26,7 +26,7 @@ const DeleteConfirmation = ({onClose, selectedItem, deleteSuccess}) => {
 
   return (
     <>
-      <div className="m-5 outline-2 outline-gray-400 rounded-md">
+      <div className="m-5 outline-2 outline-gray-400 rounded-md bg-white min-w-[200px] max-w-[300px]">
         <div className="flex justify-end p-3">
           <span
             className="cursor-pointer font-bold text-lg hover:opacity-80"

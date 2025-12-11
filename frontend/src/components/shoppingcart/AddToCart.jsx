@@ -68,36 +68,36 @@ const AddToCart = (props) => {
     <>
       {item && (
         <Modal isOpen={showModal} onClose={() => setSelectedItem('')}>
-          <div>
+          <div className='flex flex-col'>
             <div>
               <img
                 src={API_UPLOADS_URL + item.image_url}
                 alt={displayDescription}
                 width={'auto'}
-                className="rounded-md"
+                className="rounded-lg px-1"
               />
             </div>
             <div>
-              <h1>{displayName}</h1>
+              <h1 className='text-3xl! font-semibold pt-2'>{displayName}</h1>
             </div>
-            <div>
+            <div className='pt-3 p-1 flex flex-col gap-3'>
               <p>{displayDescription}</p>
               {item.allows_spice_custom === 1 && (
-                <div className="flex gap-2">
+                <div className="grid grid-cols-2 gap-1 sm:grid-cols-3">
                   <button
-                    className={spiceLevel === 1 ? 'bg-red-300' : ''}
+                    className={spiceLevel === 1 ? 'bg-red-200!' : ''}
                     onClick={() => setSpiceLevel(1)}
                   >
                     {strings.cart?.mild || 'Mild'}
                   </button>
                   <button
-                    className={spiceLevel === 2 ? 'bg-red-300' : ''}
+                    className={spiceLevel === 2 ? 'bg-red-200!' : ''}
                     onClick={() => setSpiceLevel(2)}
                   >
                     {strings.cart?.medium || 'Medium'}
                   </button>
                   <button
-                    className={spiceLevel === 3 ? 'bg-red-300' : ''}
+                    className={spiceLevel === 3 ? 'bg-red-200!' : ''}
                     onClick={() => setSpiceLevel(3)}
                   >
                     {strings.cart?.spicy || 'Spicy'}
@@ -105,25 +105,29 @@ const AddToCart = (props) => {
                 </div>
               )}
               {item.available_proteins && (
-                <div className="flex gap-2">
-                  <button onClick={() => setProtein('chicken')}>
+                <div className="grid grid-cols-2 gap-0">
+                  <button onClick={() => setProtein('chicken')}
+                    className={protein === 'chicken' ? 'bg-blue-200!' : ''}>
                     {strings.cart?.chicken || 'Kana'} (L, G)
                   </button>
-                  <button onClick={() => setProtein('beef')}>
+                  <button onClick={() => setProtein('beef')}
+                    className={protein === 'beef' ? 'bg-blue-200!' : ''}>
                     {strings.cart?.beef || 'Nauta'} (L, G)
                   </button>
-                  <button onClick={() => setProtein('vegan')}>
+                  <button onClick={() => setProtein('vegan')}
+                    className={protein === 'vegan' ? 'bg-blue-200!' : ''}>
                     {strings.cart?.plantProtein || 'Kasviproteiini'} (VE, L, G)
                   </button>
-                  <button onClick={() => setProtein('shrimp')}>
+                  <button onClick={() => setProtein('shrimp')}
+                    className={protein === 'shrimp' ? 'bg-blue-200!' : ''}>
                     {strings.cart?.shrimp || 'Katkarapu'} (L, G)
                   </button>
                 </div>
               )}
               <div>
-                <label>
-                  {strings.cart?.additionalInfo || 'Lisätiedot:'}
-                  <input
+                <label className='flex flex-col gap-2 items-start mx-3'>
+                  {strings.cart?.additionalInfo || 'Lisätiedot'}:
+                  <textarea
                     onSubmit={(e) => handleInput(e)}
                     name="postContent"
                     rows={4}
@@ -132,20 +136,23 @@ const AddToCart = (props) => {
                       strings.cart?.additionalInfoPlaceholder ||
                       'Kirjoita lisätietoa allergioista tai tilauksesta...'
                     }
-                    className="bg-neutral-50"
+                    className="bg-neutral-50 p-1 w-full h-20"
                     value={inputValue}
                     onChange={(e) => handleInput(e)}
                   />
                 </label>
               </div>
             </div>
-            <div className="flex flex-row items-center gap-2">
-              <button onClick={() => setQuantity((q) => Math.max(1, q - 1))}>
+            <div className="flex flex-row items-center justify-center gap- mt-2">
+              <button onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+                className="px-3! py-1! border! border-stone-500! rounded-lg! hover:bg-stone-200!">
                 -
               </button>
               <p>{quantity}</p>
-              <button onClick={() => setQuantity((q) => q + 1)}>+</button>
-              <button onClick={() => handleAddToCart()}>
+              <button onClick={() => setQuantity((q) => q + 1)}
+                className="px-2.5! py-1! border! border-stone-500! rounded-lg! hover:bg-stone-200!">+</button>
+              <button onClick={() => handleAddToCart()}
+                className='bg-[#2A4B11]! text-white!'>
                 {strings.cart?.addToCart || 'Lisää ostoskoriin'} {price} €
               </button>
             </div>

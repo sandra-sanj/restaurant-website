@@ -164,7 +164,7 @@ export const ImageUploadPreview = ({
   const fileInputRef = useRef(null);
 
   return (
-    <div>
+    <div className="items-center">
       <p>Kuva:</p>
       <input
         type="file"

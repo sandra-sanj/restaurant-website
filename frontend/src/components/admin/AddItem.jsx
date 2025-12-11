@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {useMenu, useAllergens} from '../../hooks/apiHook.js';
 import useForm from '../../hooks/formHooks.js';
 import {
@@ -10,12 +10,18 @@ import {
   AvailabilityToggle,
   ImageUploadPreview,
 } from './ItemFormFields.jsx';
+import Modal from '../Modal';
 
 const AddItem = ({onClose}) => {
   const [imageFile, setImageFile] = useState(null);
   const {addMenuItem} = useMenu();
   const {allergens} = useAllergens();
   const [selectedAllergens, setSelectedAllergens] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    setShowModal(true);
+  }, []);
 
   // match values with database names
   const initValues = {
@@ -107,7 +113,12 @@ const AddItem = ({onClose}) => {
 
   return (
     <>
-      <div className="m-5 outline-2 outline-gray-400 rounded-md">
+    <Modal isOpen={showModal} onClose={() => {
+      setShowModal(false);
+      onClose();
+    }}
+    unstyled={true}>
+      <div className="m-5 outline-2 outline-gray-400 rounded-md max-h-[85vh] overflow-y-auto">
         {/* Header */}
         <div className="flex justify-between items-center text-white p-4 rounded-t-md bg-[#2A4B11]!">
           <p className="font-bold">Lisää tuote</p>
@@ -217,6 +228,7 @@ const AddItem = ({onClose}) => {
           </button>
         </div>
       </div>
+      </Modal>
     </>
   );
 };

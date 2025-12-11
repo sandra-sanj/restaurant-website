@@ -7,7 +7,7 @@ const Confirmation = () => {
 
   const {strings} = useLanguage();
 
-  console.log(orderResult);
+  //console.log(orderResult);
   return (
     <>
       {orderResult && (
