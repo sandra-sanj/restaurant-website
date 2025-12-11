@@ -8,6 +8,7 @@ import {
   getUserByUsername,
 } from './user-model.js';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 const hashFormatPassword = async (password) => {
   return await bcrypt.hash(password, 10); //bcrypt.hashSync(password, 10);
@@ -117,14 +118,23 @@ const putUser = async (req, res, next) => {
     return next(error);
   }
 
+  const newData = {...req.body};
+
+  if ('phone' in newData && !newData.phone) {
+    newData.phone = null;
+  }
+  if ('address' in newData && !newData.address) {
+    newData.address = null;
+  }
+
   // modify password to hash format before it is added to the database
   if (req.body.password) {
-    req.body.password_hash = await hashFormatPassword(req.body.password);
-    delete req.body.password;
+    newData.password_hash = await hashFormatPassword(req.body.password);
+    delete newData.password;
   }
 
   const fieldsToUpdate = Object.fromEntries(
-    Object.entries(req.body).filter(([_, value]) => value !== undefined)
+    Object.entries(newData).filter(([_, value]) => value !== undefined)
   );
 
   if (Object.keys(fieldsToUpdate).length === 0) {
@@ -133,7 +143,7 @@ const putUser = async (req, res, next) => {
     return next(error);
   }
 
-  const result = await modifyUser(req.body, user.user_id);
+  const result = await modifyUser(newData, user.user_id);
 
   if (result.error) {
     return next(new Error(result.error));
@@ -142,7 +152,24 @@ const putUser = async (req, res, next) => {
     error.status = 404;
     return next(error);
   }
-  res.status(200).json({message: 'User updated', result});
+
+  const updatedUser = await findUserById(user.user_id);
+  // create new jwt with updated info
+  const updatedTokenUser = {
+    user_id: updatedUser.user_id,
+    username: updatedUser.username,
+    email: updatedUser.email,
+    phone: result.phone,
+    address: result.address,
+    role: result.role,
+    is_active: result.is_active,
+  };
+
+  const newToken = jwt.sign(updatedTokenUser, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_EXPIRES_IN,
+  });
+
+  res.status(200).json({message: 'User updated', result, token: newToken});
 };
 
 const deleteUser = async (req, res, next) => {
