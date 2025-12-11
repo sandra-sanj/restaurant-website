@@ -4,7 +4,6 @@ import {getUserByUsername} from '../user/user-model.js';
 import 'dotenv/config';
 
 const postLogin = async (req, res, next) => {
-  // TODO: combine no user and no password match return messages into one, for enhanced security: "Username or password incorrect"
   const user = await getUserByUsername(req.body.username);
   if (!user) {
     const error = new Error('No user with username');
@@ -42,7 +41,19 @@ const getMe = async (req, res, next) => {
     return next(error);
   }
 
-  res.json({message: 'token ok', user: res.locals.user});
+  // fetch user again so user info is up to date
+  try {
+    const latestUser = await findUserById(res.locals.user.user_id);
+    if (!latestUser) {
+      const error = new Error('User not found');
+      error.status = 404;
+      return next(error);
+    }
+
+    res.json({message: 'token ok', user: latestUser});
+  } catch (err) {
+    next(err);
+  }
 };
 
 export {postLogin, getMe};
