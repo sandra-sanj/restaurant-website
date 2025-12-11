@@ -18,9 +18,9 @@ const UserProvider = ({children}) => {
       localStorage.setItem('token', userInfo.token);
 
       navigate('/profile');
-
     } catch (e) {
       console.log(e.message);
+      throw e;
     }
   };
 
