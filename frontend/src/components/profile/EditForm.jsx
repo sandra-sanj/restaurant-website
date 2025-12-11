@@ -16,8 +16,6 @@ const EditForm = () => {
     address: user.address,
   };
 
-  console.log(initValues);
-
   const doEdit = async () => {
     setErrors({});
 
@@ -31,14 +29,9 @@ const EditForm = () => {
         }
       });
 
-      console.log('modifiedFields: ', modifiedFields);
       await handleEditedUser(modifiedFields);
     } catch (err) {
-      console.error('doEdit caught error:', err);
-      console.error('Error.errors:', err.errors);
-
       if (err.errors) {
-        console.log('Setting field errors:', err.errors);
         setErrors(err.errors);
       } else {
         setErrors({general: err.message || 'Update failed'});
@@ -139,15 +132,6 @@ const EditForm = () => {
                   handleInputChange(e);
                 }}
               />
-              <button
-                type="button"
-                onClick={() =>
-                  handleInputChange({target: {name: 'phone', value: ''}})
-                }
-                className="px-2 py-1 bg-red-200 text-red-700 rounded hover:bg-red-300"
-              >
-                Clear
-              </button>
               {errors.phone && <p className="text-red-600">{errors.phone}</p>}
             </label>
           </div>
