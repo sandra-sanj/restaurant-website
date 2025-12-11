@@ -27,7 +27,7 @@ const Payment = (props) => {
 
   return (
     <>
-      <Modal
+      <Modal id='payment-modal'
         isOpen={showModal}
         onClose={() =>
           confirm(
@@ -36,7 +36,7 @@ const Payment = (props) => {
           ) && setNext('cart')
         }
       >
-        <p>
+        <p id='payment-text'>
           {strings.cart?.selectedMethod || 'Valittu metodi'}: {payment}
         </p>
         <p className="mt-5 font-semibold ">

@@ -13,7 +13,7 @@ const Confirmation = () => {
       {orderResult && (
         <div className="m-7 outline-2 outline-stone-500 rounded-md w-[500px]">
           <div>
-            <h1 className="text-lg">
+            <h1 className="text-lg" id='thank-you'>
               {strings.cart?.thankYou || 'Kiitos tilauksesta!'}{' '}
             </h1>
             <div>
