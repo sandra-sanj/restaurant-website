@@ -61,7 +61,7 @@ const DeleteItem = ({onClose}) => {
         
       ) : (
 
-        <div className="m-5 outline-2 outline-gray-400 rounded-md w-[400px]">
+        <div className="m-5 outline-2 outline-gray-400 rounded-md w-[400px] max-h-[85vh] overflow-y-auto">
           {/* Header */}
           <div className="flex justify-between items-center bg-[#982A2A] text-white p-4 rounded-t-md">
             <p className="font-bold">Poista tuote</p>
