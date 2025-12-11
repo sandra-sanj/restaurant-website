@@ -5,7 +5,7 @@ import OrderCard from './OrderCard';
 
 function Cart(props) {
   const {setNext} = props;
-  const {cart, calculateTotal, setDelivery, delivery} = useOrderContext();
+  const {cart, setCart, calculateTotal, setDelivery, delivery} = useOrderContext();
   const {strings} = useLanguage();
   const [selectedDelivery, setSelectedDelivery] = useState(delivery);
 
@@ -16,7 +16,11 @@ function Cart(props) {
     setDelivery(method);
   };
 
-  console.log(cart);
+  useEffect(() => {
+    setCart(cart);
+    console.log(cart);
+  }, [totalPrice]);
+
 
   const totalWithDelivery = Number(totalPrice) + Number(4.9);
 
@@ -62,6 +66,7 @@ function Cart(props) {
               key={item.unique_id}
               item={item}
               setTotalPrice={setTotalPrice}
+              setCart={setCart}
               className="flex justify-between items-center border-b py-2 w-full"
             />
           ))}
