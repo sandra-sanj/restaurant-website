@@ -21,6 +21,7 @@ import All from './components/menu/sections/All';
 import {UserProvider} from './context/UserContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import {OrderProvider} from './context/OrderContext';
+import ShowCards from './components/menu/ShowCards';
 
 const App = () => {
   const location = useLocation();
@@ -43,6 +44,7 @@ const App = () => {
                   <Route path="/menu/mains" element={<Mains />} />
                   <Route path="/menu/desserts" element={<Desserts />} />
                   <Route path="/menu/drinks" element={<Drinks />} />
+                  <Route path='/menu/:itemId' element={<ShowCards/>}></Route>
                 </Route>
                 <Route
                   path="/profile"

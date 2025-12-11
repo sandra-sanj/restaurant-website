@@ -44,7 +44,7 @@ function Home() {
               alt="Shrimp taco"
               /*width="200"
               height="500"*/
-              onClick={() => navigate('/menu')}
+              onClick={() => navigate('/menu/6')}
               className="overflow-hidden h-[265px] lg:h-[395px] max-w-[200px] lg:max-w-[300px] rounded-sm cursor-pointer outline-1 outline-zinc-300 transition-transform duration-300 hover:scale-102"
             />
             <p className="text-white mt-2">{strings.home.newItemLabel}:</p>

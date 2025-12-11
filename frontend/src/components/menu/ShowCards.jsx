@@ -3,12 +3,15 @@ import {useMenu} from '../../hooks/apiHook';
 import {useLanguage} from '../../hooks/useLanguage';
 import {useState} from 'react';
 import AddToCart from '../shoppingcart/AddToCart';
+import { useParams } from 'react-router';
 
 function ShowCards(props) {
   const [selectedItem, setSelectedItem] = useState(null);
+  const {itemId} = useParams();
 
   const {menuArray, loading, error} = useMenu();
   const {language} = useLanguage();
+
 
   if (loading) return;
   if (error) return <p>Error: {error}</p>;
@@ -16,6 +19,14 @@ function ShowCards(props) {
   let section = menuArray.filter(
     (item) => item.category_id === props.category_id,
   );
+
+  if (itemId) {
+    let itemById = menuArray.filter((item) => 
+      item.menu_item_id === itemId,
+    )
+    setSelectedItem(itemById);
+  }
+
 
   if (!props.category_id) {
     section = menuArray;
