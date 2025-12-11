@@ -19,10 +19,10 @@ const RegisterForm = () => {
       // remove optional fields if empty
       if (!inputs.phone) delete inputs.phone;
       if (!inputs.address) delete inputs.address;
-      console.log(inputs);
-
+      
       inputs.role = 'customer';
       inputs.is_active = 1;
+      console.log(inputs);
 
       const userInfo = postUser(inputs);
     } catch (error) {
