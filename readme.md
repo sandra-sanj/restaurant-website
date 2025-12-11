@@ -13,9 +13,10 @@ Taqueria 21 is a comprehensive restaurant management and ordering system that al
 The application provides features like:
 
 - Browsing menu with allergen and price information
-- Making online orders (pickup/delivery) with protein and spice level customization
+- Making online orders (pickup/delivery)
 - Admin functions for menu and order management
-- User authentication and o
+- User authentication and order history
+- Today's lunch special highlighting
 - Multilingual support (Finnish/English)
 - Real-time weather data from OpenWeather API
 - Responsive design for all devices
@@ -47,7 +48,16 @@ The application provides features like:
 
 ### Customer Features
 
-- TODO
+- Browse menu by category (All, Mains, Snacks, desserts, Drinks)
+- View today's lunch special highlited with discounted pricing
+- Clear pricing, allergen information, ingredient lists and menu description.
+- Shopping cart management (add/remove/change quantity)
+- Additional information input (special requests)
+- Delivery method selection (pickup/delivery)
+- Contact information input or auto-fill for logged-in users
+- User registration and login
+- Language switching (Fi/En)
+- Current weather information
 
 ### Admin Features
 
@@ -97,7 +107,17 @@ The application provides features like:
 
 #### Database
 
-TODO: instructions to database creation
+```sql
+-- Open MySQL command line
+-- Run the schema.sql file
+source path/backend/database/schema.sql
+
+-- Run the create-user.sql
+source path/backend/database/create-user.sql
+
+-- (Optional) Load sample data
+source path/backend/database/sample_data.sql
+```
 
 ### Development
 
