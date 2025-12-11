@@ -2,8 +2,6 @@ import {useNavigate} from 'react-router';
 import {useLanguage} from '../hooks/useLanguage';
 import { useUserContext } from '../hooks/contextHook';
 
-//TODO: varmista että navigaatio oikeaan osoitteeseen
-// sitten ehkä oma funktio
 function Home() {
   const navigate = useNavigate();
   const {user} = useUserContext();
@@ -67,12 +65,12 @@ function Home() {
       </div>
 
       <div className="mt-6 flex flex-col items-center justify-center lg:p-10">
-        <h3
+        <h2
           className="mb-6 text-xl lg:text-2xl lg:mb-12 font-bold cursor-pointer"
           onClick={() => navigate('/menu')}
         >
           {strings.home.menuTitle}
-        </h3>
+        </h2>
         <div className="container-home mb-15 grid grid-cols-2 md:grid-cols-4 gap-6 content-center justify-items-center max-w-[1000px] lg:gap-15 lg:text-lg">
           <div className="flex flex-col justify-center items-center">
             <img
