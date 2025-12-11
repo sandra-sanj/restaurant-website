@@ -130,7 +130,7 @@ The application provides features like:
 1. Clone repository by running `git clone https://github.com/sandra-sanj/restaurant-website.git` in terminal.
 2. Open cloned project folder in a code editor.
 3. Run `npm install` to install everything in **package.json**. Run this command whenever said file is updated.
-4. Copy the contents of **.env.sample** to new **.env** file in project root and modify all rows
+4. Copy the contents of **.env.sample** to new **.env** file in project root and modify all rows to match your configuration.
 
 ### Initialize
 
@@ -184,14 +184,12 @@ Run `npm run dev` when developing project.
 Run `npm run test` to run all API tests. Run specific tests:
 
 - `npm run test:api-user` to run user related tests
-- `npm run test:api-menu` to run menu related tests (TODO)
+- `npm run test:api-menu` to run menu related tests
 - `npm run test:api-order` to run order related tests
 
 ### Build
 
 #### Backend
-
-Build project with `npm run build`. Resulting build files are located in **dist** folder.
 
 Initialization: run `npm install` in **restaurant-website/backend** folder.
 
@@ -199,19 +197,21 @@ To open project in browser, run `npm run dev` in **restaurant-website/backend**.
 
 #### Frontend
 
-TODO: instructions about frontend init, testing, building
-<br/>
-
 Initialization: run `npm install` in **restaurant-website/frontend** folder.
-<br/>
 
 To open project in browser, run `npm run dev` in **restaurant-website/frontend**.
 
 ### Launch
 
-TODO: instructions about adding project to server
+#### Setup Hosting
+This project used Microsoft Azure for hosting. Follow [these instructions](https://mattpe.github.io/wsk/project/cloud-deployment.html) to set it up, or use your own hosting solution. Ensure that a database is installed and configured on the server.
 
-something something about **dist** folder
+#### Building the Frontend
+Build the frontend by running `npm run build`. Resulting build files are automatically placed to **backend's public** folder (but usually they will be located in frontend's **dist** folder, from which they need to be moved to backend).
+
+#### Deploying to the Server
+1. Clone this repository on the server and pull any updates with git pull.
+2. Restart the server to apply changes with `pm2 restart mexican-restaurant`.
 
 ## End-to-End
 
