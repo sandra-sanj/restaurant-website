@@ -1,4 +1,51 @@
-# Website for Restaurant
+# 🌮 Taqueria 21 -Mexican Restaurant-Web Application
+
+A full-stack web application for a Mexican restaurant featuring online ordering, menu-management, admin dashboards, and multilingual support (Finnish/English).
+
+## What this Project Does
+
+Taqueria 21 is a comprehensive restaurant management and ordering system that allows:
+
+- **Customers** to browse the menu, view daily lunch specials, place orders (pickup or delivery), manage their profiles, check weather conditions and view the restaurant's location
+
+- **Administrators** to manage menu items (add/edit/delete)
+
+The application provides features like:
+
+- Browsing menu with allergen and price information
+- Making online orders (pickup/delivery) with protein and spice level customization
+- Admin functions for menu and order management
+- User authentication and o
+- Multilingual support (Finnish/English)
+- Real-time weather data from OpenWeather API
+- Responsive design for all devices
+
+---
+
+## Why this Project is Useful
+
+### For Customers
+
+- **Convenience**: Order from anywhere anytime
+- **Transparency**: Clear pricing, allergen information and ingredients lists
+- **Customization**: Choose protein types and spice levels
+- **Language Options**: Available in Finnish and English
+
+### For Developers
+
+- **Learning Resource**: Full-stack application demonstrating:
+  - RESTful API design
+  - JWT authentication
+  - Role-based access control
+  - External API integration
+  - Multilingual implementaion
+  - Responsive design
+
+---
+
+## Features
+
+###
 
 ## Install, initialize, develop and launch project
 
@@ -39,7 +86,7 @@ Build project with `npm run build`. Resulting build files are located in **dist*
 TODO: instructions about frontend init, testing, building
 <br/>
 
-Initialization: run `npm install` in **restaurant-website/frontend** folder. 
+Initialization: run `npm install` in **restaurant-website/frontend** folder.
 <br/>
 
 To open project in browser, run `npm run dev` in **restaurant-website/frontend**.
