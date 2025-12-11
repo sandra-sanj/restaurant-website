@@ -69,22 +69,17 @@ const getUserById = async (req, res, next) => {
 };
 
 const postUser = async (req, res, next) => {
-  // check if username exists
-  if (await getUserByUsername(req.body.username)) {
-    const error = new Error('Cannot add user, username already exists');
-    error.status = 409;
-    return next(error);
-  }
-
-  if (await findEmail(req.body.email)) {
-    const error = new Error('Cannot add user, email already exists');
-    error.status = 409;
-    return next(error);
-  }
-
   // modify password to hash format before it is added to the database
   req.body.password_hash = await hashFormatPassword(req.body.password);
   delete req.body.password;
+
+  // default values
+  req.body.role = req.body.role || 'customer';
+  req.body.is_active = req.body.is_active ?? 1;
+
+  // optional fields
+  req.body.phone = req.body.phone || null;
+  req.body.address = req.body.address || null;
 
   const result = await addUser(req.body);
 
@@ -122,28 +117,20 @@ const putUser = async (req, res, next) => {
     return next(error);
   }
 
-  // check if username is already taken by another user
-  const existingUserByUsername = await getUserByUsername(req.body.username);
-  if (
-    existingUserByUsername &&
-    existingUserByUsername.user_id !== user.user_id
-  ) {
-    const error = new Error('Username already exists');
-    error.status = 409;
-    return next(error);
-  }
-
-  const existingUserByEmail = await findEmail(req.body.email);
-  if (existingUserByEmail && existingUserByEmail.user_id !== user.user_id) {
-    const error = new Error('Email already exists');
-    error.status = 409;
-    return next(error);
-  }
-
   // modify password to hash format before it is added to the database
   if (req.body.password) {
     req.body.password_hash = await hashFormatPassword(req.body.password);
     delete req.body.password;
+  }
+
+  const fieldsToUpdate = Object.fromEntries(
+    Object.entries(req.body).filter(([_, value]) => value !== undefined)
+  );
+
+  if (Object.keys(fieldsToUpdate).length === 0) {
+    const error = new Error('No fields to update');
+    error.status = 400;
+    return next(error);
   }
 
   const result = await modifyUser(req.body, user.user_id);
