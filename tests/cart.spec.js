@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-test('goes to desserts', async ({ page }) => {
+test('adds item to cart', async ({ page }) => {
     await page.goto('https://wsk-server.francecentral.cloudapp.azure.com/menu');
     await page.click('#desserts');
     const response = page.waitForResponse(resp =>
