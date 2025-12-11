@@ -18,6 +18,7 @@ export const createPasswordChain = () =>
 
 export const createPhoneChain = () =>
   body('phone')
+    .optional()
     .trim()
     .custom(async (phone) => {
       if (!phone) {
@@ -37,6 +38,8 @@ export const createPhoneChain = () =>
         }
       }
     });
+
+export const createAddressChain = () => body('address').optional().trim();
 
 export const createRoleChain = () =>
   body('role')
