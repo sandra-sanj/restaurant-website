@@ -104,6 +104,7 @@ function Cart(props) {
           <button
             onClick={() => setNext('order')}
             className="w-full py-2 rounded border bg-[#2A4B11]! text-white"
+            id='goToCart'
           >
             {strings.cart?.checkout || 'Kassalle'}
           </button>

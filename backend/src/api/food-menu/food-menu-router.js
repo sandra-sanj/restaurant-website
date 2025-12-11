@@ -7,7 +7,6 @@ import {
   deleteMenuItem,
 } from './food-menu-controller.js';
 import {authenticateToken} from '../../middlewares/authentication.js';
-import {body} from 'express-validator';
 import {validationErrors} from '../../middlewares/error-handlers.js';
 import {upload, createThumbnail} from '../../middlewares/upload.js';
 import {
@@ -24,11 +23,9 @@ import {
   createDefaultProteinChain,
   createIsAvailableChain,
   createAllergenIdsChain,
-} from '../../validators/menu-item-validators.js';
+} from '../../middlewares/validators/menu-item-validators.js';
 
 const foodMenuRouter = express.Router();
-
-// TODO: modify post, put and delete to require authentication from user with admin role
 
 foodMenuRouter.route('/').get(validationErrors, getMenuItems).post(
   authenticateToken,

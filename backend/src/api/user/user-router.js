@@ -7,16 +7,18 @@ import {
   deleteUser,
 } from './user-controller.js';
 import {authenticateToken} from '../../middlewares/authentication.js';
-import {body} from 'express-validator';
 import {validationErrors} from '../../middlewares/error-handlers.js';
 import {
+  usernameValidator,
+  emailValidator,
   createUsernameChain,
   createEmailChain,
   createPasswordChain,
   createPhoneChain,
+  createAddressChain,
   createRoleChain,
   createIsActiveChain,
-} from '../../validators/user-validators.js';
+} from '../../middlewares/validators/user-validators.js';
 
 const userRouter = express.Router();
 
@@ -28,7 +30,8 @@ userRouter
     createUsernameChain(),
     createEmailChain(),
     createPasswordChain(),
-    createPhoneChain(),
+    createPhoneChain().optional(),
+    createAddressChain().optional(),
     createRoleChain(),
     createIsActiveChain(),
     validationErrors,
@@ -41,10 +44,11 @@ userRouter
   .get(authenticateToken, getUserById)
   .put(
     authenticateToken,
-    createUsernameChain().optional(),
-    createEmailChain().optional(),
+    usernameValidator,
+    emailValidator,
     createPasswordChain().optional(),
     createPhoneChain().optional(),
+    createAddressChain().optional(),
     createRoleChain().optional(),
     createIsActiveChain().optional(),
     validationErrors,

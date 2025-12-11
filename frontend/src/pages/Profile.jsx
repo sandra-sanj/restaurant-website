@@ -79,6 +79,11 @@ const Profile = () => {
               </div>
               <div className="edit-prof *:text-left mb-2">
                 <h3>
+                  {strings.profile.address}: {user.address}
+                </h3>
+              </div>
+              <div className="edit-prof *:text-left mb-2">
+                <h3>
                   {strings.profile.role}: {getRoleTranslation(user.role)}
                 </h3>
               </div>

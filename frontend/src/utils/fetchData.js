@@ -1,14 +1,21 @@
 const fetchData = async (url, options = {}) => {
-    const res = await fetch(url, options);
-    const response = await res.json();
-    
-    if(!res.ok) {
-        const error = new Error('error');
-        error.status = res.status;
-        throw error;
-    }
+  const res = await fetch(url, options);
 
-    return response;
+  let data;
+  try {
+    data = await res.json();
+  } catch {
+    data = null;
+  }
+
+  if (!res.ok) {
+    const error = new Error(data?.message || 'Request failed');
+    error.status = res.status;
+    error.errors = data?.errors || null;
+    throw error;
+  }
+
+  return data;
 };
 
 export {fetchData};
