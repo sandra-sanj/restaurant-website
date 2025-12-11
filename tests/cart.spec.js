@@ -1,5 +1,7 @@
 import { expect, test } from "@playwright/test";
 
+//jos testiä katsoo ui ominaisuudella, näkee, että tuote lisättiin ostoskoriin
+
 test('adds item to cart', async ({ page }) => {
     await page.goto('https://wsk-server.francecentral.cloudapp.azure.com/menu');
     await page.click('#desserts');
