@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "description": "1. Clone repository by running `git clone https://github.com/sandra-sanj/restaurant-website.git` in terminal.\r 2. Open cloned project folder in a code editor.\r 3. Run `npm install` to install everything in **package.json**. Run this command whenever said file is updated.\r 4. Copy the contents of **.env.sample** to new **.env** file in project root and modify all rows",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "playwright test"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sandra-sanj/restaurant-website.git"
