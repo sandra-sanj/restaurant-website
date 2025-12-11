@@ -18,11 +18,11 @@ function Modal({isOpen, onClose, children, unstyled=false}) {
       ) : (
 
       <div
-        className="m-6 outline-2 outline-gray-400 rounded-md w-[300px] xs:w-[350px] sm:w-[400px] bg-[#FFFFFF] pb-3"
+        className="m-6 outline-2 outline-gray-400 rounded-md w-[300px] min-w-[350px] xs:w-[350px] sm:w-[500px] bg-[#FFFFFF] pb-3 max-h-[85vh] overflow-y-auto overflow-x-hidden"
         onClick={onClose}
       >
         <span
-          className="cursor-pointer font-bold text-lg"
+          className="cursor-pointer font-bold text-lg justify-end flex mr-2"
           onClick={() => onClose}
         >
           &times;
