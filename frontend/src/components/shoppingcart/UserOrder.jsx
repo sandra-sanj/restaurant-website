@@ -19,7 +19,7 @@ function UserOrder(props) {
     username: user.username,
     email: user.email,
     phone: user.phone,
-    address: '',
+    address: user.address,
   };
 
   const placeOrder = () => {
@@ -64,7 +64,7 @@ function UserOrder(props) {
               name="username"
               type="text"
               id="ordername"
-              value={user.username}
+              value={inputs.username}
               onChange={handleInputChange}
               autoComplete="username"
               className="bg-stone-100 rounded w-full"
@@ -79,7 +79,7 @@ function UserOrder(props) {
               name="email"
               type="email"
               id="orderemail"
-              value={user.email}
+              value={inputs.email}
               onChange={handleInputChange}
               autoComplete="email"
               className="bg-stone-100 rounded w-full"
@@ -94,7 +94,7 @@ function UserOrder(props) {
               name="phone"
               type="text"
               id="orderphone"
-              value={user.phone}
+              value={inputs.phone}
               onChange={handleInputChange}
               autoComplete="phone"
               className="bg-stone-100 rounded w-full"
@@ -110,6 +110,7 @@ function UserOrder(props) {
                 name="address"
                 type="text"
                 id="address"
+                value={inputs.address}
                 onChange={handleInputChange}
                 autoComplete="address"
                 className="bg-stone-100 rounded w-full"

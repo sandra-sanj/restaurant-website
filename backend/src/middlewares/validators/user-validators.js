@@ -44,8 +44,8 @@ export const createPasswordChain = () =>
     .isLength({min: 8})
     .withMessage('Password must be at least 8 characters long');
 
-export const createPhoneChain = () =>
-  body('phone')
+export const createPhoneChain = (field = 'phone') =>
+  body(field)
     .optional()
     .trim()
     .custom(async (phone) => {

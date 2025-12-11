@@ -18,6 +18,7 @@ import {checkAdmin} from '../../middlewares/check-admin.js';
 import {checkOrderAccess} from '../../middlewares/check-order-access.js';
 import {body} from 'express-validator';
 import {validationErrors} from '../../middlewares/error-handlers.js';
+import {createPhoneChain} from '../../middlewares/validators/user-validators.js';
 
 const orderRouter = express.Router();
 
@@ -28,8 +29,8 @@ orderRouter.route('/').post(
     .trim()
     .notEmpty()
     .withMessage('Customer name is required')
-    .isLength({min: 2, max: 128})
-    .withMessage('Customer name must be 2-128 characters'),
+    .isLength({min: 3, max: 20})
+    .withMessage('Customer name must be 3-20 characters'),
 
   body('customer_email')
     .trim()
@@ -38,23 +39,7 @@ orderRouter.route('/').post(
     .isEmail()
     .withMessage('Must be a valid email'),
 
-  body('customer_phone')
-    .trim()
-    .notEmpty()
-    .withMessage('Phone number is required')
-    .custom((phone) => {
-      if (!phone.startsWith('+358')) {
-        throw new Error('Phone number must be Finnish (+358)');
-      }
-      const phoneNumber = phone.split('+')[1];
-      if (isNaN(phoneNumber)) {
-        throw new Error('Phone number must contain digits');
-      }
-      if (phoneNumber.length < 12) {
-        throw new Error('Phone number is too short');
-      }
-      return true;
-    }),
+  createPhoneChain('customer_phone'),
 
   body('order_type')
     .trim()
