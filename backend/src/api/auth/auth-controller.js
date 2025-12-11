@@ -4,16 +4,18 @@ import {getUserByUsername} from '../user/user-model.js';
 import 'dotenv/config';
 
 const postLogin = async (req, res, next) => {
+  const combinedErrorMsg = 'Username or password incorrect';
+
   const user = await getUserByUsername(req.body.username);
   if (!user) {
-    const error = new Error('No user with username');
+    const error = new Error(combinedErrorMsg);
     error.status = 401;
     return next(error);
   }
 
   // check if passwords match (plain text password (gets hashed here) and hashed password)
   if (!bcrypt.compareSync(req.body.password, user.password_hash)) {
-    const error = new Error('Password is incorrect');
+    const error = new Error(combinedErrorMsg);
     error.status = 401;
     return next(error);
   }
