@@ -196,3 +196,36 @@ something something about **dist** folder
 - Note Application available: **9:00 -16:00** on presentation day
 - **Server link:** (https://wsk-server.francecentral.cloudapp.azure.com/)
 - **API Documentation:** (https://wsk-server.francecentral.cloudapp.azure.com/apidoc)
+
+## Testing Instructions
+
+1. **Browse the menu** without logging in
+2. **Register** a new account or use sample accounts:
+
+##### Sample Account
+
+**Admin Account:**
+
+- Username: `admin`
+- Password: `password`
+
+**Customer Account:**
+
+- Username: `liisa`
+- Password: `password`
+
+### Testing checklist
+
+1. **Browse menu** - Check categories, today's lunch highlighting, allergen info
+2. Add items to cart
+3. Choose delivery or pickup
+4. Checkout
+5. Choose payment method add fill contact information
+6. Proceed to checkout
+7. Complete order
+8. Switch language - Test FI/EN switching
+9. Login & view profile
+10. Test user features
+11. Login as admin
+12. Test admin page add, edit, and delete product
+13. View admin history
