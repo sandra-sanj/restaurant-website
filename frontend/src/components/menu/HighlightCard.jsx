@@ -61,7 +61,7 @@ const HighlightCard = () => {
                 width={'auto'}
                 className="rounded-t-md border-b border-stone-200"
               />
-              <div className="flex flex-row items-center justify-center gap-5">
+              <div className="flex flex-row items-center justify-center gap-5 p-3">
                 <h2 className="font-semibold text-lg">{displayName}</h2>
                 <p className="text-lg">
                   {strings.menu?.lunchSpecial || 'Päivän lounas'}
@@ -73,12 +73,13 @@ const HighlightCard = () => {
                   i
                 </button>
               </div>
-              <p>{displayDescription}</p>
-              <p>{todaysLunch.special_price}</p>
+              <p className='p-3'>{displayDescription}</p>
+              <p className='font-semibold pb-3'>{todaysLunch.special_price} €</p>
               <p className="text-decoration-line: line-through">
-                {todaysLunch.regular_price}
+                {todaysLunch.regular_price} €
               </p>
-              <button onClick={() => setSelectedItem(todaysLunch)}>
+              <button onClick={() => setSelectedItem(todaysLunch)}
+                className='bg-[#2A4B11]! text-white!'>
                 {strings.cart?.addToOrder || '+ Lisää tilaukseen'}
               </button>
             </div>
