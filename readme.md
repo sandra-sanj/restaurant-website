@@ -21,8 +21,7 @@ A full-stack web application for a Mexican restaurant featuring online ordering,
 3. Application Features
 4. Technologies Used
 5. Install, initialize, develop and launch project
-6. End-To-End
-7. Instructions: How to test the application
+6. Instructions: How to test the application
 
 ## What this Project Does
 
@@ -213,9 +212,6 @@ Build the frontend by running `npm run build`. Resulting build files are automat
 1. Clone this repository on the server and pull any updates with git pull.
 2. Restart the server to apply changes with `pm2 restart mexican-restaurant`.
 
-## End-to-End
-
-TODO
 
 ## Instructions: How to test the application
 
