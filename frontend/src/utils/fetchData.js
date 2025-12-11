@@ -9,7 +9,9 @@ const fetchData = async (url, options = {}) => {
   }
 
   if (!res.ok) {
-    const error = new Error(data?.message || 'Request failed');
+    const backendMsg = data?.message || data?.error?.message || null;
+
+    const error = new Error(backendMsg || 'Request failed');
     error.status = res.status;
     error.errors = data?.errors || null;
     throw error;

@@ -2,8 +2,6 @@ import {useNavigate} from 'react-router';
 import {useLanguage} from '../hooks/useLanguage';
 import { useUserContext } from '../hooks/contextHook';
 
-//TODO: varmista että navigaatio oikeaan osoitteeseen
-// sitten ehkä oma funktio
 function Home() {
   const navigate = useNavigate();
   const {user} = useUserContext();
@@ -44,7 +42,7 @@ function Home() {
               alt="Shrimp taco"
               /*width="200"
               height="500"*/
-              onClick={() => navigate('/menu')}
+              onClick={() => navigate('/menu/6')}
               className="overflow-hidden h-[265px] lg:h-[395px] max-w-[200px] lg:max-w-[300px] rounded-sm cursor-pointer outline-1 outline-zinc-300 transition-transform duration-300 hover:scale-102"
             />
             <p className="text-white mt-2">{strings.home.newItemLabel}:</p>
@@ -59,7 +57,7 @@ function Home() {
               alt="Burrito bowl"
               /*width="200"
               height="500"*/
-              onClick={() => navigate('/menu')}
+              onClick={() => navigate('/menu/8')}
               className="overflow-hidden h-[265px] lg:h-[395px] max-w-[200px] lg:max-w-[300px] rounded-sm cursor-pointer outline-1 outline-zinc-300 transition-transform duration-300 hover:scale-102"
             />
           </div>
@@ -67,12 +65,12 @@ function Home() {
       </div>
 
       <div className="mt-6 flex flex-col items-center justify-center lg:p-10">
-        <h3
+        <h2
           className="mb-6 text-xl lg:text-2xl lg:mb-12 font-bold cursor-pointer"
           onClick={() => navigate('/menu')}
         >
           {strings.home.menuTitle}
-        </h3>
+        </h2>
         <div className="container-home mb-15 grid grid-cols-2 md:grid-cols-4 gap-6 content-center justify-items-center max-w-[1000px] lg:gap-15 lg:text-lg">
           <div className="flex flex-col justify-center items-center">
             <img

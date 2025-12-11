@@ -16,8 +16,6 @@ const EditForm = () => {
     address: user.address,
   };
 
-  console.log(initValues);
-
   const doEdit = async () => {
     setErrors({});
 
@@ -26,23 +24,14 @@ const EditForm = () => {
 
       Object.keys(inputs).forEach((key) => {
         const value = inputs[key];
-        if (
-          value !== initValues[key] &&
-          value !== undefined &&
-          value.trim() !== ''
-        ) {
+        if (value !== initValues[key] && value !== undefined) {
           modifiedFields[key] = value;
         }
       });
 
-      console.log('modifiedFields: ', modifiedFields);
       await handleEditedUser(modifiedFields);
     } catch (err) {
-      console.error('doEdit caught error:', err);
-      console.error('Error.errors:', err.errors);
-
       if (err.errors) {
-        console.log('Setting field errors:', err.errors);
         setErrors(err.errors);
       } else {
         setErrors({general: err.message || 'Update failed'});

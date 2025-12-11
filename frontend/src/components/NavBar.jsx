@@ -27,7 +27,6 @@ function NavBar() {
 
   useEffect(() => {
       setQuantity(calculateQuantity());
-      console.log(cart);
   }, [cart])
 
   

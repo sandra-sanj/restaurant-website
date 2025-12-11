@@ -1,10 +1,12 @@
 import {useUserContext} from '../../hooks/contextHook';
 import {useLanguage} from '../../hooks/useLanguage';
 import useForm from '../../hooks/formHooks';
+import {useState} from 'react';
 
 const LoginForm = () => {
   const {handleLogin} = useUserContext();
   const {strings} = useLanguage();
+  const [errors, setErrors] = useState({});
 
   const initValues = {
     username: '',
@@ -12,10 +14,16 @@ const LoginForm = () => {
   };
 
   const doLogin = async () => {
+    setErrors({});
+
     try {
-      handleLogin(inputs);
-    } catch (error) {
-      console.error(error);
+      await handleLogin(inputs);
+    } catch (err) {
+      if (err.errors) {
+        setErrors(err.errors);
+      } else {
+        setErrors({general: err.message || 'Login failed'});
+      }
     }
   };
 
@@ -26,7 +34,9 @@ const LoginForm = () => {
 
   return (
     <div>
-      <h1 className="mb-8 text-center max-sm:text-4xl!">{strings.auth.loginTitle}</h1>
+      <h1 className="mb-8 text-center max-sm:text-4xl!">
+        {strings.auth.loginTitle}
+      </h1>
       <div className="flex flex-col items-center w-full gap-2 sm:gap-4 min-w-[300px] sm:max-w-[400px] mx-auto">
         <form
           onSubmit={(e) => {
@@ -64,6 +74,7 @@ const LoginForm = () => {
                 className="w-full"
               />
             </div>
+            {errors.general && <p className="text-red-600">{errors.general}</p>}
           </div>
           <button
             type="submit"

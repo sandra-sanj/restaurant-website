@@ -25,14 +25,9 @@ const RegisterForm = () => {
       if (!userData.phone) delete userData.phone;
       if (!userData.address) delete userData.address;
 
-      console.log('Sending registration data:', userData);
       await postUser(userData);
     } catch (err) {
-      console.error('doRegister caught error:', err);
-      console.error('Error.errors:', err.errors);
-
       if (err.errors) {
-        console.log('Setting field errors:', err.errors);
         setErrors(err.errors);
       } else {
         setErrors({general: err.message || 'Registration failed'});
