@@ -6,13 +6,13 @@ A full-stack web application for a Mexican restaurant featuring online ordering,
 
 ### wireframe/Mockup
 
-- **Figma Design:** [Figma] (https://www.figma.com/design/KjSxTTLHWeR2CHeM5WiuAE/Web-proju?node-id=0-1&p=f&t=62huekebQT0KNgra-0)
+- **Figma Design:** [Figma](https://www.figma.com/design/KjSxTTLHWeR2CHeM5WiuAE/Web-proju?node-id=0-1&p=f&t=62huekebQT0KNgra-0)
 
 ### Azure server
 
 - Note Application available: **9:00 -16:00** on presentation day
-- **Server link:** (https://wsk-server.francecentral.cloudapp.azure.com/)
-- **API Documentation:** (https://wsk-server.francecentral.cloudapp.azure.com/apidoc)
+- **Server link:** [https://wsk-server.francecentral.cloudapp.azure.com/](https://wsk-server.francecentral.cloudapp.azure.com/)
+- **API Documentation:** [https://wsk-server.francecentral.cloudapp.azure.com/apidoc](https://wsk-server.francecentral.cloudapp.azure.com/apidoc)
 
 ## Table of Contents
 
