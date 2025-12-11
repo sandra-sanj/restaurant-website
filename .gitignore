@@ -7,4 +7,6 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
-tests
+test/
+cart.spec.js
+login.spec.js
