@@ -26,11 +26,7 @@ const EditForm = () => {
 
       Object.keys(inputs).forEach((key) => {
         const value = inputs[key];
-        if (
-          value !== initValues[key] &&
-          value !== undefined &&
-          value.trim() !== ''
-        ) {
+        if (value !== initValues[key] && value !== undefined) {
           modifiedFields[key] = value;
         }
       });
@@ -143,6 +139,15 @@ const EditForm = () => {
                   handleInputChange(e);
                 }}
               />
+              <button
+                type="button"
+                onClick={() =>
+                  handleInputChange({target: {name: 'phone', value: ''}})
+                }
+                className="px-2 py-1 bg-red-200 text-red-700 rounded hover:bg-red-300"
+              >
+                Clear
+              </button>
               {errors.phone && <p className="text-red-600">{errors.phone}</p>}
             </label>
           </div>
