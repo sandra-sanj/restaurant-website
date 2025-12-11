@@ -108,7 +108,8 @@ The application provides features like:
 #### Database
 
 ```sql
--- Open MySQL command line
+--Open MySQL command line
+
 -- Run the schema.sql file
 source path/backend/database/schema.sql
 
@@ -117,6 +118,33 @@ source path/backend/database/create-user.sql
 
 -- (Optional) Load sample data
 source path/backend/database/sample_data.sql
+```
+
+#### Configure Environment Variables
+
+Create a `.env` file in the backend directory:
+
+```env
+# Database Configuration
+DB_HOST=mysql.metropolia.fi
+DB_USER=myusername
+DB_PASSWORD=mypassword
+DB_NAME=myusername
+
+# JWT Configuration
+JWT_SECRET=token
+JWT_EXPIRES_IN=1d
+
+# OpenWeatherMap API
+OPENWEATHER_API_KEY=your_openweather_api_key
+
+```
+
+Create a `.env` file in the frontend directory
+
+```env
+VITE_API_URL="siteURL.com/api/v1"
+VITE_API_UPLOADS_URL="siteURL.com/uploads/"
 ```
 
 ### Development
@@ -129,14 +157,17 @@ Run `npm run test` to run all API tests. Run specific tests:
 
 - `npm run test:api-user` to run user related tests
 - `npm run test:api-menu` to run menu related tests (TODO)
-
-TODO: orders, other tests
+- `npm run test:api-order` to run order related tests
 
 ### Build
 
 #### Backend
 
 Build project with `npm run build`. Resulting build files are located in **dist** folder.
+
+Initialization: run `npm install` in **restaurant-website/backend** folder.
+
+To open project in browser, run `npm run dev` in **restaurant-website/backend**.
 
 #### Frontend
 
@@ -154,4 +185,14 @@ TODO: instructions about adding project to server
 
 something something about **dist** folder
 
-## REST API Documentation
+## Links
+
+### wireframe/Mockup
+
+- **Figma Design:** [Figma] (https://www.figma.com/design/KjSxTTLHWeR2CHeM5WiuAE/Web-proju?node-id=0-1&p=f&t=62huekebQT0KNgra-0)
+
+### Azure server
+
+- Note Application available: **9:00 -16:00** on presentation day
+- **Server link:** (https://wsk-server.francecentral.cloudapp.azure.com/)
+- **API Documentation:** (https://wsk-server.francecentral.cloudapp.azure.com/apidoc)
