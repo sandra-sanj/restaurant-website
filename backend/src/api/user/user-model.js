@@ -26,6 +26,18 @@ const findUserById = async (id) => {
   return other;
 };
 
+const findEmail = async (email) => {
+  const [rows] = await promisePool.execute(
+    'SELECT user_id, email FROM users WHERE email = ?',
+    [email]
+  );
+
+  if (rows.length === 0) {
+    return false;
+  }
+  return rows[0];
+};
+
 const addUser = async (user) => {
   const {username, email, password_hash, phone, address, role, is_active} =
     user;
@@ -107,6 +119,7 @@ const getUserByUsername = async (username) => {
 export {
   listAllUsers,
   findUserById,
+  findEmail,
   addUser,
   modifyUser,
   removeUser,
