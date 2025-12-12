@@ -12,7 +12,7 @@ A full-stack web application for a Mexican restaurant featuring online ordering,
 
 - Note Application available: **9:00 -16:00** on presentation day
 - **Server link:** [https://wsk-server.francecentral.cloudapp.azure.com/](https://wsk-server.francecentral.cloudapp.azure.com/)
-- **API Documentation:** [https://wsk-server.francecentral.cloudapp.azure.com/apidoc](https://wsk-server.francecentral.cloudapp.azure.com/apidoc)
+- **API Documentation:** [https://wsk-server.francecentral.cloudapp.azure.com/docs](https://wsk-server.francecentral.cloudapp.azure.com/docs)
 
 ## Table of Contents
 
