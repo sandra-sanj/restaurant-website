@@ -2,6 +2,9 @@
 
 A full-stack web application for a Mexican restaurant featuring online ordering, menu-management, admin dashboards, and multilingual support (Finnish/English).
 
+**NOTE:** If you see dark buttons with dark text, **change your browser's theme to light mode**. There is a bug with dark mode.
+
+
 ## Links
 
 ### wireframe/Mockup
