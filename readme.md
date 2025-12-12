@@ -118,7 +118,7 @@ The application provides features like:
 
 ### Validation
 
-- **V3C Markup Validation Service** - Check HTML structure, detect syntax errors
+- **W3C Markup Validation Service** - Check HTML structure, detect syntax errors
 - **Lighthouse** - Improve accessibility, search engine optimization and best-practices
 
 ## Install, initialize, develop and launch project
