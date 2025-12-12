@@ -85,19 +85,19 @@ const AddToCart = (props) => {
               {item.allows_spice_custom === 1 && (
                 <div className="grid grid-cols-2 gap-1 sm:grid-cols-3">
                   <button
-                    className={spiceLevel === 1 ? 'bg-red-200!' : ''}
+                    className={spiceLevel === 1 ? 'bg-red-200!' : 'bg-slate-100! hover:bg-stone-200!'}
                     onClick={() => setSpiceLevel(1)}
                   >
                     {strings.cart?.mild || 'Mild'}
                   </button>
                   <button
-                    className={spiceLevel === 2 ? 'bg-red-200!' : ''}
+                    className={spiceLevel === 2 ? 'bg-red-200!' : 'bg-slate-100! hover:bg-stone-200!'}
                     onClick={() => setSpiceLevel(2)}
                   >
                     {strings.cart?.medium || 'Medium'}
                   </button>
                   <button
-                    className={spiceLevel === 3 ? 'bg-red-200!' : ''}
+                    className={spiceLevel === 3 ? 'bg-red-200!' : 'bg-slate-100! hover:bg-stone-200!'}
                     onClick={() => setSpiceLevel(3)}
                   >
                     {strings.cart?.spicy || 'Spicy'}
@@ -107,19 +107,19 @@ const AddToCart = (props) => {
               {item.available_proteins && (
                 <div className="grid grid-cols-2 gap-0">
                   <button onClick={() => setProtein('chicken')}
-                    className={protein === 'chicken' ? 'bg-blue-200!' : ''}>
+                    className={protein === 'chicken' ? 'bg-blue-200!' : 'bg-slate-100! hover:bg-stone-200!'}>
                     {strings.cart?.chicken || 'Kana'} (L, G)
                   </button>
                   <button onClick={() => setProtein('beef')}
-                    className={protein === 'beef' ? 'bg-blue-200!' : ''}>
+                    className={protein === 'beef' ? 'bg-blue-200!' : 'bg-slate-100! hover:bg-stone-200!'}>
                     {strings.cart?.beef || 'Nauta'} (L, G)
                   </button>
                   <button onClick={() => setProtein('vegan')}
-                    className={protein === 'vegan' ? 'bg-blue-200!' : ''}>
+                    className={protein === 'vegan' ? 'bg-blue-200!' : 'bg-slate-100! hover:bg-stone-200! '}>
                     {strings.cart?.plantProtein || 'Kasviproteiini'} (VE, L, G)
                   </button>
                   <button onClick={() => setProtein('shrimp')}
-                    className={protein === 'shrimp' ? 'bg-blue-200!' : ''}>
+                    className={protein === 'shrimp' ? 'bg-blue-200!' : 'bg-slate-100! hover:bg-stone-200!'}>
                     {strings.cart?.shrimp || 'Katkarapu'} (L, G)
                   </button>
                 </div>
@@ -145,12 +145,12 @@ const AddToCart = (props) => {
             </div>
             <div className="flex flex-row items-center justify-center gap- mt-2">
               <button onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                className="px-3! py-1! border! border-stone-500! rounded-lg! hover:bg-stone-200!">
+                className="px-3! py-1! border! border-stone-500! rounded-lg! bg-slate-100! hover:bg-stone-200!">
                 -
               </button>
               <p id='quantityOfItems'>{quantity}</p>
               <button onClick={() => setQuantity((q) => q + 1)}
-                className="px-2.5! py-1! border! border-stone-500! rounded-lg! hover:bg-stone-200!" id='quantity-plus-btn'>+</button>
+                className="px-2.5! py-1! border! border-stone-500! rounded-lg! bg-slate-100! hover:bg-stone-200!" id='quantity-plus-btn'>+</button>
               <button onClick={() => handleAddToCart()}
                 className='bg-[#2A4B11]! text-white!' id='addToCartBtn'>
                 {strings.cart?.addToCart || 'Lisää ostoskoriin'} {price} €
